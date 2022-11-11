@@ -1,0 +1,157 @@
+const mongoCollections = require('../config/mongoCollections');
+
+const {ObjectId} = require('mongodb');
+
+const {flights}=require('../config/mongoCollections');
+
+
+const {getFlightById }= require("./flights")
+const flightData = require('../data/flights.js');
+
+
+
+
+const createClass = async (
+  fid,
+  classType,
+  classCapacity,
+  price,
+  seatNumbers,
+  foodchoices
+) => {
+  
+ 
+  
+  const classId=ObjectId();
+  const flightCollection= await flights()
+ 
+  
+  let class1 = {
+  
+    classType:classType,
+    classCapacity:classCapacity,
+    price:price,
+    seatNumbers:seatNumbers,
+    foodchoices:foodchoices
+  }
+
+
+  
+  const updatedClass = { _id: classId, ...class1 };
+ 
+
+
+  try{
+  const updatedInfo= await flightCollection.updateOne({ _id: ObjectId(fid) }, { $push: { flightClass: updatedClass } });
+  if (updatedInfo.modifiedCount === 0) 
+    throw "could not add class";
+  }catch(e){throw "flight not found"}
+  const flight1 = await flightData.getFlightById(fid);
+ return flight1
+};
+
+
+
+
+
+const getAllClasses = async (fid) => {
+  if(!fid)
+  throw `no id is given`;
+  if(typeof(fid)!=="string")
+  throw `type of id is not a string`;
+  if(fid.trim().length===0)
+  throw 'id cannot be empty or all white spaces';
+  fid=fid.trim();
+  if(!ObjectId.isValid(fid))
+  throw `id is not valid`;
+  fid=fid.trim()
+ 
+  
+  const flight1 = await flightData.getFlightById(fid);
+
+ return flight1.flightClass
+};
+
+const getClass = async (classId) => {
+  
+  if(!classId)
+  throw `no id is given`;
+  if(typeof(classId)!=="string")
+  throw `type of id is not a string`;
+  if(classId.trim().length===0)
+  throw 'id cannot be empty or all white spaces';
+  classId=classId.trim();
+  if(!ObjectId.isValid(classId))
+  throw `id is not valid`;
+  classId=classId.trim()
+
+const flightCollection= await flights()
+
+const flightList = await flightCollection.find({}).toArray();
+let found = false;
+let fclass = {};
+for (let i = 0; i < flightList.length; i++) {
+    const currentflight = flightList[i];
+    for (let j = 0; j < currentflight.flightClass.length; j++) {
+        if (currentflight.flightClass[j]._id.toString() == classId) {
+            found= true;
+            fclass = currentflight.flightClass[j];
+        }
+    }
+}
+if (!found) throw 'no class with that id';
+fclass._id=fclass._id.toString()
+return fclass;
+};
+
+
+
+const removeClass = async (classId) => {
+  const flightCollection = await flights();
+  const allflights = await flightCollection.find({}).toArray();
+  let classFound = false;
+  let flightId = "";
+  let newallflights = [];
+  let curflight = {};
+  for (let i = 0; i < allflights.length; i++) {
+      curflight = allflights[i];
+      let oldclassList = curflight.flightClass;     
+for (let j = 0; j < oldclassList.length; j++) {
+          if (oldclassList[j]._id.toString() == classId) {
+
+
+
+  classFound = true;
+  flightId = oldclassList[j]._id;
+              for (let k = 0; k < oldclassList.length; k++) {
+          if (oldclassList[k]._id.toString() == classId) {
+    continue;
+    
+
+                  }
+    newallflights.push(oldclassList[k]);
+              }
+          }
+    if (classFound) break;
+      }
+      curflight.flightClass = newallflights;
+      if (classFound) break;
+  }
+  if (!classFound) {
+      throw `could not delete class with id of ${classId}`;
+  }
+
+  const newclass = {};
+  newclass.flightClass = curflight.flightClass;
+
+  await flightCollection.updateOne({_id: curflight._id}, {$set: {flightClass : curflight.flightClass}});
+  newflight = await getFlightById(curflight._id.toString());
+return newflight
+
+};
+
+
+  
+
+
+module.exports = {createClass,getAllClasses,getClass,removeClass};

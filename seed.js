@@ -1,0 +1,116 @@
+const flights = require('./data/flights');
+const classes = require('./data/class');
+const bookedSeats = require('./data/bookedSeats');
+const users=require("./data/usersCollection");
+const bookingCollection=require("./data/bookingCollection")
+const travelers=require("./data/travelers")
+const review =require("./data/reviewsCollection")
+const connection = require('./config/mongoConnection');
+const { bookings } = require('./config/mongoCollections');
+
+
+async function main() {
+    const db = await connection.dbConnection();
+    let flight1=undefined;
+    let flight2 =undefined;
+    let flight3 = undefined;
+    let class1=undefined;
+    let class2=undefined;
+    let bookedseat1=undefined;
+    let user1=undefined;
+    let user2=undefined;
+    let booking1=undefined;
+    let traveller1=undefined;
+    let review2=undefined
+   // await db.dropDatabase()
+
+try{
+
+    flight1 = await flights.createFlight("SA-090","New York","California","16:00","18:00","2 hrs","200 miles")
+    //console.log(flight1)
+}catch(e){
+    console.log(e);
+}
+try{
+
+    flight2 = await flights.createFlight("SA-091","New Jersey","Los Angeles","17:00","18:00","1 hrs","2001 miles")
+    //console.log(flight2)
+}catch(e){
+    console.log(e);
+}
+try{
+
+    flight3 = await flights.createFlight("SA-092","Seattle","Washinton","18:00","20:00","2 hrs","20 miles")
+    //console.log(flight3)
+}catch(e){
+    console.log(e);
+}
+try{
+
+    class1 = await classes.createClass(flight1._id,"economy","10","1000USD",[1,2,3,4,5,6,7,8,0],["veg","nonveg"])
+    //console.log(flight3)
+}catch(e){
+    console.log(e);
+}
+try{
+
+    class2 = await classes.createClass(flight1._id,"business","5","2000USD",[1,2,3,4],["veg","nonveg"])
+    //console.log(flight3)
+}catch(e){
+    console.log(e);
+}
+try{
+
+    bookedseat1 = await bookedSeats.createBookedSeats(flight1._id,2,"travelerid1",class1.classType)
+    //console.log(flight3)
+}catch(e){
+    console.log(e);
+}
+
+try{
+
+    user1 = await users.createUsers("Aaryaman","Katoch","atpk","password","smthin@smthin.com")
+    //console.log(flight3)
+}catch(e){
+    console.log(e);
+}
+try{
+
+    user2 = await users.createUsers("Aaryaman22","Katoch22","atpk22","password22","smthin@smthin.com22")
+    //console.log(flight3)
+}catch(e){
+    console.log(e);
+}
+try{
+
+    booking1 = await bookingCollection.createBooking(flight1._id,user1._id)
+    //console.log(flight3)
+}catch(e){
+    console.log(e);
+}
+try{
+
+    traveller1 = await travelers.createTraveler(booking1._id,"parth","patel","S9182778",bookedseat1.seatNumber,"19/09/1999","Male","parth@stevens.edu","5512548455","bookedseat1.classtype","veg")
+    //console.log(flight3)
+}catch(e){
+    console.log(e);
+}
+
+try{
+
+    review1 = await review.createReview(user1._id,flight1._id,"flight sucked ass",1)
+    //console.log(flight3)
+}catch(e){
+    console.log(e);
+}
+
+try{
+
+    review2 = await review.createReview(user1._id,flight1._id,"flight didnt suck ass",4)
+    //console.log(flight3)
+}catch(e){
+    console.log(e);
+}
+await connection.closeConnection();
+}
+main();
