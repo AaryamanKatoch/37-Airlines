@@ -6,8 +6,7 @@ const helper =require('../helpers');
 const { checkifemptystring, checkifinputexists, checkifstring, checkifproperstudio, checkifproperdirector, checkifpropertitle, checkispropergenre, checkifvalidrating, checkispropercastmemeber, checkisproperdate, checkisproperruntime} = require('../helpers');
 
 
-
-
+//added date in create and update flight
 const createFlight = async (
   flightCode,
   departure,
@@ -16,7 +15,7 @@ const createFlight = async (
   arrivalTime,
   duration,
   miles,
-
+  date
 ) => {
   
   const flightcollection = await flights();
@@ -28,6 +27,7 @@ const createFlight = async (
   arrivalTime:arrivalTime,
   duration:duration,
   miles:miles,
+  date:new Date(date),
   flightClass:[],
   bookedSeats:[],
   reviews:[]
@@ -101,6 +101,7 @@ const updateFlight = async (
   arrivalTime,
   duration,
   miles,
+  date
   
 ) => {
 
@@ -117,7 +118,7 @@ const updateFlight = async (
     arrivalTime:arrivalTime,
     duration:duration,
     miles:miles,
-    
+    date:new Date(date),
   }
   const updatedInfo = await flightCollection.updateOne({_id: ObjectId(id)},
   {$set: updatedflight}
@@ -126,16 +127,39 @@ if (updatedInfo.modifiedCount === 0) {
   throw 'could not update flight successfully';
   
 }
-return await getFlightById(id)
+return await getFlightById(id);
 
 };
 
+const searchFlightsResult = async (
+  departure,
+  arrival,
+  date,
+  NoOfPass,
+  f_class
+) => {
+  if(!departure) throw 'No departure passed!';
+  if(!arrival) throw 'No arrival passed!';
+  if(!date) throw 'No date passed';
+  if(!NoOfPass) throw 'No passengers passed!';
+  if(departure.trim().length==0) throw 'departure can not be empty string';
+  if(arrival.trim().length==0) throw 'arrival can not be empty string';
+  if(!typeof departure=='string') throw 'departure must be valid string';
+  if(!typeof arrival=='string') throw 'arrival must be valid string';
+  if(isNaN(NoOfPass)) throw 'Number of passengers must be valid Number';
+  const flightCollection =await flights();
+  date=new Date(date);
+  console.log(date);
+  const flightsList = await flightCollection.find({'departure':departure,'arrival':arrival,'date':date}).toArray();
+  return flightsList;
+}
 
 
-
-module.exports = {createFlight,
+module.exports = {
+  createFlight,
   getAllFlights,
   getFlightById,
   removeFlight,
-  updateFlight
+  updateFlight,
+  searchFlightsResult
 };

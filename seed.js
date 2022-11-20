@@ -22,25 +22,35 @@ async function main() {
     let booking1=undefined;
     let traveller1=undefined;
     let review2=undefined
-   // await db.dropDatabase()
+    await db.dropDatabase()
 
 try{
 
-    flight1 = await flights.createFlight("SA-090","New York","California","16:00","18:00","2 hrs","200 miles")
+    flight1 = await flights.createFlight("MF-090","New York","California","10:00","11:00","1 hrs","20 miles","2022-12-10")
     //console.log(flight1)
 }catch(e){
     console.log(e);
 }
+
 try{
 
-    flight2 = await flights.createFlight("SA-091","New Jersey","Los Angeles","17:00","18:00","1 hrs","2001 miles")
+    flight1 = await flights.createFlight("MF-090","New York","California","10:00","11:00","1 hrs","20 miles","2022-12-10")
+    //console.log(flight1)
+}catch(e){
+    console.log(e);
+}
+
+
+try{
+
+    flight2 = await flights.createFlight("SA-091","New Jersey","Los Angeles","17:00","18:00","1 hrs","2001 miles","2022-12-11")
     //console.log(flight2)
 }catch(e){
     console.log(e);
 }
 try{
 
-    flight3 = await flights.createFlight("SA-092","Seattle","Washinton","18:00","20:00","2 hrs","20 miles")
+    flight3 = await flights.createFlight("SA-092","Seattle","Washinton","18:00","20:00","2 hrs","20 miles","2022-12-15")
     //console.log(flight3)
 }catch(e){
     console.log(e);
@@ -111,6 +121,8 @@ try{
 }catch(e){
     console.log(e);
 }
+console.log('done!');
+
 await connection.closeConnection();
 }
 main();

@@ -1,11 +1,11 @@
 
 
 <main>
-    <form method="post" name="searchFlightsForm" action="/flights">
+    <form method="post" name="searchFlightsForm" action="/searchflights">
     <table>
         <tr>
             <td><label for="depart_airport">Departure Airport</label></td>
-            <td><input type="text" name="depart_airport" id="depart" placeholder="Newark" required></td>
+            <td><input type="text" name="depart_airport" id="depart_airport" placeholder="Newark" required></td>
         </tr>
         
         <tr>
@@ -31,9 +31,9 @@
         <tr>
             <td><label for="class">Class</label></td>
             <td><select name="class" id="class">
-                <option value="ec">Economy Class</option>
-                <option value="bs">Business Class</option>
-                <option value="ft">First Class</option>
+                <option value="economy">Economy Class</option>
+                <option value="business">Business Class</option>
+                <option value="first">First Class</option>
                 </select>
             </td>
         </tr>

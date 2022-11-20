@@ -1,0 +1,14 @@
+<section>
+    <h1>flights:-</h1><hr>
+    <h6>{{class}}</h6>
+    <h6>{{NoOfPass}}</h6>
+    {{#each flights}}
+        <hr>
+        <h2>{{departure}}</h2>
+        <h2>{{arrival}}</h2>
+        <h2>{{date}}</h2>
+        <h2>{{_id}}</h2>
+        <h2>{{class}}</h2> 
+        <a href="/searchflights/{{_id}}&{{class}}&{{NoOfPass}}">click here for more details</a>
+    {{/each}}
+</section>
