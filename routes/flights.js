@@ -38,6 +38,34 @@ router.route("/searchflights").post(async (req, res) => {
     }
 });
 
+router.route("/searchflights/:id&:class&:NoOfPass").get(async (req, res) => {
+  //code here for GET
+  let fid=req.params.id;
+  let f_class=req.params.class;
+  let NoOfPass=req.params.NoOfPass;
+  
+  if(!fid) {
+    res.status(400).render("error",{class:"error", title: "Error ",error: "No flight id is given." })
+  }
+  if(typeof(fid)!=="string")
+  {res.status(400).render("error",{class:"error", title:"Error",error: "Flight Id is not a string" });return} 
+  fid=fid.trim()
+  if(fid.length===0)
+  {res.status(400).render("error",{class:"error",title:"Error", error: "No Flight Id is given or is all white spaces" });return}
 
+  req.params.id=req.params.id.trim()
+try{
+  var sol=await flightsData.getallflightdetailsforflightdetailspage(fid,f_class)
+  
+} catch(e){;res.status(404).render("error",{class:"error",title:"Error", error: "No Flight found with that id"});return}
+
+res.render('flightdetails', { solution1: sol,title: "Flight Found" });
+});
+
+
+router.route("/flightbooking/:id").post(async (req, res) => {
+
+
+});
 module.exports = router;
 

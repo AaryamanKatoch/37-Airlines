@@ -1,0 +1,29 @@
+
+<section>
+<h1>{{title}}</h1>
+
+<dl>
+
+  <dt>Flight Code</dt>
+  <dd>{{{solution1.flightCode}}}</dd>
+  <dt>Departure City</dt>
+  <dd>{{solution1.departure}}</dd>
+  <dt>Arrival City</dt>
+  <dd>{{solution1.arrival}}</dd>
+  <dt>Departure Time</dt>
+  <dd>{{solution1.departureTime}}</dd>
+  <dt>Arrival Time</dt>
+  <dd>{{solution1.arrivalTime}}</dd>
+  <dt>Flight Duration</dt>
+  <dd>{{solution1.duration}}</dd>
+  <dt>Flight Miles</dt>
+  <dd>{{solution1.miles}}</dd>
+  <dt>Flight Classes Selected</dt>
+  <p>{{solution1.flightClass.classType}} {{solution1.flightClass.price}}</p>
+ 
+  
+ <form action="https://routetobook/:id/numberoftravelers">
+  <button class="btn btn-danger btn-lg">Click</button>
+  </form>
+
+</section>

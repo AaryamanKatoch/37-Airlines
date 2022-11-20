@@ -154,8 +154,41 @@ const searchFlightsResult = async (
   return flightsList;
 }
 
+async function getallflightdetailsforflightdetailspage(id,fclass){
+  const flightCollection=await flights()
+  flightdetails=await getFlightById(id)
+  const allflights = await flightCollection.find({}).toArray();
+  let resclass={}
+  for(i=0;i<allflights.length;i++){
+    curflight=allflights[i]
+    
+    for(j=0;j<curflight.flightClass.length;j++){
+      
+      if(fclass==curflight.flightClass[j].classType){
+        resclass=curflight.flightClass[j]
+      }
+    }
+  }
+  
 
-module.exports = {
+  let myflight={
+  flightCode:flightdetails.flightCode,
+  departure:flightdetails.departure,
+  arrival:flightdetails.arrival,
+  departureTime:flightdetails.departureTime,
+  arrivalTime:flightdetails.arrivalTime,
+  duration:flightdetails.duration,
+  miles:flightdetails.miles,
+  flightClass:resclass
+}
+
+
+
+return myflight
+}
+  
+
+module.exports = {getallflightdetailsforflightdetailspage,
   createFlight,
   getAllFlights,
   getFlightById,
