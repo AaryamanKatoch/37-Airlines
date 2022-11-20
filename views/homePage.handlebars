@@ -1,0 +1,49 @@
+
+
+<main>
+    <form method="post" name="searchFlightsForm" action="/flights">
+    <table>
+        <tr>
+            <td><label for="depart_airport">Departure Airport</label></td>
+            <td><input type="text" name="depart_airport" id="depart" placeholder="Newark" required></td>
+        </tr>
+        
+        <tr>
+            <td><label for="arrival_airport">Arrival Airport</label></td>
+            <td><input type="text" name="arrival_airport" id="arrival_airport" placeholder="Mumbai" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="date">Departure Date</label></td>
+            <td><input type="date" name="date" id="date" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="passengers">Passengers</label></td>
+            <td><select name="passengers" id="passengers">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><label for="class">Class</label></td>
+            <td><select name="class" id="class">
+                <option value="ec">Economy Class</option>
+                <option value="bs">Business Class</option>
+                <option value="ft">First Class</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr><td>&nbsp;</td></tr>
+
+        <tr>
+            <td><button type="submit" name="submit" value="Submit">Submit</button></td>
+        </tr>
+        
+    </table>
+    </form>
+</main>
