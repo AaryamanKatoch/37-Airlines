@@ -161,14 +161,14 @@ async function getallflightdetailsforflightdetailspage(id,fclass){
   let resclass={}
   for(i=0;i<allflights.length;i++){
     curflight=allflights[i]
-    
+    if(curflight._id==id){
     for(j=0;j<curflight.flightClass.length;j++){
       
       if(fclass==curflight.flightClass[j].classType){
         resclass=curflight.flightClass[j]
       }
     }
-  }
+  }}
   
 
   let myflight={

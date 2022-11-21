@@ -56,16 +56,14 @@ router.route("/searchflights/:id&:class&:NoOfPass").get(async (req, res) => {
   req.params.id=req.params.id.trim()
 try{
   var sol=await flightsData.getallflightdetailsforflightdetailspage(fid,f_class)
-  
+  sol["id1"]=fid
+  sol["f_class"]=f_class
+  sol["NoOfPass"]=NoOfPass
 } catch(e){;res.status(404).render("error",{class:"error",title:"Error", error: "No Flight found with that id"});return}
 
 res.render('flightdetails', { solution1: sol,title: "Flight Found" });
 });
 
 
-router.route("/flightbooking/:id").post(async (req, res) => {
-
-
-});
 module.exports = router;
 
