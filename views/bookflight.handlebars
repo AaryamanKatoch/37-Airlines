@@ -1,0 +1,45 @@
+<form action="/searchflights/book/{{flightId}}&{{flightClass}}&{{noOfPass}}/success" method="POST" name = "formName" id="form">
+{{#for noOfPass choice}}
+    <div>
+        <label for="firstname{{this.noOfForms}}" class="labelclass">Firstname</label>
+        <input type="text" name="firstname{{this.noOfForms}}" placeholder="Enter Firstname" id = "firstname{{this.noOfForms}}" value = "">
+    </div>
+    <div>
+        <label for="lastname{{this.noOfForms}}" class="labelclass">Lastname</label>
+        <input type="text" name="lastname{{this.noOfForms}}" placeholder="Enter Lastname" id = "lastname{{this.noOfForms}}">
+    </div>
+    <div>
+        <label for="passport{{this.noOfForms}}" class="labelclass">Passport</label>
+        <input type="text" name="passport{{this.noOfForms}}" placeholder="Enter Passport Number" id = "passport{{this.noOfForms}}">
+    </div>
+    <div>
+        <label for="birthdate{{this.noOfForms}}" class="labelclass">Birthdate</label>
+        <input type="date" name="birthdate{{this.noOfForms}}" id = "birthdate{{this.noOfForms}}">
+    </div>
+    <div>
+        <label for="male{{this.noOfForms}}" class="labelclass">Male</label>
+        <input type="radio" name="gender{{this.noOfForms}}" value="male" id="male{{this.noOfForms}}">
+        <label for="female{{this.noOfForms}}" class="labelclass">Female</label>
+        <input type="radio" name="gender{{this.noOfForms}}" value="female" id="female{{this.noOfForms}}">
+    </div>
+    <div>
+        <label for="email{{this.noOfForms}}">Enter your email:</label>
+        <input type="email{{this.noOfForms}}" id="email{{this.noOfForms}}" name="email{{this.noOfForms}}">
+    </div>
+    <div>
+        <label for="mobile{{this.noOfForms}}">Enter Mobile Number:</label>
+        <input type="tel" id="mobile{{this.noOfForms}}" name="mobile{{this.noOfForms}}" placeholder="Enter mobile number">  
+    </div>
+    <div>
+        <label for="foodchoices{{this.noOfForms}}">Food Preference</label>
+        <select name="foodchoices{{this.noOfForms}}" id="foodchoices{{this.noOfForms}}">
+           {{#each this.foodItems}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <br>
+    <br>           
+{{/for}}
+<button type="submit" id="sub">Book</button>    
+</form>

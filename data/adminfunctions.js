@@ -8,8 +8,6 @@ const flightData = require('../data/flights.js');
 async function getadminflightlist(){
     const flightList= await flightData.getAllFlights()
     return flightList
-    
-
 }
 
 
