@@ -65,5 +65,7 @@ res.render('flightdetails', { solution1: sol,title: "Flight Found" });
 });
 
 
+
+
 module.exports = router;
 

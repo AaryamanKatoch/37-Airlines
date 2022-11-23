@@ -7,6 +7,7 @@ const travelers=require("./data/travelers")
 const review =require("./data/reviewsCollection")
 const connection = require('./config/mongoConnection');
 const { bookings } = require('./config/mongoCollections');
+const adminhome=require("./data/adminfunctions")
 
 
 async function main() {
@@ -22,7 +23,7 @@ async function main() {
     let booking1=undefined;
     let traveller1=undefined;
     let review2=undefined
-    await db.dropDatabase()
+  //  await db.dropDatabase()
 
 try{
 
@@ -121,7 +122,14 @@ try{
 }catch(e){
     console.log(e);
 }
-
+/*
+try{
+    admintest=await flights.updateFlight( )
+    console.log(admintest)
+} catch(e){
+    console.log(e)
+}
+*/
 
 console.log('done!');
 

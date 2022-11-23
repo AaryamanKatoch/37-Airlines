@@ -93,8 +93,8 @@ const removeFlight = async (flightId) => {if(!flightId)
   return (`${deletename.flightId} has been successfully deleted! `);};
 
 const updateFlight = async (
+  id,
   flightCode,
-  flightId,
   departure,
   arrival,
   departureTime,
@@ -118,7 +118,7 @@ const updateFlight = async (
     arrivalTime:arrivalTime,
     duration:duration,
     miles:miles,
-    date:new Date(date),
+    date:new Date(date)
   }
   const updatedInfo = await flightCollection.updateOne({_id: ObjectId(id)},
   {$set: updatedflight}
