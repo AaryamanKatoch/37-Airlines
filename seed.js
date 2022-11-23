@@ -57,14 +57,14 @@ try{
 }
 try{
 
-    class1 = await classes.createClass(flight1._id,"economy","10","1000USD",[1,2,3,4,5,6,7,8,0],["veg","nonveg"])
+    class1 = await classes.createClass(flight1._id,"economy","10","1000USD",["veg","nonveg"])
     //console.log(flight3)
 }catch(e){
     console.log(e);
 }
 try{
 
-    class2 = await classes.createClass(flight1._id,"business","5","2000USD",[1,2,3,4],["veg","nonveg"])
+    class2 = await classes.createClass(flight1._id,"business","5","2000USD",["veg","nonveg"])
     //console.log(flight3)
 }catch(e){
     console.log(e);
@@ -100,7 +100,7 @@ try{
 }
 try{
 
-    traveller1 = await travelers.createTraveler(booking1._id,"parth","patel","S9182778",bookedseat1.seatNumber,"19/09/1999","Male","parth@stevens.edu","5512548455","bookedseat1.classtype","veg")
+    traveller1 = await travelers.createTraveler(booking1._id,"parth","patel","S9182778","19/09/1999","Male","parth@stevens.edu","5512548455","bookedseat1.classtype","veg")
     //console.log(flight3)
 }catch(e){
     console.log(e);

@@ -16,7 +16,6 @@ const createClass = async (
   classType,
   classCapacity,
   price,
-  seatNumbers,
   foodchoices
 ) => {
   
@@ -31,7 +30,6 @@ const createClass = async (
     classType:classType,
     classCapacity:classCapacity,
     price:price,
-    seatNumbers:seatNumbers,
     foodchoices:foodchoices
   }
 
@@ -150,8 +148,17 @@ return newflight
 
 };
 
+async function getFoodChoiceFromClass(flightId, classType)
+{
+  
+  const flightCollection = await flights();
+  let getFlightClass = await flightCollection.findOne({_id : ObjectId(flightId)},{projection:{_id: 0, flightClass : {$elemMatch: {classType : classType}}}});
+  console.log(getFlightClass);
+  return getFlightClass.flightClass[0].foodchoices;
+}
+
 
   
 
 
-module.exports = {createClass,getAllClasses,getClass,removeClass};
+module.exports = {createClass,getAllClasses,getClass,removeClass,getFoodChoiceFromClass};
