@@ -3,6 +3,7 @@ const mongoCollections = require('../config/mongoCollections');
 const flights = mongoCollections.flights;
 const {ObjectId} = require('mongodb');
 const helper =require('../helpers');
+const moment = require('moment');
 const { checkifemptystring, checkifinputexists, checkifstring, checkifproperstudio, checkifproperdirector, checkifpropertitle, checkispropergenre, checkifvalidrating, checkispropercastmemeber, checkisproperdate, checkisproperruntime} = require('../helpers');
 
 
@@ -27,7 +28,7 @@ const createFlight = async (
   arrivalTime:arrivalTime,
   duration:duration,
   miles:miles,
-  date:new Date(date),
+  date:date,
   flightClass:[],
   bookedSeats:[],
   reviews:[]
@@ -41,18 +42,21 @@ const createFlight = async (
       const flight = await getFlightById(newId);
      
        flight._id=flight._id.toString()
-       return flight;};
+       return flight;
+};
 
-const getAllFlights = async () => {    const flightCollection = await flights();
-
+const getAllFlights = async () => {    
+  const flightCollection = await flights();
   const arr = await flightCollection.find({}).toArray();
   if (arr===null) return [];
   for(i in arr){
     arr[i]._id=arr[i]._id.toString();
   }
-  return arr;};
+  return arr;
+};
 
-const getFlightById = async (flightId) => {  if(!flightId)
+const getFlightById = async (flightId) => {  
+  if(!flightId)
   throw `no id is given`;
   if(typeof(flightId)!=="string")
   throw `type of id is not a string`;
@@ -66,11 +70,11 @@ const getFlightById = async (flightId) => {  if(!flightId)
  if(flightbyid===null) 
  throw `no flight found with that id`;
  flightbyid._id=flightbyid._id.toString()
- /////////
  for(i=0;i<flightbyid.reviews.length;i++){
   flightbyid.reviews[i]._id=flightbyid.reviews[i]._id.toString()
  }
- return flightbyid;};
+ return flightbyid;
+};
 
 const removeFlight = async (flightId) => {if(!flightId)
   throw `no id is given`;
@@ -90,8 +94,9 @@ const removeFlight = async (flightId) => {if(!flightId)
     throw `Could not delete flight with id of ${flightId}`;
   }
 
-  return (`${deletename.flightId} has been successfully deleted! `);};
+  return (`${deletename.flightId} has been successfully deleted! `);
 
+};
 const updateFlight = async (
   flightCode,
   flightId,
@@ -118,7 +123,7 @@ const updateFlight = async (
     arrivalTime:arrivalTime,
     duration:duration,
     miles:miles,
-    date:new Date(date),
+    date:date,
   }
   const updatedInfo = await flightCollection.updateOne({_id: ObjectId(id)},
   {$set: updatedflight}
@@ -148,10 +153,40 @@ const searchFlightsResult = async (
   if(!typeof arrival=='string') throw 'arrival must be valid string';
   if(isNaN(NoOfPass)) throw 'Number of passengers must be valid Number';
   const flightCollection =await flights();
+  let date_arr=[];
+  date_arr.push(date);
   date=new Date(date);
-  console.log(date);
-  const flightsList = await flightCollection.find({'departure':departure,'arrival':arrival,'date':date}).toArray();
-  return flightsList;
+  for (let i = 1; i < 4; i++) {
+    date.setDate(date.getDate() + 1);
+    date=date.toISOString();
+    date_arr.push(date.split('T')[0]);
+    date=new Date(date) 
+  }
+  console.log(date_arr);
+  const flightsList = await flightCollection.find({'departure':departure,'arrival':arrival,'date':{ $in: date_arr }}).toArray();
+  if(flightsList==null){
+    return flightsList;
+  }
+  let f_flightList=[];
+  flightsList.forEach(element => {
+    let add_flag=false;
+    let temp=element.flightClass;
+    //console.log('*',temp);
+    temp.forEach(element => {
+      if(element.classType==f_class){
+        if(element.seatNumbers.length>=NoOfPass){
+          add_flag=true;
+          //console.log('you can book!!-->',element.classType);
+        }
+      }
+    });
+    if(add_flag){
+      f_flightList.push(element);
+      //console.log('adding this');
+    }
+  });
+  //console.log(f_flightList);
+  return f_flightList;
 }
 
 async function getallflightdetailsforflightdetailspage(id,fclass){
@@ -170,7 +205,6 @@ async function getallflightdetailsforflightdetailspage(id,fclass){
     }
   }}
   
-
   let myflight={
   flightCode:flightdetails.flightCode,
   departure:flightdetails.departure,
@@ -182,11 +216,21 @@ async function getallflightdetailsforflightdetailspage(id,fclass){
   flightClass:resclass
 }
 
-
-
 return myflight
 }
   
+// async function main(){
+//   try{
+//     let result=await searchFlightsResult('New York','California','2022-12-10',2,'economy');
+//     console.log(result);
+//   }catch(e){
+//     console.log(e);
+//   }
+//   console.log('done');
+//   process.exit();
+// }
+
+// main();
 
 module.exports = {getallflightdetailsforflightdetailspage,
   createFlight,
