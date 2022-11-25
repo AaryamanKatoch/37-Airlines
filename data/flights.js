@@ -98,8 +98,8 @@ const removeFlight = async (flightId) => {if(!flightId)
 
 };
 const updateFlight = async (
+  id,
   flightCode,
-  flightId,
   departure,
   arrival,
   departureTime,
@@ -156,17 +156,18 @@ const searchFlightsResult = async (
   let date_arr=[];
   date_arr.push(date);
   date=new Date(date);
-  for (let i = 1; i < 4; i++) {
+  for (let i = 1; i < 7; i++) {
     date.setDate(date.getDate() + 1);
     date=date.toISOString();
     date_arr.push(date.split('T')[0]);
     date=new Date(date) 
   }
-  console.log(date_arr);
+  //console.log(date_arr);
   const flightsList = await flightCollection.find({'departure':departure,'arrival':arrival,'date':{ $in: date_arr }}).toArray();
   if(flightsList==null){
     return flightsList;
   }
+  //console.log(flightsList);
   let f_flightList=[];
   flightsList.forEach(element => {
     let add_flag=false;
@@ -174,7 +175,7 @@ const searchFlightsResult = async (
     //console.log('*',temp);
     temp.forEach(element => {
       if(element.classType==f_class){
-        if(element.seatNumbers.length>=NoOfPass){
+        if(element.classCapacity>=NoOfPass){
           add_flag=true;
           //console.log('you can book!!-->',element.classType);
         }
@@ -185,7 +186,7 @@ const searchFlightsResult = async (
       //console.log('adding this');
     }
   });
-  //console.log(f_flightList);
+  //console.log('final flights list',f_flightList);
   return f_flightList;
 }
 

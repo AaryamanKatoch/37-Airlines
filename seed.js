@@ -7,6 +7,7 @@ const travelers=require("./data/travelers")
 const review =require("./data/reviewsCollection")
 const connection = require('./config/mongoConnection');
 const { bookings } = require('./config/mongoCollections');
+const adminhome=require("./data/adminfunctions")
 
 
 async function main() {
@@ -16,6 +17,7 @@ async function main() {
     let flight3 = undefined;
     let flight4 = undefined;
     let flight5 = undefined;
+    let flight6=undefined;
     let class1=undefined;
     let class2=undefined;
     let bookedseat1=undefined;
@@ -36,7 +38,7 @@ try{
 
 try{
 
-    flight2 = await flights.createFlight("MF-090","New York","California","10:00","11:00","1 hrs","20 miles","2022-12-10")
+    flight2 = await flights.createFlight("MF-080","New York","California","10:00","11:00","1 hrs","20 miles","2022-12-10")
     //console.log(flight1)
 }catch(e){
     console.log(e);
@@ -44,7 +46,15 @@ try{
 
 try{
 
-    flight3 = await flights.createFlight("MF-090","New York","California","12:00","11:00","1 hrs","20 miles","2022-12-11")
+    flight3 = await flights.createFlight("MF-070","New York","California","12:00","11:00","1 hrs","20 miles","2022-12-11")
+    //console.log(flight1)
+}catch(e){
+    console.log(e);
+}
+
+try{
+
+    flight6 = await flights.createFlight("MF-060","New York","California","12:00","11:00","1 hrs","20 miles","2022-12-16")
     //console.log(flight1)
 }catch(e){
     console.log(e);
@@ -67,34 +77,42 @@ try{
 }
 try{
 
-    class1 = await classes.createClass(flight1._id,"economy","10","1000USD",[1,2,3,4,5,6,7,8,0],["veg","nonveg"])
+    class1 = await classes.createClass(flight1._id,"economy",10,"1000USD",["veg","nonveg"])
     //console.log(flight3)
 }catch(e){
     console.log(e);
 }
 try{
 
-    class2 = await classes.createClass(flight1._id,"business","5","2000USD",[1,2,3,4],["veg","nonveg"])
+    class2 = await classes.createClass(flight1._id,"business",5,"2000USD",["veg","nonveg"])
+    //console.log(flight3)
+}catch(e){
+    console.log(e);
+}
+
+try{
+
+    class2 = await classes.createClass(flight6._id,"economy",15,"2000USD",["veg","nonveg"])
+    //console.log(flight3)
+}catch(e){
+    console.log(e);
+}
+
+try{
+    class1 = await classes.createClass(flight2._id,"economy",10,"1000USD",[1,2,3,4,5,6,7,8,0],["veg","nonveg"])
     //console.log(flight3)
 }catch(e){
     console.log(e);
 }
 try{
 
-    class1 = await classes.createClass(flight2._id,"economy","10","1000USD",[1,2,3,4,5,6,7,8,0],["veg","nonveg"])
+    class2 = await classes.createClass(flight2._id,"business",5,"2000USD",[1,2,3,4],["veg","nonveg"])
     //console.log(flight3)
 }catch(e){
     console.log(e);
 }
 try{
-
-    class2 = await classes.createClass(flight2._id,"business","5","2000USD",[1,2,3,4],["veg","nonveg"])
-    //console.log(flight3)
-}catch(e){
-    console.log(e);
-}
-try{
-    class2 = await classes.createClass(flight3._id,"business","5","2000USD",[1,2,3,4],["veg","nonveg"])
+    class2 = await classes.createClass(flight3._id,"business",5,"2000USD",[1,2,3,4],["veg","nonveg"])
     //console.log(flight3)
 }catch(e){
     console.log(e);
@@ -130,7 +148,7 @@ try{
 }
 try{
 
-    traveller1 = await travelers.createTraveler(booking1._id,"parth","patel","S9182778",bookedseat1.seatNumber,"19/09/1999","Male","parth@stevens.edu","5512548455","bookedseat1.classtype","veg")
+    traveller1 = await travelers.createTraveler(booking1._id,"parth","patel","S9182778","19/09/1999","Male","parth@stevens.edu","5512548455","bookedseat1.classtype","veg")
     //console.log(flight3)
 }catch(e){
     console.log(e);
@@ -151,7 +169,14 @@ try{
 }catch(e){
     console.log(e);
 }
-
+/*
+try{
+    admintest=await flights.updateFlight( )
+    console.log(admintest)
+} catch(e){
+    console.log(e)
+}
+*/
 
 console.log('done!');
 

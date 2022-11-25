@@ -6,6 +6,7 @@ const bookedSeatsData=require('./bookedSeats')
 const bookingData=require('./bookingCollection')
 const travelerData=require('./travelers')
 const userData=require('./usersCollection')
+const adminData=require('./adminfunctions')
 
 
 module.exports = {
@@ -15,6 +16,7 @@ module.exports = {
   bookedSeats:bookedSeatsData,
   bookings:bookingData,
   travelers:travelerData,
-  users:userData
+  users:userData,
+  adminfunctions:adminData
 
 };

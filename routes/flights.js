@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const data = require('../data');
 const flightsData = data.flights;
+const classes = require('../data/class');
+const bookingCollection = require('../data/bookingCollection');
+const travelerData = require('../data/travelers');
 const path = require('path');
 
 router.route("/searchflights").post(async (req, res) => {
@@ -63,6 +66,68 @@ try{
 
 res.render('flightdetails', { solution1: sol,title: "Flight Found" });
 });
+
+router.route("/searchflights/book/:id&:class&:NoOfPass").get(async(req,res)=>{
+  try {
+    let flightId = req.params.id;
+    let flightClass = req.params.class;
+    let NoOfPass = req.params.NoOfPass;
+    
+    if(!flightId) throw 'Flight Id is not provided.';
+    if(!flightClass) throw 'Flight Class is not provided.';
+    if(!NoOfPass) throw 'Number of passengers is not provided.';
+    flightId = flightId.trim();
+    //console.log(flightClass);
+    let food = await classes.getFoodChoiceFromClass(flightId,flightClass);
+    console.log(food);
+    res.render('bookflight', {title : "Book Flight", noOfPass : NoOfPass, choice : food, flightId : flightId, flightClass : flightClass});
+  } catch (e) {
+    res.render('error',{error : e, title : 'Error'});
+  }
+
+});
+
+router.route("/searchflights/book/:id&:class&:NoOfPass/success").post(async(req,res) => {
+  let data = req.body;
+  let flightId = req.params.id;
+  let keys = Object.keys(data);
+  let arrayObj = [];
+  for(let i = 0; i < keys.length; i++)
+  {
+      let value = data[keys[i]];
+      let key = keys[i].substring(0, keys[i].length - 1);
+      let index = parseInt(keys[i][keys[i].length - 1]) - 1;
+      arrayObj[index] = arrayObj[index] || {};
+      arrayObj[index][key] = value; 
+  }
+  let key = [];
+  for(let i = 0; i < keys.length; i++)
+  {
+      key.push(keys[i].substring(0, keys[i].length - 1));
+  }
+  let bookingData = await bookingCollection.createBooking(flightId,'6379595b21896b817c8fc3c6');
+  for(let i = 0; i < arrayObj.length; i++)
+  {
+      let obj = arrayObj[i];
+      let firstname, lastname, passport, birthdate, gender, email, mobile, foodchoices;
+      for(let j = 0; j < key.length; j++)
+      {
+          if(key[j] == 'firstname') firstname = arrayObj[i][key[j]];
+          if(key[j] == 'lastname') lastname = arrayObj[i][key[j]];
+          if(key[j] == 'passport') passport = arrayObj[i][key[j]];
+          if(key[j] == 'birthdate') birthdate = arrayObj[i][key[j]];
+          if(key[j] == 'gender') gender = arrayObj[i][key[j]];
+          if(key[j] == 'email') email = arrayObj[i][key[j]];
+          if(key[j] == 'mobile') mobile = arrayObj[i][key[j]];
+          if(key[j] == 'foodchoices') foodchoices = arrayObj[i][key[j]];            
+      }
+      let updatedBooking = await travelerData.createTraveler(bookingData._id,firstname,lastname,passport,"1",birthdate,gender,email,mobile,"economy",foodchoices);
+      console.log(updatedBooking);
+  }
+   res.render('success');
+});
+
+
 
 
 module.exports = router;
