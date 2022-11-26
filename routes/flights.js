@@ -7,8 +7,13 @@ const bookingCollection = require('../data/bookingCollection');
 const travelerData = require('../data/travelers');
 const path = require('path');
 
+//route for getting flights from passed parameters from form on the home page
+
 router.route("/searchflights").post(async (req, res) => {
     try{
+
+      //error cheking
+
       let flightInfo=req.body;
       let departure=flightInfo.depart_airport;
       let arrival=flightInfo.arrival_airport;
@@ -19,12 +24,18 @@ router.route("/searchflights").post(async (req, res) => {
       if(!arrival) throw 'No arrival passed!';
       if(!date) throw 'No date passed';
       if(!NoOfPass) throw 'No passengers passed!';
+      if(!f_class) throw 'No flight class passed!';
       if(departure.trim().length==0) throw 'departure can not be empty string';
       if(arrival.trim().length==0) throw 'arrival can not be empty string';
-      if(!typeof departure=='string') throw 'departure must be valid string';
-      if(!typeof arrival=='string') throw 'arrival must be valid string';
-      NoOfPass=Number(NoOfPass);
+      if(date.trim().length==0) throw 'date can not be empty string';
+      if(f_class.trim().length==0) throw 'flight class can not be empty string';
+      if(!typeof date=='string') throw 'date must be valid string';
+      if(!typeof f_class=='string') throw 'flight class must be valid string';
       if(isNaN(NoOfPass)) throw 'Number of passengers must be valid Number';
+      NoOfPass=Number(NoOfPass);
+
+      //error handling done
+
       let result=await flightsData.searchFlightsResult(departure,arrival,date,NoOfPass,f_class);
       if(result.length==0){
         res.status(400).render('error',{error:'No result found for this properties' ,title:'No result Found'}, );

@@ -26,7 +26,7 @@ async function main() {
     let booking1=undefined;
     let traveller1=undefined;
     let review2=undefined
-    await db.dropDatabase()
+    //await db.dropDatabase()
 
 try{
 

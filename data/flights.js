@@ -136,6 +136,9 @@ return await getFlightById(id);
 
 };
 
+/*  function for searching flights from passed departure , arrival , date , number of passengers and
+ flight class details   */
+
 const searchFlightsResult = async (
   departure,
   arrival,
@@ -143,17 +146,31 @@ const searchFlightsResult = async (
   NoOfPass,
   f_class
 ) => {
+  
+  //error cheking 
   if(!departure) throw 'No departure passed!';
   if(!arrival) throw 'No arrival passed!';
   if(!date) throw 'No date passed';
   if(!NoOfPass) throw 'No passengers passed!';
+  if(!f_class) throw 'No flight class passed!';
   if(departure.trim().length==0) throw 'departure can not be empty string';
   if(arrival.trim().length==0) throw 'arrival can not be empty string';
+  if(date.trim().length==0) throw 'date can not be empty string';
+  if(f_class.trim().length==0) throw 'flight class can not be empty string';
   if(!typeof departure=='string') throw 'departure must be valid string';
   if(!typeof arrival=='string') throw 'arrival must be valid string';
+  if(!typeof date=='string') throw 'date must be valid string';
+  if(!typeof f_class=='string') throw 'flight class must be valid string';
   if(isNaN(NoOfPass)) throw 'Number of passengers must be valid Number';
+  NoOfPass=Number(NoOfPass);
+ 
+  //error cheking done
+
   const flightCollection =await flights();
-  let date_arr=[];
+
+  //creating date array for next week of selected date
+
+  let date_arr=[];  
   date_arr.push(date);
   date=new Date(date);
   for (let i = 1; i < 7; i++) {
@@ -162,31 +179,28 @@ const searchFlightsResult = async (
     date_arr.push(date.split('T')[0]);
     date=new Date(date) 
   }
-  //console.log(date_arr);
+
+  //getting flights based on dates and other parameters 
+
   const flightsList = await flightCollection.find({'departure':departure,'arrival':arrival,'date':{ $in: date_arr }}).toArray();
   if(flightsList==null){
     return flightsList;
   }
-  //console.log(flightsList);
   let f_flightList=[];
   flightsList.forEach(element => {
     let add_flag=false;
     let temp=element.flightClass;
-    //console.log('*',temp);
     temp.forEach(element => {
       if(element.classType==f_class){
         if(element.classCapacity>=NoOfPass){
           add_flag=true;
-          //console.log('you can book!!-->',element.classType);
         }
       }
     });
     if(add_flag){
       f_flightList.push(element);
-      //console.log('adding this');
     }
   });
-  //console.log('final flights list',f_flightList);
   return f_flightList;
 }
 
@@ -233,7 +247,8 @@ return myflight
 
 // main();
 
-module.exports = {getallflightdetailsforflightdetailspage,
+module.exports = {
+  getallflightdetailsforflightdetailspage,
   createFlight,
   getAllFlights,
   getFlightById,
