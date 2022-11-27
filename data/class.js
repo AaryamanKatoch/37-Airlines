@@ -3,6 +3,7 @@ const {ObjectId} = require('mongodb');
 const {flights}=require('../config/mongoCollections');
 const {getFlightById }= require("./flights")
 const flightData = require('../data/flights.js');
+const helper=require('../helpers')
 
 const createClass = async (
   fid,
@@ -12,6 +13,13 @@ const createClass = async (
   foodchoices
 ) => {
   
+
+classType=await helper.checkifproperclasstype(classType)
+classCapacity=await helper.checkifproperclasscapacity(classCapacity)
+price=await helper.checkifproperprice(price)
+foodchoices=await helper.checkifproperfoodchoices(foodchoices)
+
+
   const classId=ObjectId();
   const flightCollection= await flights()
  
@@ -97,6 +105,18 @@ return fclass;
 
 
 const removeClass = async (classId) => {
+  if(!classId)
+  throw `no id is given`;
+  if(typeof(classId)!=="string")
+  throw `type of id is not a string`;
+  if(classId.trim().length===0)
+  throw 'id cannot be empty or all white spaces';
+  classId=classId.trim();
+  if(!ObjectId.isValid(classId))
+  throw `id is not valid`;
+  classId=classId.trim()
+
+
   const flightCollection = await flights();
   const allflights = await flightCollection.find({}).toArray();
   let classFound = false;
@@ -142,7 +162,7 @@ return newflight
 
 async function getFoodChoiceFromClass(flightId, classType)
 {
-  
+  classType=await helper.checkifproperclasstype(classType)
   const flightCollection = await flights();
   let getFlightClass = await flightCollection.findOne({_id : ObjectId(flightId)},{projection:{_id: 0, flightClass : {$elemMatch: {classType : classType}}}});
   console.log(getFlightClass);

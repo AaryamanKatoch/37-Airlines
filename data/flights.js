@@ -4,7 +4,6 @@ const flights = mongoCollections.flights;
 const {ObjectId} = require('mongodb');
 const helper =require('../helpers');
 const moment = require('moment');
-const { checkifemptystring, checkifinputexists, checkifstring, checkifproperstudio, checkifproperdirector, checkifpropertitle, checkispropergenre, checkifvalidrating, checkispropercastmemeber, checkisproperdate, checkisproperruntime} = require('../helpers');
 
 
 //added date in create and update flight
@@ -18,7 +17,17 @@ const createFlight = async (
   miles,
   date
 ) => {
-  
+
+  flightCode=await helper.checkifproperflightcode(flightCode)
+  departure=await helper.checkifproperdeparr(departure)
+  arrival=await helper.checkifproperdeparr(arrival)
+  departureTime=await helper.checkifproperarrdepttime(departureTime)
+  arrivalTime=await helper.checkifproperarrdepttime(arrivalTime)
+  duration=await helper.checkifproperduration(duration)
+  miles=miles.trim()
+  await helper.checkifpropermiles(miles)
+
+
   const flightcollection = await flights();
   let flight1 = {
   flightCode:flightCode,
@@ -111,8 +120,17 @@ const updateFlight = async (
 ) => {
 
 
+  flightCode=await helper.checkifproperflightcode(flightCode)
+  departure=await helper.checkifproperdeparr(departure)
+  arrival=await helper.checkifproperdeparr(arrival)
+  departureTime=await helper.checkifproperarrdepttime(departureTime)
+  arrivalTime=await helper.checkifproperarrdepttime(arrivalTime)
+  duration=await helper.checkifproperduration(duration)
+  miles=miles.trim()
+  await helper.checkifpropermiles(miles)
   
-  
+
+
   ///
   const flightCollection = await flights();
   let updatedflight = {
@@ -205,10 +223,31 @@ const searchFlightsResult = async (
 }
 
 async function getallflightdetailsforflightdetailspage(id,fclass){
+  if(!id)
+  throw `no id is given`;
+  if(typeof(id)!=="string")
+  throw `type of id is not a string`;
+  if(id.trim().length===0)
+  throw 'id cannot be empty or all white spaces';
+  id=id.trim();
+  if(!ObjectId.isValid(id))
+  throw `id is not valid`;
+
+ if(!fclass)
+ throw 'no flight class is provided'
+ if(typeof(fclass)!=="string")
+ throw `type of flight class is not a string`;
+ if(fclass.trim().length===0)
+ throw 'flight class cannot be empty or all white spaces';
+ fclass=fclass.trim();
+ 
+
+
   const flightCollection=await flights()
   flightdetails=await getFlightById(id)
   const allflights = await flightCollection.find({}).toArray();
   let resclass={}
+
   for(i=0;i<allflights.length;i++){
     curflight=allflights[i]
     if(curflight._id==id){

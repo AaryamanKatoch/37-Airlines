@@ -17,6 +17,36 @@ rating
 
 ) => {
   
+  if(!flightId)
+  throw `no id is given`;
+  if(typeof(flightId)!=="string")
+  throw `type of id is not a string`;
+  if(flightId.trim().length===0)
+  throw 'id cannot be empty or all white spaces';
+  flightId=flightId.trim();
+  if(!ObjectId.isValid(flightId))
+  throw `id is not valid`;
+  flightId=flightId.trim()
+
+
+  if(!userId)
+  throw `no id is given`;
+  if(typeof(userId)!=="string")
+  throw `type of id is not a string`;
+  if(userId.trim().length===0)
+  throw 'id cannot be empty or all white spaces';
+  userId=userId.trim();
+  if(!ObjectId.isValid(userId))
+  throw `id is not valid`;
+  userId=userId.trim()
+
+  review=await helper.checkifproperreview(review)
+  await helper.checkifproperrating(rating)
+
+
+
+
+
   const reviewcollection = await reviews();
   let review1 = {
     userId:userId,
@@ -100,8 +130,43 @@ const updateReview = async (
     rating
 ) => {
 
+  if(!reviewId)
+  throw `no id is given`;
+  if(typeof(reviewId)!=="string")
+  throw `type of id is not a string`;
+  if(reviewId.trim().length===0)
+  throw 'id cannot be empty or all white spaces';
+  reviewId=reviewId.trim();
+  if(!ObjectId.isValid(reviewId))
+  throw `id is not valid`;
+  reviewId=reviewId.trim()
 
-  
+  if(!flightId)
+  throw `no id is given`;
+  if(typeof(flightId)!=="string")
+  throw `type of id is not a string`;
+  if(flightId.trim().length===0)
+  throw 'id cannot be empty or all white spaces';
+  flightId=flightId.trim();
+  if(!ObjectId.isValid(flightId))
+  throw `id is not valid`;
+  flightId=flightId.trim()
+
+
+  if(!userId)
+  throw `no id is given`;
+  if(typeof(userId)!=="string")
+  throw `type of id is not a string`;
+  if(userId.trim().length===0)
+  throw 'id cannot be empty or all white spaces';
+  userId=userId.trim();
+  if(!ObjectId.isValid(userId))
+  throw `id is not valid`;
+  userId=userId.trim()
+
+  review=await helper.checkifproperreview(review)
+  await helper.checkifproperrating(rating)
+
   
   ///
   const reviewCollection=await reviews()

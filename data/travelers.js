@@ -7,7 +7,7 @@ const {bookings}=require('../config/mongoCollections');
 //const { getFlightById } =require('./flights')
 
 const bookingData = require('../data/bookingCollection');
-
+const helper=require('../helpers')
 //const {getFlightById} = require('./flight');
 
 
@@ -25,6 +25,11 @@ const createTraveler = async (
   food
 ) => {
   
+
+
+
+
+
  
   
   const travelerId=ObjectId();
@@ -110,6 +115,18 @@ return ftraveler;
 
 
 const removeTraveler = async (travelerId) => {
+
+  if(!travelerId)
+  throw `no id is given`;
+  if(typeof(travelerId)!=="string")
+  throw `type of id is not a string`;
+  if(travelerId.trim().length===0)
+  throw 'id cannot be empty or all white spaces';
+  travelerId=travelerId.trim();
+  if(!ObjectId.isValid(travelerId))
+  throw `id is not valid`;
+  travelerId=travelerId.trim()
+
   const bookingCollection = await bookings();
   const allbookings = await bookingCollection.find({}).toArray();
   let travelerFound = false;
