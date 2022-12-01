@@ -24,23 +24,23 @@ if(staticForm){
 
     staticForm.addEventListener('submit', (event) => {
         event.preventDefault();
-    console.log(here)
+  
         try {
           // hide containers by default
           errorContainer.classList.add('hidden');
           // Values come from inputs as strings, no matter what :(
-            const fcodeval= fcode.value;
+            let fcodeval= fcode.value;
             if(!fcodeval)
             throw "No flight code provided";
         
             if(typeof(fcodeval)!=="string")
             throw 'flight code is not a string';
-            if(vari.trim().length===0)
+            if(fcodeval.trim().length===0)
             throw "flight code cant be empty or all white spaces";
         
             fcodeval=fcodeval.trim()
             fcodeval=fcodeval.toUpperCase()
-        
+            const isAlphaNumeric = str => /^[a-z0-9]+$/gi.test(str);
             if(!isAlphaNumeric(fcodeval))
             throw "flight code can have only alphanumeric value"
           
@@ -54,7 +54,7 @@ if(staticForm){
             throw "maximum length of flight code is 6 "
         
             
-            const deparval=depar.value;
+            let deparval=depar.value;
             if(!deparval)
             throw "No departure or arrival city is provided";
         
@@ -67,7 +67,7 @@ if(staticForm){
             deparval=deparval.toUpperCase()
         
             if(!(/^[A-Za-z\s]*$/.test(deparval)))
-            throw 'city can also have alphabets'
+            throw 'city can only have alphabets'
         
             if(deparval.length<2)
             throw "minimum length of arrival and departure cities  should be two"
@@ -78,7 +78,7 @@ if(staticForm){
     
 
 
-            const arrival=arri.value;
+            let arrival=arri.value;
             if(!arrival)
             throw "No departure or arrival city is provided";
         
@@ -100,7 +100,7 @@ if(staticForm){
             throw "maximum length of arrival and departure cities should be 6 "
         
 
-            const departimval=departim.value;
+            let departimval=departim.value;
             if(!departimval)
             throw "No arrival or departure time is provided";
          
@@ -116,7 +116,7 @@ if(staticForm){
             throw 'not proper arrival/departure time format'
 
 
-            const arritimval=arritim.value;
+            let arritimval=arritim.value;
             if(!arritimval)
             throw "No arrival or departure time is provided";
          
@@ -130,10 +130,10 @@ if(staticForm){
             if (!regex.test(arritimval))
             throw 'not proper arrival/departure time format'
 
-            const duraval=dura.value;
+            let duraval=dura.value;
 
 
-            const milval=mil.value;
+            let milval=mil.value;
 
             if(!milval)
             throw "miles not provided";
@@ -147,12 +147,14 @@ if(staticForm){
             if(!(Number.isInteger(Number(milval)) && Number(milval) > 1 && Number(milval)<9538))
             throw "not proper miles , should be an integer between 1 and 9538"
             const datval=dat.value;
-          
+            staticForm.submit()
         } catch (e) {
+          console.log(e)
           const message = typeof e === 'string' ? e : e.message;
-          errorTextElement.textContent = e;
-        errorContainer.classList.remove('hidden');
+          errorTextElement.textContent = message;
+        errorContainer.hidden=false;
         }
+    
       });
 }
   })();

@@ -10,6 +10,9 @@ app.use(express.urlencoded({extended: true}));
 
 
 const static = express.static(__dirname + '/public');
+app.use;
+app.use('/public',static);
+
 
 
 

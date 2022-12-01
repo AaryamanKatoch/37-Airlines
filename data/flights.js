@@ -146,10 +146,10 @@ const updateFlight = async (
   const updatedInfo = await flightCollection.updateOne({_id: ObjectId(id)},
   {$set: updatedflight}
 );
-if (updatedInfo.modifiedCount === 0) {
-  throw 'could not update flight successfully';
+//if (updatedInfo.modifiedCount === 0) {
+ // throw 'could not update flight successfully';
   
-}
+//}
 return await getFlightById(id);
 
 };
