@@ -30,7 +30,7 @@ async function main() {
 
 try{
 
-    flight1 = await flights.createFlight("MF-090","New York","California","10:00","11:00","1 hrs","20 miles","2022-12-10")
+    flight1 = await flights.createFlight("MF090","New York","California","10:00","11:00","1","20","2022-12-10")
     //console.log(flight1)
 }catch(e){
     console.log(e);
@@ -38,7 +38,7 @@ try{
 
 try{
 
-    flight2 = await flights.createFlight("MF-080","New York","California","10:00","11:00","1 hrs","20 miles","2022-12-10")
+    flight2 = await flights.createFlight("MF080","New York","California","10:00","11:00","1","20","2022-12-10")
     //console.log(flight1)
 }catch(e){
     console.log(e);
@@ -46,7 +46,7 @@ try{
 
 try{
 
-    flight3 = await flights.createFlight("MF-070","New York","California","12:00","11:00","1 hrs","20 miles","2022-12-11")
+    flight3 = await flights.createFlight("MF070","New York","California","12:00","11:00","1","20","2022-12-11")
     //console.log(flight1)
 }catch(e){
     console.log(e);
@@ -54,7 +54,7 @@ try{
 
 try{
 
-    flight6 = await flights.createFlight("MF-060","New York","California","12:00","11:00","1 hrs","20 miles","2022-12-16")
+    flight6 = await flights.createFlight("MF060","New York","California","12:00","11:00","1","20","2022-12-16")
     //console.log(flight1)
 }catch(e){
     console.log(e);
@@ -63,28 +63,28 @@ try{
 
 try{
 
-    flight4 = await flights.createFlight("SA-091","New Jersey","Los Angeles","17:00","18:00","1 hrs","2001 miles","2022-12-11")
+    flight4 = await flights.createFlight("SA091","New Jersey","Los Angeles","17:00","18:00","1","2001","2022-12-11")
     //console.log(flight2)
 }catch(e){
     console.log(e);
 }
 try{
 
-    flight5 = await flights.createFlight("SA-092","Seattle","Washinton","18:00","20:00","2 hrs","20 miles","2022-12-15")
+    flight5 = await flights.createFlight("SA092","Seattle","Washinton","18:00","20:00","2","20","2022-12-15")
     //console.log(flight3)
 }catch(e){
     console.log(e);
 }
 try{
 
-    class1 = await classes.createClass(flight1._id,"economy",10,"1000USD",["veg","nonveg"])
+    class1 = await classes.createClass(flight1._id,"economy",10,"1000",["veg","nonveg"])
     //console.log(flight3)
 }catch(e){
     console.log(e);
 }
 try{
 
-    class2 = await classes.createClass(flight1._id,"business",5,"2000USD",["veg","nonveg"])
+    class2 = await classes.createClass(flight1._id,"business",5,"2000",["veg","nonveg"])
     //console.log(flight3)
 }catch(e){
     console.log(e);
@@ -92,27 +92,27 @@ try{
 
 try{
 
-    class2 = await classes.createClass(flight6._id,"economy",15,"2000USD",["veg","nonveg"])
+    class2 = await classes.createClass(flight6._id,"economy",15,"2000",["veg","nonveg"])
     //console.log(flight3)
 }catch(e){
     console.log(e);
 }
 
 try{
-    class1 = await classes.createClass(flight2._id,"economy",10,"1000USD",[1,2,3,4,5,6,7,8,0],["veg","nonveg"])
+    class1 = await classes.createClass(flight2._id,"economy",10,"1000",[1,2,3,4,5,6,7,8,0],["veg","nonveg"])
     //console.log(flight3)
 }catch(e){
     console.log(e);
 }
 try{
 
-    class2 = await classes.createClass(flight2._id,"business",5,"2000USD",[1,2,3,4],["veg","nonveg"])
+    class2 = await classes.createClass(flight2._id,"business",5,"2000",[1,2,3,4],["veg","nonveg"])
     //console.log(flight3)
 }catch(e){
     console.log(e);
 }
 try{
-    class2 = await classes.createClass(flight3._id,"business",5,"2000USD",[1,2,3,4],["veg","nonveg"])
+    class2 = await classes.createClass(flight3._id,"business",5,"2000",[1,2,3,4],["veg","nonveg"])
     //console.log(flight3)
 }catch(e){
     console.log(e);
@@ -148,7 +148,7 @@ try{
 }
 try{
 
-    traveller1 = await travelers.createTraveler(booking1._id,"parth","patel","S9182778","19/09/1999","Male","parth@stevens.edu","5512548455","bookedseat1.classtype","veg")
+    traveller1 = await travelers.createTraveler(booking1._id,"parth","patel","S9182778","19/09/1999","Male","parth@stevens.edu","5512548455",bookedseat1.classtype,"veg")
     //console.log(flight3)
 }catch(e){
     console.log(e);

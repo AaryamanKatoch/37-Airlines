@@ -40,8 +40,8 @@ rating
   throw `id is not valid`;
   userId=userId.trim()
 
-  review=await helper.checkifproperreview(review)
-  await helper.checkifproperrating(rating)
+  //review=await helper.checkifproperreview(review)
+  //await helper.checkifproperrating(rating)
 
 
 
@@ -164,8 +164,8 @@ const updateReview = async (
   throw `id is not valid`;
   userId=userId.trim()
 
-  review=await helper.checkifproperreview(review)
-  await helper.checkifproperrating(rating)
+  //review=await helper.checkifproperreview(review)
+  //await helper.checkifproperrating(rating)
 
   
   ///

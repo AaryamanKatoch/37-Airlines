@@ -1,5 +1,5 @@
 <section>
-      <form method="post" name="editflightdetails" action="/admin/editflight/{{solution1._id}}">
+      <form id="adminformid" method="post" name="editflightdetails" action="/admin/editflight/{{solution1._id}}">
 
       <label for="flightcodeInput">Flight Code</label>
       <input id="flightcodeInput" name="flightcodeInput"  placeholder="Flight Code" value="{{solution1.flightCode}}">
@@ -29,4 +29,9 @@
       <button type="submit">Submit</button>
 
       </form>
+
+  <div class="hidden" id="error-container">
+    <div class="text-goes-here">
+    </div>
+     <script src="/public/js/homepage.js"></script>
 </section>

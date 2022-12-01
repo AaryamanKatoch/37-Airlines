@@ -17,7 +17,7 @@ const createBookedSeats = async (
 ) => {
   
  
-  classtype=helper.checkifproperclasstype(classtype)
+  //classtype=helper.checkifproperclasstype(classtype)
   const bookedId=ObjectId();
   const flightCollection= await flights()
  

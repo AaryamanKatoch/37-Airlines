@@ -60,7 +60,8 @@ router.route("/admin/editflight/:id").get(async (req, res) => {
    try{
    const newflight = await flightData.updateFlight(fid,newflightcode,newdeparture,newarrival,newdeparturetime,newarrivaltime,newduration,newmiles,newdate)
    res.redirect("/admin")
-}catch(e){console.log(e)}
+}catch(e){//console.log(e)
+}
     });
 
 
