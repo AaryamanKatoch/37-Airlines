@@ -14,10 +14,10 @@ const createClass = async (
 ) => {
   
 
-classType=await helper.checkifproperclasstype(classType)
-classCapacity=await helper.checkifproperclasscapacity(classCapacity)
-price=await helper.checkifproperprice(price)
-foodchoices=await helper.checkifproperfoodchoices(foodchoices)
+//classType=await helper.checkifproperclasstype(classType)
+//classCapacity=await helper.checkifproperclasscapacity(classCapacity)
+//price=await helper.checkifproperprice(price)
+//foodchoices=await helper.checkifproperfoodchoices(foodchoices)
 
 
   const classId=ObjectId();
@@ -162,7 +162,7 @@ return newflight
 
 async function getFoodChoiceFromClass(flightId, classType)
 {
-  classType=await helper.checkifproperclasstype(classType)
+  //classType=await helper.checkifproperclasstype(classType)
   const flightCollection = await flights();
   let getFlightClass = await flightCollection.findOne({_id : ObjectId(flightId)},{projection:{_id: 0, flightClass : {$elemMatch: {classType : classType}}}});
   //console.log(getFlightClass);

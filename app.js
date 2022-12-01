@@ -7,7 +7,20 @@ const exphbars = require('express-handlebars');
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+
+
+const static = express.static(__dirname + '/public');
+app.use;
+app.use('/public',static);
+
+
+
+
+
+
+
 app.engine('handlebars', exphbars.engine({defaultLayout: 'main'}));
+
 app.set('view engine', 'handlebars');
 var hbs = exphbars.create({});
 var hbs1 = exphbars.create({});

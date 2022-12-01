@@ -18,14 +18,14 @@ const createFlight = async (
   date
 ) => {
 
-  flightCode=await helper.checkifproperflightcode(flightCode)
-  departure=await helper.checkifproperdeparr(departure)
-  arrival=await helper.checkifproperdeparr(arrival)
-  departureTime=await helper.checkifproperarrdepttime(departureTime)
-  arrivalTime=await helper.checkifproperarrdepttime(arrivalTime)
-  duration=await helper.checkifproperduration(duration)
-  miles=miles.trim()
-  await helper.checkifpropermiles(miles)
+  //flightCode=await helper.checkifproperflightcode(flightCode)
+  //departure=await helper.checkifproperdeparr(departure)
+  //arrival=await helper.checkifproperdeparr(arrival)
+  //departureTime=await helper.checkifproperarrdepttime(departureTime)
+  //arrivalTime=await helper.checkifproperarrdepttime(arrivalTime)
+  //duration=await helper.checkifproperduration(duration)
+  //miles=miles.trim()
+  //await helper.checkifpropermiles(miles)
 
 
   const flightcollection = await flights();
@@ -120,14 +120,14 @@ const updateFlight = async (
 ) => {
 
 
-  flightCode=await helper.checkifproperflightcode(flightCode)
-  departure=await helper.checkifproperdeparr(departure)
-  arrival=await helper.checkifproperdeparr(arrival)
-  departureTime=await helper.checkifproperarrdepttime(departureTime)
-  arrivalTime=await helper.checkifproperarrdepttime(arrivalTime)
-  duration=await helper.checkifproperduration(duration)
-  miles=miles.trim()
-  await helper.checkifpropermiles(miles)
+  //flightCode=await helper.checkifproperflightcode(flightCode)
+  //departure=await helper.checkifproperdeparr(departure)
+  //arrival=await helper.checkifproperdeparr(arrival)
+  //departureTime=await helper.checkifproperarrdepttime(departureTime)
+  //arrivalTime=await helper.checkifproperarrdepttime(arrivalTime)
+  //duration=await helper.checkifproperduration(duration)
+  //miles=miles.trim()
+  //await helper.checkifpropermiles(miles)
   
 
 
@@ -146,10 +146,10 @@ const updateFlight = async (
   const updatedInfo = await flightCollection.updateOne({_id: ObjectId(id)},
   {$set: updatedflight}
 );
-if (updatedInfo.modifiedCount === 0) {
-  throw 'could not update flight successfully';
+//if (updatedInfo.modifiedCount === 0) {
+ // throw 'could not update flight successfully';
   
-}
+//}
 return await getFlightById(id);
 
 };

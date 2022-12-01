@@ -53,14 +53,15 @@ router.route("/admin/editflight/:id").get(async (req, res) => {
      const newarrivaltime=req.body.arrTimeInput
      const newduration=req.body.durationInput
      const newmiles=req.body.milesInput
-     const newdate=req.body.date
+     const newdate=req.body.dateInput
      const fid=req.params.id
      
  
    try{
    const newflight = await flightData.updateFlight(fid,newflightcode,newdeparture,newarrival,newdeparturetime,newarrivaltime,newduration,newmiles,newdate)
    res.redirect("/admin")
-}catch(e){console.log(e)}
+}catch(e){//console.log(e)
+}
     });
 
 

@@ -134,7 +134,7 @@ router.route("/searchflights/book/:id&:class&:NoOfPass/success").post(async(req,
           if(key[j] == 'mobile') mobile = arrayObj[i][key[j]];
           if(key[j] == 'foodchoices') foodchoices = arrayObj[i][key[j]];            
       }
-      let updatedBooking = await travelerData.createTraveler(bookingData._id,firstname,lastname,passport,"1",birthdate,gender,email,mobile,classType,foodchoices);
+      let updatedBooking = await travelerData.createTraveler(bookingData._id,firstname,lastname,passport,birthdate,gender,email,mobile,classType,foodchoices);
       console.log(updatedBooking);
   }
   let updatedClassCapacity = await classes.updateClassCapacity(flightId,classType,NoOfPass);

@@ -164,12 +164,12 @@ async function checkifproperclasscapacity(vari){
     if(!vari)
     throw "class capacity not provided";
  
-    if(typeof(vari)!=="string")
-    throw 'class capacity is not a string';
-    if(vari.trim().length===0)
-    throw "class capacity cant be empty or all white spaces";
+    if(typeof(vari)!=="number")
+    throw 'class capacity is not a number';
+    //if(vari.trim().length===0)
+   // throw "class capacity cant be empty or all white spaces";
  
-    vari=vari.trim() 
+    //vari=vari.trim() 
     if(!(Number.isInteger(Number(vari)) && Number(vari) >= 0 && Number(vari)<1000))
     throw "capacity should be between 0 and 1000"
 
@@ -204,6 +204,7 @@ async function checkifproperfoodchoices(vari){
     throw 'food choices array cant be empty'
 
     for(i=0;i<vari.length;i++){
+        //console.log(vari[i])
         if(typeof(vari[i])!=="string")
         throw 'choice should be a string'
         //console.log(curfood)
