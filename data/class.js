@@ -165,12 +165,22 @@ async function getFoodChoiceFromClass(flightId, classType)
   classType=await helper.checkifproperclasstype(classType)
   const flightCollection = await flights();
   let getFlightClass = await flightCollection.findOne({_id : ObjectId(flightId)},{projection:{_id: 0, flightClass : {$elemMatch: {classType : classType}}}});
-  console.log(getFlightClass);
+  //console.log(getFlightClass);
   return getFlightClass.flightClass[0].foodchoices;
 }
 
+async function updateClassCapacity(flightId, classType, noOfPass)
+{
+  
+  const flightCollection = await flights();
+  let getFlightClass = await flightCollection.findOne({_id : ObjectId(flightId)},{projection:{_id: 0, flightClass : {$elemMatch: {classType : classType}}}});
+  let updateFlightClassCapacity = parseInt(getFlightClass.flightClass[0].classCapacity) - parseInt(noOfPass);
+  let updateFlightClass = await flightCollection.updateOne({_id : ObjectId(flightId), "flightClass.classType" : classType},{$set : {"flightClass.$.classCapacity" : updateFlightClassCapacity}});
+ // console.log(updateFlightClass);
+  return updateFlightClass;
+}
 
   
 
 
-module.exports = {createClass,getAllClasses,getClass,removeClass,getFoodChoiceFromClass};
+module.exports = {createClass,getAllClasses,getClass,removeClass,getFoodChoiceFromClass,updateClassCapacity};
