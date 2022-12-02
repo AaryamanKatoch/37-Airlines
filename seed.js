@@ -112,7 +112,7 @@ try{
     console.log(e);
 }
 try{
-    class2 = await classes.createClass(flight3._id,"business",5,"2000",[1,2,3,4],["veg","nonveg"])
+    class2 = await classes.createClass(flight3._id,"business",5,"2000",["veg","nonveg"])
     //console.log(flight3)
 }catch(e){
     console.log(e);

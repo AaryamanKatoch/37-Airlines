@@ -2,13 +2,14 @@
 //You can add and export any helper functions you want here. If you aren't using any, then you can just leave this file as is.
 
 const { reviews } = require("./config/mongoCollections");
-
-//duration(flight) and date(flight) helper and date of birth(traveller)  and food(traveller) left 
+const isAlphaNumeric = str => /^[a-z0-9]+$/gi.test(str);
+const re_for_specialcharacter=/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+//duration(flight) helper and date of birth(traveller)  and food(traveller) left 
 
 
 async function checkifinputexists(vari) {
     if(!vari)
-    throw "No input is provided inn some field";
+    throw "No input is provided in some field";
 }
 
 async function checkifstring(vari){
@@ -26,8 +27,6 @@ async function checkifarray(vari){
     if(!Array.isArray(vari))
     throw "input is not array";
 }
-
-const isAlphaNumeric = str => /^[a-z0-9]+$/gi.test(str);
 
 async function checkifproperflightcode(vari){ 
      //flight code is alphanumeric; first character has to be an aplhabet//min length 2; max length:6
@@ -57,18 +56,18 @@ async function checkifproperflightcode(vari){
     return vari
 }
 
+//right
 async function checkifproperdeparr(vari){
     // departure and arrival should be string, alphabets, min length 2, max length 20
     if(!vari)
     throw "No departure or arrival city is provided";
-
     if(typeof(vari)!=="string")
     throw 'departure or arrival is not a string';
     if(vari.trim().length===0)
     throw "departure or arrival city cant be empty or all white spaces";
 
     vari=vari.trim()
-    vari=vari.toUpperCase()
+    vari=vari.toLowerCase()
 
     if(!(/^[A-Za-z\s]*$/.test(vari)))
     throw 'city can also have alphabets'
@@ -80,6 +79,68 @@ async function checkifproperdeparr(vari){
     throw "maximum length of arrival and departure cities should be 6 "
 
     return vari
+}
+
+//right
+async function checkifproperDate(date){
+    if(!date) throw 'No date passed';
+    if(date.trim().length==0) throw 'date can not be empty string';
+    if(!typeof date=='string') throw 'date must be valid string';
+    const re_for_specialcharacter=/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    date=date.trim();
+    var c_year = new Date().getFullYear();  
+    var ListofDays = [31,28,31,30,31,30,31,31,30,31,30,31];
+    arr=date.split('-');
+    if(arr.length !== 3){
+        throw 'invalid Date';
+    }
+
+    month=arr[1];
+    day=arr[2];
+    year=arr[0];
+
+    if(month.length!==2 || day.length!==2 || year.length!==4){
+        throw 'invalid Date';
+    }
+
+
+    if(re_for_specialcharacter.test(month) || re_for_specialcharacter.test(day) || re_for_specialcharacter.test(year)){
+        throw 'invalid Date';
+    }
+
+    month= Number(month);
+    day= Number(day);
+    year= Number(year);
+
+
+    if(!Number.isInteger(month) || !Number.isInteger(day)  || !Number.isInteger(year)){
+        throw 'invalid Date';
+    }
+
+
+    // if(year<1900 || year> (c_year+2) ){
+    //     throw 'invalid Date';
+    // }
+    if(month<0 || month>12){
+        throw 'invalid Date';
+    }
+    if(month==2){
+        if(day>28){
+            throw 'invalid Date';
+        }
+    }
+    if(day>ListofDays[month-1]){
+        throw 'invalid Date';
+    }
+    return date;
+}
+
+//right
+async function checkifproperNoOfPass(NoOfPass){
+    if(!NoOfPass) throw 'No passengers passed!';
+    if(isNaN(NoOfPass)) throw 'Number of passengers must be valid Number';
+    NoOfPass=Number(NoOfPass);
+    return NoOfPass;
 }
 
 async function checkifproperarrdepttime(vari){
@@ -141,6 +202,7 @@ async function checkifpropermiles(vari){
 
 }
 
+//right
 async function checkifproperclasstype(vari){
 
     if(!vari)
@@ -369,5 +431,5 @@ module.exports = {
     checkifproperflightcode,checkifemptystring,checkifinputexists,checkifproperdeparr,checkifproperarrdepttime,checkifproperduration,
     checkifpropermiles,checkifproperclasstype, checkifproperclasscapacity,checkifproperprice,checkifproperfoodchoices,checkifproperreview,
     checkifproperrating, checkifproperflname,checkifproperpassport, checkifpropergender, checkifproperemail, checkifproperphonenumber,
-
+    checkifproperDate,checkifproperNoOfPass,checkifstring,checkifarray
 }

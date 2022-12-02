@@ -26,7 +26,8 @@ const createFlight = async (
   //duration=await helper.checkifproperduration(duration)
   //miles=miles.trim()
   //await helper.checkifpropermiles(miles)
-
+  arrival=await helper.checkifproperdeparr(arrival);
+  departure=await helper.checkifproperdeparr(departure);
 
   const flightcollection = await flights();
   let flight1 = {
@@ -166,22 +167,37 @@ const searchFlightsResult = async (
 ) => {
   
   //error cheking 
-  if(!departure) throw 'No departure passed!';
-  if(!arrival) throw 'No arrival passed!';
-  if(!date) throw 'No date passed';
-  if(!NoOfPass) throw 'No passengers passed!';
-  if(!f_class) throw 'No flight class passed!';
-  if(departure.trim().length==0) throw 'departure can not be empty string';
-  if(arrival.trim().length==0) throw 'arrival can not be empty string';
-  if(date.trim().length==0) throw 'date can not be empty string';
-  if(f_class.trim().length==0) throw 'flight class can not be empty string';
-  if(!typeof departure=='string') throw 'departure must be valid string';
-  if(!typeof arrival=='string') throw 'arrival must be valid string';
-  if(!typeof date=='string') throw 'date must be valid string';
-  if(!typeof f_class=='string') throw 'flight class must be valid string';
-  if(isNaN(NoOfPass)) throw 'Number of passengers must be valid Number';
-  NoOfPass=Number(NoOfPass);
- 
+
+  // if(!departure) throw 'No departure passed!';
+  // if(!arrival) throw 'No arrival passed!';
+  // if(!date) throw 'No date passed';
+  // if(!NoOfPass) throw 'No passengers passed!';
+  // if(!f_class) throw 'No flight class passed!';
+
+  helper.checkifinputexists(departure);
+  helper.checkifinputexists(arrival);
+  helper.checkifinputexists(date);
+  helper.checkifinputexists(NoOfPass);
+  helper.checkifinputexists(f_class);
+
+  // if(departure.trim().length==0) throw 'departure can not be empty string';
+  // if(arrival.trim().length==0) throw 'arrival can not be empty string';
+  // if(date.trim().length==0) throw 'date can not be empty string';
+  // if(f_class.trim().length==0) throw 'flight class can not be empty string';
+
+  // if(!typeof departure=='string') throw 'departure must be valid string';
+  // if(!typeof arrival=='string') throw 'arrival must be valid string';
+  // if(!typeof date=='string') throw 'date must be valid string';
+  // if(!typeof f_class=='string') throw 'flight class must be valid string';
+  // if(isNaN(NoOfPass)) throw 'Number of passengers must be valid Number';
+  // NoOfPass=Number(NoOfPass);
+
+  f_class=await helper.checkifproperclasstype(f_class);
+  departure=await helper.checkifproperdeparr(departure);
+  arrival=await helper.checkifproperdeparr(arrival);
+  date=await helper.checkifproperDate(date);
+  NoOfPass=await helper.checkifproperNoOfPass(NoOfPass);
+  
   //error cheking done
 
   const flightCollection =await flights();
