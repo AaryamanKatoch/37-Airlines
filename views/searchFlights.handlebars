@@ -1,7 +1,7 @@
 <section>
     <h1>flights:-</h1><hr>
-    <h6>{{class}}</h6>
-    <h6>{{NoOfPass}}</h6>
+    <h2>{{class}}</h2>
+    <h2>{{NoOfPass}}</h2>
     {{#each flights}}
         <hr>
         <h2>{{departure}}</h2>
@@ -9,6 +9,8 @@
         <h2>{{date}}</h2>
         <h2>{{_id}}</h2>
         <h2>{{class}}</h2> 
-        <a href="/searchflights/{{_id}}&{{class}}&{{NoOfPass}}">click here for more details</a>
+        {{!-- {{#flightId _id}}{{/flightId}} --}}
+        <a href="/searchflights/flightdetails/{{_id}}">click here for more details</a>
+        {{!-- <button onclick="send({{}})">Click here for more Details</button> --}}
     {{/each}}
 </section>

@@ -1,0 +1,18 @@
+<h1>Register</h1>
+<form action="/register" method="post" id="registration-form">
+    <label for="firstName">Enter Firstname: </label>
+    <input type="text" name="firstName" placeholder="Enter firstname" id = "firstName">
+    <label for="lastName">Enter Lastname: </label>
+    <input type="text" name="lastName" placeholder="Enter lastname" id = "lastName">
+    <label for="email">Enter email: </label>
+    <input type="email" name="email" placeholder="Enter email" id = "email">
+    <label for="password">Enter password: </label>
+    <input type="password" name="password" placeholder="Enter password" id = "password">
+    <label for="password">Confirm password: </label>
+    <input type="password" name="confirmPassword" placeholder="Confirm password" id = "confirmPassword">         
+    <button type="submit" class="btn">Register</button>
+    {{#if hasErrors}}
+        <p id="error">{{error}}</p>
+    {{/if}}
+</form>
+<a href="/login">Already have an account? Click here to log-in</a>
