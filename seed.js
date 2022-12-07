@@ -8,6 +8,7 @@ const review =require("./data/reviewsCollection")
 const connection = require('./config/mongoConnection');
 const { bookings } = require('./config/mongoCollections');
 const adminhome=require("./data/adminfunctions")
+const userhome=require("./data/userfunctions")
 
 
 async function main() {
@@ -175,10 +176,9 @@ try{
     console.log(admintest)
 } catch(e){
     console.log(e)
-}
-*/
+}*/
 
-console.log('done!');
+
 
 await connection.closeConnection();
 }
