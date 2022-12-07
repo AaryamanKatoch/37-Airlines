@@ -1,4 +1,10 @@
 <section>
+    {{#if isLoggedIn}}
+    <div><a href="/userProfile">User Profile</a></div>
+    <div><a href="/logout">Logout</a></div>
+    {{else}}
+    <a href="/login">Login</a>
+    {{/if}}
     <h1>flights:-</h1><hr>
     <h2>{{class}}</h2>
     <h2>{{NoOfPass}}</h2>

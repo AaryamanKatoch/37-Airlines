@@ -1,5 +1,11 @@
 
 <section>
+{{#if isLoggedIn}}
+<a href="/userProfile">User Profile</a>
+{{else}}
+<a href="/login">Login</a>
+{{/if}}
+
 <h1>{{title}}</h1>
 
 <dl>

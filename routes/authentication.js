@@ -78,7 +78,7 @@ router
     else{
       let user = req.session.user.email;
       req.session.destroy();
-    //   res.render('logout', {title : 'Logged Out', username : user});
+      res.redirect('/');
     }
   })
 
