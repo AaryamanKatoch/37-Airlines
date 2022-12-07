@@ -1,4 +1,11 @@
-<form action="/searchflights/book/{{flightId}}&{{flightClass}}&{{noOfPass}}/success" method="POST" name = "formName" id="form">
+{{#if isLoggedIn}}
+<div><a href="/userProfile">User Profile</a></div>
+<div><a href="/logout">Logout</a></div>
+{{else}}
+<a href="/login">Login</a>
+{{/if}}
+
+<form action="/searchflights/flightdetails/{{flightId}}/book/success" method="POST" name = "formName" id="form">
 {{#for noOfPass choice}}
     <div>
         <label for="firstname{{this.noOfForms}}" class="labelclass">Firstname</label>

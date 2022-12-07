@@ -1,0 +1,22 @@
+<section>
+<h1>User Details</h1>
+<ul>
+<li>Firstname :{{solution1.firstName}}</li>
+<li>Lastname  :{{solution1.lastName}}</li>
+<li>email     :{{solution1.email}}</li>
+<br>
+<h2>Booking History</h2>
+{{#each solution1.bookings}}
+<section>
+<li> Number of Travellers {{numbertravelers}}</li>
+<li>Flight Code           {{FlightCode}}</li>
+<li>Departure             {{Departure}}</li>
+<li>Arrival               {{Arrival}}</li>
+<li>Date                  {{Date}}</li>
+<br>
+<br>
+</section>
+{{/each}}
+</ul>  
+<a href="/userProfile/editdetails"> Edit Profile</a> 
+</section>

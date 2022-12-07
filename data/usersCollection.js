@@ -1,44 +1,58 @@
 const mongoCollections = require('../config/mongoCollections');
 //const mongoCollections = require('../../../config/mongoCollections');
-const movies = mongoCollections.movies;
+//const movies = mongoCollections.movies;
 const {ObjectId} = require('mongodb');
 const helper =require('../helpers');
 const { checkifemptystring, checkifinputexists, checkifstring, checkifproperstudio, checkifproperdirector, checkifpropertitle, checkispropergenre, checkifvalidrating, checkispropercastmemeber, checkisproperdate, checkisproperruntime} = require('../helpers');
 const { reviews, flights, users } = require('../config/mongoCollections');
-const classes=require('./class')
+const classes=require('./class');
+const bcrypt = require("bcrypt");
+const saltRounds = 12;
 
 
 const createUsers = async (
   firstName,
-  lastName,
-  userName,
+  lastName,  
+  email,
   password,
-  email
-
-
-  
+  confirmPassword, 
 
 ) => {
   
-  const usercollection = await users();
-  let user1 = {
-    firstName:firstName,
-    lastName:lastName,
-    userName:userName,
-    password:password,
-    email:email,
-    bookingHistory:[]
+  //const usercollection = await users();
+  // let user1 = {
+  //   firstName:firstName,
+  //   lastName:lastName,
+  //   password:password,
+  //   email:email,
+  //   bookingHistory:[]
+  // }
+  // username = await helpers.isValidUsername(username);
+  // password = await helpers.isValidPassword(password);
+  firstName = firstName.trim();
+  lastName = lastName.trim();
+  email = email.trim();  
+  // password = password.trim();
+
+  let userCollection = await users();
+  let userData = await userCollection.findOne({email : email.toLowerCase()});
+  if(userData) throw 'Email is already taken.';
+  if(password !== confirmPassword) throw 'Password does not match.';
+  let passwordHashed = await bcrypt.hash(password,saltRounds);
+  
+  let newUserData = {
+    firstName : firstName.toLowerCase(),
+    lastName : lastName.toLowerCase(),
+    email : email.toLowerCase(),
+    password : passwordHashed,
+    bookingHistory : []
   }
-  const insertInfo = await usercollection.insertOne(user1);
-      if (!insertInfo.acknowledged || !insertInfo.insertedId)
-        throw 'Could not add user';
-  
-     const newId = insertInfo.insertedId.toString();
-  
-      const user = await getUserById(newId);
-     
-       user._id=user._id.toString()
-       return user;};
+  const insertInfo = await userCollection.insertOne(newUserData);
+    if (!insertInfo.acknowledged || !insertInfo.insertedId)
+      throw 'Could not add user data.';
+  let userInsertedObj = {insertedUser: true};
+  return userInsertedObj;
+};
 
 const getAllUsers = async () => {    const userCollection = await users();
 
@@ -91,34 +105,59 @@ const updateUser = async (
   userId,
   firstName,
   lastName,
-  userName,
-  password,
-  email
+
+  
 ) => {
-
-
-  
-  
-  ///
   const userCollection = await users();
   let updateduser = {
   firstName:firstName,
-  lastName:lastName,
-  userName:userName,
-  password:password,
-  email:email,
+  lastName:lastName
   }
+  
   const updatedInfo = await userCollection.updateOne({_id: ObjectId(userId)},
   {$set: updateduser}
 );
+/*
 if (updatedInfo.modifiedCount === 0) {
   throw 'could not update user successfully';
-  
-}
-return await getUserById(userId)
+}*/
+
 
 };
 
+async function checkUser(email, password){
+  // username = await helpers.isValidUsername(username);
+  // password = await helpers.isValidPassword(password);
+  email = email.trim().toLowerCase();
+  password = password.trim();
+  let userCollection = await users();
+  let userData = await userCollection.findOne({email : email});
+  // console.log(userData);
+  if(userData == null) throw 'Either the username or password is invalid';
+  let checkPassword = await bcrypt.compare(password,userData.password);
+  if(!checkPassword) throw 'Either the username or password is invalid';
+  let passwordAuthObj = {authenticatedUser: true};
+  return passwordAuthObj;
+};
+
+async function getUserByEmail(email){
+  email = email.trim().toLowerCase();
+  let userCollection = await users();
+  let userData = await userCollection.findOne({email : email});
+ 
+  if(userData == null) throw 'Either the username or password is invalid';
+  return userData;
+}
+
+async function updateBookingHistory(userId,bookingId){
+  const userCollection = await users();
+  // const getUserDetails = await userCollection.getUserById(userId);
+  let updateHistory = await userCollection.updateOne({_id : ObjectId(userId)},{$push : {bookingHistory : bookingId}});
+  if (updateHistory.modifiedCount === 0) {
+    throw 'could not update user booking history successfully';
+  } 
+  return updateHistory;
+}
 
 
 
@@ -126,5 +165,8 @@ module.exports = {createUsers,
   getAllUsers,
   getUserById,
   removeUser,
-  updateUser
+  updateUser,
+  checkUser,
+  getUserByEmail,
+  updateBookingHistory
 };

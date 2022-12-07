@@ -5,6 +5,7 @@ const flightsData = data.flights;
 const classes = require('../data/class');
 const bookingCollection = require('../data/bookingCollection');
 const travelerData = require('../data/travelers');
+const userCollection = require('../data/usersCollection');
 const path = require('path');
 
 //route for getting flights from passed parameters from form on the home page
@@ -45,18 +46,26 @@ router.route("/searchflights").post(async (req, res) => {
           element['NoOfPass']=NoOfPass;
           element['class']=f_class;
         });
-        res.render('searchFlights',{flights : result,title:'searchFlights','class':f_class,'NoOfPass':NoOfPass});
+        req.session.info = {class : f_class, noOfPass : NoOfPass};
+        let isLoggedIn;
+        if(req.session.user) isLoggedIn = true;
+        else isLoggedIn = false;
+        res.render('searchFlights',{flights : result,title:'searchFlights','class':f_class,'NoOfPass':NoOfPass, isLoggedIn: isLoggedIn});
       } 
     }catch(e){
       res.status(400).render('error',{error:e ,title:'ridham error'}, );
     }
 });
 
-router.route("/searchflights/:id&:class&:NoOfPass").get(async (req, res) => {
+router.route("/searchflights/flightdetails/:id").get(async (req, res) => {
   //code here for GET
+  // let fid=req.params.id;
+  // let f_class=req.params.class;
+  // let NoOfPass=req.params.NoOfPass;
+
   let fid=req.params.id;
-  let f_class=req.params.class;
-  let NoOfPass=req.params.NoOfPass;
+  let f_class=req.session.info.class;
+  let NoOfPass=req.session.info.noOfPass;
   
   if(!fid) {
     res.status(400).render("error",{class:"error", title: "Error ",error: "No flight id is given." })
@@ -67,42 +76,48 @@ router.route("/searchflights/:id&:class&:NoOfPass").get(async (req, res) => {
   if(fid.length===0)
   {res.status(400).render("error",{class:"error",title:"Error", error: "No Flight Id is given or is all white spaces" });return}
 
-  req.params.id=req.params.id.trim()
+  fid=fid.trim()
 try{
   var sol=await flightsData.getallflightdetailsforflightdetailspage(fid,f_class)
+  let isLoggedIn;
+  if(req.session.user) isLoggedIn = true;
+  else isLoggedIn = false;
   sol["id1"]=fid
   sol["f_class"]=f_class
   sol["NoOfPass"]=NoOfPass
 } catch(e){;res.status(404).render("error",{class:"error",title:"Error", error: "No Flight found with that id"});return}
 
-res.render('flightdetails', { solution1: sol,title: "Flight Found" });
+res.render('flightdetails', { solution1: sol,title: "Flight Found" ,isLoggedIn : isLoggedIn});
 });
 
-router.route("/searchflights/book/:id&:class&:NoOfPass").get(async(req,res)=>{
+router.route("/searchflights/flightdetails/:id/book").get(async(req,res)=>{
   try {
     let flightId = req.params.id;
-    let flightClass = req.params.class;
-    let NoOfPass = req.params.NoOfPass;
+    let flightClass = req.session.info.class;
+    let NoOfPass = req.session.info.noOfPass;
     
     if(!flightId) throw 'Flight Id is not provided.';
     if(!flightClass) throw 'Flight Class is not provided.';
     if(!NoOfPass) throw 'Number of passengers is not provided.';
     flightId = flightId.trim();
     //console.log(flightClass);
+    let isLoggedIn;
+    if(req.session.user) isLoggedIn = true;
+    else isLoggedIn = false;
     let food = await classes.getFoodChoiceFromClass(flightId,flightClass);
     console.log(food);
-    res.render('bookflight', {title : "Book Flight", noOfPass : NoOfPass, choice : food, flightId : flightId, flightClass : flightClass});
+    res.render('bookflight', {title : "Book Flight", noOfPass : NoOfPass, choice : food, flightId : flightId, flightClass : flightClass, isLoggedIn : isLoggedIn});
   } catch (e) {
     res.render('error',{error : e, title : 'Error'});
   }
 
 });
 
-router.route("/searchflights/book/:id&:class&:NoOfPass/success").post(async(req,res) => {
+router.route("/searchflights/flightdetails/:id/book/success").post(async(req,res) => {
   let data = req.body;
   let flightId = req.params.id;
-  let classType = req.params.class;  
-  let NoOfPass = req.params.NoOfPass;
+  let classType = req.session.info.class;
+  let NoOfPass = req.session.info.noOfPass;
   let keys = Object.keys(data);
   let arrayObj = [];
   for(let i = 0; i < keys.length; i++)
@@ -118,7 +133,9 @@ router.route("/searchflights/book/:id&:class&:NoOfPass/success").post(async(req,
   {
       key.push(keys[i].substring(0, keys[i].length - 1));
   }
-  let bookingData = await bookingCollection.createBooking(flightId,'6379595b21896b817c8fc3c6');
+  let userIdByEmail = await userCollection.getUserByEmail(req.session.user.email);
+  let userID =  userIdByEmail._id.toString();
+  let bookingData = await bookingCollection.createBooking(flightId,userID);
   for(let i = 0; i < arrayObj.length; i++)
   {
       let obj = arrayObj[i];
@@ -137,8 +154,13 @@ router.route("/searchflights/book/:id&:class&:NoOfPass/success").post(async(req,
       let updatedBooking = await travelerData.createTraveler(bookingData._id,firstname,lastname,passport,birthdate,gender,email,mobile,classType,foodchoices);
       console.log(updatedBooking);
   }
+  let isLoggedIn;
+  if(req.session.user) isLoggedIn = true;
+  else isLoggedIn = false;
   let updatedClassCapacity = await classes.updateClassCapacity(flightId,classType,NoOfPass);
-   res.render('success');
+  let enterBookingHistory = await userCollection.updateBookingHistory(userID,bookingData._id);
+
+   res.render('success',{isLoggedIn: isLoggedIn});
 });
 
 

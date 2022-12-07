@@ -3,7 +3,10 @@ const router = express.Router();
 
 router.route("/").get(async (req, res) => {
     try {
-        res.render("homePage", {title:"Home Page"});
+        let isLoggedIn;
+        if(req.session.user) isLoggedIn = true;
+        else isLoggedIn = false;
+        res.render("homePage", {title:"Home Page",isLoggedIn: isLoggedIn });
     } catch (error) {
         res.status(500).send(error);
     }

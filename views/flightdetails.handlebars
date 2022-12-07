@@ -1,5 +1,11 @@
 
 <section>
+{{#if isLoggedIn}}
+<a href="/userProfile">User Profile</a>
+{{else}}
+<a href="/login">Login</a>
+{{/if}}
+
 <h1>{{title}}</h1>
 
 <dl>
@@ -21,5 +27,5 @@
   <dt>Flight Classes Selected</dt>
   <p>{{solution1.flightClass.classType}} {{solution1.flightClass.price}}</p>
 
-   <a href="/searchflights/book/{{solution1.id1}}&{{solution1.f_class}}&{{solution1.NoOfPass}}">click kere to book flight</a>
+   <a href="/searchflights/flightdetails/{{solution1.id1}}/book">click kere to book flight</a>
 </section>

@@ -8,6 +8,7 @@ const review =require("./data/reviewsCollection")
 const connection = require('./config/mongoConnection');
 const { bookings } = require('./config/mongoCollections');
 const adminhome=require("./data/adminfunctions")
+const userhome=require("./data/userfunctions")
 
 
 async function main() {
@@ -125,60 +126,59 @@ try{
     console.log(e);
 }
 
-try{
+// try{
 
-    user1 = await users.createUsers("Aaryaman","Katoch","atpk","password","smthin@smthin.com")
-    //console.log(flight3)
-}catch(e){
-    console.log(e);
-}
-try{
+//     user1 = await users.createUsers("Aaryaman","Katoch","atpk","password","smthin@smthin.com")
+//     //console.log(flight3)
+// }catch(e){
+//     console.log(e);
+// }
+// try{
 
-    user2 = await users.createUsers("Aaryaman22","Katoch22","atpk22","password22","smthin@smthin.com22")
-    //console.log(flight3)
-}catch(e){
-    console.log(e);
-}
-try{
+//     user2 = await users.createUsers("Aaryaman22","Katoch22","atpk22","password22","smthin@smthin.com22")
+//     //console.log(flight3)
+// }catch(e){
+//     console.log(e);
+// }
+// try{
 
-    booking1 = await bookingCollection.createBooking(flight1._id,user1._id)
-    //console.log(flight3)
-}catch(e){
-    console.log(e);
-}
-try{
+//     booking1 = await bookingCollection.createBooking(flight1._id,user1._id)
+//     //console.log(flight3)
+// }catch(e){
+//     console.log(e);
+// }
+// try{
 
-    traveller1 = await travelers.createTraveler(booking1._id,"parth","patel","S9182778","19/09/1999","Male","parth@stevens.edu","5512548455",bookedseat1.classtype,"veg")
-    //console.log(flight3)
-}catch(e){
-    console.log(e);
-}
+//     traveller1 = await travelers.createTraveler(booking1._id,"parth","patel","S9182778","19/09/1999","Male","parth@stevens.edu","5512548455",bookedseat1.classtype,"veg")
+//     //console.log(flight3)
+// }catch(e){
+//     console.log(e);
+// }
 
-try{
+// try{
 
-    review1 = await review.createReview(user1._id,flight1._id,"flight was bad",1)
-    //console.log(flight3)
-}catch(e){
-    console.log(e);
-}
+//     review1 = await review.createReview(user1._id,flight1._id,"flight was bad",1)
+//     //console.log(flight3)
+// }catch(e){
+//     console.log(e);
+// }
 
-try{
+// try{
 
-    review2 = await review.createReview(user1._id,flight1._id,"flight was awesome",4)
-    //console.log(flight3)
-}catch(e){
-    console.log(e);
-}
+//     review2 = await review.createReview(user1._id,flight1._id,"flight was awesome",4)
+//     //console.log(flight3)
+// }catch(e){
+//     console.log(e);
+// }
 /*
 try{
     admintest=await flights.updateFlight( )
     console.log(admintest)
 } catch(e){
     console.log(e)
-}
-*/
+}*/
 
-console.log('done!');
+
 
 await connection.closeConnection();
 }
