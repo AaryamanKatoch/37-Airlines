@@ -75,14 +75,17 @@ rating
  return flight1
        };
 
-const getAllReviews = async () => {    const reviewCollection = await reviews();
+const getAllReviews = async () => {    
+  
+  const reviewCollection = await reviews();
 
   const arr = await reviewCollection.find({}).toArray();
   if (arr===null) return [];
   for(i in arr){
     arr[i]._id=arr[i]._id.toString();
   }
-  return arr;};
+  return arr;
+};
 
 const getReviewById = async (reviewId) => {  if(!reviewId)
   throw `no id is given`;
