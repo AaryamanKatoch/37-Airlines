@@ -73,6 +73,14 @@ app.use("/login", (req, res, next) => {
   }
 });
 
+app.use("/reviews/add", (req, res, next) => {
+  if (!req.session.user) {
+    return res.redirect(`/login`);
+  } else {
+    next();
+  }
+});
+
 app.use("/searchflights/flightdetails/:id/book", (req, res, next) => {
   if (!req.session.user) {
     return res.redirect(`/login`);
@@ -80,6 +88,7 @@ app.use("/searchflights/flightdetails/:id/book", (req, res, next) => {
     next();
   }
 });
+
 app.use("/searchflights/flightdetails/:id/book/success", (req, res, next) => {
   if (!req.session.user) {
     return res.redirect(`/login`);

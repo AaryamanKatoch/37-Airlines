@@ -66,6 +66,7 @@ router.route("/searchflights/flightdetails/:id").get(async (req, res) => {
   let fid=req.params.id;
   let f_class=req.session.info.class;
   let NoOfPass=req.session.info.noOfPass;
+  let isLoggedIn;
   
   if(!fid) {
     res.status(400).render("error",{class:"error", title: "Error ",error: "No flight id is given." })
@@ -79,7 +80,7 @@ router.route("/searchflights/flightdetails/:id").get(async (req, res) => {
   fid=fid.trim()
 try{
   var sol=await flightsData.getallflightdetailsforflightdetailspage(fid,f_class)
-  let isLoggedIn;
+  
   if(req.session.user) isLoggedIn = true;
   else isLoggedIn = false;
   sol["id1"]=fid
@@ -87,7 +88,7 @@ try{
   sol["NoOfPass"]=NoOfPass
 } catch(e){;res.status(404).render("error",{class:"error",title:"Error", error: "No Flight found with that id"});return}
 
-res.render('flightdetails', { solution1: sol,title: "Flight Found" ,isLoggedIn : isLoggedIn});
+res.render('flightdetails', { solution1: sol,title: "Flight Found" ,'isLoggedIn' : isLoggedIn });
 });
 
 router.route("/searchflights/flightdetails/:id/book").get(async(req,res)=>{

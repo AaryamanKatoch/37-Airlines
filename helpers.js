@@ -287,23 +287,24 @@ async function checkifproperfoodchoices(vari){
 return vari
 }
 
-
+//right
 async function checkifproperreview(vari){
     if(!vari)
     throw "review not provided";
  
-    if(typeof(vari)!=="string")
+    if(typeof(vari)!=='string')
     throw 'review is not a string';
     if(vari.trim().length===0)
     throw "review cant be empty or all white spaces";
  
     vari=vari.trim() 
-    if(reviews.length<2)
+    if(vari.length<2)
     throw 'review should atleast be 2 characters long'
     return vari
 
 }
 
+//right
 async function checkifproperrating(vari){
 
     if(typeof(vari)!=="number")
@@ -315,7 +316,9 @@ async function checkifproperrating(vari){
     if(vari>5 || vari<0)
     throw 'rating should be between 0 and 5'
 
+    return vari;
 }
+
 async function checkifproperflname(vari){
     if(!vari)
     throw "No first or last name provided";

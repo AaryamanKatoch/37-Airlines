@@ -26,8 +26,9 @@ async function main() {
     let user2=undefined;
     let booking1=undefined;
     let traveller1=undefined;
-    let review2=undefined
-    //await db.dropDatabase()
+    let review1=undefined;
+    let review2=undefined;
+    await db.dropDatabase();
 
 try{
 
@@ -126,6 +127,24 @@ try{
     console.log(e);
 }
 
+try{
+    user1=await users.createUsers('test1','test2','admin123@stevens.edu','Admin@123','Admin@123');
+}catch(e){
+    console.log(e);
+}
+
+try{
+    review1=await review.createReview('admin123@stevens.edu','good one',5)
+}catch(e){
+    console.log(e);
+}
+
+try{
+    review2=await review.createReview('admin123@stevens.edu','bad one',1)
+}catch(e){
+    console.log(e);
+}
+
 // try{
 
 //     user1 = await users.createUsers("Aaryaman","Katoch","atpk","password","smthin@smthin.com")
@@ -179,7 +198,7 @@ try{
 }*/
 
 
-
+console.log('done!!');
 await connection.closeConnection();
 }
 main();
