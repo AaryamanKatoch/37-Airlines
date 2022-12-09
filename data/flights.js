@@ -11,11 +11,12 @@ const createFlight = async (
   flightCode,
   departure,
   arrival,
+  departureDate,
   departureTime,
+  arrivalDate,
   arrivalTime,
   duration,
-  miles,
-  date
+  miles
 ) => {
 
   //flightCode=await helper.checkifproperflightcode(flightCode)
@@ -26,33 +27,37 @@ const createFlight = async (
   //duration=await helper.checkifproperduration(duration)
   //miles=miles.trim()
   //await helper.checkifpropermiles(miles)
-  arrival=await helper.checkifproperdeparr(arrival);
-  departure=await helper.checkifproperdeparr(departure);
+  arrival = await helper.checkifproperdeparr(arrival);
+  departure = await helper.checkifproperdeparr(departure);
 
   const flightcollection = await flights();
   let flight1 = {
-  flightCode:flightCode,
-  departure:departure,
-  arrival:arrival,
-  departureTime:departureTime,
-  arrivalTime:arrivalTime,
-  duration:duration,
-  miles:miles,
-  date:date,
-  flightClass:[],
-  bookedSeats:[],
-  reviews:[]
+    flightCode: flightCode,
+    departure: departure,
+    arrival: arrival,
+    departureDate: departureDate,
+    departureTime: departureTime,
+    arrivalDate: arrivalDate,
+    arrivalTime: arrivalTime,
+    duration: duration,
+    miles: miles,
+    flightClass: [],
+    bookedSeats: [],
+    reviews: []
   }
+
   const insertInfo = await flightcollection.insertOne(flight1);
-      if (!insertInfo.acknowledged || !insertInfo.insertedId)
-        throw 'Could not add flight';
-  
-     const newId = insertInfo.insertedId.toString();
-  
-      const flight = await getFlightById(newId);
-     
-       flight._id=flight._id.toString()
-       return flight;
+
+  if (!insertInfo.acknowledged || !insertInfo.insertedId)
+    throw 'Could not add flight';
+
+  const newId = insertInfo.insertedId.toString();
+
+  const flight = await getFlightById(newId);
+
+  flight._id = flight._id.toString();
+
+  return flight;
 };
 
 const getAllFlights = async () => {    
@@ -216,7 +221,7 @@ const searchFlightsResult = async (
 
   //getting flights based on dates and other parameters 
 
-  const flightsList = await flightCollection.find({'departure':departure,'arrival':arrival,'date':{ $in: date_arr }}).toArray();
+  const flightsList = await flightCollection.find({'departure':departure,'arrival':arrival,'departureDate':{ $in: date_arr }}).toArray();
   if(flightsList==null){
     return flightsList;
   }

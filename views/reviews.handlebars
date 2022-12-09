@@ -1,0 +1,19 @@
+<main>
+<section>
+    {{#if isLoggedIn}}
+    <div><a href="/userProfile">User Profile</a></div>
+    <div><a href="/logout">Logout</a></div>
+    {{else}}
+    <a href="/login">Login</a>
+    {{/if}}
+    <h1>Reviews:-</h1><hr>
+    <a href="/reviews/add">Add Review</a>
+    {{#each review}}
+        <hr>
+        <h2>{{review}}</h2>
+        <h2>{{rating}}</h2>
+        <h6>{{userName}}</h6>
+        {{!-- <a href="/searchflights/{{_id}}&{{class}}&{{NoOfPass}}">click here for more details</a> --}}
+    {{/each}}
+</section>
+</main>

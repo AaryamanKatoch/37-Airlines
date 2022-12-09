@@ -105,31 +105,23 @@ const updateUser = async (
   userId,
   firstName,
   lastName,
-  email,
-  password,
+
   
 ) => {
-
-
-  
-  
-  ///
   const userCollection = await users();
   let updateduser = {
   firstName:firstName,
-  lastName:lastName,
-  email:email,
-  password:password,
-  
+  lastName:lastName
   }
+  
   const updatedInfo = await userCollection.updateOne({_id: ObjectId(userId)},
   {$set: updateduser}
 );
+/*
 if (updatedInfo.modifiedCount === 0) {
   throw 'could not update user successfully';
-  
-}
-return await getUserById(userId)
+}*/
+
 
 };
 
@@ -153,6 +145,7 @@ async function getUserByEmail(email){
   let userCollection = await users();
   let userData = await userCollection.findOne({email : email});
 //  console.log(userData);
+ 
   if(userData == null) throw 'Either the username or password is invalid';
   return userData;
 }
