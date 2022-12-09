@@ -1,5 +1,11 @@
 
 <section>
+{{#if isLoggedIn}}
+{{!-- <div><a href="/userProfile">User Profile</a></div> --}}
+<div><a href="/adminlogout">Logout</a></div>
+{{else}}
+<a href="/adminlogin">Login</a>
+{{/if}}
 <h1>All Available Flights</h1>
 <ul>
 {{#each solution1}}

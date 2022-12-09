@@ -152,7 +152,7 @@ async function getUserByEmail(email){
   email = email.trim().toLowerCase();
   let userCollection = await users();
   let userData = await userCollection.findOne({email : email});
- console.log(userData);
+//  console.log(userData);
   if(userData == null) throw 'Either the username or password is invalid';
   return userData;
 }

@@ -31,12 +31,23 @@ hbs.handlebars.registerHelper('for', function(n,m,block) {
     return num ;
 });
 
-hbs1.handlebars.registerHelper('foodChoice', function(n, block) {
+hbs1.handlebars.registerHelper('Sr', function(n, block) {
   var num = '';
    n = parseInt(n);
   for(var i = 0; i < n; i++)
       num += block.fn(i+1);
   return num;
+});
+
+hbs2.handlebars.registerHelper('SrAndDetails', function(n,m,block) {
+  var num = '';
+  n = parseInt(n);   
+  
+  for(var i = 0; i < n; i++){
+    num += block.fn({sr : i+1, travelers : m});
+  }
+      
+  return num ;
 });
 
 // hbs2.handlebars.registerHelper('flightId', function(flightId,req,res) {
@@ -67,6 +78,7 @@ app.use(
 
 app.use("/login", (req, res, next) => {
   if (req.session.user) {
+    // console.log(req.session.previousURL.previousURL);
     return res.redirect("/");
   } else {
     next();
@@ -75,18 +87,44 @@ app.use("/login", (req, res, next) => {
 
 app.use("/searchflights/flightdetails/:id/book", (req, res, next) => {
   if (!req.session.user) {
-    return res.redirect(`/login`);
+    return res.redirect("/login");
   } else {
     next();
   }
 });
 app.use("/searchflights/flightdetails/:id/book/success", (req, res, next) => {
   if (!req.session.user) {
-    return res.redirect(`/login`);
+    return res.redirect("/login");
   } else {
     next();
   }
 });
+
+app.use("/adminlogin", (req, res, next) => {
+  if (req.session.admin) {
+    return res.redirect("/admin");
+  } else {
+    next();
+  }
+});
+
+app.use("/admin", (req, res, next) => {
+  if (!req.session.admin) {
+    //console.log("here in middle");
+    return res.redirect("/adminlogin");
+  } else {
+    next();
+  }
+});
+
+app.use("/admin/editflight/:id", (req, res, next) => {
+  if (!req.session.admin) {
+    return res.redirect("/adminlogin");
+  } else {
+    next();
+  }
+});
+
 
 
 configRoutes(app);

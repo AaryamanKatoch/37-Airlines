@@ -50,6 +50,7 @@ router.route("/searchflights").post(async (req, res) => {
         let isLoggedIn;
         if(req.session.user) isLoggedIn = true;
         else isLoggedIn = false;
+        // req.session.previousURL = {previousURL:"/searchflights"};
         res.render('searchFlights',{flights : result,title:'searchFlights','class':f_class,'NoOfPass':NoOfPass, isLoggedIn: isLoggedIn});
       } 
     }catch(e){
@@ -79,14 +80,15 @@ router.route("/searchflights/flightdetails/:id").get(async (req, res) => {
   fid=fid.trim()
 try{
   var sol=await flightsData.getallflightdetailsforflightdetailspage(fid,f_class)
-  let isLoggedIn;
-  if(req.session.user) isLoggedIn = true;
-  else isLoggedIn = false;
+  
   sol["id1"]=fid
   sol["f_class"]=f_class
   sol["NoOfPass"]=NoOfPass
 } catch(e){;res.status(404).render("error",{class:"error",title:"Error", error: "No Flight found with that id"});return}
-
+let isLoggedIn;
+  if(req.session.user) isLoggedIn = true;
+  else isLoggedIn = false;
+  // req.session.previousURL = {previousURL:`/searchflights/flightdetails/${fid}`};
 res.render('flightdetails', { solution1: sol,title: "Flight Found" ,isLoggedIn : isLoggedIn});
 });
 
@@ -105,7 +107,8 @@ router.route("/searchflights/flightdetails/:id/book").get(async(req,res)=>{
     if(req.session.user) isLoggedIn = true;
     else isLoggedIn = false;
     let food = await classes.getFoodChoiceFromClass(flightId,flightClass);
-    console.log(food);
+    // console.log(food);
+    // req.session.previousURL = {previousURL:`/searchflights/flightdetails/${flightId}/book`};
     res.render('bookflight', {title : "Book Flight", noOfPass : NoOfPass, choice : food, flightId : flightId, flightClass : flightClass, isLoggedIn : isLoggedIn});
   } catch (e) {
     res.render('error',{error : e, title : 'Error'});
@@ -152,15 +155,20 @@ router.route("/searchflights/flightdetails/:id/book/success").post(async(req,res
           if(key[j] == 'foodchoices') foodchoices = arrayObj[i][key[j]];            
       }
       let updatedBooking = await travelerData.createTraveler(bookingData._id,firstname,lastname,passport,birthdate,gender,email,mobile,classType,foodchoices);
-      console.log(updatedBooking);
+      // console.log(updatedBooking);
   }
   let isLoggedIn;
   if(req.session.user) isLoggedIn = true;
   else isLoggedIn = false;
   let updatedClassCapacity = await classes.updateClassCapacity(flightId,classType,NoOfPass);
   let enterBookingHistory = await userCollection.updateBookingHistory(userID,bookingData._id);
-
-   res.render('success',{isLoggedIn: isLoggedIn});
+  let getBookings = await bookingCollection.getBookingById(bookingData._id);
+  let flightClassPrice = await classes.getFlightClassPrice(flightId,classType);
+  let totalPrice = NoOfPass*flightClassPrice;
+  // console.log(getBookings.travelers);
+  // req.session.previousURL = {previousURL:`/searchflights/flightdetails/${flightId}/book/success`};
+  req.session.bookingID = {bookingID : bookingData._id};
+   res.render('success',{isLoggedIn: isLoggedIn, travelers : getBookings.travelers, sr : getBookings.travelers.length, totalPrice : totalPrice});
 });
 
 

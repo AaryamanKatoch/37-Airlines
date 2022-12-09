@@ -180,7 +180,15 @@ async function updateClassCapacity(flightId, classType, noOfPass)
   return updateFlightClass;
 }
 
+async function getFlightClassPrice(flightId, classType)
+{
+  const flightCollection = await flights();
+  let getFlightClass = await flightCollection.findOne({_id : ObjectId(flightId)},{projection:{_id: 0, flightClass : {$elemMatch: {classType : classType}}}});
+  let flightClassPrice = parseInt(getFlightClass.flightClass[0].price);
+  return flightClassPrice;  
+}
+
   
 
 
-module.exports = {createClass,getAllClasses,getClass,removeClass,getFoodChoiceFromClass,updateClassCapacity};
+module.exports = {createClass,getAllClasses,getClass,removeClass,getFoodChoiceFromClass,updateClassCapacity,getFlightClassPrice};

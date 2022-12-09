@@ -8,6 +8,7 @@ const review =require("./data/reviewsCollection")
 const connection = require('./config/mongoConnection');
 const { bookings } = require('./config/mongoCollections');
 const adminhome=require("./data/adminfunctions")
+const adminCollection = require("./data/adminCollection");
 
 
 async function main() {
@@ -99,14 +100,14 @@ try{
 }
 
 try{
-    class1 = await classes.createClass(flight2._id,"economy",10,"1000",["veg","nonveg"])
+    class1 = await classes.createClass(flight2._id,"economy",100,"1000",["veg","nonveg"])
     //console.log(flight3)
 }catch(e){
     console.log(e);
 }
 try{
 
-    class2 = await classes.createClass(flight2._id,"business",5,"2000",["veg","nonveg"])
+    class2 = await classes.createClass(flight2._id,"business",50,"2000",["veg","nonveg"])
     //console.log(flight3)
 }catch(e){
     console.log(e);
@@ -169,6 +170,16 @@ try{
 // }catch(e){
 //     console.log(e);
 // }
+
+try{
+
+    adminData = await adminCollection.createAdmin("17j050@gmail.com","Parth028");
+    //console.log(flight3)
+}catch(e){
+    console.log(e);
+}
+
+
 /*
 try{
     admintest=await flights.updateFlight( )
