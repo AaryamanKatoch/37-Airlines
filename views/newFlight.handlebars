@@ -1,0 +1,121 @@
+<body>
+    <form method="post" name="addFlightForm" action="/admin/addflight">
+    <table>
+        <tr>
+            <td><label for="flight_code">Flight Code</label></td>
+            <td><input type="text" name="flight_code" id="flight_code" placeholder="AB-000" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="departure">Departure Airport</label></td>
+            <td><input type="text" name="departure" id="departure" placeholder="Newark" required></td>
+        </tr>
+        
+        <tr>
+            <td><label for="arrival">Arrival Airport</label></td>
+            <td><input type="text" name="arrival" id="arrival" placeholder="Mumbai" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="dept_date">Departure Date</label></td>
+            <td><input type="date" name="dept_date" id="dept_date" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="dept_time">Departure Time</label></td>
+            <td><input type="time" name="dept_time" id="dept_time" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="arrival_date">Arrival Date</label></td>
+            <td><input type="date" name="arrival_date" id="arrival_date" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="arrival_time">Arrival Time</label></td>
+            <td><input type="time" name="arrival_time" id="arrival_time" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="flight_duration">Flight Duration</label></td>
+            <td><input type="text" name="flight_duration" id="flight_duration" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="miles">Miles</label></td>
+            <td><input type="number" name="miles" id="miles" required></td>
+        </tr>
+
+        <tr><td>&nbsp;</td></tr>
+
+        <tr>
+            <td><b>Flight Classes</b></td>
+            <td><b>No of Seats</b></td>
+        </tr>
+
+        <tr>
+            <td>First Class</td>
+            <td><input type="number" placeholder="No of Seats" id="ft_seats" name="ft_seats" value="0"></td>
+        </tr>
+
+        <tr>
+            <td>Business Class</td>
+            <td><input type="number" placeholder="No of Seats" id="bs_seats" name="bs_seats" value="0"></td>
+        </tr>
+
+        <tr>
+            <td>Economy Class</td>
+            <td><input type="number" placeholder="No of Seats" id="ec_seats" name="ec_seats" value="0"></td>
+        </tr>
+
+        <tr><td>&nbsp;</td></tr>
+
+        <tr>
+            <td><button type="submit" name="submit" value="Submit">Add Flight</button></td>
+        </tr>
+        
+    </table>
+    </form>
+
+    <script>
+        function fnChecked(){
+            var checkbox = document.getElementById("ec");
+            var seats = document.getElementById("ec_seats");
+
+            if (checkbox.checked == true) {
+                seats.style.display = "block";
+            } else {
+                seats.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+
+
+{{!-- <tr>
+    <td>Classes</td>
+    <td>
+        <input type="checkbox" id="ec" name="ec" value="economy" onclick="fnChecked()">
+        <label for="ec">Economy</label><br>
+    </td>
+    <td>
+        <input type="number" placeholder="No of Seats" id="ec_seats" style="display: none;" value="0">
+    </td>
+</tr>
+
+<tr>
+    <td>&nbsp;</td>
+    <td>
+        <input type="checkbox" id="bs" name="bs" value="business">
+        <label for="bs">Business</label><br>
+    </td>
+</tr>
+
+<tr>
+    <td>&nbsp;</td>
+    <td>
+        <input type="checkbox" id="ft" name="ft" value="first">
+        <label for="ft">First Class</label><br>
+    </td>
+</tr> --}}

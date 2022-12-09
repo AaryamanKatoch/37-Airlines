@@ -1,11 +1,39 @@
+<main>
+    <h1>All Available Flights</h1>
 
-<section>
-<h1>All Available Flights</h1>
-<ul>
-{{#each solution1}}
 
-<li><a href="/admin/editflight/{{_id}}">{{flightCode}}{{arrival}}{{departure}}</a> </li>
+    <table>
+        <thead>
+            <tr>
+                <th>Flight Code</th>
+                <th>Arrival</th>
+                <th>Departure</th>
+                <th colspan="2">Action</th>
+            </tr>
+        </thead>
 
-{{/each}}
-</ul>  
-</section>
+        <tbody>
+            {{#each solution1}}
+
+            <tr>
+                <td>{{flightCode}}</td>
+                <td>{{arrival}}</td>
+                <td>{{departure}}</td>
+                <td><a href="/admin/editflight/{{_id}}">Update</a></td>
+                <td>Delete</td>
+            </tr>
+
+            {{/each}}
+        </tbody>
+    </table>
+
+    {{!-- <ul>
+        {{#each solution1}}
+
+        <li><a href="/admin/editflight/{{_id}}">{{flightCode}} {{arrival}} {{departure}}</a> </li>
+
+        {{/each}}
+    </ul> --}}
+
+    <a href="admin/addflight">Add Flight</a>
+</main>

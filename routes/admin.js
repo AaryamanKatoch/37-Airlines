@@ -23,6 +23,29 @@ router.route("/admin").get(async (req, res) => {
   
   res.render('adminhomepage', { solution1: sol,title: "Flights Available" });
   });
+
+router.route("/admin/addflight")
+  .get(async (req, res) => {
+    try {
+      res.render("newFlight", { title: "Add Flight" });
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  })
+  .post(async (req, res) => {
+    try {
+      let newFlightData = req.body;
+      console.log(newFlightData);
+
+      const addFlightRes = await flights.createFlight(newFlightData.flight_code, newFlightData.departure, newFlightData.arrival,
+        newFlightData.dept_date, newFlightData.dept_time, newFlightData.arrival_date, newFlightData.arrival_time,
+        newFlightData.flight_duration, newFlightData.miles);
+
+      res.redirect("/admin");
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
   
   
 router.route("/admin/editflight/:id").get(async (req, res) => {
