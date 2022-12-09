@@ -6,6 +6,7 @@ router.route("/").get(async (req, res) => {
         let isLoggedIn;
         if(req.session.user) isLoggedIn = true;
         else isLoggedIn = false;
+        req.session.previousURL = {previousURL:`/`};
         res.render("homePage", {title:"Home Page",isLoggedIn: isLoggedIn });
     } catch (error) {
         res.status(500).send(error);

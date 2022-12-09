@@ -1,28 +1,73 @@
 <main>
-    <h1>Available Flights</h1>
-<table>
-     <thead>
-         <tr>
-            <th>Flight Code</th>
-            <th>Arrival</th>
-            <th>Departure</th>
-             <th colspan="2">Action</th>
-        </tr>
-    </thead>
+    {{#if isLoggedIn}}
+{{!-- <div><a href="/userProfile">User Profile</a></div> --}}
+<div><a href="/adminlogout">Logout</a></div>
+{{else}}
+<a href="/adminlogin">Login</a>
+{{/if}}
+<h1>All Available Flights</h1>
 
-     <tbody>
-         {{#each solution1}}
 
-           <tr>
-             <td>{{flightCode}}</td>
-             <td>{{arrival}}</td>
-             <td>{{departure}}</td>
-            <td><a href="/admin/editflight/{{_id}}">Update</a></td>
-             <td>Delete</td>
-        </tr>
+    <table>
+        <thead>
+            <tr>
+                <th>Flight Code</th>
+                <th>Arrival</th>
+                <th>Departure</th>
+                <th colspan="2">Action</th>
+            </tr>
+        </thead>
 
-    {{/each}}
-</tbody>
-</table>
+        <tbody>
+            {{#each solution1}}
+
+            <tr>
+                <td>{{flightCode}}</td>
+                <td>{{arrival}}</td>
+                <td>{{departure}}</td>
+                <td><a href="/admin/editflight/{{_id}}">Update</a></td>
+                <td>Delete</td>
+            </tr>
+
+            {{/each}}
+        </tbody>
+    </table>
+
+    {{!-- <ul>
+        {{#each solution1}}
+
+    <table>
+        <thead>
+            <tr>
+                <th>Flight Code</th>
+                <th>Arrival</th>
+                <th>Departure</th>
+                <th colspan="2">Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each solution1}}
+
+            <tr>
+                <td>{{flightCode}}</td>
+                <td>{{arrival}}</td>
+                <td>{{departure}}</td>
+                <td><a href="/admin/editflight/{{_id}}">Update</a></td>
+                <td>Delete</td>
+            </tr>
+
+            {{/each}}
+        </tbody>
+    </table>
+
+    {{!-- <ul>
+        {{#each solution1}}
+
+        <li><a href="/admin/editflight/{{_id}}">{{flightCode}} {{arrival}} {{departure}}</a> </li>
+
+        {{/each}}
+    </ul> --}}
+
     <a href="admin/addflight">Add Flight</a>
 </main>

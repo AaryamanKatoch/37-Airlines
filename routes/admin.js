@@ -20,8 +20,10 @@ router.route("/admin").get(async (req, res) => {
     var sol=await adminData.getadminflightlist()
     
   } catch(e){res.status(404).render("error",{class:"error",title:"Error", error: "No Flights available"});return}
-  
-  res.render('adminhomepage', { solution1: sol,title: "Flights Available" });
+  let isLoggedIn;
+    if(req.session.admin) isLoggedIn = true;
+    else isLoggedIn = false;
+  res.render('adminhomepage', { solution1: sol,title: "Flights Available", isLoggedIn : isLoggedIn });
   });
 
 router.route("/admin/addflight")
@@ -63,8 +65,10 @@ router.route("/admin/editflight/:id").get(async (req, res) => {
   try{
     var sol=await flights.getFlightById(fid)
   } catch(e){;res.status(404).render("error",{class:"error",title:"Error", error: "No Flight found with that id"});return}
-  
-  res.render('editadmin', { solution1: sol,title: "Edit Flight" });
+  let isLoggedIn;
+    if(req.session.admin) isLoggedIn = true;
+    else isLoggedIn = false;
+  res.render('editadmin', { solution1: sol,title: "Edit Flight" , isLoggedIn : isLoggedIn});
   });
 
 

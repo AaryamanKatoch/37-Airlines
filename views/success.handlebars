@@ -5,3 +5,34 @@
 <a href="/login">Login</a>
 {{/if}}
 <p>Success</p>
+<table class="invoice">
+    <tr>
+        <th>Sr No.</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Passport Number</th>
+        <th>Date of Birth</th>
+        <th>Gender</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Booked Class</th>
+        <th>Food Choice</th>
+    </tr>
+    {{#each travelers}}
+    <tr>
+        <td>{{@index}}</td>
+        <td>{{this.firstName}}</td>
+        <td>{{this.lastName}}</td>
+        <td>{{this.passportNumber}}</td>
+        <td>{{this.dateOfBirth}}</td>
+        <td>{{this.gender}}</td>
+        <td>{{this.email}}</td>
+        <td>{{this.phoneNumber}}</td>
+        <td>{{this.bookedClass}}</td>
+        <td>{{this.food}}</td>
+    </tr>
+    {{/each}}
+    <tr>
+        <td>Total Price : {{totalPrice}}</td>
+    </tr>
+</table>

@@ -9,6 +9,7 @@ const connection = require('./config/mongoConnection');
 const { bookings } = require('./config/mongoCollections');
 const adminhome = require("./data/adminfunctions")
 const userhome = require("./data/userfunctions")
+const adminCollection = require("./data/adminCollection");
 
 
 async function main() {
@@ -101,26 +102,26 @@ async function main() {
         console.log(e);
     }
 
-    try {
-        class1 = await classes.createClass(flight2._id, "economy", 10, "1000", ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e);
-    }
-    try {
+try{
+    class1 = await classes.createClass(flight2._id,"economy",100,"1000",["veg","nonveg"])
+    //console.log(flight3)
+}catch(e){
+    console.log(e);
+}
+try{
 
-        class2 = await classes.createClass(flight2._id, "business", 5, "2000", ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e);
-    }
-    try {
-        class2 = await classes.createClass(flight3._id, "business", 5, "2000", ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e);
-    }
-    try {
+    class2 = await classes.createClass(flight2._id,"business",50,"2000",["veg","nonveg"])
+    //console.log(flight3)
+}catch(e){
+    console.log(e);
+}
+try{
+    class2 = await classes.createClass(flight3._id,"business",5,"2000",["veg","nonveg"])
+    //console.log(flight3)
+}catch(e){
+    console.log(e);
+}
+try{
 
         bookedseat1 = await bookedSeats.createBookedSeats(flight1._id, 2, "travelerid1", class1.classType)
         //console.log(flight3)
@@ -185,18 +186,29 @@ async function main() {
 
     // try{
 
-    //     review2 = await review.createReview(user1._id,flight1._id,"flight was awesome",4)
-    //     //console.log(flight3)
-    // }catch(e){
-    //     console.log(e);
-    // }
-    /*
-    try{
-        admintest=await flights.updateFlight( )
-        console.log(admintest)
-    } catch(e){
-        console.log(e)
-    }*/
+//     review2 = await review.createReview(user1._id,flight1._id,"flight was awesome",4)
+//     //console.log(flight3)
+// }catch(e){
+//     console.log(e);
+// }
+
+try{
+
+    adminData = await adminCollection.createAdmin("17j050@gmail.com","Parth028");
+    //console.log(flight3)
+}catch(e){
+    console.log(e);
+}
+
+
+/*
+try{
+    admintest=await flights.updateFlight( )
+    console.log(admintest)
+} catch(e){
+    console.log(e)
+}
+*/
 
 
     console.log('done!!');
