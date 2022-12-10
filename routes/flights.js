@@ -7,6 +7,7 @@ const bookingCollection = require('../data/bookingCollection');
 const travelerData = require('../data/travelers');
 const userCollection = require('../data/usersCollection');
 const path = require('path');
+const emaildata=require('../data/email')
 
 //route for getting flights from passed parameters from form on the home page
 
@@ -173,6 +174,16 @@ router.route("/searchflights/flightdetails/:id/book/success").post(async(req,res
 });
 
 
+router.route("/searchflights/flightdetails/:id/book/success/emailconfirmation").get(async (req, res) => {
+let bookid= req.session.bookingID.bookingID
+bookid=bookid.toString()
+console.log(bookid)
+try{
+await emaildata.myemail(bookid)
+}catch(e){console.log(e)}
+res.redirect('/')
+
+})
 
 
 module.exports = router;
