@@ -10,10 +10,13 @@ const { bookings } = require('./config/mongoCollections');
 const adminhome = require("./data/adminfunctions")
 const userhome = require("./data/userfunctions")
 const adminCollection = require("./data/adminCollection");
+const emaildata=require("./data/email")
 
 
 async function main() {
     const db = await connection.dbConnection();
+   
+    
     let flight1 = undefined;
     let flight2 = undefined;
     let flight3 = undefined;
@@ -201,17 +204,13 @@ try{
 }
 
 
-/*
+
 try{
     admintest=await flights.updateFlight( )
     console.log(admintest)
 } catch(e){
     console.log(e)
 }
-*/
 
-
-    console.log('done!!');
-    await connection.closeConnection();
-}
 main();
+}
