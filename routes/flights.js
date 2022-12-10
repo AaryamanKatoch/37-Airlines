@@ -165,10 +165,11 @@ router.route("/searchflights/flightdetails/:id/book/success").post(async(req,res
   let getBookings = await bookingCollection.getBookingById(bookingData._id);
   let flightClassPrice = await classes.getFlightClassPrice(flightId,classType);
   let totalPrice = NoOfPass*flightClassPrice;
+  var flightDetails=await flightsData.getallflightdetailsforflightdetailspage(flightId,classType);
   // console.log(getBookings.travelers);
   // req.session.previousURL = {previousURL:`/searchflights/flightdetails/${flightId}/book/success`};
   req.session.bookingID = {bookingID : bookingData._id};
-   res.render('success',{isLoggedIn: isLoggedIn, travelers : getBookings.travelers, sr : getBookings.travelers.length, totalPrice : totalPrice});
+   res.render('success',{isLoggedIn: isLoggedIn, travelers : getBookings.travelers, sr : getBookings.travelers.length, totalPrice : totalPrice, flightDetails : flightDetails});
 });
 
 

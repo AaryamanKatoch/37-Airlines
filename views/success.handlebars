@@ -5,6 +5,21 @@
 <a href="/login">Login</a>
 {{/if}}
 <p>Success</p>
+<dl>
+
+  <dt>Flight Code</dt>
+  <dd>{{{flightDetails.flightCode}}}</dd>
+  <dt>Departure City</dt>
+  <dd>{{flightDetails.departure}}</dd>
+  <dt>Arrival City</dt>
+  <dd>{{flightDetails.arrival}}</dd>
+  <dt>Departure Time</dt>
+  <dd>{{flightDetails.departureTime}}</dd>
+  <dt>Arrival Time</dt>
+  <dd>{{flightDetails.arrivalTime}}</dd>
+  <dt>Flight Duration</dt>
+  <dd>{{flightDetails.duration}}</dd>
+</dl>
 <table class="invoice">
     <tr>
         <th>Sr No.</th>
