@@ -7,7 +7,9 @@ const bookingCollection = require('../data/bookingCollection');
 const travelerData = require('../data/travelers');
 const userCollection = require('../data/usersCollection');
 const path = require('path');
-const emaildata=require('../data/email')
+const emaildata=require('../data/email');
+const pdfCreate = require('../data/pdfCreation');
+const { travelers } = require('../data');
 
 //route for getting flights from passed parameters from form on the home page
 
@@ -183,7 +185,39 @@ await emaildata.myemail(bookid)
 }catch(e){console.log(e)}
 res.redirect('/')
 
-})
+});
+
+router.route("/searchflights/flightdetails/:id/book/success").get(async (req, res) => {
+  
+  try{
+    let bookingId = req.session.bookingID.bookingID;
+    bookingId = bookingId.toString();
+    let getBooking = await bookingCollection.getBookingById(bookingId);
+    let flightDetails = await flightsData.getFlightById(getBooking.flightId);
+    let travelersDetails = getBooking.travelers;
+    let NoOfPass = req.session.info.noOfPass;
+    // let flightId = req.params.id;
+    let classType = req.session.info.class;
+    let flightClassPrice = await classes.getFlightClassPrice(getBooking.flightId,classType);
+    let totalPrice = NoOfPass*flightClassPrice;
+    let isLoggedIn;
+    if(req.session.user) isLoggedIn = true;
+    else isLoggedIn = false;
+    // var flightDetails=await flightsData.getallflightdetailsforflightdetailspage(flightId,classType);
+
+    const stream = res.writeHead(200, {
+      'Content-Type': 'application/pdf',
+      'Content-Disposition' : 'attachment;filename=ticket.pdf',
+    });
+    await pdfCreate.createInvoice(flightDetails,travelersDetails,totalPrice,"ticket.pdf",(chunk)=> stream.write(chunk),()=>stream.end());
+    // res.render('success',{isLoggedIn: isLoggedIn, travelers : getBooking.travelers, sr : getBooking.travelers.length, totalPrice : totalPrice, flightDetails : flightDetails});
+    res.redirect('/');
+  
+  }catch(e){
+
+  }
+  
+  })
 
 
 module.exports = router;
