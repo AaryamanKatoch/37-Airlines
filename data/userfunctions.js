@@ -26,7 +26,7 @@ let eachbfdet=await flightdata.getFlightById(eachbfid)
 eachbobj["FlightCode"]=eachbfdet.flightCode
 eachbobj["Departure"]=eachbfdet.departure
 eachbobj["Arrival"]=eachbfdet.arrival
-eachbobj["Date"]=eachbfdet.date
+eachbobj["DepartureDate"]=eachbfdet.departureDate
 resobj["bookings"].push(eachbobj)
 }
 return resobj
