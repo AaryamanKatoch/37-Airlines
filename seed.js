@@ -16,7 +16,7 @@ const emaildata=require("./data/email")
 async function main() {
     const db = await connection.dbConnection();
    
-    
+    /*
     let flight1 = undefined;
     let flight2 = undefined;
     let flight3 = undefined;
@@ -32,7 +32,7 @@ async function main() {
     let traveller1 = undefined;
     let review1 = undefined;
     let review2 = undefined;
-    await db.dropDatabase();
+   await db.dropDatabase();
 
     try {
 
@@ -210,7 +210,14 @@ try{
     console.log(admintest)
 } catch(e){
     console.log(e)
+}*/
+try{
+    admintest=await flights.updateFlight("6398d25539bc0fe2d40f2d7c","NN23","New","Cali","2021-22-1","10:00","2022-12-11","10:00","20","21")
+    console.log(admintest)
+} catch(e){
+    console.log(e)
 }
 
-main();
+
 }
+main();

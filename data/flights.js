@@ -117,11 +117,12 @@ const updateFlight = async (
   flightCode,
   departure,
   arrival,
+  departureDate,
   departureTime,
+  arrivalDate,
   arrivalTime,
   duration,
-  miles,
-  date
+  miles
   
 ) => {
 
@@ -143,11 +144,12 @@ const updateFlight = async (
     flightCode:flightCode,
     departure:departure,
     arrival:arrival,
+    departureDate:departureDate,
     departureTime:departureTime,
+    arrivalDate:arrivalDate,
     arrivalTime:arrivalTime,
     duration:duration,
-    miles:miles,
-    date:date,
+    miles:miles
   }
   const updatedInfo = await flightCollection.updateOne({_id: ObjectId(id)},
   {$set: updatedflight}

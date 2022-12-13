@@ -9,11 +9,13 @@ if(staticForm){
     const fcode=document.getElementById('flightcodeInput');
     const depar=document.getElementById('departureInput');
     const arri=document.getElementById('arrivalInput');
+    const depardate=document.getElementById('departureDateInput');
     const departim=document.getElementById('departimeInput');
+   const arrivaldate=document.getElementById('arrivalDateInput')
     const arritim=document.getElementById('arrTimeInput');
     const dura=document.getElementById('durationInput');
     const mil=document.getElementById('milesInput');
-    const dat=document.getElementById('dateInput');
+   
 
    
 
@@ -99,6 +101,51 @@ if(staticForm){
             if(arrival.length>30)
             throw "maximum length of arrival and departure cities should be 6 "
         
+            
+
+//departure date
+
+           let date=depardate.value;
+           if(!date) throw 'No date passed';
+           if(date.trim().length==0) throw 'date can not be empty string';
+           if(!typeof date=='string') throw 'date must be valid string';
+           const re_for_specialcharacter=/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+           date=date.trim();
+           var c_year = new Date().getFullYear();  
+           var ListofDays = [31,28,31,30,31,30,31,31,30,31,30,31];
+           let arr=date.split('-');
+           if(arr.length !== 3){
+               throw 'invalid Date';
+           }
+           month=arr[1];
+           day=arr[2];
+           year=arr[0];
+       
+           if(month.length!==2 || day.length!==2 || year.length!==4){
+               throw 'invalid Date';
+           }
+           if(re_for_specialcharacter.test(month) || re_for_specialcharacter.test(day) || re_for_specialcharacter.test(year)){
+               throw 'invalid Date';
+           }
+           month= Number(month);
+           day= Number(day);
+           year= Number(year);
+           if(!Number.isInteger(month) || !Number.isInteger(day)  || !Number.isInteger(year)){
+               throw 'invalid Date';
+           }
+           if(month<0 || month>12){
+               throw 'invalid Date';
+           }
+           if(month==2){
+               if(day>28){
+                   throw 'invalid Date';
+               }
+           }
+           if(day>ListofDays[month-1]){
+               throw 'invalid Date';
+           }
+           
+
 
             let departimval=departim.value;
             if(!departimval)
@@ -116,6 +163,53 @@ if(staticForm){
             throw 'not proper arrival/departure time format'
 
 
+
+//arrival date
+date=arrivaldate.value;
+if(!date) throw 'No date passed';
+if(date.trim().length==0) throw 'date can not be empty string';
+if(!typeof date=='string') throw 'date must be valid string';
+
+date=date.trim();
+c_year = new Date().getFullYear();  
+
+ arr=date.split('-');
+if(arr.length !== 3){
+    throw 'invalid Date';
+}
+month=arr[1];
+day=arr[2];
+year=arr[0];
+
+if(month.length!==2 || day.length!==2 || year.length!==4){
+    throw 'invalid Date';
+}
+if(re_for_specialcharacter.test(month) || re_for_specialcharacter.test(day) || re_for_specialcharacter.test(year)){
+    throw 'invalid Date';
+}
+month= Number(month);
+day= Number(day);
+year= Number(year);
+if(!Number.isInteger(month) || !Number.isInteger(day)  || !Number.isInteger(year)){
+    throw 'invalid Date';
+}
+if(month<0 || month>12){
+    throw 'invalid Date';
+}
+if(month==2){
+    if(day>28){
+        throw 'invalid Date';
+    }
+}
+if(day>ListofDays[month-1]){
+    throw 'invalid Date';
+}     
+
+
+
+
+
+
             let arritimval=arritim.value;
             if(!arritimval)
             throw "No arrival or departure time is provided";
@@ -131,7 +225,7 @@ if(staticForm){
             throw 'not proper arrival/departure time format'
 
             let duraval=dura.value;
-
+          //duration function is left
 
             let milval=mil.value;
 
@@ -146,7 +240,7 @@ if(staticForm){
             milval=milval.trim() 
             if(!(Number.isInteger(Number(milval)) && Number(milval) > 1 && Number(milval)<9538))
             throw "not proper miles , should be an integer between 1 and 9538"
-            const datval=dat.value;
+            
             staticForm.submit()
         } catch (e) {
           console.log(e)

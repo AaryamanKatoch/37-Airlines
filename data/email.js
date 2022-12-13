@@ -56,8 +56,6 @@ let  mailoptions ={
 transporter.sendMail(mailoptions,function(error,info){
     if(error)
     console.log(error);
-    else
-    console.log("email sent")
     
 });
 }
