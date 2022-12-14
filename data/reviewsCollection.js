@@ -1,3 +1,7 @@
+
+//// No error handling done -----ATPK
+
+
 const mongoCollections = require('../config/mongoCollections');
 //const mongoCollections = require('../../../config/mongoCollections');
 
@@ -16,6 +20,9 @@ review,
 rating
 
 ) => {
+
+
+
   //error checking
   //validation for username left
   review=await helper.checkifproperreview(review)

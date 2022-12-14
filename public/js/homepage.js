@@ -107,8 +107,9 @@ if(staticForm){
 
            let date=depardate.value;
            if(!date) throw 'No date passed';
+          
+           if(typeof date!=='string') throw 'date must be valid string';
            if(date.trim().length==0) throw 'date can not be empty string';
-           if(!typeof date=='string') throw 'date must be valid string';
            const re_for_specialcharacter=/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
            date=date.trim();
            var c_year = new Date().getFullYear();  
@@ -167,9 +168,9 @@ if(staticForm){
 //arrival date
 date=arrivaldate.value;
 if(!date) throw 'No date passed';
-if(date.trim().length==0) throw 'date can not be empty string';
-if(!typeof date=='string') throw 'date must be valid string';
 
+if(typeof date!=='string') throw 'date must be valid string';
+if(date.trim().length==0) throw 'date can not be empty string';
 date=date.trim();
 c_year = new Date().getFullYear();  
 

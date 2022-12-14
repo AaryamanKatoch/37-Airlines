@@ -10,6 +10,19 @@ const path = require('path');
 
 
 async function getmaildata(bookingid){
+
+    if(!bookingid)
+    throw `no id is given`;
+    if(typeof(bookingid)!=="string")
+    throw `type of id is not a string`;
+    if(bookingid.trim().length===0)
+    throw 'id cannot be empty or all white spaces';
+    bookingid=bookingid.trim();
+    
+
+
+
+
 let mybooking= await bookingCollection.getBookingById(bookingid)
 newbook={}
 maillist=[]
@@ -26,6 +39,19 @@ return newbook
 }
 
 async function myemail(bid){
+
+    if(!bid)
+    throw `no id is given`;
+    if(typeof(bid)!=="string")
+    throw `type of id is not a string`;
+    if(bid.trim().length===0)
+    throw 'id cannot be empty or all white spaces';
+    bid=bid.trim();
+   
+
+
+
+
 const nbook=await getmaildata(bid)
 
 for(i=0;i<nbook.maillist.length;i++){

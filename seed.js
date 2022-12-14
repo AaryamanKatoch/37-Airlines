@@ -16,7 +16,7 @@ const emaildata=require("./data/email")
 async function main() {
     const db = await connection.dbConnection();
    
-    /*
+    
     let flight1 = undefined;
     let flight2 = undefined;
     let flight3 = undefined;
@@ -33,6 +33,16 @@ async function main() {
     let review1 = undefined;
     let review2 = undefined;
    await db.dropDatabase();
+
+
+
+   try {
+
+    let flight26 = await flights.createFlight("SDF43", "New", "California", "2022-12-10", "10:00", "2022-12-11", "11:00", "88", "20");
+    //console.log(flight1)
+} catch (e) {
+    console.log(e);
+}
 
     try {
 
@@ -69,7 +79,7 @@ async function main() {
 
     try {
 
-        flight4 = await flights.createFlight("SA091", "New Jersey", "Los Angeles", "2022-12-11", "17:00", "2022-12-12", "18:00", "1", "2001");
+        flight4 = await flights.createFlight(" SA091", "New Jersey", "Los Angeles", "2022-12-11", "17:00", "2022-12-12", "18:00", "1", "2001");
         //console.log(flight2)
     } catch (e) {
         console.log(e);
@@ -124,13 +134,7 @@ try{
 }catch(e){
     console.log(e);
 }
-try{
 
-        bookedseat1 = await bookedSeats.createBookedSeats(flight1._id, 2, "travelerid1", class1.classType)
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e);
-    }
 
     try {
         user1 = await users.createUsers('test1', 'test2', 'admin123@stevens.edu', 'Admin@123', 'Admin@123');
@@ -197,26 +201,12 @@ try{
 
 try{
 
-    adminData = await adminCollection.createAdmin("17j050@gmail.com","Parth028");
+    adminData = await adminCollection.createAdmin("abc@gmail.com","Qwerty123!");
     //console.log(flight3)
 }catch(e){
     console.log(e);
 }
 
-
-
-try{
-    admintest=await flights.updateFlight( )
-    console.log(admintest)
-} catch(e){
-    console.log(e)
-}*/
-try{
-    admintest=await flights.updateFlight("6398d25539bc0fe2d40f2d7c","NN23","New","Cali","2021-22-1","10:00","2022-12-11","10:00","20","21")
-    console.log(admintest)
-} catch(e){
-    console.log(e)
-}
 
 
 }
