@@ -211,8 +211,8 @@ async function updateClassCapacity(flightId, classType, noOfPass) // check for n
   flightId=flightId.trim()
 
 
-classType=await helper.checkifproperclasstype(classType)
-
+classType=await helper.checkifproperclasstype(classType);
+noOfPass = await helper.checkifproperNoOfPass(noOfPass);
 
 
 

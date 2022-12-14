@@ -33,7 +33,7 @@ router.route("/admin").get(async (req, res) => {
     error=e; 
     return res.status(400).render('adminhomepage', { solution1: sol,title: "Flights Available", isLoggedIn : isLoggedIn,haserror:haserror,error:error });
   }
-  res.status(500).render('adminhomepage', { solution1: sol,title: "Flights Available", isLoggedIn : isLoggedIn,haserror:haserror,error:error });
+  
   });
 
 router.route("/admin/addflight")

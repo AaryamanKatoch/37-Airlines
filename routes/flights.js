@@ -10,6 +10,8 @@ const path = require('path');
 const emaildata=require('../data/email');
 const pdfCreate = require('../data/pdfCreation');
 const { travelers } = require('../data');
+const helpers = require('../helpers');
+const {ObjectId} = require('mongodb');
 
 //route for getting flights from passed parameters from form on the home page
 
@@ -50,7 +52,7 @@ router.route("/searchflights").post(async (req, res) => {
           element['NoOfPass']=NoOfPass;
           element['class']=f_class;
         });
-        req.session.info = {class : f_class, noOfPass : NoOfPass};
+        req.session.info = {class : f_class, noOfPass : NoOfPass.toString()};
         
         let isLoggedIn;
         if(req.session.user) isLoggedIn = true;
@@ -107,30 +109,49 @@ router.route("/searchflights/flightdetails/:id").get(async (req, res) => {
 });
 
 router.route("/searchflights/flightdetails/:id/book").get(async(req,res)=>{
+  let flightId = req.params.id;
+    
+  let flightClass = req.session.info.class;
+  
+  let NoOfPass = req.session.info.noOfPass;
+  let food;
+  let isLoggedIn;
   try {
     
-    let flightId = req.params.id;
-    
-    let flightClass = req.session.info.class;
-    
-    let NoOfPass = req.session.info.noOfPass;
+   
     
     if(!flightId) throw 'Flight Id is not provided.';
     if(!flightClass) throw 'Flight Class is not provided.';
     if(!NoOfPass) throw 'Number of passengers is not provided.';
-    flightId = flightId.trim();
+    if(typeof flightId !== 'string') throw 'FlightId is not a string.';
+    if(typeof flightClass !== 'string') throw 'Flight Class is not a string.';
+    if(typeof NoOfPass !== 'string') throw 'Number of passengers is not a string.';
+    if(flightId.trim().length===0)
+    throw 'flight id cannot be empty or all white spaces';
+    flightId=flightId.trim();
+    if(!ObjectId.isValid(flightId))
+    throw `id is not valid`;
+    flightClass = flightClass.trim();
+    NoOfPass = NoOfPass.trim();
+    if(NoOfPass.trim().length===0)
+    throw 'Number of Passengers cannot be empty or all white spaces';
+    flightClass = await helpers.checkifproperclasstype(flightClass);
+    NoOfPass = await helpers.checkifproperNoOfPass(NoOfPass);
     //console.log(flightClass);
-    let isLoggedIn;
+    
     if(req.session.user) isLoggedIn = true;
     else isLoggedIn = false;
     
-    let food = await classes.getFoodChoiceFromClass(flightId,flightClass);
+    food = await classes.getFoodChoiceFromClass(flightId,flightClass);
     
     // console.log(food);
     // req.session.previousURL = {previousURL:`/searchflights/flightdetails/${flightId}/book`};
-    res.render('bookflight', {title : "Book Flight", noOfPass : NoOfPass, choice : food, flightId : flightId, flightClass : flightClass, isLoggedIn : isLoggedIn});
+    res.render('bookflight', {title : "Book Flight", noOfPass : NoOfPass, choice : food, flightId : flightId, flightClass : flightClass, isLoggedIn : isLoggedIn, hasError : false});
   } catch (e) {
-    res.render('error',{error : e, title : 'Error'});
+    if(req.session.user) isLoggedIn = true;
+    else isLoggedIn = false;
+    // food = await classes.getFoodChoiceFromClass(flightId,flightClass);
+    res.status(400).render('bookflight',{title : "Book Flight", noOfPass : NoOfPass, choice : food, flightId : flightId, flightClass : flightClass, isLoggedIn : isLoggedIn,hasError : true,error : e});
   }
 
 });

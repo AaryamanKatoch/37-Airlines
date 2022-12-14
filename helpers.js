@@ -3,6 +3,7 @@
 
 const { reviews } = require("./config/mongoCollections");
 const isAlphaNumeric = str => /^[a-z0-9]+$/gi.test(str);
+const {ObjectId} = require('mongodb');
 const re_for_specialcharacter=/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 //duration(flight) helper and date of birth(traveller)  and food(traveller) left 
 
@@ -138,8 +139,14 @@ async function checkifproperDate(date){
 //right
 async function checkifproperNoOfPass(NoOfPass){
     if(!NoOfPass) throw 'No passengers passed!';
+    if(typeof NoOfPass !== 'string') throw 'Number of passengers is not a string.';
+    if(NoOfPass.trim().length===0)
+    throw 'Number of Passengers cannot be empty or all white spaces';
+    NoOfPass = NoOfPass.trim();
+    const special = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    if(special.test(NoOfPass)) throw 'Number of passengers must be valid Number'; 
     if(isNaN(NoOfPass)) throw 'Number of passengers must be valid Number';
-    NoOfPass=Number(NoOfPass);
+    // NoOfPass=Number(NoOfPass);
     return NoOfPass;
 }
 

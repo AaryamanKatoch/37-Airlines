@@ -53,6 +53,9 @@
 <div class="hidden" id="error-container">
   <div class="text-goes-here">
   </div>
+  {{#if hasError}}
+  <div><p>{{error}}</p></div>
+  {{/if}}
   <script>
    
     sessionStorage.setItem('noOfPass',{{noOfPass}});
