@@ -51,6 +51,7 @@ router.route("/searchflights").post(async (req, res) => {
           element['class']=f_class;
         });
         req.session.info = {class : f_class, noOfPass : NoOfPass};
+        
         let isLoggedIn;
         if(req.session.user) isLoggedIn = true;
         else isLoggedIn = false;

@@ -370,7 +370,7 @@ async function checkifpropergender(vari){
     vari=vari.trim()
     vari=vari.toLowerCase()
 
-    if(vari!=="Male" && vari!=="Female" && vari!=="Other")
+    if(vari!=="male" && vari!=="female" && vari!=="Other")
     throw 'kindly select from: male,female,other'
 
 return vari
