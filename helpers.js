@@ -70,7 +70,7 @@ async function checkifproperdeparr(vari){
     vari=vari.toLowerCase()
 
     if(!(/^[A-Za-z\s]*$/.test(vari)))
-    throw 'city can also have alphabets'
+    throw 'city can only have alphabets'
 
     if(vari.length<2)
     throw "minimum length of arrival and departure cities  should be two"
@@ -84,8 +84,8 @@ async function checkifproperdeparr(vari){
 //right
 async function checkifproperDate(date){
     if(!date) throw 'No date passed';
+    if(typeof date!=='string') throw 'date must be valid string';
     if(date.trim().length==0) throw 'date can not be empty string';
-    if(!typeof date=='string') throw 'date must be valid string';
     const re_for_specialcharacter=/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
     date=date.trim();
     var c_year = new Date().getFullYear();  
@@ -176,12 +176,6 @@ if(!vari)
    vari=vari.trim()
 
 
-
-
-
-
-
-
 return vari
 }
 
@@ -243,12 +237,8 @@ async function checkifproperprice(vari){
     if(!vari)
     throw "class price not provided";
  
-    if(typeof(vari)!=="string")
-    throw 'class price is not a string';
-    if(vari.trim().length===0)
-    throw "class price cant be empty or all white spaces";
- 
-    vari=vari.trim() 
+    if(typeof(vari)!=="number")
+    throw 'class price is not a number';
     if(!(Number.isInteger(Number(vari)) && Number(vari) >= 0 && Number(vari)<100000))
     throw "price should be between 0 and 100000"
     return vari
@@ -403,6 +393,22 @@ async function checkifproperemail(vari){
     throw 'not proper email address'
     return vari
 }
+async function checkisproperpassword(vari){ // need to check if we trim password --- ATPK
+    await checkifinputexists(vari)
+    if(typeof(vari)!="string")
+    throw "password has to be a string"
+    if(vari.trim().length==0)
+    throw "password cannot be all white spaces"
+    if(((/\s/).test(vari))==true)
+    throw "password cannot have whitespaces"
+    if(vari.length<6)
+    throw "password should be atleast 6 characters long"
+    const testcondition = new RegExp("^(?=.*[A-Z])(?=.*\\d)(?=.*[-+_!@#$%^&*.,?]).+$");
+    if (!testcondition.test(vari)) 
+    throw "password is not proper"
+    //vari=vari.trim()
+    return vari
+    }
 
 async function checkifproperphonenumber(vari){
 
@@ -440,5 +446,5 @@ module.exports = {
     checkifproperflightcode,checkifemptystring,checkifinputexists,checkifproperdeparr,checkifproperarrdepttime,checkifproperduration,
     checkifpropermiles,checkifproperclasstype, checkifproperclasscapacity,checkifproperprice,checkifproperfoodchoices,checkifproperreview,
     checkifproperrating, checkifproperflname,checkifproperpassport, checkifpropergender, checkifproperemail, checkifproperphonenumber,
-    checkifproperDate,checkifproperNoOfPass,checkifstring,checkifarray,addDigitIfNeeded
+    checkifproperDate,checkifproperNoOfPass,checkifstring,checkifarray,checkisproperpassword,checkifproperprice,addDigitIfNeeded
 }

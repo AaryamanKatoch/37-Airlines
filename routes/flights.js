@@ -7,7 +7,9 @@ const bookingCollection = require('../data/bookingCollection');
 const travelerData = require('../data/travelers');
 const userCollection = require('../data/usersCollection');
 const path = require('path');
-const emaildata=require('../data/email')
+const emaildata=require('../data/email');
+const pdfCreate = require('../data/pdfCreation');
+const { travelers } = require('../data');
 
 //route for getting flights from passed parameters from form on the home page
 
@@ -95,8 +97,11 @@ res.render('flightdetails', { solution1: sol,title: "Flight Found" ,isLoggedIn :
 
 router.route("/searchflights/flightdetails/:id/book").get(async(req,res)=>{
   try {
+    
     let flightId = req.params.id;
+    
     let flightClass = req.session.info.class;
+    
     let NoOfPass = req.session.info.noOfPass;
     
     if(!flightId) throw 'Flight Id is not provided.';
@@ -107,7 +112,9 @@ router.route("/searchflights/flightdetails/:id/book").get(async(req,res)=>{
     let isLoggedIn;
     if(req.session.user) isLoggedIn = true;
     else isLoggedIn = false;
+    
     let food = await classes.getFoodChoiceFromClass(flightId,flightClass);
+    
     // console.log(food);
     // req.session.previousURL = {previousURL:`/searchflights/flightdetails/${flightId}/book`};
     res.render('bookflight', {title : "Book Flight", noOfPass : NoOfPass, choice : food, flightId : flightId, flightClass : flightClass, isLoggedIn : isLoggedIn});
@@ -166,10 +173,11 @@ router.route("/searchflights/flightdetails/:id/book/success").post(async(req,res
   let getBookings = await bookingCollection.getBookingById(bookingData._id);
   let flightClassPrice = await classes.getFlightClassPrice(flightId,classType);
   let totalPrice = NoOfPass*flightClassPrice;
+  var flightDetails=await flightsData.getallflightdetailsforflightdetailspage(flightId,classType);
   // console.log(getBookings.travelers);
   // req.session.previousURL = {previousURL:`/searchflights/flightdetails/${flightId}/book/success`};
   req.session.bookingID = {bookingID : bookingData._id};
-   res.render('success',{isLoggedIn: isLoggedIn, travelers : getBookings.travelers, sr : getBookings.travelers.length, totalPrice : totalPrice});
+   res.render('success',{isLoggedIn: isLoggedIn, travelers : getBookings.travelers, sr : getBookings.travelers.length, totalPrice : totalPrice, flightDetails : flightDetails});
 });
 
 
@@ -182,7 +190,39 @@ await emaildata.myemail(bookid)
 }catch(e){console.log(e)}
 res.redirect('/')
 
-})
+});
+
+router.route("/searchflights/flightdetails/:id/book/success").get(async (req, res) => {
+  
+  try{
+    let bookingId = req.session.bookingID.bookingID;
+    bookingId = bookingId.toString();
+    let getBooking = await bookingCollection.getBookingById(bookingId);
+    let flightDetails = await flightsData.getFlightById(getBooking.flightId);
+    let travelersDetails = getBooking.travelers;
+    let NoOfPass = req.session.info.noOfPass;
+    // let flightId = req.params.id;
+    let classType = req.session.info.class;
+    let flightClassPrice = await classes.getFlightClassPrice(getBooking.flightId,classType);
+    let totalPrice = NoOfPass*flightClassPrice;
+    let isLoggedIn;
+    if(req.session.user) isLoggedIn = true;
+    else isLoggedIn = false;
+    // var flightDetails=await flightsData.getallflightdetailsforflightdetailspage(flightId,classType);
+
+    const stream = res.writeHead(200, {
+      'Content-Type': 'application/pdf',
+      'Content-Disposition' : 'attachment;filename=ticket.pdf',
+    });
+    await pdfCreate.createInvoice(flightDetails,travelersDetails,totalPrice,"ticket.pdf",(chunk)=> stream.write(chunk),()=>stream.end());
+    // res.render('success',{isLoggedIn: isLoggedIn, travelers : getBooking.travelers, sr : getBooking.travelers.length, totalPrice : totalPrice, flightDetails : flightDetails});
+    res.redirect('/');
+  
+  }catch(e){
+
+  }
+  
+  })
 
 
 module.exports = router;

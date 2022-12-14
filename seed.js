@@ -32,7 +32,17 @@ async function main() {
     let traveller1 = undefined;
     let review1 = undefined;
     let review2 = undefined;
-    await db.dropDatabase();
+   await db.dropDatabase();
+
+
+
+   try {
+
+    let flight26 = await flights.createFlight("SDF43", "New", "California", "2022-12-10", "10:00", "2022-12-11", "11:00", "88", "20");
+    //console.log(flight1)
+} catch (e) {
+    console.log(e);
+}
 
     try {
 
@@ -124,13 +134,7 @@ try{
 }catch(e){
     console.log(e);
 }
-try{
 
-        bookedseat1 = await bookedSeats.createBookedSeats(flight1._id, 2, "travelerid1", class1.classType)
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e);
-    }
 
     try {
         user1 = await users.createUsers('test1', 'test2', 'admin123@stevens.edu', 'Admin@123', 'Admin@123');
@@ -203,7 +207,7 @@ try{
 
 try{
 
-    adminData = await adminCollection.createAdmin("17j050@gmail.com","Parth028");
+    adminData = await adminCollection.createAdmin("abc@gmail.com","Qwerty123!");
     //console.log(flight3)
 }catch(e){
     console.log(e);
@@ -211,14 +215,6 @@ try{
 
 
 
-try{
-    admintest=await flights.updateFlight( )
-    console.log(admintest)
-} catch(e){
-    console.log(e)
-}
-await connection.closeConnection();
-console.log('done!!!')
 }
 
 main();

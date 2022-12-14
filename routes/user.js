@@ -48,7 +48,6 @@ router.route("/userProfile").get(async (req, res) => {
       router.route("/userProfile/editdetails").post(async (req, res) => {
         let email1=req.session.user.email;
         var sol=await userd.getUserByEmail(email1)
-        console.log(sol)
         const id=sol._id
         const newfirstname = req.body.firstnameInput
         const newlastname = req.body.lastnameInput

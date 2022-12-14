@@ -18,6 +18,21 @@ const createClass = async (
 //classCapacity=await helper.checkifproperclasscapacity(classCapacity)
 //price=await helper.checkifproperprice(price)
 //foodchoices=await helper.checkifproperfoodchoices(foodchoices)
+if(!fid)
+throw `no id is given`;
+if(typeof(fid)!=="string")
+throw `type of id is not a string`;
+if(fid.trim().length===0)
+throw 'id cannot be empty or all white spaces';
+fid=fid.trim();
+if(!ObjectId.isValid(fid))
+throw `id is not valid`;
+fid=fid.trim()
+
+classType=await helper.checkifproperclasstype(classType)
+classCapacity=await helper.checkifproperclasscapacity(classCapacity)
+price=await helper.checkifproperprice(price)
+foodchoices=await helper.checkifproperfoodchoices(foodchoices)
 
 
   const classId=ObjectId();
@@ -163,15 +178,44 @@ return newflight
 async function getFoodChoiceFromClass(flightId, classType)
 {
   //classType=await helper.checkifproperclasstype(classType)
+  if(!flightId)
+  throw `no id is given`;
+  if(typeof(flightId)!=="string")
+  throw `type of id is not a string`;
+  if(flightId.trim().length===0)
+  throw 'id cannot be empty or all white spaces';
+  flightId=flightId.trim();
+  if(!ObjectId.isValid(flightId))
+  throw `id is not valid`;
+  flightId=flightId.trim()
+
+ classType=await helper.checkifproperclasstype(classType)
+
   const flightCollection = await flights();
   let getFlightClass = await flightCollection.findOne({_id : ObjectId(flightId)},{projection:{_id: 0, flightClass : {$elemMatch: {classType : classType}}}});
   //console.log(getFlightClass);
   return getFlightClass.flightClass[0].foodchoices;
 }
 
-async function updateClassCapacity(flightId, classType, noOfPass)
+async function updateClassCapacity(flightId, classType, noOfPass) // check for number of passengers ----ATPK
 {
-  
+  if(!flightId)
+  throw `no id is given`;
+  if(typeof(flightId)!=="string")
+  throw `type of id is not a string`;
+  if(flightId.trim().length===0)
+  throw 'id cannot be empty or all white spaces';
+  flightId=flightId.trim();
+  if(!ObjectId.isValid(flightId))
+  throw `id is not valid`;
+  flightId=flightId.trim()
+
+
+classType=await helper.checkifproperclasstype(classType)
+
+
+
+
   const flightCollection = await flights();
   let getFlightClass = await flightCollection.findOne({_id : ObjectId(flightId)},{projection:{_id: 0, flightClass : {$elemMatch: {classType : classType}}}});
   let updateFlightClassCapacity = parseInt(getFlightClass.flightClass[0].classCapacity) - parseInt(noOfPass);
@@ -182,6 +226,23 @@ async function updateClassCapacity(flightId, classType, noOfPass)
 
 async function getFlightClassPrice(flightId, classType)
 {
+  if(!flightId)
+  throw `no id is given`;
+  if(typeof(flightId)!=="string")
+  throw `type of id is not a string`;
+  if(flightId.trim().length===0)
+  throw 'id cannot be empty or all white spaces';
+  flightId=flightId.trim();
+  if(!ObjectId.isValid(flightId))
+  throw `id is not valid`;
+  flightId=flightId.trim()
+
+
+classType=await helper.checkifproperclasstype(classType)
+
+
+
+
   const flightCollection = await flights();
   let getFlightClass = await flightCollection.findOne({_id : ObjectId(flightId)},{projection:{_id: 0, flightClass : {$elemMatch: {classType : classType}}}});
   let flightClassPrice = parseInt(getFlightClass.flightClass[0].price);

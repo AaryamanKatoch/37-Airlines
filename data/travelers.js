@@ -1,3 +1,6 @@
+//No error handling done --- ATPK
+
+
 const mongoCollections = require('../config/mongoCollections');
 //const mongoCollections = require('../../../config/mongoCollections');
 const {ObjectId} = require('mongodb');

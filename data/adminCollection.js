@@ -9,9 +9,10 @@ const classes=require('./class');
 const bcrypt = require("bcrypt");
 const saltRounds = 12;
 
+
 async function checkAdmin(email, password){
-    // username = await helpers.isValidUsername(username);
-    // password = await helpers.isValidPassword(password);
+    email = await helper.checkifproperemail(email);
+    password = await helper.checkisproperpassword(password);
     email = email.trim().toLowerCase();
     password = password.trim();
     let adminCollection = await admin();
@@ -29,7 +30,8 @@ async function checkAdmin(email, password){
     password,
   
   ) => {
-    
+    email = await helper.checkifproperemail(email);
+    password = await helper.checkisproperpassword(password);
     
     // username = await helpers.isValidUsername(username);
     // password = await helpers.isValidPassword(password);

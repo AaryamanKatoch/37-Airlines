@@ -1,3 +1,7 @@
+
+//// No error handling done -----ATPK
+
+
 const mongoCollections = require('../config/mongoCollections');
 //const mongoCollections = require('../../../config/mongoCollections');
 const {ObjectId} = require('mongodb');
@@ -14,6 +18,9 @@ review,
 rating
 
 ) => {
+
+
+
   //error checking
   //validation for username left
   username=await helper.checkifproperemail(username)

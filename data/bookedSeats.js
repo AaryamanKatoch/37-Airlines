@@ -15,8 +15,29 @@ const createBookedSeats = async (
   travelerId,
   classtype
 ) => {
-  
- 
+  if(!flightId)
+  throw `no id is given`;
+  if(typeof(flightId)!=="string")
+  throw `type of flight id is not a string`;
+  if(flightId.trim().length===0)
+  throw 'id cannot be empty or all white spaces';
+  flightId=flightId.trim();
+  if(!ObjectId.isValid(flightId))
+  throw `id is not valid`;
+  flightId=flightId.trim()
+
+  if(!travelerId)
+  throw `no id is given`;
+  if(typeof(travelerId)!=="string")
+  throw `type of traveler id is not a string`;
+  if(travelerId.trim().length===0)
+  throw 'id cannot be empty or all white spaces';
+  travelerId=travelerId.trim();
+  if(!ObjectId.isValid(travelerId))
+  throw `id is not valid`;
+  travelerId=travelerId.trim()
+
+ classtype=await helper.checkifproperclasstype(classtype)
   //classtype=helper.checkifproperclasstype(classtype)
   const bookedId=ObjectId();
   const flightCollection= await flights()
