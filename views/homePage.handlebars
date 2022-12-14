@@ -9,6 +9,7 @@
     {{/if}}
     <form method="post" name="searchFlightsForm" action="/searchflights">
     <table>
+        <tbody>
         <tr>
             <td><label for="depart_airport">Departure Airport</label></td>
             <td><input type="text" name="depart_airport" id="depart_airport" placeholder="Newark" required></td>
@@ -49,7 +50,7 @@
         <tr>
             <td><button type="submit" name="submit" value="Submit">Submit</button></td>
         </tr>
-        
+        </tbody>
     </table>
     </form>
 </main>

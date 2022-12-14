@@ -21,7 +21,8 @@
   <dt>Flight Duration</dt>
   <dd>{{flightDetails.duration}}</dd>
 </dl>
-<table class="invoice">
+<table class="table table-striped">
+    <thead>
     <tr>
         <th>Sr No.</th>
         <th>First Name</th>
@@ -34,6 +35,8 @@
         <th>Booked Class</th>
         <th>Food Choice</th>
     </tr>
+    </thead>
+    <tbody>
     {{#each travelers}}
     <tr>
         <td>{{@index}}</td>
@@ -48,9 +51,11 @@
         <td>{{this.food}}</td>
     </tr>
     {{/each}}
+
     <tr>
         <td>Total Price : {{totalPrice}}</td>
     </tr>
+    </tbody>
 </table>
 
 <div><a href="/searchflights/flightdetails/:id/book/success">Download ticket</a></div>

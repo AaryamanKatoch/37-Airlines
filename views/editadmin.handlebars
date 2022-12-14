@@ -11,33 +11,33 @@
     </section>
 <section>
     <form id="adminformid" method="post" name="editflightdetails" action="/admin/editflight/{{solution1._id}}">
+   
+    <label for="flightcodeInput" class="form-label">Flight Code</label>
+    <input id="flightcodeInput" class="form-control" name="flightcodeInput"  placeholder="Flight Code" value="{{solution1.flightCode}}">
 
-    <label for="flightcodeInput">Flight Code</label>
-    <input id="flightcodeInput" name="flightcodeInput"  placeholder="Flight Code" value="{{solution1.flightCode}}">
-
-    <label for="departureInput">Departure City</label>
-    <input id="departureInput" name="departureInput"  placeholder="Departure City" value="{{solution1.departure}}">
+    <label for="departureInput" class="form-label">Departure City</label>
+    <input id="departureInput" class="form-control" name="departureInput"  placeholder="Departure City" value="{{solution1.departure}}">
     
-    <label for="arrivalInput">Arrival City</label>
-    <input id="arrivalInput" name="arrivalInput"  placeholder="Arrival City" value="{{solution1.arrival}}">
+    <label for="arrivalInput" class="form-label">Arrival City</label>
+    <input id="arrivalInput" class="form-control" name="arrivalInput"  placeholder="Arrival City" value="{{solution1.arrival}}">
 
-    <label for="departureDateInput">Departure Date</label>
-    <input id="departureDateInput" name="departureDateInput"  placeholder="departureDateInput" value="{{solution1.departureDate}}">
+    <label for="departureDateInput" class="form-label">Departure Date</label>
+    <input id="departureDateInput"  class="form-control" name="departureDateInput"  placeholder="departureDateInput" value="{{solution1.departureDate}}">
       
-    <label for="departimeInput">Departure Time</label>
-    <input id="departimeInput" name="departimeInput"  placeholder="Departure Time" value="{{solution1.departureTime}}">
+    <label for="departimeInput" class="form-label">Departure Time</label>
+    <input id="departimeInput" class="form-control" name="departimeInput"  placeholder="Departure Time" value="{{solution1.departureTime}}">
 
-    <label for="arrivalDateInput">Arrival Date</label>
-    <input id="arrivalDateInput" name="arrivalDateInput"  placeholder="arrivalDateInput" value="{{solution1.arrivalDate}}">
+    <label for="arrivalDateInput" class="form-label">Arrival Date</label>
+    <input id="arrivalDateInput" class="form-control" name="arrivalDateInput"  placeholder="arrivalDateInput" value="{{solution1.arrivalDate}}">
       
-    <label for="arrTimeInput">Arrival Time</label>
-    <input id="arrTimeInput" name="arrTimeInput"  placeholder="Arrival Time" value="{{solution1.arrivalTime}}">
+    <label for="arrTimeInput" class="form-label">Arrival Time</label>
+    <input id="arrTimeInput"  class="form-control" name="arrTimeInput"  placeholder="Arrival Time" value="{{solution1.arrivalTime}}">
       
-    <label for="durationInput">Duration</label>
-    <input id="durationInput" name="durationInput"  placeholder="Duration" value="{{solution1.duration}}">
+    <label for="durationInput" class="form-label">Duration</label>
+    <input id="durationInput" class="form-control" name="durationInput"  placeholder="Duration" value="{{solution1.duration}}">
 
-    <label for="milesInput">Miles</label>
-    <input id="milesInput" name="milesInput"  placeholder="Miles" value="{{solution1.miles}}">
+    <label for="milesInput" class="form-label">Miles</label>
+    <input id="milesInput" class="form-control" name="milesInput"  placeholder="Miles" value="{{solution1.miles}}">
 
     <button type="submit">Submit</button>
 
