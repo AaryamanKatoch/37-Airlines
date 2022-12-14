@@ -32,11 +32,21 @@ async function main() {
     let traveller1 = undefined;
     let review1 = undefined;
     let review2 = undefined;
-    await db.dropDatabase();
+   await db.dropDatabase();
+
+
+
+   try {
+
+    let flight26 = await flights.createFlight("SDF43", "New", "California", "2022-12-10", "10:00", "2022-12-11", "11:00", "88", "20");
+    //console.log(flight1)
+} catch (e) {
+    console.log(e);
+}
 
     try {
 
-        flight1 = await flights.createFlight("MF090", "New York", "California", "2022-12-10", "10:00", "2022-12-11", "11:00", "1", "20");
+        flight1 = await flights.createFlight("MF090", "New York", "California", "2022-12-18", "10:00", "2022-12-19", "11:00", "1", "20");
         //console.log(flight1)
     } catch (e) {
         console.log(e);
@@ -44,7 +54,7 @@ async function main() {
 
     try {
 
-        flight2 = await flights.createFlight("MF080", "New York", "California", "2022-12-10", "10:00", "2022-12-11", "11:00", "1", "20");
+        flight2 = await flights.createFlight("MF080", "New York", "California", "2022-12-18", "10:00", "2022-12-19", "11:00", "1", "20");
         //console.log(flight1)
     } catch (e) {
         console.log(e);
@@ -52,7 +62,7 @@ async function main() {
 
     try {
 
-        flight3 = await flights.createFlight("MF070", "New York", "California", "2022-12-11", "12:00", "2022-12-12", "11:00", "1", "20");
+        flight3 = await flights.createFlight("MF070", "New York", "California", "2022-12-19", "12:00", "2022-12-20", "11:00", "1", "20");
         //console.log(flight1)
     } catch (e) {
         console.log(e);
@@ -60,7 +70,7 @@ async function main() {
 
     try {
 
-        flight6 = await flights.createFlight("MF060", "New York", "California", "2022-12-16", "12:00", "2022-12-17", "11:00", "1", "20");
+        flight6 = await flights.createFlight("MF060", "New York", "California", "2022-12-22", "12:00", "2022-12-23", "11:00", "1", "20");
         //console.log(flight1)
     } catch (e) {
         console.log(e);
@@ -69,7 +79,7 @@ async function main() {
 
     try {
 
-        flight4 = await flights.createFlight("SA091", "New Jersey", "Los Angeles", "2022-12-11", "17:00", "2022-12-12", "18:00", "1", "2001");
+        flight4 = await flights.createFlight("SA091", "New Jersey", "Los Angeles", "2022-12-19", "17:00", "2022-12-20", "18:00", "1", "2001");
         //console.log(flight2)
     } catch (e) {
         console.log(e);
@@ -124,16 +134,16 @@ try{
 }catch(e){
     console.log(e);
 }
-try{
 
-        bookedseat1 = await bookedSeats.createBookedSeats(flight1._id, 2, "travelerid1", class1.classType)
-        //console.log(flight3)
+
+    try {
+        user1 = await users.createUsers('test1', 'test2', 'admin123@stevens.edu', 'Admin@123', 'Admin@123');
     } catch (e) {
         console.log(e);
     }
 
     try {
-        user1 = await users.createUsers('test1', 'test2', 'admin123@stevens.edu', 'Admin@123', 'Admin@123');
+        user1 = await users.createUsers('test11', 'test12', 'test123@stevens.edu', 'Test@123', 'Test@123');
     } catch (e) {
         console.log(e);
     }
@@ -197,7 +207,7 @@ try{
 
 try{
 
-    adminData = await adminCollection.createAdmin("17j050@gmail.com","Parth028");
+    adminData = await adminCollection.createAdmin("abc@gmail.com","Qwerty123!");
     //console.log(flight3)
 }catch(e){
     console.log(e);
@@ -205,12 +215,6 @@ try{
 
 
 
-try{
-    admintest=await flights.updateFlight( )
-    console.log(admintest)
-} catch(e){
-    console.log(e)
 }
 
 main();
-}

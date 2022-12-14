@@ -8,6 +8,9 @@
     {{/if}}
     <h1>Reviews:-</h1><hr>
     <a href="/reviews/add">Add Review</a>
+    {{#if error}}
+    <h1>{{error}}</h1>
+    {{/if}}
     {{#each review}}
         <hr>
         <h2>{{review}}</h2>

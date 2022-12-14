@@ -19,16 +19,16 @@ const createFlight = async (
   miles
 ) => {
 
-  //flightCode=await helper.checkifproperflightcode(flightCode)
-  //departure=await helper.checkifproperdeparr(departure)
-  //arrival=await helper.checkifproperdeparr(arrival)
-  //departureTime=await helper.checkifproperarrdepttime(departureTime)
-  //arrivalTime=await helper.checkifproperarrdepttime(arrivalTime)
-  //duration=await helper.checkifproperduration(duration)
-  //miles=miles.trim()
-  //await helper.checkifpropermiles(miles)
-  arrival = await helper.checkifproperdeparr(arrival);
-  departure = await helper.checkifproperdeparr(departure);
+  flightCode=await helper.checkifproperflightcode(flightCode)
+  departure=await helper.checkifproperdeparr(departure)
+  arrival=await helper.checkifproperdeparr(arrival)
+  departureDate=await helper.checkifproperDate(departureDate)
+  departureTime=await helper.checkifproperarrdepttime(departureTime)
+  arrivalDate=await helper.checkifproperDate(arrivalDate)
+  arrivalTime=await helper.checkifproperarrdepttime(arrivalTime)
+  duration=await helper.checkifproperduration(duration)
+  await helper.checkifpropermiles(miles)
+  miles=miles.trim()
 
   const flightcollection = await flights();
   let flight1 = {
@@ -117,15 +117,35 @@ const updateFlight = async (
   flightCode,
   departure,
   arrival,
+  departureDate,
   departureTime,
+  arrivalDate,
   arrivalTime,
   duration,
-  miles,
-  date
+  miles
   
 ) => {
 
+  if(!id)
+  throw `no id is given`;
+  if(typeof(id)!=="string")
+  throw `type of id is not a string`;
+  if(id.trim().length===0)
+  throw 'id cannot be empty or all white spaces';
+  id=id.trim();
+  if(!ObjectId.isValid(id))
+  throw `id is not valid`;
 
+  flightCode=await helper.checkifproperflightcode(flightCode)
+  departure=await helper.checkifproperdeparr(departure)
+  arrival=await helper.checkifproperdeparr(arrival)
+  departureDate=await helper.checkifproperDate(departureDate)
+  departureTime=await helper.checkifproperarrdepttime(departureTime)
+  arrivalDate=await helper.checkifproperDate(arrivalDate)
+  arrivalTime=await helper.checkifproperarrdepttime(arrivalTime)
+  duration=await helper.checkifproperduration(duration)
+  await helper.checkifpropermiles(miles)
+  miles=miles.trim()
   //flightCode=await helper.checkifproperflightcode(flightCode)
   //departure=await helper.checkifproperdeparr(departure)
   //arrival=await helper.checkifproperdeparr(arrival)
@@ -143,11 +163,12 @@ const updateFlight = async (
     flightCode:flightCode,
     departure:departure,
     arrival:arrival,
+    departureDate:departureDate,
     departureTime:departureTime,
+    arrivalDate:arrivalDate,
     arrivalTime:arrivalTime,
     duration:duration,
-    miles:miles,
-    date:date,
+    miles:miles
   }
   const updatedInfo = await flightCollection.updateOne({_id: ObjectId(id)},
   {$set: updatedflight}
@@ -163,7 +184,7 @@ return await getFlightById(id);
 /*  function for searching flights from passed departure , arrival , date , number of passengers and
  flight class details   */
 
-const searchFlightsResult = async (
+const searchFlightsResult = async ( // no of pass check once ------- atpk
   departure,
   arrival,
   date,
@@ -176,14 +197,14 @@ const searchFlightsResult = async (
   // if(!departure) throw 'No departure passed!';
   // if(!arrival) throw 'No arrival passed!';
   // if(!date) throw 'No date passed';
-  // if(!NoOfPass) throw 'No passengers passed!';
+  if(!NoOfPass) throw 'No passengers passed!';
   // if(!f_class) throw 'No flight class passed!';
 
-  helper.checkifinputexists(departure);
-  helper.checkifinputexists(arrival);
-  helper.checkifinputexists(date);
-  helper.checkifinputexists(NoOfPass);
-  helper.checkifinputexists(f_class);
+  departure=await helper.checkifproperdeparr(departure)
+  arrival=await helper.checkifproperdeparr(arrival)
+  date=await helper.checkifproperDate(date)
+  f_class=await helper.checkifproperclasstype(f_class)
+  
 
   // if(departure.trim().length==0) throw 'departure can not be empty string';
   // if(arrival.trim().length==0) throw 'arrival can not be empty string';
@@ -261,7 +282,7 @@ async function getallflightdetailsforflightdetailspage(id,fclass){
  if(fclass.trim().length===0)
  throw 'flight class cannot be empty or all white spaces';
  fclass=fclass.trim();
- 
+ fclass=await helper.checkifproperclasstype(fclass)
 
 
   const flightCollection=await flights()

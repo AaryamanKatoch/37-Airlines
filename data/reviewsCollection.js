@@ -1,6 +1,9 @@
+
+//// No error handling done -----ATPK
+
+
 const mongoCollections = require('../config/mongoCollections');
 //const mongoCollections = require('../../../config/mongoCollections');
-
 const {ObjectId} = require('mongodb');
 const helper =require('../helpers');
 const { checkifemptystring, checkifinputexists, checkifstring, checkifproperstudio, checkifproperdirector, checkifpropertitle, checkispropergenre, checkifvalidrating, checkispropercastmemeber, checkisproperdate, checkisproperruntime} = require('../helpers');
@@ -9,15 +12,18 @@ const flightData = require('../data/flights.js');
 const userData=require('../data/usersCollection.js');
 const bookingData=require('../data/bookingCollection.js');
 
-
 const createReview = async (
 username,
 review,
 rating
 
 ) => {
+
+
+
   //error checking
   //validation for username left
+  username=await helper.checkifproperemail(username)
   review=await helper.checkifproperreview(review)
   rating=await helper.checkifproperrating(rating)
 
@@ -30,36 +36,46 @@ rating
     throw 'can not find the user!!!!';
   }
 
+  let data=await userData.getUserByEmail('test123@stevens.edu');
+  if(!data.bookingHistory){
+    throw 'you are not allowed to add review...';
+  }
+  if(data.bookingHistory.length === 0){
+    throw 'you are not allowed to add review';
+  }
+  let bul= await check_if_user_can_add_review(data.bookingHistory);
+  
+  if(bul==true){
+    //console.log('got true')
 
+    let review1 = {
+      userName:username,
+      userId:userinfo._id.toString(), 
+      review:review,
+      rating:rating
+    }
+  
+    const insertInfo = await reviewcollection.insertOne(review1);
+        if (!insertInfo.acknowledged || !insertInfo.insertedId)
+          throw 'Could not add review';
+    
+    const newId = insertInfo.insertedId.toString();
+    return newId;
 
-  let review1 = {
-    userName:username,
-    userId:userinfo._id.toString(), 
-    review:review,
-    rating:rating
+  }else{
+    throw 'you are not allowed to add review...'
   }
 
-  const insertInfo = await reviewcollection.insertOne(review1);
-      if (!insertInfo.acknowledged || !insertInfo.insertedId)
-        throw 'Could not add review';
-  
-  const newId = insertInfo.insertedId.toString();
-  
 //   const review2 = await getReviewById(newId);
-     
 //   review2._id=review2._id.toString()
-
 //   const flightCollection= await flights()
 //   try{
 //       const updatedInfo= await flightCollection.updateOne({ _id: ObjectId(flightId) }, { $push: { reviews: review2 } });
 //   if (updatedInfo.modifiedCount === 0) 
-  
 //   throw "could not add class";
 //   }catch(e){throw "flight not found"}
 //   const flight1 = await flightData.getFlightById(flightId);
 //  return flight
-
-  return newId;
 };
 
 const getAllReviews = async () => {    
@@ -177,36 +193,48 @@ return await getReviewById(reviewId)
 
 };
 
-// async function main(){
-//   try{
-//     let year    = now.getFullYear();
-//     let month   = now.getMonth()+1; 
-//     let day     = now.getDate();
-//     let hour    = now.getHours();
-//     let minute  = now.getMinutes();
-//     let bul=false;
-//     const curr_date=year+'-'+month+'-'+day;
-//     const curr_time=hour+':'+minute;
-//     console.log('*****'+curr_date+curr_time+'*****');
-//     let data=await userData.getUserByEmail('rpatel16@stevens.edu');
-//     if(!data.bookingHistory){
-//       throw 'you are not allowed to add review...';
-//     }
-//     if(data.bookingHistory == null){
-//       throw 'you are not allowed to add review';
-//     }
-//     let bookings=data.bookingHistory;
-//     bookings.forEach(async element => {
-//       let temp_book=await bookingData.getBookingById(element);
-//       let temp_flight_data=await flightData.getFlightById(temp_book.flightId);
-//       console.log(temp_flight_data);
-//     });
-//   }catch(e){
-//     console.log(e);
-//   }
-// }
-
-// main();
+async function check_if_user_can_add_review(bookings){
+  var now = new Date();
+  let year    = now.getFullYear();
+  let month   = now.getMonth()+1; 
+  let day     = now.getDate();
+  let hour    = now.getHours();
+  hour=await helper.addDigitIfNeeded(hour.toString());
+  let minute  = now.getMinutes();
+  minute=await helper.addDigitIfNeeded(minute.toString());
+  let curr_date=year+'-'+month+'-'+day;
+  let curr_time=hour+':'+minute;
+  for (let i = 0; i < bookings.length; i++){
+    let temp_book=await bookingData.getBookingById(bookings[i]);
+    let temp_flight_data=await flightData.getFlightById(temp_book.flightId);
+    let arr_date=temp_flight_data.arrivalDate;
+    let arr_time=temp_flight_data.arrivalTime;
+    //console.log('curr date*****',curr_date,'*****');
+    //console.log('*****',curr_time,'*****')
+    //console.log("arrr date*****",arr_date,'*****');
+    //console.log("*****",arr_time,'*****');
+    const curr_date_obj=new Date(curr_date);
+    const arrr_date_obj=new Date(arr_date);
+    //console.log(curr_date_obj)
+    //console.log(arrr_date_obj)
+    if(curr_date_obj > arrr_date_obj){
+      //console.log('curr > arr')
+      return true;
+    }else if(curr_date_obj.toDateString() === arrr_date_obj.toDateString()){
+      //console.log('curr = arr')
+      if(curr_time > arr_time){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    else{
+      //console.log('curr < arr')
+      return false;
+    }
+  }
+}
 
 module.exports = {
   createReview,

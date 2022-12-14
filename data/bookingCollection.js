@@ -12,28 +12,7 @@ const createBooking = async (
  flightId,
  userId
 ) => {
-  // if(!flightId)
-  // throw `no id is given`;
-  // if(typeof(flightId)!=="string")
-  // throw `type of id is not a string`;
-  // if(flightId.trim().length===0)
-  // throw 'id cannot be empty or all white spaces';
-  // flightId=flightId.trim();
-  // if(!ObjectId.isValid(flightId))
-  // throw `id is not valid`;
-  // flightId=flightId.trim()
 
-
-  // if(!userId)
-  // throw `no id is given`;
-  // if(typeof(userId)!=="string")
-  // throw `type of id is not a string`;
-  // if(userId.trim().length===0)
-  // throw 'id cannot be empty or all white spaces';
-  // userId=userId.trim();
-  // if(!ObjectId.isValid(userId))
-  // throw `id is not valid`;
-  // userId=userId.trim()
 
 
 

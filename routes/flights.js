@@ -98,8 +98,11 @@ res.render('flightdetails', { solution1: sol,title: "Flight Found" ,isLoggedIn :
 
 router.route("/searchflights/flightdetails/:id/book").get(async(req,res)=>{
   try {
+    
     let flightId = req.params.id;
+    
     let flightClass = req.session.info.class;
+    
     let NoOfPass = req.session.info.noOfPass;
     
     if(!flightId) throw 'Flight Id is not provided.';
@@ -110,7 +113,9 @@ router.route("/searchflights/flightdetails/:id/book").get(async(req,res)=>{
     let isLoggedIn;
     if(req.session.user) isLoggedIn = true;
     else isLoggedIn = false;
+    
     let food = await classes.getFoodChoiceFromClass(flightId,flightClass);
+    
     // console.log(food);
     // req.session.previousURL = {previousURL:`/searchflights/flightdetails/${flightId}/book`};
     res.render('bookflight', {title : "Book Flight", noOfPass : NoOfPass, choice : food, flightId : flightId, flightClass : flightClass, isLoggedIn : isLoggedIn});

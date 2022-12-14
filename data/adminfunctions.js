@@ -10,6 +10,4 @@ async function getadminflightlist(){
     return flightList
 }
 
-
-
 module.exports={getadminflightlist}

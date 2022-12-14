@@ -1,3 +1,7 @@
+// No error handling done --- ATPK
+
+
+
 const fs = require("fs");
 const PDFDocument = require("pdfkit");
 
