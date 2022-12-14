@@ -84,8 +84,9 @@ async function checkifproperdeparr(vari){
 //right
 async function checkifproperDate(date){
     if(!date) throw 'No date passed';
+    
+    if(typeof date !=='string') throw 'date must be valid string';
     if(date.trim().length==0) throw 'date can not be empty string';
-    if(!typeof date=='string') throw 'date must be valid string';
     const re_for_specialcharacter=/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
     date=date.trim();
     var c_year = new Date().getFullYear();  
@@ -380,7 +381,7 @@ async function checkifpropergender(vari){
     vari=vari.trim()
     vari=vari.toLowerCase()
 
-    if(vari!=="Male" && vari!=="Female" && vari!=="Other")
+    if(vari!=="male" && vari!=="female" && vari!=="Other")
     throw 'kindly select from: male,female,other'
 
 return vari

@@ -5,11 +5,11 @@
 <a href="/login">Login</a>
 {{/if}}
 
-<form action="/searchflights/flightdetails/{{flightId}}/book/success" method="POST" name = "formName" id="form">
+<form action="/searchflights/flightdetails/{{flightId}}/book/success" method="POST" name = "formName" id="formName">
 {{#for noOfPass choice}}
     <div>
         <label for="firstname{{this.noOfForms}}" class="labelclass">Firstname</label>
-        <input type="text" name="firstname{{this.noOfForms}}" placeholder="Enter Firstname" id = "firstname{{this.noOfForms}}" value = "">
+        <input type="text" name="firstname{{this.noOfForms}}" placeholder="Enter Firstname" id = "firstname{{this.noOfForms}}">
     </div>
     <div>
         <label for="lastname{{this.noOfForms}}" class="labelclass">Lastname</label>
@@ -50,3 +50,11 @@
 {{/for}}
 <button type="submit" id="sub">Book</button>    
 </form>
+<div class="hidden" id="error-container">
+  <div class="text-goes-here">
+  </div>
+  <script>
+   
+    sessionStorage.setItem('noOfPass',{{noOfPass}});
+    </script>
+  <script src="/public/js/bookflight.js"></script>
