@@ -32,6 +32,7 @@ async function main() {
     let traveller1 = undefined;
     let review1 = undefined;
     let review2 = undefined;
+    /*
    await db.dropDatabase();
 
 
@@ -137,13 +138,13 @@ try{
 
 
     try {
-        user1 = await users.createUsers('test1', 'test2', 'admin123@stevens.edu', 'Admin@123', 'Admin@123');
+        user1 = await users.createUsers('test', 'test', 'admin123@stevens.edu', 'Admin@123', 'Admin@123');
     } catch (e) {
         console.log(e);
     }
 
     try {
-        user1 = await users.createUsers('test11', 'test12', 'test123@stevens.edu', 'Test@123', 'Test@123');
+        user1 = await users.createUsers('test', 'test', 'test123@stevens.edu', 'Test@123', 'Test@123');
     } catch (e) {
         console.log(e);
     }
@@ -202,8 +203,14 @@ try{
 }catch(e){
     console.log(e);
 }
+*/
+try{
 
-
+    adminData = await flights.getallflightdetailsforflightdetailspage("639a00cae633c3e1f81b834b","economy");
+    console.log(adminData)
+}catch(e){
+    console.log(e);
+}
 
 }
 

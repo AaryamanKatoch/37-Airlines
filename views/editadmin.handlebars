@@ -4,6 +4,11 @@
 {{else}}
 <a href="/adminlogin">Login</a>
 {{/if}}
+
+ {{#if haserror}}
+<div >Error : {{error}}</div>
+{{/if}}
+    </section>
 <section>
     <form id="adminformid" method="post" name="editflightdetails" action="/admin/editflight/{{solution1._id}}">
 
@@ -42,4 +47,9 @@
   <div class="text-goes-here">
   </div>
     <script src="/public/js/homepage.js"></script>
-    </section>
+
+
+
+
+
+ 

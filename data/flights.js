@@ -81,6 +81,7 @@ const getFlightById = async (flightId) => {
   if(!ObjectId.isValid(flightId))
   throw `id is not valid`;
  const flightCollection =await flights();
+
  const flightbyid= await flightCollection.findOne({_id:ObjectId(flightId)});
  if(flightbyid===null) 
  throw `no flight found with that id`;
@@ -218,11 +219,6 @@ const searchFlightsResult = async (
   // if(isNaN(NoOfPass)) throw 'Number of passengers must be valid Number';
   // NoOfPass=Number(NoOfPass);
 
-  f_class=await helper.checkifproperclasstype(f_class);
-  departure=await helper.checkifproperdeparr(departure);
-  arrival=await helper.checkifproperdeparr(arrival);
-  date=await helper.checkifproperDate(date);
-  NoOfPass=await helper.checkifproperNoOfPass(NoOfPass);
   
   //error cheking done
 
@@ -246,6 +242,7 @@ const searchFlightsResult = async (
   if(flightsList==null){
     return flightsList;
   }
+ 
   let f_flightList=[];
   flightsList.forEach(element => {
     let add_flag=false;
@@ -265,6 +262,7 @@ const searchFlightsResult = async (
 }
 
 async function getallflightdetailsforflightdetailspage(id,fclass){
+  
   if(!id)
   throw `no id is given`;
   if(typeof(id)!=="string")
@@ -282,13 +280,14 @@ async function getallflightdetailsforflightdetailspage(id,fclass){
  if(fclass.trim().length===0)
  throw 'flight class cannot be empty or all white spaces';
  fclass=fclass.trim();
- fclass=await helper.checkifproperclasstype
-
+ fclass=await helper.checkifproperclasstype(fclass)
+ let resclass={}
 
   const flightCollection=await flights()
   flightdetails=await getFlightById(id)
+
   const allflights = await flightCollection.find({}).toArray();
-  let resclass={}
+  
 
   for(i=0;i<allflights.length;i++){
     curflight=allflights[i]
@@ -300,7 +299,7 @@ async function getallflightdetailsforflightdetailspage(id,fclass){
       }
     }
   }}
-  
+
   let myflight={
   flightCode:flightdetails.flightCode,
   departure:flightdetails.departure,
@@ -311,6 +310,7 @@ async function getallflightdetailsforflightdetailspage(id,fclass){
   miles:flightdetails.miles,
   flightClass:resclass
 }
+
 
 return myflight
 }

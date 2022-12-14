@@ -1,5 +1,12 @@
 <section>
 <h1>User Details</h1>
+
+
+{{#if haserror}}
+<div >Error : {{error}}</div>
+{{/if}}
+
+
 <ul>
 <li>Firstname :{{solution1.firstName}}</li>
 <li>Lastname  :{{solution1.lastName}}</li>
@@ -26,4 +33,7 @@
 {{/each}}
 </ul>  
 <a href="/userProfile/editdetails"> Edit Profile</a> 
+<br>
+<br>
+<a href="/"> Homepage</a> 
 </section>

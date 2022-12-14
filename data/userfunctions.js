@@ -11,6 +11,7 @@ const { bookings } = require('.');
 
 
 async function getuserinfoforuserprofile(useremail){
+    
 useremail=await helper.checkifproperemail(useremail)
 
 resobj={}

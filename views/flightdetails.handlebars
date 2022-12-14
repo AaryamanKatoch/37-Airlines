@@ -7,11 +7,14 @@
 <a href="/login">Login</a>
 {{/if}}
 
+{{#if haserror}}
+<div >Error : {{error}}</div>
+{{/if}}
 <h1>{{title}}</h1>
 
 <dl>
 
-  <dt>Flight Code</dt>
+  <dt>Flight Code: </dt>
   <dd>{{{solution1.flightCode}}}</dd>
   <dt>Departure City</dt>
   <dd>{{solution1.departure}}</dd>

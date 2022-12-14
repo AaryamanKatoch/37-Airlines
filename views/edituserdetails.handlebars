@@ -1,4 +1,10 @@
 <section>
+
+  {{#if haserror}}
+<div >Error : {{error}}</div>
+{{/if}}
+
+
       <form id="userformid" method="post" name="edituserdetails" action="/userProfile/editdetails">
 
       <label for="firstnameInput">First Name</label>

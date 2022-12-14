@@ -67,33 +67,42 @@ router.route("/searchflights/flightdetails/:id").get(async (req, res) => {
   // let fid=req.params.id;
   // let f_class=req.params.class;
   // let NoOfPass=req.params.NoOfPass;
-
+  let err;
+  let haserror=false;
   let fid=req.params.id;
+  
   let f_class=req.session.info.class;
   let NoOfPass=req.session.info.noOfPass;
-  
+  let isLoggedIn;
+  try{
   if(!fid) {
-    res.status(400).render("error",{class:"error", title: "Error ",error: "No flight id is given." })
+    throw "no flight id is given"
   }
   if(typeof(fid)!=="string")
-  {res.status(400).render("error",{class:"error", title:"Error",error: "Flight Id is not a string" });return} 
+  {throw "Flight Id is not a string" } 
   fid=fid.trim()
   if(fid.length===0)
-  {res.status(400).render("error",{class:"error",title:"Error", error: "No Flight Id is given or is all white spaces" });return}
+  {throw "No Flight Id is given or is all white spaces"}
 
   fid=fid.trim()
-try{
+
   var sol=await flightsData.getallflightdetailsforflightdetailspage(fid,f_class)
   
   sol["id1"]=fid
   sol["f_class"]=f_class
   sol["NoOfPass"]=NoOfPass
-} catch(e){;res.status(404).render("error",{class:"error",title:"Error", error: "No Flight found with that id"});return}
-let isLoggedIn;
+
+  
+
   if(req.session.user) isLoggedIn = true;
   else isLoggedIn = false;
-  // req.session.previousURL = {previousURL:`/searchflights/flightdetails/${fid}`};
-res.render('flightdetails', { solution1: sol,title: "Flight Found" ,isLoggedIn : isLoggedIn});
+  return res.status(200).render('flightdetails', { solution1: sol,title: "Flight Found" ,isLoggedIn : isLoggedIn, haserror:haserror, error:err});
+
+} catch(e){err=e;haserror=true;
+  return res.status(400).render('flightdetails', { solution1: sol,title: "Flight Found" ,isLoggedIn : isLoggedIn, haserror:haserror, error:err});
+}
+  
+    res.status(500).render('flightdetails', { solution1: sol,title: "Flight Found" ,isLoggedIn : isLoggedIn, haserror:haserror, error:err});
 });
 
 router.route("/searchflights/flightdetails/:id/book").get(async(req,res)=>{
