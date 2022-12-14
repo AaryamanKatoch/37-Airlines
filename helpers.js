@@ -376,7 +376,7 @@ async function checkifpropergender(vari){
 return vari
 }
 
-
+//right
 async function checkifproperemail(vari){
     if(!vari)
     throw "No email provided";
@@ -436,9 +436,15 @@ async function checkifproperphonenumber(vari){
 
 }
 
+//right
+async function addDigitIfNeeded(n){
+    return n > 9 ? "" + n: "0" + n;
+}
+
+
 module.exports = {
     checkifproperflightcode,checkifemptystring,checkifinputexists,checkifproperdeparr,checkifproperarrdepttime,checkifproperduration,
     checkifpropermiles,checkifproperclasstype, checkifproperclasscapacity,checkifproperprice,checkifproperfoodchoices,checkifproperreview,
     checkifproperrating, checkifproperflname,checkifproperpassport, checkifpropergender, checkifproperemail, checkifproperphonenumber,
-    checkifproperDate,checkifproperNoOfPass,checkifstring,checkifarray,checkisproperpassword,checkifproperprice
+    checkifproperDate,checkifproperNoOfPass,checkifstring,checkifarray,checkisproperpassword,checkifproperprice,addDigitIfNeeded
 }
