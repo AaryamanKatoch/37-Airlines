@@ -148,17 +148,7 @@ try{
         console.log(e);
     }
 
-    try {
-        review1 = await review.createReview('admin123@stevens.edu', 'good one', 5)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-        review2 = await review.createReview('admin123@stevens.edu', 'bad one', 1)
-    } catch (e) {
-        console.log(e);
-    }
+ 
 
     // try{
 

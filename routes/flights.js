@@ -39,8 +39,9 @@ router.route("/searchflights").post(async (req, res) => {
       NoOfPass=Number(NoOfPass);
 
       //error handling done
-
+      
       let result=await flightsData.searchFlightsResult(departure,arrival,date,NoOfPass,f_class);
+      
       if(result.length==0){
         res.status(400).render('error',{error:'No result found for this properties' ,title:'No result Found'}, );
       }

@@ -184,7 +184,7 @@ return await getFlightById(id);
 /*  function for searching flights from passed departure , arrival , date , number of passengers and
  flight class details   */
 
-const searchFlightsResult = async ( // no of pass check once ------- atpk
+const searchFlightsResult = async ( 
   departure,
   arrival,
   date,
@@ -282,7 +282,7 @@ async function getallflightdetailsforflightdetailspage(id,fclass){
  if(fclass.trim().length===0)
  throw 'flight class cannot be empty or all white spaces';
  fclass=fclass.trim();
- fclass=await helper.checkifproperclasstype(fclass)
+ fclass=await helper.checkifproperclasstype
 
 
   const flightCollection=await flights()

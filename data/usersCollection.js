@@ -1,6 +1,3 @@
-// No error handling done ---ATPK
-
-
 
 const mongoCollections = require('../config/mongoCollections');
 //const mongoCollections = require('../../../config/mongoCollections');
@@ -22,7 +19,11 @@ const createUsers = async (
   confirmPassword, 
 
 ) => {
-  
+  firstName=await helper.checkifproperflname(firstName)
+  lastName=await helper.checkifproperflname(lastName)
+  email=await helper.checkifproperemail(email)
+  password=await helper.checkisproperpassword(password)
+  confirmPassword=await helper.checkisproperpassword(confirmPassword)
   //const usercollection = await users();
   // let user1 = {
   //   firstName:firstName,
@@ -132,6 +133,8 @@ if (updatedInfo.modifiedCount === 0) {
 async function checkUser(email, password){
   // username = await helpers.isValidUsername(username);
   // password = await helpers.isValidPassword(password);
+  email=await helper.checkifproperemail(email)
+  password=await helper.checkisproperpassword(password)
   email = email.trim().toLowerCase();
   password = password.trim();
   let userCollection = await users();
@@ -145,6 +148,7 @@ async function checkUser(email, password){
 };
 
 async function getUserByEmail(email){
+  email=await helper.checkifproperemail(email)
   email = email.trim().toLowerCase();
   let userCollection = await users();
   let userData = await userCollection.findOne({email : email});
@@ -155,6 +159,26 @@ async function getUserByEmail(email){
 }
 
 async function updateBookingHistory(userId,bookingId){
+  if(!userId)
+  throw `no id is given`;
+  if(typeof(userId)!=="string")
+  throw `type of id is not a string`;
+  if(userId.trim().length===0)
+  throw 'id cannot be empty or all white spaces';
+  userId=userId.trim();
+  if(!ObjectId.isValid(userId))
+  throw `id is not valid`;
+
+  if(!bookingId)
+  throw `no id is given`;
+  if(typeof(bookingId)!=="string")
+  throw `type of id is not a string`;
+  if(bookingId.trim().length===0)
+  throw 'id cannot be empty or all white spaces';
+  bookingId=bookingId.trim();
+  if(!ObjectId.isValid(bookingId))
+  throw `id is not valid`;
+
   const userCollection = await users();
   // const getUserDetails = await userCollection.getUserById(userId);
   let updateHistory = await userCollection.updateOne({_id : ObjectId(userId)},{$push : {bookingHistory : bookingId}});

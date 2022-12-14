@@ -1,5 +1,5 @@
 
-//// No error handling done -----ATPK 
+
 
 
 const mongoCollections = require('../config/mongoCollections');
@@ -128,6 +128,10 @@ const removeReview = async (reviewId) => {if(!reviewId)
 
   return (`has been successfully deleted! `);};
 
+
+
+
+ // error handling not done for review and rating ------ @ridham 
 const updateReview = async (
     reviewId,
     userId,
