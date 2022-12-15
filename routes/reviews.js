@@ -21,7 +21,7 @@ router.route("/reviews").get(async (req,res)=>{
         };
         let reviews=await reviewsData.getAllReviews();
         if(reviews.length==0){
-            res.status(400).render('reviews',{review : reviews,title:'Reviews','isLoggedIn':isLoggedIn});
+            res.render('reviews',{review : reviews,title:'Reviews','isLoggedIn':isLoggedIn});
         }else{
             res.render('reviews',{review : reviews,title:'Reviews','isLoggedIn':isLoggedIn});
         }
