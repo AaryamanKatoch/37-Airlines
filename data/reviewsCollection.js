@@ -1,5 +1,5 @@
 
-//// No error handling done -----ATPK
+
 
 
 const mongoCollections = require('../config/mongoCollections');
@@ -135,6 +135,17 @@ const removeReview = async (reviewId) => {
 //   review,
 //   rating
 // ) => {
+
+
+
+ // error handling not done for review and rating ------ @ridham 
+const updateReview = async (
+    reviewId,
+    userId,
+    flightId,
+    review,
+    rating
+) => {
 
 //     //error checking
 //     username=await helper.checkifproperemail(username)

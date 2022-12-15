@@ -14,38 +14,52 @@ const userd=require("../data/usersCollection")
 
 router.route("/userProfile").get(async (req, res) => {
     // need to add session coonditions
+    let haserror=false;
+    let error;
+    if(!req.session.user)
+    return res.redirect("/login")
     let email= req.session.user.email
     try{
       var sol=await userData.getuserinfoforuserprofile(email)
-      
-    } catch(e){res.status(404).render("error",{class:"error",title:"Error", error: "N/A"});return}
-    
-    res.render('userprofile', { solution1: sol,title: "User Details" });
+      return res.status(200).render('userprofile', { solution1: sol,title: "User Details",haserror:haserror,error:error });
+    } catch(e){haserror=true;error=e;
+      return res.status(400).render('userprofile', { solution1: sol,title: "User Details" ,haserror:haserror,error:error});}
+      res.status(500).render('userprofile', { solution1: sol,title: "User Details",haserror:haserror,error:error });
     });
 
 
 
     router.route("/userProfile/editdetails").get(async (req, res) => {
         //code here for GET
+        if(!req.session.user)
+        return res.redirect("/login")
+        let haserror=false;
+        let error;
+
         let email=req.session.user.email;
+        try{
         if(!email) {
-          res.status(400).render("error",{class:"error", title: "Error ",error: "No logged in user" })
+          throw "No logged in user"
         }
+
         if(typeof(email)!=="string")
-        {res.status(400).render("error",{class:"error", title:"Error",error: "user email is not a string" });return} 
+        {throw "user email is not a string" }
         email=email.trim()
         if(email.length===0)
-        {email.status(400).render("error",{class:"error",title:"Error", error: "No user email is given or is all white spaces" });return}
-      
-      try{
+        {throw "No user email is given or is all white spaces" }
         var sol=await userData.getuserinfoforuserprofile(email)
-      } catch(e){;res.status(404).render("error",{class:"error",title:"Error", error: "No user found with that email"});return}
+       return res.status(200).render('edituserdetails', { solution1: sol,title: "Edit User",haserror:haserror,error:error});
+      } catch(e){haserror=true;error=e;
+        return res.status(400).render('edituserdetails', { solution1: sol,title: "Edit User",haserror:haserror,error:error});}
       
-      res.render('edituserdetails', { solution1: sol,title: "Edit User" });
+      res.status(500).render('edituserdetails', { solution1: sol,title: "Edit User",haserror:haserror,error:error});
       });
 
 
       router.route("/userProfile/editdetails").post(async (req, res) => {
+        if(!req.session.user)
+        return res.redirect("/login")
+        
         let email1=req.session.user.email;
         var sol=await userd.getUserByEmail(email1)
         const id=sol._id
@@ -62,6 +76,7 @@ router.route("/userProfile").get(async (req, res) => {
      
       res.redirect("/userprofile")
    }catch(e){//console.log(e)
+    res.redirect("/userprofile")
    }
        });
 

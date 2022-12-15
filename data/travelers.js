@@ -1,4 +1,3 @@
-//No error handling done --- ATPK
 
 
 const mongoCollections = require('../config/mongoCollections');
@@ -27,13 +26,27 @@ const createTraveler = async (
   bookedClass,
   food
 ) => {
+  if(!bookingId)
+  throw `no id is given`;
+  if(typeof(bookingId)!=="string")
+  throw `type of id is not a string`;
+  if(bookingId.trim().length===0)
+  throw 'id cannot be empty or all white spaces';
+  bookingId=bookingId.trim();
+  if(!ObjectId.isValid(bookingId))
+  throw `id is not valid`;
+
+  firstName=await helper.checkifproperflname(firstName)
+  lastName=await helper.checkifproperflname(lastName)
+  passportNumber=await helper.checkifproperpassport(passportNumber)
+  dateOfBirth=await helper.checkifproperDate(dateOfBirth)
+  gender=await helper.checkifpropergender(gender)
+  email=await helper.checkifproperemail(email)
+  phoneNumber=await helper.checkifproperphonenumber(phoneNumber)
+  bookedClass=await helper.checkifproperclasstype(bookedClass)
+  //food left
   
 
-
-
-
-
- 
   
   const travelerId=ObjectId();
   const bookingCollection= await bookings()
@@ -62,7 +75,7 @@ const createTraveler = async (
   if (updatedInfo.modifiedCount === 0) 
     throw "could not add traveller";
   }catch(e){throw "booking not found"}
-const booking1 = bookingData.getBookingById(bookingId)
+const booking1 = await bookingData.getBookingById(bookingId)
 return booking1
 }
 

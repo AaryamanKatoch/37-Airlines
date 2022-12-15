@@ -1,14 +1,21 @@
 <main>
-    {{#if isLoggedIn}}
-{{!-- <div><a href="/userProfile">User Profile</a></div> --}}
-<div><a href="/adminlogout">Logout</a></div>
-{{else}}
-<a href="/adminlogin">Login</a>
-{{/if}}
-<h1>All Available Flights</h1>
+    <div style="text-align: right;">
+        {{#if isLoggedIn}}
+        {{!-- <div><a href="/userProfile">User Profile</a></div> --}}
+        <div><a href="/adminlogout">Logout</a></div>
+        {{else}}
+        <a href="/adminlogin">Login</a>
+        {{/if}}
+        
+        {{#if haserror}}
+        <div>Error : {{error}}</div>
+        {{/if}}
+    </div>
+
+<h2>All Available Flights</h2>
 
 
-    <table>
+    <table class ="table table-striped">
         <thead>
             <tr>
                 <th>Flight Code</th>
@@ -26,7 +33,7 @@
                 <td>{{arrival}}</td>
                 <td>{{departure}}</td>
                 <td><a href="/admin/editflight/{{_id}}">Update</a></td>
-                <td>Delete</td>
+                <td><a href="/admin/deleteflight/{{_id}}">Delete</a></td>
             </tr>
 
             {{/each}}
@@ -69,5 +76,5 @@
         {{/each}}
     </ul> --}}
 
-    <a href="admin/addflight">Add Flight</a>
+    <button><a href="admin/addflight">Add Flight</a></button>
 </main>

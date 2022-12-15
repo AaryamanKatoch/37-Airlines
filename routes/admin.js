@@ -16,14 +16,24 @@ const flightData = require('../data/flights.js');
 
 
 router.route("/admin").get(async (req, res) => {
+  let haserror=false;
+  let isLoggedIn;
+  let error;
   try{
     var sol=await adminData.getadminflightlist()
     
-  } catch(e){res.status(404).render("error",{class:"error",title:"Error", error: "No Flights available"});return}
-  let isLoggedIn;
+
+ 
     if(req.session.admin) isLoggedIn = true;
     else isLoggedIn = false;
-  res.render('adminhomepage', { solution1: sol,title: "Flights Available", isLoggedIn : isLoggedIn });
+
+    return res.status(200).render('adminhomepage', { solution1: sol,title: "Flights Available", isLoggedIn : isLoggedIn,haserror:haserror,error:error });
+  }catch(e){
+    haserror=true;
+    error=e; 
+    return res.status(400).render('adminhomepage', { solution1: sol,title: "Flights Available", isLoggedIn : isLoggedIn,haserror:haserror,error:error });
+  }
+  res.status(500).render('adminhomepage', { solution1: sol,title: "Flights Available", isLoggedIn : isLoggedIn,haserror:haserror,error:error });
   });
 
 router.route("/admin/addflight")
@@ -53,22 +63,28 @@ router.route("/admin/addflight")
 router.route("/admin/editflight/:id").get(async (req, res) => {
     //code here for GET
     let fid=req.params.id;
+    let isLoggedIn;
+    let error;
+    let haserror=false;
+    try{
     if(!fid) {
-      res.status(400).render("error",{class:"error", title: "Error ",error: "No flight id is given." })
+      throw "No flight id is given." 
     }
     if(typeof(fid)!=="string")
-    {res.status(400).render("error",{class:"error", title:"Error",error: "Flight Id is not a string" });return} 
+    {throw "Flight Id is not a string" } 
     fid=fid.trim()
     if(fid.length===0)
-    {res.status(400).render("error",{class:"error",title:"Error", error: "No Flight Id is given or is all white spaces" });return}
+    {throw "No Flight Id is given or is all white spaces" }
   req.params.id=req.params.id.trim()
-  try{
     var sol=await flights.getFlightById(fid)
-  } catch(e){;res.status(404).render("error",{class:"error",title:"Error", error: "No Flight found with that id"});return}
-  let isLoggedIn;
     if(req.session.admin) isLoggedIn = true;
     else isLoggedIn = false;
-  res.render('editadmin', { solution1: sol,title: "Edit Flight" , isLoggedIn : isLoggedIn});
+    return res.status(200).render('editadmin', { solution1: sol,title: "Edit Flight" , isLoggedIn : isLoggedIn,haserror:haserror,error:error});
+  }catch(e){error=e;
+    haserror=true
+  return res.status(400).render('editadmin', { solution1: sol,title: "Edit Flight" , isLoggedIn : isLoggedIn,haserror:haserror,error:error});
+ }
+  res.status(500).render('editadmin', { solution1: sol,title: "Edit Flight" , isLoggedIn : isLoggedIn,haserror:haserror,error:error});
   });
 
 
@@ -87,15 +103,32 @@ router.route("/admin/editflight/:id").get(async (req, res) => {
  
    try{
    const newflight = await flightData.updateFlight(fid,newflightcode,newdeparture,newarrival,newdepartureDate,newdeparturetime,newarrivalDate,newarrivaltime,newduration,newmiles)
-   res.redirect("/admin")
-}catch(e){//console.log(e)
+   return res.redirect('/admin')
+   
+}catch(e){ 
+  return res.redirect('/admin')
 }
-    });
+});
 
 
+router.route("/admin/deleteflight/:id").get(async (req, res) => {
+  try {
+    let fid = req.params.id;
+    console.log(fid);
 
+    let isLoggedIn;
+    if(req.session.admin) isLoggedIn = true;
+    else isLoggedIn = false;
 
+    let flightDeleted = await flightData.removeFlight(fid);
+    //console.log(flightDeleted);
+    res.redirect('/admin');
+  } catch (error) {
+    console.log(error);
+    res.redirect('admin');
+  }
   
-  module.exports = router;
-  
-  
+});
+
+
+module.exports = router;

@@ -1,29 +1,66 @@
 <section>
 <h1>User Details</h1>
-<ul>
-<li>Firstname :{{solution1.firstName}}</li>
-<li>Lastname  :{{solution1.lastName}}</li>
-<li>email     :{{solution1.email}}</li>
+
+
+{{#if haserror}}
+<div >Error : {{error}}</div>
+{{/if}}
+
+
+<table class ="table table-striped">
+    <tbody>
+ <tr>
+<td>Firstname</td>
+<td>{{solution1.firstName}}</td>
+</tr>
+<tr>
+<td>Lastname</td> 
+<td>{{solution1.lastName}}</td>
+</tr>
+<tr><td>email</td>
+<td>{{solution1.email}}</td>
+</tbody>
+</table>
 <br>
 <h2>Booking History</h2>
+
+<table class ="table table-striped">
+    <thead>
+        <tr>
+            <th>Number of Travelers</th>
+            <th>Flight Code</th>
+            <th>Departure</th>
+            <th>Arrival</th>
+            <th>Departure Date</th>
+        </tr>
+    </thead>
+    
+
 {{#each solution1.bookings}}
-<section>
-<li>
- Number of Travellers : {{numbertravelers}}
- <br>
- Flight Code          : {{FlightCode}}
- <br>
- Departure            : {{Departure}}
- <br>
- Arrival              : {{Arrival}}
- <br>
- Departure Date       : {{DepartureDate}}
-</li>
-<br>
-<br>
-<br>
-</section>
+<tbody>
+    <tr>
+<td>
+ {{numbertravelers}}
+</td>
+<td>
+{{FlightCode}}
+</td>
+ <td>
+ {{Departure}}
+ </td>
+ <td>
+{{Arrival}}
+ </td>
+ <td>
+{{DepartureDate}}
+ </td>
+
+</tr>
 {{/each}}
-</ul>  
+</tbody>
+</table>
 <a href="/userProfile/editdetails"> Edit Profile</a> 
+<br>
+<br>
+<a href="/"> Homepage</a> 
 </section>

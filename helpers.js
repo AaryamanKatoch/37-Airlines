@@ -319,12 +319,12 @@ async function checkifproperflname(vari){
     throw "name cant be empty or all white spaces";
 
     vari=vari.trim()
-    vari=vari.toUpperCase()
+    vari=vari.toLowerCase()
     
     if(vari.length<2)
     throw 'both first and last names must be atleast two characters long'
 
-let regex1 = /^[a-z ,.'-]+$/i
+let regex1 = /^[a-z ']+$/i
 if(!regex1.test(vari))
 throw 'name can only have alphabets and some some special characters'
 return vari
@@ -370,7 +370,7 @@ async function checkifpropergender(vari){
     vari=vari.trim()
     vari=vari.toLowerCase()
 
-    if(vari!=="Male" && vari!=="Female" && vari!=="Other")
+    if(vari!=="male" && vari!=="female" && vari!=="Other")
     throw 'kindly select from: male,female,other'
 
 return vari

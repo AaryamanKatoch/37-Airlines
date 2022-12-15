@@ -1,18 +1,39 @@
-<h1>Register</h1>
+<h2>Register</h2>
 <form action="/register" method="post" id="registration-form">
-    <label for="firstName">Enter Firstname: </label>
-    <input type="text" name="firstName" placeholder="Enter firstname" id = "firstName">
-    <label for="lastName">Enter Lastname: </label>
-    <input type="text" name="lastName" placeholder="Enter lastname" id = "lastName">
-    <label for="email">Enter email: </label>
-    <input type="email" name="email" placeholder="Enter email" id = "email">
-    <label for="password">Enter password: </label>
-    <input type="password" name="password" placeholder="Enter password" id = "password">
-    <label for="password">Confirm password: </label>
-    <input type="password" name="confirmPassword" placeholder="Confirm password" id = "confirmPassword">         
-    <button type="submit" class="btn">Register</button>
+
+    <table>
+        <tr>
+            <td><label for="firstName" class="form-label">Firstname: </label></td>
+            <td><input type="text" class="form-control" name="firstName" placeholder="Enter firstname" id = "firstName"></td>
+        </tr>
+
+        <tr>
+            <td><label for="lastName" class="form-label">Lastname: </label></td>
+            <td><input type="text" class="form-control" name="lastName" placeholder="Enter lastname" id = "lastName"></td>
+        </tr>
+
+        <tr>
+            <td><label for="email" class="form-label">Email: </label></td>
+            <td><input type="email" class="form-control" name="email" placeholder="Enter email" id = "email"></td>
+        </tr>
+
+        <tr>
+            <td><label for="password" class="form-label">Password: </label></td>
+            <td><input type="password" class="form-control" name="password" placeholder="Enter password" id = "password"></td>
+        </tr>
+
+        <tr>
+            <td><label for="password" class="form-label">Confirm Password: </label></td>
+            <td><input type="password" class="form-control" name="confirmPassword" placeholder="Confirm password" id = "confirmPassword"></td>
+        </tr>
+
+        <tr>
+            <td><button type="submit" class="btn">Register</button></td>
+        </tr>
+    </table>
     {{#if hasErrors}}
         <p id="error">{{error}}</p>
     {{/if}}
 </form>
+
 <a href="/login">Already have an account? Click here to log-in</a>

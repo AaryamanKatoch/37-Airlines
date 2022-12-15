@@ -7,26 +7,61 @@
 <a href="/login">Login</a>
 {{/if}}
 
+{{#if haserror}}
+<div >Error : {{error}}</div>
+{{/if}}
 <h1>{{title}}</h1>
 
-<dl>
+<table class="table table-striped">
+  <tbody>
+  <tr>
+    <td>Flight Code</td>
+    <td>{{solution1.flightCode}}</td>
+  </tr>
 
-  <dt>Flight Code</dt>
-  <dd>{{{solution1.flightCode}}}</dd>
-  <dt>Departure City</dt>
-  <dd>{{solution1.departure}}</dd>
-  <dt>Arrival City</dt>
-  <dd>{{solution1.arrival}}</dd>
-  <dt>Departure Time</dt>
-  <dd>{{solution1.departureTime}}</dd>
-  <dt>Arrival Time</dt>
-  <dd>{{solution1.arrivalTime}}</dd>
-  <dt>Flight Duration</dt>
-  <dd>{{solution1.duration}}</dd>
-  <dt>Flight Miles</dt>
-  <dd>{{solution1.miles}}</dd>
-  <dt>Flight Class Selected</dt>
-  <p>{{solution1.flightClass.classType}} {{solution1.flightClass.price}}</p>
+    <tr>
+    <td>Departure City</td>
+    <td>{{solution1.departure}}</td>
+  </tr> 
 
+   <tr>
+    <td>Arrival City</td>
+    <td>{{solution1.arrival}}</td>
+  </tr>  
+  
+  <tr>
+    <td>Departure Time</td>
+    <td>{{solution1.departureTime}}</td>
+  </tr>  
+  
+  <tr>
+    <td>Arrival Time</td>
+    <td>{{solution1.arrivalTime}}</td>
+  </tr>
+
+  <tr>
+    <td>Flight Duration</td>
+    <td>{{solution1.duration}}</td>
+  </tr>
+
+  <tr>
+    <td>Flight Miles</td>
+    <td>{{solution1.miles}}</td>
+  </tr>
+
+
+  <tr>
+    <td>Flight Class Selected</td>
+    <td>{{solution1.flightClass.classType}}</td>
+  </tr>
+
+    <tr>
+    <td>Price</td>
+    <td>{{solution1.flightClass.price}}USD</td>
+  </tr>
+</tbody>
+</table>
+<br>
+<br>
    <a href="/searchflights/flightdetails/{{solution1.id1}}/book">click kere to book flight</a>
 </section>
