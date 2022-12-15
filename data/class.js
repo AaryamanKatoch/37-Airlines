@@ -193,7 +193,8 @@ async function getFoodChoiceFromClass(flightId, classType)
 
   const flightCollection = await flights();
   let getFlightClass = await flightCollection.findOne({_id : ObjectId(flightId)},{projection:{_id: 0, flightClass : {$elemMatch: {classType : classType}}}});
-  //console.log(getFlightClass);
+  // console.log(getFlightClass);
+  if(getFlightClass==null || getFlightClass.length == 0 || JSON.stringify(getFlightClass) === "{}") throw 'Cannot find the flight with that id and the given class type.';
   return getFlightClass.flightClass[0].foodchoices;
 }
 
@@ -218,9 +219,11 @@ noOfPass = await helper.checkifproperNoOfPass(noOfPass);
 
   const flightCollection = await flights();
   let getFlightClass = await flightCollection.findOne({_id : ObjectId(flightId)},{projection:{_id: 0, flightClass : {$elemMatch: {classType : classType}}}});
+  if(getFlightClass == null || getFlightClass.length == 0 || JSON.stringify(getFlightClass) === "{}") throw 'Cannot find the flight with that id and the given class type.';
   let updateFlightClassCapacity = parseInt(getFlightClass.flightClass[0].classCapacity) - parseInt(noOfPass);
   let updateFlightClass = await flightCollection.updateOne({_id : ObjectId(flightId), "flightClass.classType" : classType},{$set : {"flightClass.$.classCapacity" : updateFlightClassCapacity}});
  // console.log(updateFlightClass);
+ if(updateFlightClass.modifiedCount === 0) throw 'Cannot update the Class Capacity';
   return updateFlightClass;
 }
 
@@ -245,6 +248,7 @@ classType=await helper.checkifproperclasstype(classType)
 
   const flightCollection = await flights();
   let getFlightClass = await flightCollection.findOne({_id : ObjectId(flightId)},{projection:{_id: 0, flightClass : {$elemMatch: {classType : classType}}}});
+  if(getFlightClass == null || getFlightClass.length == 0 || JSON.stringify(getFlightClass) === "{}") throw 'Cannot find the flight with that id and the given class type.';
   let flightClassPrice = parseInt(getFlightClass.flightClass[0].price);
   return flightClassPrice;  
 }

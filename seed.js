@@ -32,8 +32,8 @@ async function main() {
     let traveller1 = undefined;
     let review1 = undefined;
     let review2 = undefined;
-    /*
-   await db.dropDatabase();
+    
+//    await db.dropDatabase();
 
 
 
@@ -203,14 +203,14 @@ try{
 }catch(e){
     console.log(e);
 }
-*/
-try{
 
-    adminData = await flights.getallflightdetailsforflightdetailspage("639a00cae633c3e1f81b834b","economy");
-    console.log(adminData)
-}catch(e){
-    console.log(e);
-}
+// try{
+
+//     adminData = await flights.getallflightdetailsforflightdetailspage("639a00cae633c3e1f81b834b","economy");
+//     console.log(adminData)
+// }catch(e){
+//     console.log(e);
+// }
 
 }
 

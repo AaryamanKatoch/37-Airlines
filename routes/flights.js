@@ -148,10 +148,8 @@ router.route("/searchflights/flightdetails/:id/book").get(async(req,res)=>{
     // req.session.previousURL = {previousURL:`/searchflights/flightdetails/${flightId}/book`};
     res.render('bookflight', {title : "Book Flight", noOfPass : NoOfPass, choice : food, flightId : flightId, flightClass : flightClass, isLoggedIn : isLoggedIn, hasError : false});
   } catch (e) {
-    if(req.session.user) isLoggedIn = true;
-    else isLoggedIn = false;
-    // food = await classes.getFoodChoiceFromClass(flightId,flightClass);
-    res.status(400).render('bookflight',{title : "Book Flight", noOfPass : NoOfPass, choice : food, flightId : flightId, flightClass : flightClass, isLoggedIn : isLoggedIn,hasError : true,error : e});
+    
+    res.status(400).render('error',{title : "Error",error : e});
   }
 
 });
