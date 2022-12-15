@@ -1,11 +1,29 @@
 <main>
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid well" id="home" style="display:block; padding-top:10px;padding-bottom:10px">
+            
+    <ul class="navbar-nav">
     {{#if isLoggedIn}}
-    <div><a href="/userProfile">User Profile</a></div>
-    <div><a href="/logout">Logout</a></div>
+   <li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
+        <a class="nav-link" href="/userProfile">User Profile</a>
+        </li>
+    <li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
+        <a class="nav-link" href="/logout">Logout</a>
+    </li>
     {{else}}
-    <a href="/login">Login</a>
+<li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
+        <a "nav-link" href="/login">Login</a>
+        </li>
     {{/if}}
-    <div><a href="/reviews">Reviews</ahref></a></div>
+
+    <li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
+        <a class="nav-link" href="/reviews">Reviews</ahref></a>
+        </li>
+
+    </ul>
+    </div>
+    </nav>
+
     <form method="post" name="searchFlightsForm" action="/searchflights">
     <table>
         <tbody>
@@ -52,4 +70,5 @@
         </tbody>
     </table>
     </form>
+    
 </main>

@@ -244,10 +244,10 @@ if(day>ListofDays[month-1]){
             
             staticForm.submit()
         } catch (e) {
-          console.log(e)
+            errorContainer.classList.remove('hidden');
           const message = typeof e === 'string' ? e : e.message;
           errorTextElement.textContent = message;
-        errorContainer.hidden=false;
+        
         }
     
       });
