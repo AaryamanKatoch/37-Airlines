@@ -237,6 +237,9 @@ try{
     console.log(e);
 }
 
+await connection.closeConnection();
+console.log('Done!');
+
 }
 
 main();
