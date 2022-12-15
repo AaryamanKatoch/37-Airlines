@@ -224,4 +224,5 @@ module.exports = {
   getReviewById,
   removeReview,
   //updateReview
+  check_if_user_can_add_review
 };

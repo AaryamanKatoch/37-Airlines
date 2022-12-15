@@ -6,6 +6,10 @@ const path = require('path');
 const helper =require('../helpers');
 const { Console } = require('console');
 const { type } = require('os');
+const flightData = require('../data/flights.js');
+const userData=require('../data/usersCollection.js');
+const bookingData=require('../data/bookingCollection.js');
+const alert=require('alert');
 
 //route for reviews main page
 
@@ -40,7 +44,28 @@ router.route('/reviews/add').get(async (req,res)=>{
         else{
             isLoggedIn = false
         };
-        res.render('addReview',{title:'Reviews','isLoggedIn':isLoggedIn});
+        let username=req.session.user.email;
+        username=await helper.checkifproperemail(username);
+        let userinfo=await userData.getUserByEmail(username);
+        if(!userinfo){
+            throw 'can not find the user!!!!';
+        }
+        let data=await userData.getUserByEmail(username);
+        if(!data.bookingHistory){
+            return alert('can not add review!');
+            //return res.json({'error':'can add review now!'})
+        }
+        else if(data.bookingHistory.length === 0){
+            return alert('can not add review!');
+            //return res.json({'error':'can add review now!'})
+        }
+        let bul= await reviewsData.check_if_user_can_add_review(data.bookingHistory);
+        if(bul==true){
+            res.render('addReview',{title:'Reviews','isLoggedIn':isLoggedIn});
+        }else{
+            res.json({'error':'can add review now!'})
+        }
+        //res.render('addReview',{title:'Reviews','isLoggedIn':isLoggedIn});
     }catch(e){
         res.status(400).render('error',{error:e ,title:'ridham error'});
     }
