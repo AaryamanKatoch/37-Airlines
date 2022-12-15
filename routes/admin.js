@@ -111,9 +111,24 @@ router.route("/admin/editflight/:id").get(async (req, res) => {
 });
 
 
+router.route("/admin/deleteflight/:id").get(async (req, res) => {
+  try {
+    let fid = req.params.id;
+    console.log(fid);
+
+    let isLoggedIn;
+    if(req.session.admin) isLoggedIn = true;
+    else isLoggedIn = false;
+
+    let flightDeleted = await flightData.removeFlight(fid);
+    //console.log(flightDeleted);
+    res.redirect('/admin');
+  } catch (error) {
+    console.log(error);
+    res.redirect('admin');
+  }
+  
+});
 
 
-  
-  module.exports = router;
-  
-  
+module.exports = router;

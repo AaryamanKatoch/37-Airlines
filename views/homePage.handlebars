@@ -1,12 +1,12 @@
-
-
 <main>
-    {{#if isLoggedIn}}
-    <div><a href="/userProfile">User Profile</a></div>
-    <div><a href="/logout">Logout</a></div>
-    {{else}}
-    <a href="/login">Login</a>
-    {{/if}}
+    <div style="text-align: right;">
+        {{#if isLoggedIn}}
+        <a href="/userProfile">User Profile</a> &nbsp;
+        <a href="/logout">Logout</a>
+        {{else}}
+        <a href="/login">Login</a>
+        {{/if}}
+    </div>
     <form method="post" name="searchFlightsForm" action="/searchflights">
     <table>
         <tbody>

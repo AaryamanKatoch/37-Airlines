@@ -92,17 +92,16 @@ const getFlightById = async (flightId) => {
  return flightbyid;
 };
 
-const removeFlight = async (flightId) => {if(!flightId)
-  throw `no id is given`;
-  if(typeof(flightId)!=="string")
-  throw `type of id is not a string`;
-  if(flightId.trim().length===0)
-  throw 'id cannot be empty or all white spaces';
-  flightId=flightId.trim();
-  if(!ObjectId.isValid(flightId))
-  throw `id is not valid`;
-  const flightCollection =await flights();
-  var deletename= await getFlightById(flightId);
+const removeFlight = async (flightId) => {
+  if(!flightId) throw `no id is given`;
+  if(typeof(flightId)!=="string") throw `type of id is not a string`;
+  if(flightId.trim().length===0) throw 'id cannot be empty or all white spaces';
+
+  flightId = flightId.trim();
+  if(!ObjectId.isValid(flightId)) throw `id is not valid`;
+
+  const flightCollection = await flights();
+  var deletename = await getFlightById(flightId);
   
   const deletedflight = await flightCollection.deleteOne({_id: ObjectId(flightId)});
 
@@ -113,6 +112,7 @@ const removeFlight = async (flightId) => {if(!flightId)
   return (`${deletename.flightId} has been successfully deleted! `);
 
 };
+
 const updateFlight = async (
   id,
   flightCode,
