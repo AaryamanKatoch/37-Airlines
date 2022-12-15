@@ -37,12 +37,17 @@ router.route("/searchflights").post(async (req, res) => {
       if(isNaN(NoOfPass)) throw 'Number of passengers must be valid Number';
       NoOfPass=Number(NoOfPass);
 
+      let isLoggedIn;
+      if(req.session.user) isLoggedIn = true;
+      else isLoggedIn = false;
+
       //error handling done
       
       let result=await flightsData.searchFlightsResult(departure,arrival,date,NoOfPass,f_class);
       
       if(result.length==0){
-        res.status(400).render('error',{error:'No result found for this properties' ,title:'No result Found'}, );
+        //res.status(400).render('error',{error:'No result found for this properties' ,title:'No result Found'}, );
+        res.render('searchFlights',{flights : result,title:'searchFlights', isLoggedIn: isLoggedIn,noflights:true});
       }
       else{
         await result.forEach(element => {
@@ -50,15 +55,11 @@ router.route("/searchflights").post(async (req, res) => {
           element['class']=f_class;
         });
         req.session.info = {class : f_class, noOfPass : NoOfPass};
-        
-        let isLoggedIn;
-        if(req.session.user) isLoggedIn = true;
-        else isLoggedIn = false;
         // req.session.previousURL = {previousURL:"/searchflights"};
-        res.render('searchFlights',{flights : result,title:'searchFlights','class':f_class,'NoOfPass':NoOfPass, isLoggedIn: isLoggedIn});
+        res.render('searchFlights',{flights : result,title:'searchFlights', isLoggedIn: isLoggedIn,noflights:false});
       } 
     }catch(e){
-      res.status(400).render('error',{error:e ,title:'ridham error'}, );
+      res.status(400).render('error',{error:e ,title:'error'}, );
     }
 });
 

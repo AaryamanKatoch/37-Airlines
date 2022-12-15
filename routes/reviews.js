@@ -52,22 +52,23 @@ router.route('/reviews/add').get(async (req,res)=>{
         }
         let data=await userData.getUserByEmail(username);
         if(!data.bookingHistory){
-            return alert('can not add review!');
+            return alert('You can not add review now!\n You must have completed atleast one flight');
             //return res.json({'error':'can add review now!'})
         }
         else if(data.bookingHistory.length === 0){
-            return alert('can not add review!');
+            return alert('You can not add review now!\n You must have completed atleast one flight');
             //return res.json({'error':'can add review now!'})
         }
         let bul= await reviewsData.check_if_user_can_add_review(data.bookingHistory);
         if(bul==true){
             res.render('addReview',{title:'Reviews','isLoggedIn':isLoggedIn});
         }else{
-            res.json({'error':'can add review now!'})
+            return alert('You can not add review now!\n You must have completed atleast one flight');
+            //res.json({'error':'can add review now!'})
         }
         //res.render('addReview',{title:'Reviews','isLoggedIn':isLoggedIn});
     }catch(e){
-        res.status(400).render('error',{error:e ,title:'ridham error'});
+        res.status(400).render('error',{error:e ,title:'Error'});
     }
 }).post(async function(req,res){
     try{
@@ -88,6 +89,7 @@ router.route('/reviews/add').get(async (req,res)=>{
             res.status(400).render('error',{error:'can not add review' ,title:'can not add review'}, );
         }
         res.redirect("/reviews");
+        //res.status(400).render('error',{error:'render from post review add' ,title:'ridham error'});
     }catch(e){
         res.status(400).render('error',{error:e ,title:'Error'});
     }
