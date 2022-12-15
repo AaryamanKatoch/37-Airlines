@@ -11,6 +11,7 @@ const emaildata=require('../data/email');
 const pdfCreate = require('../data/pdfCreation');
 const { travelers } = require('../data');
 const helper =require('../helpers');
+const xss = require('xss');
 
 //route for getting flights from passed parameters from form on the home page
 
@@ -18,13 +19,13 @@ router.route("/searchflights").post(async (req, res) => {
     try{
 
       //error cheking
-
+     
       let flightInfo=req.body;
-      let departure=flightInfo.depart_airport;
-      let arrival=flightInfo.arrival_airport;
-      let date=flightInfo.date;
-      let NoOfPass=flightInfo.passengers;
-      let f_class=flightInfo.class;
+      let departure=xss(flightInfo.depart_airport);
+      let arrival=xss(flightInfo.arrival_airport);
+      let date=xss(flightInfo.date);
+      let NoOfPass=xss(flightInfo.passengers);
+      let f_class=xss(flightInfo.class);
       if(!departure) throw 'No departure passed!';
       if(!arrival) throw 'No arrival passed!';
       if(!date) throw 'No date passed';
@@ -112,7 +113,7 @@ router.route("/searchflights/flightdetails/:id/book").get(async(req,res)=>{
     
     let flightClass = req.session.info.class;
     
-    let NoOfPass = req.session.info.noOfPass;
+    let NoOfPass =req.session.info.noOfPass;
     
     if(!flightId) throw 'Flight Id is not provided.';
     if(!flightClass) throw 'Flight Class is not provided.';
@@ -143,7 +144,7 @@ router.route("/searchflights/flightdetails/:id/book/success").post(async(req,res
   let arrayObj = [];
   for(let i = 0; i < keys.length; i++)
   {
-      let value = data[keys[i]];
+      let value = xss(data[keys[i]]);
       let key = keys[i].substring(0, keys[i].length - 1);
       let index = parseInt(keys[i][keys[i].length - 1]) - 1;
       arrayObj[index] = arrayObj[index] || {};
@@ -192,12 +193,13 @@ router.route("/searchflights/flightdetails/:id/book/success").post(async(req,res
 
 
 router.route("/searchflights/flightdetails/:id/book/success/emailconfirmation").get(async (req, res) => {
+  let eror;
 let bookid= req.session.bookingID.bookingID
 bookid=bookid.toString()
-console.log(bookid)
+
 try{
 await emaildata.myemail(bookid)
-}catch(e){console.log(e)}
+}catch(e){error=e}
 res.redirect('/')
 
 });
@@ -205,12 +207,12 @@ res.redirect('/')
 router.route("/searchflights/flightdetails/:id/book/success").get(async (req, res) => {
   
   try{
-    let bookingId = req.session.bookingID.bookingID;
+    let bookingId =req.session.bookingID.bookingID;
     bookingId = bookingId.toString();
     let getBooking = await bookingCollection.getBookingById(bookingId);
     let flightDetails = await flightsData.getFlightById(getBooking.flightId);
     let travelersDetails = getBooking.travelers;
-    let NoOfPass = req.session.info.noOfPass;
+    let NoOfPass =req.session.info.noOfPass;
     // let flightId = req.params.id;
     let classType = req.session.info.class;
     let flightClassPrice = await classes.getFlightClassPrice(getBooking.flightId,classType);

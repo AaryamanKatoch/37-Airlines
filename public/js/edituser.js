@@ -68,7 +68,7 @@
             console.log(e)
             const message = typeof e === 'string' ? e : e.message;
             errorTextElement.textContent = message;
-          errorContainer.hidden=false;
+            errorContainer.classList.remove('hidden');
           }
       
         });
