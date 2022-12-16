@@ -1,13 +1,13 @@
 <body>
-    <form method="post" name="addFlightForm" action="/admin/addflight">
+    <form method="post" name="addFlightForm" id="addFlightForm" action="/admin/addflight" >
     <table>
         <tr>
             <td><label for="flight_code">Flight Code</label></td>
-            <td><input type="text" name="flight_code" id="flight_code" placeholder="AB-000" required></td>
+            <td><input type="text" name="flight_code" id="flight_code" placeholder="AB000" required></td>
         </tr>
 
         <tr>
-            <td><label for="departure">Departure Airport</label></td>
+            <td><label for="departure">Departure Airport &nbsp;</label></td>
             <td><input type="text" name="departure" id="departure" placeholder="Newark" required></td>
         </tr>
         
@@ -43,7 +43,7 @@
 
         <tr>
             <td><label for="miles">Miles</label></td>
-            <td><input type="number" name="miles" id="miles" required></td>
+            <td><input type="number" name="miles" id="miles" min="0"></td>
         </tr>
 
         <tr><td>&nbsp;</td></tr>
@@ -77,18 +77,12 @@
     </table>
     </form>
 
-    <script>
-        function fnChecked(){
-            var checkbox = document.getElementById("ec");
-            var seats = document.getElementById("ec_seats");
+    <div class="hidden" id="error-container">
+        <div class="text-goes-here">
+        </div>
+    </div>
 
-            if (checkbox.checked == true) {
-                seats.style.display = "block";
-            } else {
-                seats.style.display = "none";
-            }
-        }
-    </script>
+    <script src="/public/js/createflight.js"></script>
 </body>
 
 

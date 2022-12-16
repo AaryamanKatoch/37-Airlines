@@ -28,8 +28,8 @@
     <table>
         <tbody>
         <tr>
-            <td><label for="depart_airport">Departure Airport</label></td>
-            <td><input type="text" name="depart_airport" id="depart_airport" placeholder="Newark" required></td>
+            <td><label for="depart_airport">Departure Airport &nbsp;</label></td>
+            <td><input type="text" name="depart_airport" id="depart_airport" placeholder="Newark"></td>
         </tr>
         
         <tr>
@@ -65,10 +65,16 @@
         <tr><td>&nbsp;</td></tr>
 
         <tr>
-            <td><button type="submit" name="submit" value="Submit">Submit</button></td>
+            <td><button type="submit">Submit</button></td>
         </tr>
         </tbody>
     </table>
     </form>
-    
+
+    <div class="hidden" id="error-container">
+        <div class="text-goes-here">
+        </div>
+    </div>
+
+    <script src="/public/js/homepage1.js"></script>
 </main>
