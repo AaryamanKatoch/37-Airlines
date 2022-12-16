@@ -13,62 +13,63 @@ dateToday = year + '-' + month + '-' + day;
 document.getElementById("date").setAttribute("min", dateToday);
 
 
-(function($){
-    $("#searchFlightsForm").submit(function(event){
-        event.preventDefault();
-        let depart_airport = $("#depart_airport").val();
-        let arrival_airport = $("#arrival_airport").val();
-        let date = $("#date").val();
-        let passengers = $("#passengers").val();
-        let class_ = $("#class").val();
+(function(){
+    const staticForm = document.getElementById('searchFlightsForm');
+    if(staticForm){
+        const depart_airport1 = document.getElementById('depart_airport');
+        const arrival_airport1 = document.getElementById('arrival_airport');
+        const date1 = document.getElementById('date');
+        const passengers1 = document.getElementById('passengers');
+        const class1 = document.getElementById('class');
 
-        let errorContainer = $("#error-container");
-        let errorText = $(".text-goes-here");
+        const errorContainer = document.getElementById('error-container');
+        const errorTextElement = errorContainer.getElementsByClassName(
+        'text-goes-here'
+        )[0];
 
-        try {
-            errorContainer.addClass("hidden");
+        staticForm.addEventListener('submit', (event) => {
+            event.preventDefault();
 
-            if(!depart_airport || !arrival_airport || !passengers || !date || !class_)
-            throw "Please provide all details";
+            try {
+                errorContainer.classList.add('hidden');
 
-            if(typeof(depart_airport)!=='string')
-            throw 'Departure Airport is not a string';
+                let depart_airport = depart_airport1.value;
+                let arrival_airport = arrival_airport1.value;
+                let passengers = passengers1.value;
+                let class_ = class1.value;
+                let date = date1.value;
 
-            if(depart_airport.trim().length===0)
-            throw "Departure Airport should not be empty or all white spaces";
-        
-            depart_airport = depart_airport.trim() 
-            if(depart_airport.length < 2)
-            throw 'Departure Airport should atleast be 2 characters long';
+                if(!depart_airport || !arrival_airport || !passengers || !date || !class_)
+                throw "Please provide all details";
 
-            if(typeof(arrival_airport)!=='string')
-            throw 'Arrival Airport is not a string';
+                if(! typeof(depart_airport) === "string") 
+                throw 'Departure Airport is not a string';
+            
+                depart_airport = depart_airport.trim() ;
+                if(depart_airport.length < 2)
+                throw 'Departure Airport should atleast be 2 characters long';
 
-            if(arrival_airport.trim().length===0)
-            throw "Arrival Airport should not be empty or all white spaces";
-        
-            arrival_airport = arrival_airport.trim() 
-            if(arrival_airport.length < 2)
-            throw 'Arrival Airport should atleast be 2 characters long';
+                if(!(/^[A-Za-z\s]*$/.test(depart_airport)))
+                throw 'Departure Airport can only have alphabets';
 
-            errorContainer.hide();
+                if(! typeof(arrival_airport) === "string")
+                throw 'Arrival Airport is not a string';
+            
+                arrival_airport = arrival_airport.trim();
+                if(arrival_airport.length < 2)
+                throw 'Arrival Airport should atleast be 2 characters long';
 
-            $.ajax({
-                url:'/searchflights',
-                method:'POST',
-                contentType:'application/json',
-                data:JSON.stringify({depart_airport:depart_airport, arrival_airport:arrival_airport, date:date, passengers:passengers, class:class_}),
-                success: function(){
-                    console.log("Connected");
-                    window.location = '/searchflights';
-                },
-            });
+                if(!(/^[A-Za-z\s]*$/.test(arrival_airport)))
+                throw 'Arrival Airport can only have alphabets';
+                
+                staticForm.submit();
 
-        } catch (error) {
-            const message = typeof error === 'string' ? error : error.message;
-            errorText.text(message);
-            errorContainer.removeClass('hidden');
-        }
+            } catch (error) {
+                const message = typeof error === 'string' ? error : error.message;
+                errorTextElement.textContent = message;
+                errorContainer.classList.remove('hidden');
+            }
 
-    })
-})(window.jQuery);
+        })
+    }
+})();
