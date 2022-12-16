@@ -24,12 +24,12 @@
     </div>
     </nav>
 
-    <form method="post" name="searchFlightsForm" action="/searchflights">
+    <form method="post" name="searchFlightsForm" action="/searchflights" id="searchFlightsForm">
     <table>
         <tbody>
         <tr>
             <td><label for="depart_airport">Departure Airport &nbsp;</label></td>
-            <td><input type="text" name="depart_airport" id="depart_airport" placeholder="Newark"></td>
+            <td><input type="text" name="depart_airport" id="depart_airport" placeholder="Newark" required></td>
         </tr>
         
         <tr>
@@ -48,6 +48,8 @@
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
                 </select>
             </td>
         </tr>
