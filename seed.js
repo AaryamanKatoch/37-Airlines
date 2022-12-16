@@ -86,13 +86,7 @@ async function main() {
     } catch (e) {
         console.log(e);
     }
-    try {
-
-        flight5 = await flights.createFlight("SA092", "Seattle", "Washinton", "2022-12-15", "18:00", "2022-12-15", "20:00", "2", "21");
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e);
-    }
+   
 
     try {
 
