@@ -32,7 +32,7 @@
              throw "name cant be empty or all white spaces";
 
              vari=vari.trim()
-             vari=vari.toUpperCase()
+             vari=vari.toLowerCase()
     
              if(vari.length<2)
              throw 'first name must be atleast two characters long'
@@ -54,7 +54,7 @@
              throw "name cant be empty or all white spaces";
 
              vari1=vari1.trim()
-             vari1=vari1.toUpperCase()
+             vari1=vari1.toLowerCase()
     
              if(vari1.length<2)
              throw 'last name must be atleast two characters long'
@@ -65,7 +65,7 @@
               
               staticForm.submit()
           } catch (e) {
-            console.log(e)
+          
             const message = typeof e === 'string' ? e : e.message;
             errorTextElement.textContent = message;
             errorContainer.classList.remove('hidden');

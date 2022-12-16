@@ -75,7 +75,7 @@ let transporter = nodemailer.createTransport({
 let  mailoptions ={
     from :'aaryamantpkatoch@gmail.com',
     to: email,
-    subject : "Email Confirmation",
+    subject : "Email Confirmation Test - CS546B_Group 37",
     text:`Hi , your ticket has been confirmed for ${fcode} departing on ${date} ${time} from ${depart}`
 };
 
