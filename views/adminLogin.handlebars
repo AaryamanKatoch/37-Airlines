@@ -1,5 +1,5 @@
 <section>
-  <h1>Admin Login</h1>
+  <h2>Admin Login</h2>
     <form action="/adminlogin" method="post" id="login-form">
     <table>
       <tr>
@@ -12,10 +12,11 @@
         <td><input type="password" name="password" class="form-control" placeholder="Enter password" id = "password"></td>
       </tr>
 
-      <tr>
-        <td><button type="submit" class="btn">Login</button></td>
-      </tr>
+ 
+        
+     
     </table>
+    <button type="submit" class="btn">Login</button>
          
       {{#if hasErrors}}
           <p>{{error}}</p>

@@ -242,7 +242,7 @@ router.route("/searchflights/flightdetails/:id/book/success").post(async(req,res
     // console.log(getBookings.travelers);
     // req.session.previousURL = {previousURL:`/searchflights/flightdetails/${flightId}/book/success`};
     req.session.bookingID = {bookingID : bookingData._id};
-    res.render('success',{isLoggedIn: isLoggedIn, travelers : getBookings.travelers, sr : getBookings.travelers.length, totalPrice : totalPrice, flightDetails : flightDetails});
+    res.render('success',{isLoggedIn: isLoggedIn, travelers : getBookings.travelers, sr : getBookings.travelers.length, totalPrice : totalPrice, flightDetails : flightDetails, title:"Success"});
     
   } catch (e) {
     res.status(400).render('error',{title : "Error",error : e});
