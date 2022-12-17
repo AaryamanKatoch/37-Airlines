@@ -77,7 +77,7 @@ async function checkifproperdeparr(vari){
     throw "minimum length of arrival and departure cities  should be two"
 
     if(vari.length>30)
-    throw "maximum length of arrival and departure cities should be 6 "
+    throw "maximum length of arrival and departure cities should be 30 "
 
     return vari
 }
@@ -118,10 +118,6 @@ async function checkifproperDate(date){
         throw 'invalid Date';
     }
 
-
-    // if(year<1900 || year> (c_year+2) ){
-    //     throw 'invalid Date';
-    // }
     if(month<0 || month>12){
         throw 'invalid Date';
     }
