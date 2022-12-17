@@ -4,9 +4,16 @@ const data = require('../data');
 const reviewsData = data.reviews;
 const path = require('path');
 const helper =require('../helpers');
+const { Console } = require('console');
+const { type } = require('os');
+const flightData = require('../data/flights.js');
+const userData=require('../data/usersCollection.js');
+const bookingData=require('../data/bookingCollection.js');
+const alert=require('alert');
 
 //route for reviews main page
 
+//Done
 router.route("/reviews").get(async (req,res)=>{
     try{
         let isLoggedIn;
@@ -18,7 +25,7 @@ router.route("/reviews").get(async (req,res)=>{
         };
         let reviews=await reviewsData.getAllReviews();
         if(reviews.length==0){
-            res.status(400).render('error',{error:'No reviews found' ,title:'No rviews Found'}, );
+            res.render('reviews',{review : reviews,title:'Reviews','isLoggedIn':isLoggedIn});
         }else{
             res.render('reviews',{review : reviews,title:'Reviews','isLoggedIn':isLoggedIn});
         }
@@ -27,6 +34,7 @@ router.route("/reviews").get(async (req,res)=>{
     }
 })
 
+//Done
 router.route('/reviews/add').get(async (req,res)=>{
     try{
         let isLoggedIn;
@@ -36,30 +44,54 @@ router.route('/reviews/add').get(async (req,res)=>{
         else{
             isLoggedIn = false
         };
-        res.render('addReview',{title:'Reviews','isLoggedIn':isLoggedIn});
+        let username=req.session.user.email;
+        username=await helper.checkifproperemail(username);
+        let userinfo=await userData.getUserByEmail(username);
+        if(!userinfo){
+            throw 'can not find the user!!!!';
+        }
+        let data=await userData.getUserByEmail(username);
+        if(!data.bookingHistory){
+            return alert('can not add review!');
+            //return res.json({'error':'can add review now!'})
+        }
+        else if(data.bookingHistory.length === 0){
+            return alert('can not add review!');
+            //return res.json({'error':'can add review now!'})
+        }
+        let bul= await reviewsData.check_if_user_can_add_review(data.bookingHistory);
+        if(bul==true){
+            res.render('addReview',{title:'Reviews','isLoggedIn':isLoggedIn});
+        }else{
+            res.json({'error':'can add review now!'})
+        }
+        //res.render('addReview',{title:'Reviews','isLoggedIn':isLoggedIn});
     }catch(e){
         res.status(400).render('error',{error:e ,title:'ridham error'});
     }
-}).post(async (req,res)=>{
+}).post(async function(req,res){
     try{
         const data=req.body;
         let review=data.review;
         let rating=data.rating;
-        const username=req.session.user.email;
+        let username=req.session.user.email;
+        //console.log('in the post of review')
 
         rating=Number(rating);
         rating=await helper.checkifproperrating(rating);
         review=await helper.checkifproperreview(review);
+        username=await helper.checkifproperemail(username);
 
         const result=await reviewsData.createReview(username,review,rating);
-        if(!result){
+        //console.log('****',result,'******')
+        if(!result || result==null){
             res.status(400).render('error',{error:'can not add review' ,title:'can not add review'}, );
         }
         res.redirect("/reviews");
     }catch(e){
-        res.status(400).render('error',{error:e ,title:'ridham error'});
+        res.status(400).render('error',{error:e ,title:'Error'});
     }
-})
+ })
 
 
 

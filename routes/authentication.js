@@ -3,12 +3,20 @@ const router = express.Router();
 const data = require("../data");
 const userData = data.users;
 const adminData = require("../data/adminCollection");
+const helpers = require('../helpers');
 
 router
   .route('/login')
   .get(async (req, res) => {
     //code here for GET
-    if(req.session.user) res.redirect("/");
+    if(req.session.user){
+      if(req.session.previousURL){
+        res.redirect(req.session.previousURL.previousURL);
+      }
+      else{
+        res.redirect('/');
+      }
+    }
     res.render('login', {title: 'Login'});
   })
   .post(async (req, res) => {
@@ -24,7 +32,13 @@ router
       const newUser = await userData.checkUser(email, password);
       if(newUser.authenticatedUser !== true) throw 'User cannot be authenticated.';
       req.session.user = {email : email};
-      res.redirect("/");
+      if(req.session.previousURL){
+        res.redirect(req.session.previousURL.previousURL);
+      }
+      else{
+        res.redirect('/');
+      }
+      // res.redirect("/");
     }
     catch (e) {      
         res.status(400).render('login',{title: 'Login', error : e, hasErrors: true});           
@@ -51,6 +65,7 @@ router
         let email = userPostData.email.trim();
         let password = userPostData.password;
         let confirmPassword = userPostData.confirmPassword;
+        email = await helpers.checkifproperemail(email);
         if(password != confirmPassword) throw 'Password does not match.'; 
         const newUser = await userData.createUsers(firstName,lastName,email,password,confirmPassword);
         if(!newUser.insertedUser) throw 'User cannot be created.';

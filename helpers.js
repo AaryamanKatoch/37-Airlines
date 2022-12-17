@@ -377,8 +377,8 @@ async function checkifpropergender(vari){
     vari=vari.trim()
     vari=vari.toLowerCase()
 
-    if(vari!=="male" && vari!=="female" && vari!=="Other")
-    throw 'kindly select from: male,female,other'
+    if(vari!=="male" && vari!=="female")
+    throw 'kindly select from: male,female'
 
 return vari
 }
@@ -448,10 +448,130 @@ async function addDigitIfNeeded(n){
     return n > 9 ? "" + n: "0" + n;
 }
 
+async function checkifproperfirstname(firstName){
+    if(!firstName)
+    throw "No firstname provided";
+
+    if(typeof(firstName)!=="string")
+    throw 'Firstname is not a string';
+    
+    if(firstName.trim().length===0)
+    throw "firstname cant be empty or all white spaces";
+
+    firstName=firstName.trim();
+    // firstName=firstName.toUpperCase();
+    
+    if(firstName.length<2)
+    throw 'Firstname must be atleast two characters long';
+
+    let regex1 = /^[a-zA-Z]+$/i;
+    if(!regex1.test(firstName))
+    throw 'Firstname can only have alphabets';
+    return firstName;
+}
+async function checkifproperlastname(lastName){
+    if(!lastName)
+    throw "No Lastname provided";
+
+    if(typeof(lastName)!=="string")
+    throw 'Lastname is not a string';
+    
+    if(lastName.trim().length===0)
+    throw "lastname cant be empty or all white spaces";
+
+    lastName=lastName.trim();
+    // lastName=lastName.toUpperCase();
+    
+    if(lastName.length<2)
+    throw 'Lastname must be atleast two characters long';
+
+    let regex2 = /^[a-zA-Z]+$/i;
+    if(!regex2.test(lastName))
+    throw 'Lastname can only have alphabets';
+    return lastName;
+}
+async function checkifproperbirthdate(date){
+    if(!date) throw 'No date passed';
+        
+    if(typeof date !=='string') throw 'date must be valid string';
+    if(date.trim().length==0) throw 'date can not be empty string';
+    const re_for_specialcharacter=/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    date=date.trim();
+    var c_year = new Date().getFullYear();  
+    var ListofDays = [31,28,31,30,31,30,31,31,30,31,30,31];
+    arr=date.split('-');
+    if(arr.length !== 3){
+        throw 'invalid Date';
+    }
+
+    month=arr[1];
+    day=arr[2];
+    year=arr[0];
+
+    if(month.length!==2 || day.length!==2 || year.length!==4){
+        throw 'invalid Date';
+    }
+
+
+    if(re_for_specialcharacter.test(month) || re_for_specialcharacter.test(day) || re_for_specialcharacter.test(year)){
+        throw 'invalid Date';
+    }
+
+    month= Number(month);
+    day= Number(day);
+    year= Number(year);
+
+
+    if(!Number.isInteger(month) || !Number.isInteger(day)  || !Number.isInteger(year)){
+        throw 'invalid Date';
+    }
+
+
+    if(month<0 || month>12){
+        throw 'invalid Date';
+    }
+    if(month==2){
+        if(day>28){
+            throw 'invalid Date';
+        }
+    }
+    if(day>ListofDays[month-1]){
+        throw 'invalid Date';
+    }
+    const today = new Date();
+    // console.log(today);
+    let selectedDate = new Date(date);
+    // console.log(selectedDate);
+    selectedDate.setDate(selectedDate.getDate()+1) ;
+    if(selectedDate > today) throw 'Date should be less than current date';
+    return date;
+}
+
+async function checkifproperchoiceoffood(foodchoices){
+    if(!foodchoices)
+    throw "food choices not provided";
+    if(typeof(foodchoices)!=="string")
+    throw 'choice should be a string';
+    //console.log(curfood)
+    foodchoices=foodchoices.trim()
+    // foodchoices=foodchoices.toLowerCase()
+    //console.log(curfood)
+    if(foodchoices.length===0)
+    throw 'choice cant be empty or all white spaces';
+
+    if(!foodchoices.match(/^[A-Za-z\s]*$/))  
+    throw 'choice should only be a string of alphabets';                        
+
+    if(foodchoices.length>30)
+    throw "food choice name is too long, ask the chef to change name";
+    return foodchoices;
+}
+
 
 module.exports = {
     checkifproperflightcode,checkifemptystring,checkifinputexists,checkifproperdeparr,checkifproperarrdepttime,checkifproperduration,
     checkifpropermiles,checkifproperclasstype, checkifproperclasscapacity,checkifproperprice,checkifproperfoodchoices,checkifproperreview,
     checkifproperrating, checkifproperflname,checkifproperpassport, checkifpropergender, checkifproperemail, checkifproperphonenumber,
-    checkifproperDate,checkifproperNoOfPass,checkifstring,checkifarray,checkisproperpassword,checkifproperprice,addDigitIfNeeded
+    checkifproperDate,checkifproperNoOfPass,checkifstring,checkifarray,checkisproperpassword,checkifproperprice,addDigitIfNeeded,checkifproperfirstname,checkifproperlastname,checkifproperbirthdate,
+    checkifproperchoiceoffood
 }

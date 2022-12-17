@@ -79,7 +79,13 @@ app.use(
 app.use("/login", (req, res, next) => {
   if (req.session.user) {
     // console.log(req.session.previousURL.previousURL);
-    return res.redirect("/");
+    // return res.redirect("/");
+    if(req.session.previousURL){
+      return res.redirect(req.session.previousURL.previousURL);
+    }
+    else{
+      return res.redirect('/');
+    }
   } else {
     next();
   }

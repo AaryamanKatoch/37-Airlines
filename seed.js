@@ -23,6 +23,7 @@ async function main() {
     let flight4 = undefined;
     let flight5 = undefined;
     let flight6 = undefined;
+    let flight26 = undefined;
     let class1 = undefined;
     let class2 = undefined;
     let bookedseat1 = undefined;
@@ -32,14 +33,14 @@ async function main() {
     let traveller1 = undefined;
     let review1 = undefined;
     let review2 = undefined;
-    
-//    await db.dropDatabase();
+
+   await db.dropDatabase();
 
 
 
    try {
 
-    let flight26 = await flights.createFlight("SDF43", "New", "California", "2022-12-10", "10:00", "2022-12-11", "11:00", "88", "20");
+    flight26 = await flights.createFlight("SDF43", "New York", "California", "2022-12-10", "10:00", "2022-12-11", "11:00", "88", "20");
     //console.log(flight1)
 } catch (e) {
     console.log(e);
@@ -98,14 +99,14 @@ async function main() {
         class1 = await classes.createClass(flight1._id, "economy", 10, 1000, ["veg", "nonveg"])
         //console.log(flight3)
     } catch (e) {
-        console.log(e);
+        console.log(e +"1");
     }
     try {
 
         class2 = await classes.createClass(flight1._id, "business", 5, 2000, ["veg", "nonveg"])
         //console.log(flight3)
     } catch (e) {
-        console.log(e);
+        console.log(e +"1");
     }
 
     try {
@@ -113,35 +114,49 @@ async function main() {
         class2 = await classes.createClass(flight6._id, "economy", 15, 2000, ["veg", "nonveg"])
         //console.log(flight3)
     } catch (e) {
-        console.log(e);
+        console.log(e +"6");
     }
 
 try{
     class1 = await classes.createClass(flight2._id,"economy",100,1000,["veg","nonveg"])
     //console.log(flight3)
 }catch(e){
-    console.log(e);
+    console.log(e+"2");
 }
 try{
 
     class2 = await classes.createClass(flight2._id,"business",50,2000,["veg","nonveg"])
     //console.log(flight3)
 }catch(e){
-    console.log(e);
+    console.log(e+"2");
 }
 try{
     class2 = await classes.createClass(flight3._id,"business",5,2000,["veg","nonveg"])
     //console.log(flight3)
 }catch(e){
-    console.log(e);
+    console.log(e+"3");
+}
+try {
+
+    class1 = await classes.createClass(flight26._id, "economy", 10, 1000, ["veg", "nonveg"])
+    //console.log(flight3)
+} catch (e) {
+    console.log(e+"26");
+}
+try {
+
+    class2 = await classes.createClass(flight26._id, "business", 5, 2000, ["veg", "nonveg"])
+    //console.log(flight3)
+} catch (e) {
+    console.log(e+"26");
 }
 
 
-    try {
-        user1 = await users.createUsers('test', 'test', 'admin123@stevens.edu', 'Admin@123', 'Admin@123');
-    } catch (e) {
-        console.log(e);
-    }
+    // try {
+    //     user1 = await users.createUsers('test1', 'test2', 'admin123@stevens.edu', 'Admin@123', 'Admin@123');
+    // } catch (e) {
+    //     console.log(e);
+    // }
 
     try {
         user1 = await users.createUsers('test', 'test', 'test123@stevens.edu', 'Test@123', 'Test@123');
@@ -149,7 +164,17 @@ try{
         console.log(e);
     }
 
- 
+    // try {
+    //     review1 = await review.createReview('admin123@stevens.edu', 'good one', 5)
+    // } catch (e) {
+    //     console.log(e);
+    // }
+
+    // try {
+    //     review2 = await review.createReview('admin123@stevens.edu', 'bad one', 1)
+    // } catch (e) {
+    //     console.log(e);
+    // }
 
     // try{
 
@@ -204,13 +229,24 @@ try{
     console.log(e);
 }
 
-// try{
+//  try{
+
+// // try{
+
+// //     adminData = await flights.getallflightdetailsforflightdetailspage("639a00cae633c3e1f81b834b","economy");
+// //     console.log(adminData)
+// // }catch(e){
+// //     console.log(e);
+// // }
 
 //     adminData = await flights.getallflightdetailsforflightdetailspage("639a00cae633c3e1f81b834b","economy");
 //     console.log(adminData)
 // }catch(e){
 //     console.log(e);
 // }
+
+await connection.closeConnection();
+console.log('Done!');
 
 }
 

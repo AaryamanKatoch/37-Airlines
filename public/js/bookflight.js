@@ -21,6 +21,7 @@
                    
                     // console.log(typeof noOfPass);
                     errorContainer.classList.add('hidden');
+                    // errors.hidden = true;
                     index.forEach(function(i){
                     // console.log(i);
                         let firstName = document.getElementById(`firstname${i+1}`);
@@ -245,7 +246,10 @@
             } catch (e) {
                 const message = typeof e === 'string' ? e : e.message;
                 errorTextElement.textContent = message;
-                errorContainer.hidden=false;
+                // errorContainer.hidden=false;
+                errorContainer.classList.remove('hidden');
+                // errors.textContent = message;
+                // errors.hidden = false;
             }
             
         });

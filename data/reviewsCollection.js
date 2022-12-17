@@ -1,7 +1,3 @@
-
-
-
-
 const mongoCollections = require('../config/mongoCollections');
 //const mongoCollections = require('../../../config/mongoCollections');
 const {ObjectId} = require('mongodb');
@@ -19,24 +15,23 @@ rating
 
 ) => {
 
-
-
   //error checking
-  //validation for username left
   username=await helper.checkifproperemail(username)
   review=await helper.checkifproperreview(review)
   rating=await helper.checkifproperrating(rating)
 
-  //geting reviews and returning
+  //creating reviews collection object
   const reviewcollection = await reviews();
 
+  //verifying user
   let userinfo=await userData.getUserByEmail(username);
 
   if(!userinfo){
     throw 'can not find the user!!!!';
   }
 
-  let data=await userData.getUserByEmail('test123@stevens.edu');
+  //checking for user can add review or not
+  let data=await userData.getUserByEmail(username);
   if(!data.bookingHistory){
     throw 'you are not allowed to add review...';
   }
@@ -45,6 +40,7 @@ rating
   }
   let bul= await check_if_user_can_add_review(data.bookingHistory);
   
+  //if bul is true then user have atleast completed one flight 
   if(bul==true){
     //console.log('got true')
 
@@ -63,7 +59,7 @@ rating
     return newId;
 
   }else{
-    throw 'you are not allowed to add review...'
+    throw 'you are not allowed to add review now...'
   }
 
 //   const review2 = await getReviewById(newId);
@@ -108,7 +104,8 @@ const getReviewById = async (reviewId) => {  if(!reviewId)
  
  return reviewbyid;};
 
-const removeReview = async (reviewId) => {if(!reviewId)
+const removeReview = async (reviewId) => {
+  if(!reviewId)
   throw `no id is given`;
   if(typeof(reviewId)!=="string")
   throw `type of id is not a string`;
@@ -126,76 +123,57 @@ const removeReview = async (reviewId) => {if(!reviewId)
     throw `Could not delete review with id of ${reviewId}`;
   }
 
-  return (`has been successfully deleted! `);};
+  return (`has been successfully deleted! `);
+};
 
+// const updateReview = async (
+//   username,
+//   review,
+//   rating
+// ) => {
 
 
 
  // error handling not done for review and rating ------ @ridham 
-const updateReview = async (
-    reviewId,
-    userId,
-    flightId,
-    review,
-    rating
-) => {
+// const updateReview = async (
+//     reviewId,
+//     userId,
+//     flightId,
+//     review,
+//     rating
+// ) => {
 
-  if(!reviewId)
-  throw `no id is given`;
-  if(typeof(reviewId)!=="string")
-  throw `type of id is not a string`;
-  if(reviewId.trim().length===0)
-  throw 'id cannot be empty or all white spaces';
-  reviewId=reviewId.trim();
-  if(!ObjectId.isValid(reviewId))
-  throw `id is not valid`;
-  reviewId=reviewId.trim()
-
-  if(!flightId)
-  throw `no id is given`;
-  if(typeof(flightId)!=="string")
-  throw `type of id is not a string`;
-  if(flightId.trim().length===0)
-  throw 'id cannot be empty or all white spaces';
-  flightId=flightId.trim();
-  if(!ObjectId.isValid(flightId))
-  throw `id is not valid`;
-  flightId=flightId.trim()
+//     //error checking
+//     username=await helper.checkifproperemail(username)
+//     review=await helper.checkifproperreview(review)
+//     rating=await helper.checkifproperrating(rating)
 
 
-  if(!userId)
-  throw `no id is given`;
-  if(typeof(userId)!=="string")
-  throw `type of id is not a string`;
-  if(userId.trim().length===0)
-  throw 'id cannot be empty or all white spaces';
-  userId=userId.trim();
-  if(!ObjectId.isValid(userId))
-  throw `id is not valid`;
-  userId=userId.trim()
+//     const reviewcollection = await reviews();
 
-  //review=await helper.checkifproperreview(review)
-  //await helper.checkifproperrating(rating)
-
+//     let userinfo=await userData.getUserByEmail(username);
   
-  ///
-  const reviewCollection=await reviews()
-  let updatedreview = {
-    userId:userId,
-    flightId:flightId,
-    review:review,
-    rating:rating
-  }
-  const updatedInfo = await reviewCollection.updateOne({_id: ObjectId(reviewId)},
-  {$set: updatedreview}
-);
-if (updatedInfo.modifiedCount === 0) {
-  throw 'could not update review successfully';
-  
-}
-return await getReviewById(reviewId)
+//     if(!userinfo){
+//       throw 'can not find the user!!!!';
+//     }
 
-};
+
+//   let updatedreview = {
+//     userId:userId,
+//     flightId:flightId,
+//     review:review,
+//     rating:rating
+//   }
+//   const updatedInfo = await reviewCollection.updateOne({_id: ObjectId(reviewId)},
+//   {$set: updatedreview}
+// );
+// if (updatedInfo.modifiedCount === 0) {
+//   throw 'could not update review successfully';
+  
+// }
+// return await getReviewById(reviewId)
+
+// };
 
 async function check_if_user_can_add_review(bookings){
   var now = new Date();
@@ -245,5 +223,6 @@ module.exports = {
   getAllReviews,
   getReviewById,
   removeReview,
-  updateReview
+  //updateReview
+  check_if_user_can_add_review
 };
