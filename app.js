@@ -99,6 +99,12 @@ app.use("/reviews/add", (req, res, next) => {
   }
 });
 
+app.use((req, res, next) => {
+  res.locals.canNotAddReview=req.session.canNotAddReview
+  delete req.session.canNotAddReview
+  next()
+});
+
 app.use("/searchflights/flightdetails/:id/book", (req, res, next) => {
   if (!req.session.user) {
     return res.redirect("/login");

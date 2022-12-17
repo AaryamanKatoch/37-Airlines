@@ -9,7 +9,6 @@ const { type } = require('os');
 const flightData = require('../data/flights.js');
 const userData=require('../data/usersCollection.js');
 const bookingData=require('../data/bookingCollection.js');
-const alert=require('alert');
 const xss = require('xss');
 
 //route for reviews main page
@@ -26,9 +25,9 @@ router.route("/reviews").get(async (req,res)=>{
         };
         let reviews=await reviewsData.getAllReviews();
         if(reviews.length==0){
-            res.render('reviews',{review : reviews,title:'Reviews','isLoggedIn':isLoggedIn});
+            res.render('reviews',{review : reviews,title:'Reviews','isLoggedIn':isLoggedIn,noReviews:true});
         }else{
-            res.render('reviews',{review : reviews,title:'Reviews','isLoggedIn':isLoggedIn});
+            res.render('reviews',{review : reviews,title:'Reviews','isLoggedIn':isLoggedIn,noReviews:false});
         }
     }catch(e){
         res.status(400).render('error',{error:e ,title:'ridham error'});
@@ -53,18 +52,26 @@ router.route('/reviews/add').get(async (req,res)=>{
         }
         let data=await userData.getUserByEmail(username);
         if(!data.bookingHistory){
-            return alert('You can not add review now!\n You must have completed atleast one flight');
+            req.session.canNotAddReview=true
+            return res.redirect("/reviews");
+            //res.render('reviews',{review : reviews,title:'Reviews','isLoggedIn':isLoggedIn,noReviews:false,canNotAddReview:true});
+            //return alert('You can not add review now!\n You must have completed atleast one flight');
             //return res.json({'error':'can add review now!'})
         }
         else if(data.bookingHistory.length === 0){
-            return alert('You can not add review now!\n You must have completed atleast one flight');
+            req.session.canNotAddReview=true
+            return res.redirect("/reviews");
+            //res.render('reviews',{review : reviews,title:'Reviews','isLoggedIn':isLoggedIn,noReviews:false,canNotAddReview:true});
+            //return alert('You can not add review now!\n You must have completed atleast one flight');
             //return res.json({'error':'can add review now!'})
         }
         let bul= await reviewsData.check_if_user_can_add_review(data.bookingHistory);
         if(bul==true){
-            res.render('addReview',{title:'Reviews','isLoggedIn':isLoggedIn});
+            res.render('addReview',{title:'Add Reviews','isLoggedIn':isLoggedIn});
         }else{
-            return alert('You can not add review now!\n You must have completed atleast one flight');
+            req.session.canNotAddReview=true
+            return res.redirect("/reviews");
+            //res.render('reviews',{review : reviews,title:'Reviews','isLoggedIn':isLoggedIn,noReviews:false,canNotAddReview:true});
             //res.json({'error':'can add review now!'})
         }
         //res.render('addReview',{title:'Reviews','isLoggedIn':isLoggedIn});
