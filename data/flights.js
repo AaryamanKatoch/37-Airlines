@@ -1,4 +1,5 @@
 const mongoCollections = require('../config/mongoCollections');
+const bookingData = require('./bookingCollection')
 
 const flights = mongoCollections.flights;
 const {ObjectId} = require('mongodb');
@@ -16,17 +17,29 @@ const createFlight = async (
   arrivalDate,
   arrivalTime,
   duration,
-  miles
+  miles,
+  // ft_seats,
+  // bs_seats,
+  // ec_seats,
+  // ft_food_options,
+  // bs_food_options,
+  // ec_food_options,
+  // ft_price,
+  // bs_price,
+  // ec_price
 ) => {
 
-  flightCode=await helper.checkifproperflightcode(flightCode)
-  departure=await helper.checkifproperdeparr(departure)
-  arrival=await helper.checkifproperdeparr(arrival)
-  departureDate=await helper.checkifproperDate(departureDate)
-  departureTime=await helper.checkifproperarrdepttime(departureTime)
-  arrivalDate=await helper.checkifproperDate(arrivalDate)
-  arrivalTime=await helper.checkifproperarrdepttime(arrivalTime)
-  duration=await helper.checkifproperduration(duration)
+  // console.log(flightCode, departure, arrival, departureDate, departureTime, arrivalDate, arrivalTime, duration, miles, ft_seats, bs_seats,
+  //   ec_seats, ft_food_options, bs_food_options, ec_food_options, ft_price, bs_price, ec_price);
+
+  flightCode = await helper.checkifproperflightcode(flightCode);
+  departure = await helper.checkifproperdeparr(departure);
+  arrival = await helper.checkifproperdeparr(arrival);
+  departureDate = await helper.checkifproperDate(departureDate);
+  departureTime = await helper.checkifproperarrdepttime(departureTime);
+  arrivalDate = await helper.checkifproperDate(arrivalDate);
+  arrivalTime = await helper.checkifproperarrdepttime(arrivalTime);
+  duration = await helper.checkifproperduration(duration);
   await helper.checkifpropermiles(miles)
   miles=miles.trim()
 
@@ -100,9 +113,13 @@ const removeFlight = async (flightId) => {
   flightId = flightId.trim();
   if(!ObjectId.isValid(flightId)) throw `id is not valid`;
 
-  const flightCollection = await flights();
   var deletename = await getFlightById(flightId);
+
+  if (!deletename || deletename === undefined) {
+    throw `Could not delete flight with id of ${flightId}`;
+  }
   
+  const flightCollection = await flights();
   const deletedflight = await flightCollection.deleteOne({_id: ObjectId(flightId)});
 
   if (deletedflight.deletedCount === 0) {

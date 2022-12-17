@@ -36,14 +36,15 @@ const createTraveler = async (
   if(!ObjectId.isValid(bookingId))
   throw `id is not valid`;
 
-  firstName=await helper.checkifproperflname(firstName)
-  lastName=await helper.checkifproperflname(lastName)
+  firstName=await helper.checkifproperfirstname(firstName)
+  lastName=await helper.checkifproperlastname(lastName)
   passportNumber=await helper.checkifproperpassport(passportNumber)
-  dateOfBirth=await helper.checkifproperDate(dateOfBirth)
+  dateOfBirth=await helper.checkifproperbirthdate(dateOfBirth)
   gender=await helper.checkifpropergender(gender)
   email=await helper.checkifproperemail(email)
   phoneNumber=await helper.checkifproperphonenumber(phoneNumber)
   bookedClass=await helper.checkifproperclasstype(bookedClass)
+  food = await helper.checkifproperchoiceoffood(food);
   //food left
   
 

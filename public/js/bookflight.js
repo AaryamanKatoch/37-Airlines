@@ -21,6 +21,7 @@
                    
                     // console.log(typeof noOfPass);
                     errorContainer.classList.add('hidden');
+                    // errors.hidden = true;
                     index.forEach(function(i){
                     // console.log(i);
                         let firstName = document.getElementById(`firstname${i+1}`);

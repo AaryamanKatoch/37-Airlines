@@ -39,7 +39,7 @@
                 <td>{{arrival}}</td>
                 <td>{{departure}}</td>
                 <td><a href="/admin/editflight/{{_id}}">Update</a></td>
-                <td><a href="/admin/deleteflight/{{_id}}">Delete</a></td>
+                <td><a href="/admin/deleteflight/{{_id}}" onclick="myalert()">Delete</a></td>
             </tr>
 
             {{/each}}
@@ -83,4 +83,6 @@
     </ul> --}}
 
     <button><a href="admin/addflight">Add Flight</a></button>
+
+    <script src="/public/js/adminhomepage.js"></script>
 </main>

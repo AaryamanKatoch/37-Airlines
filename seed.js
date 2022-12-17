@@ -93,14 +93,14 @@ async function main() {
         class1 = await classes.createClass(flight1._id, "economy", 10, 1000, ["veg", "nonveg"])
         //console.log(flight3)
     } catch (e) {
-        console.log(e);
+        console.log(e +"1");
     }
     try {
 
         class2 = await classes.createClass(flight1._id, "business", 5, 2000, ["veg", "nonveg"])
         //console.log(flight3)
     } catch (e) {
-        console.log(e);
+        console.log(e +"1");
     }
 
     try {
@@ -108,41 +108,41 @@ async function main() {
         class2 = await classes.createClass(flight6._id, "economy", 15, 2000, ["veg", "nonveg"])
         //console.log(flight3)
     } catch (e) {
-        console.log(e);
+        console.log(e +"6");
     }
 
 try{
     class1 = await classes.createClass(flight2._id,"economy",100,1000,["veg","nonveg"])
     //console.log(flight3)
 }catch(e){
-    console.log(e);
+    console.log(e+"2");
 }
 try{
 
     class2 = await classes.createClass(flight2._id,"business",50,2000,["veg","nonveg"])
     //console.log(flight3)
 }catch(e){
-    console.log(e);
+    console.log(e+"2");
 }
 try{
     class2 = await classes.createClass(flight3._id,"business",5,2000,["veg","nonveg"])
     //console.log(flight3)
 }catch(e){
-    console.log(e);
+    console.log(e+"3");
 }
 try {
 
-    class1 = await classes.createClass(flight26._id, "economy", 10, 1000, ["veg", "nonveg"])
+    class1 = await classes.createClass(flight26._id, "economy", 100, 1000, ["veg", "nonveg"])
     //console.log(flight3)
 } catch (e) {
-    console.log(e);
+    console.log(e+"26");
 }
 try {
 
-    class2 = await classes.createClass(flight26._id, "business", 5, 2000, ["veg", "nonveg"])
+    class2 = await classes.createClass(flight26._id, "business", 50, 2000, ["veg", "nonveg"])
     //console.log(flight3)
 } catch (e) {
-    console.log(e);
+    console.log(e+"26");
 }
 
 
@@ -154,6 +154,16 @@ try {
 
     try {
         user1 = await users.createUsers('test', 'test', 'test123@stevens.edu', 'Test@123', 'Test@123');
+    } catch (e) {
+        console.log(e);
+    }
+
+    try {
+        // console.log(user1._id);
+        let bookingData = await bookingCollection.createBooking(flight26._id, user1._id);
+        let updatedBooking = await travelers.createTraveler(bookingData._id,"Parth","Patel","123456789","2022-12-01","male","pp997069@gmail.com","5512468510","economy","veg");
+        let updatedClassCapacity = await classes.updateClassCapacity(flight26._id,"economy","1");
+        let enterBookingHistory = await users.updateBookingHistory(user1._id,bookingData._id);
     } catch (e) {
         console.log(e);
     }
@@ -223,13 +233,21 @@ try{
     console.log(e);
 }
 
-try{
+//  try{
 
-    adminData = await flights.getallflightdetailsforflightdetailspage("639a00cae633c3e1f81b834b","economy");
-    console.log(adminData)
-}catch(e){
-    console.log(e);
-}
+// // try{
+
+// //     adminData = await flights.getallflightdetailsforflightdetailspage("639a00cae633c3e1f81b834b","economy");
+// //     console.log(adminData)
+// // }catch(e){
+// //     console.log(e);
+// // }
+
+//     adminData = await flights.getallflightdetailsforflightdetailspage("639a00cae633c3e1f81b834b","economy");
+//     console.log(adminData)
+// }catch(e){
+//     console.log(e);
+// }
 
 await connection.closeConnection();
 console.log('Done!');

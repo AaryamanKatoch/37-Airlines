@@ -13,7 +13,28 @@ const createBooking = async (
  userId
 ) => {
 
+  if(!flightId)
+  throw `no Flight id is given`;
+  if(typeof(flightId)!=="string")
+  throw `type of flight id is not a string`;
+  if(flightId.trim().length===0)
+  throw 'flight id cannot be empty or all white spaces';
+  flightId=flightId.trim();
+  if(!ObjectId.isValid(flightId))
+  throw `flight id is not valid`;
+  flightId=flightId.trim();
 
+
+  if(!userId)
+  throw `no user id is given`;
+  if(typeof(userId)!=="string")
+  throw `type of user id is not a string`;
+  if(userId.trim().length===0)
+  throw 'user id cannot be empty or all white spaces';
+  userId=userId.trim();
+  if(!ObjectId.isValid(userId))
+  throw `user id is not valid`;
+  userId=userId.trim();
 
 
   
@@ -44,19 +65,19 @@ const getAllBookings = async () => {    const bookingCollection = await bookings
   return arr;};
 
 const getBookingById = async (bookingId) => {  if(!bookingId)
-  throw `no id is given`;
+  throw `no booking id is given`;
   if(typeof(bookingId)!=="string")
-  throw `type of id is not a string`;
+  throw `type of booking id is not a string`;
   if(bookingId.trim().length===0)
-  throw 'id cannot be empty or all white spaces';
+  throw 'booking id cannot be empty or all white spaces';
   bookingId=bookingId.trim();
   if(!ObjectId.isValid(bookingId))
-  throw `id is not valid`;
+  throw `booking id is not valid`;
  const bookingCollection =await bookings();
  const bookingbyid= await bookingCollection.findOne({_id:ObjectId(bookingId)});
  if(bookingbyid===null) 
  throw `no booking found with that id`;
- bookingbyid._id=bookingbyid._id.toString()
+ bookingbyid._id=bookingbyid._id.toString();
 
 
  return bookingbyid;};
@@ -118,7 +139,7 @@ const updateBooking = async (
   userId=userId.trim();
   if(!ObjectId.isValid(userId))
   throw `id is not valid`;
-  userId=userId.trim()
+  userId=userId.trim();
 
 
   const bookingCollection = await bookings();
@@ -137,12 +158,37 @@ return await getBookingById(bookingId)
 
 };
 
+const removeAllBookingHavingFid = async (flightId) => {
+  if (!flightId)
+    throw `no id is given`;
+  if (typeof (flightId) !== "string")
+    throw `type of id is not a string`;
+  if (flightId.trim().length === 0)
+    throw 'id cannot be empty or all white spaces';
 
+  flightId = flightId.trim();
+  if (!ObjectId.isValid(flightId))
+    throw `id is not valid`;
+  
+  let allBookings = await getAllBookings();
+  (await allBookings).forEach(function (obj){
+    //console.log("Delete Loop Start")
+    if(obj.flightId === flightId){
+      //console.log(obj.userId);
+      let deletedBooking = removeBooking(obj._id.toString());
+      //console.log(deletedBooking);
+    }
+    //console.log("Delete Loop End")
+  });
+
+  return (`successfully deleted all bookings with ${flightId}`);
+};
 
 
 module.exports = {createBooking,
   getAllBookings,
   getBookingById,
   removeBooking,
-  updateBooking
+  updateBooking,
+  removeAllBookingHavingFid
 };

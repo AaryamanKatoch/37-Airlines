@@ -40,6 +40,12 @@ document.getElementById("arrival_date").setAttribute("min", dateToday);
         let ft_seats = $("#ft_seats").val();
         let bs_seats = $("#bs_seats").val();
         let ec_seats = $("#ec_seats").val();
+        let ft_food_options = $("#ft_food_options").val();
+        let bs_food_options = $("#bs_food_options").val();
+        let ec_food_options = $("#ec_food_options").val();
+        let ft_price = $("#ft_price").val();
+        let bs_price = $("#bs_price").val();
+        let ec_price = $("#ec_price").val();
 
         let errorContainer = $("#error-container");
         let errorText = $(".text-goes-here");
@@ -50,9 +56,18 @@ document.getElementById("arrival_date").setAttribute("min", dateToday);
             if(!flight_code || !departure || !arrival || !dept_date || !dept_time || !arrival_date || !arrival_time 
                 || !flight_duration || !miles || !ft_seats || !bs_seats || !ec_seats)
             throw "Please provide all details";
+
+            if(ec_seats !== '0' && (!ec_food_options.length > 0 || !ec_price)) throw "Please provide all details";
+            if(bs_seats !== '0' && (!bs_food_options.length > 0 || !bs_price)) throw "Please provide all details";
+            if(ft_seats !== '0' && (!ft_food_options.length > 0 || !ft_price)) throw "Please provide all details";
             
             if(new Date(arrival_date) < new Date(dept_date)) throw "Arrival Date should be later than Departure Date";
-
+            if(ec_seats === '0' && (ec_food_options.length > 0 || ec_price)) 
+            throw "Cannot provide food options/price for flight classes having 0 seats";
+            if(bs_seats === '0' && (bs_food_options.length > 0 || bs_price)) 
+            throw "Cannot provide food options/price for flight classes having 0 seats";
+            if(ft_seats === '0' && (ft_food_options.length > 0 || ft_price)) 
+            throw "Cannot provide food options/price for flight classes having 0 seats";
 
             // var strDeptDate = deptDate.toString();
             // var temp = new Date(strDeptDate);
@@ -80,7 +95,8 @@ document.getElementById("arrival_date").setAttribute("min", dateToday);
                 contentType:'application/json',
                 data:JSON.stringify({flight_code:flight_code, departure:departure, arrival:arrival, dept_date: dept_date, 
                     dept_time:dept_time, arrival_date:arrival_date, arrival_time:arrival_time, flight_duration:flight_duration, 
-                    miles:miles, ft_seats:ft_seats, bs_seats:bs_seats, ec_seats:ec_seats}),
+                    miles:miles, ft_seats:ft_seats, bs_seats:bs_seats, ec_seats:ec_seats, ft_food_options:ft_food_options,
+                    bs_food_options:bs_food_options, ec_food_options:ec_food_options, ft_price:ft_price, bs_price:bs_price, ec_price:ec_price}),
                 success: function(){
                     console.log("Connected");
                     window.location = '/admin';

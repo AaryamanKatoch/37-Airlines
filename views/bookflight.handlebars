@@ -37,19 +37,19 @@
     <div>
         <label for="male{{this.noOfForms}}" class="form-label">Male</label>
         <input type="radio" class="form-control" name="gender{{this.noOfForms}}" value="male" id="male{{this.noOfForms}}">
-        <label for="female{{this.noOfForms}}" class=class="form-label">Female</label>
+        <label for="female{{this.noOfForms}}" class="form-label">Female</label>
         <input type="radio" class="form-control" name="gender{{this.noOfForms}}" value="female" id="female{{this.noOfForms}}">
     </div>
     <div>
-        <label for="email{{this.noOfForms}} class="form-label"">Enter your email:</label>
+        <label for="email{{this.noOfForms}}" class="form-label">Enter your email:</label>
         <input type="email{{this.noOfForms}}" class="form-control" id="email{{this.noOfForms}}" name="email{{this.noOfForms}}">
     </div>
     <div>
-        <label for="mobile{{this.noOfForms}} class="form-label"">Enter Mobile Number:</label>
+        <label for="mobile{{this.noOfForms}}" class="form-label">Enter Mobile Number:</label>
         <input type="tel" id="mobile{{this.noOfForms}}" class="form-control" name="mobile{{this.noOfForms}}" placeholder="Enter mobile number">  
     </div>
     <div>
-        <label for="foodchoices{{this.noOfForms}} class="form-label"">Food Preference</label>
+        <label for="foodchoices{{this.noOfForms}}" class="form-label">Food Preference</label>
         <select name="foodchoices{{this.noOfForms}}" id="foodchoices{{this.noOfForms}}">
            {{#each this.foodItems}}
             <option value="{{this}}">{{this}}</option>
@@ -61,11 +61,16 @@
 {{/for}}
 <button type="submit" id="sub">Book</button>    
 </form>
+{{#if hasError}}
+<div><p>{{error}}</p></div>
+{{/if}}
 <div class="hidden" id="error-container">
-  <div class="text-goes-here">
-  </div>
+<div class="text-goes-here"></div>
+</div>
+{{!-- <div id="errors" class="errors" hidden></div> --}}
+  
   <script>
-   
     sessionStorage.setItem('noOfPass',{{noOfPass}});
     </script>
   <script src="/public/js/bookflight.js"></script>
+  <script src="/public/js/futureDateDisable.js"></script>

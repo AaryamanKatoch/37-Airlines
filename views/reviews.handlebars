@@ -23,15 +23,19 @@
         
     {{/if}}
     </ul></div></nav>
+    {{#if canNotAddReview}}
+        <h5 id="error-container">you can not add review right now!!</h5>
+        <h5 id="error-container">you mst complete atleast one journey with us!!</h5>
+    {{/if}}
     <h1>Reviews:-</h1><hr>
-    {{#if error}}
-    <h1>{{error}}</h1>
+    {{#if noReviews}}
+        <h1>No Reviews Found</h1>
     {{/if}}
     {{#each review}}
         <hr>
         <h2>{{review}}</h2>
         <h2>{{rating}}</h2>
-        <h6>{{userName}}</h6>
+        <h6>By :- {{userName}}</h6>
     {{/each}}
 </section>
 </main>
