@@ -1,7 +1,7 @@
 const mongoCollections = require('../config/mongoCollections');
 const {ObjectId} = require('mongodb');
 const {flights}=require('../config/mongoCollections');
-const {getFlightById }= require("./flights")
+//const {getFlightById }= require("./flights")
 const flightData = require('../data/flights.js');
 const helper=require('../helpers')
 
@@ -59,8 +59,8 @@ foodchoices=await helper.checkifproperfoodchoices(foodchoices)
   if (updatedInfo.modifiedCount === 0) 
     throw "could not add class";
   }catch(e){throw "flight not found"}
-  const flight1 = await flightData.getFlightById(fid);
- return flight1
+  //const flight1 = await flightData.getFlightById(fid);
+ return "Class added";
 };
 
 

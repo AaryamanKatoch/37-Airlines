@@ -3,6 +3,7 @@ const mongoCollections = require('../config/mongoCollections');
 const movies = mongoCollections.movies;
 const {ObjectId} = require('mongodb');
 const helper =require('../helpers');
+const usersCollection = require('./usersCollection');
 
 const { reviews, flights, users, bookings } = require('../config/mongoCollections');
 
@@ -171,11 +172,21 @@ const removeAllBookingHavingFid = async (flightId) => {
     throw `id is not valid`;
   
   let allBookings = await getAllBookings();
-  (await allBookings).forEach(function (obj){
+  (await allBookings).forEach(async function (obj){
     //console.log("Delete Loop Start")
     if(obj.flightId === flightId){
       //console.log(obj.userId);
-      let deletedBooking = removeBooking(obj._id.toString());
+      let userData = await usersCollection.getUserById(obj.userId.toString());
+      //console.log(userData);
+      let allUserBookings = userData.bookingHistory;
+      let newBookings = [];
+      for(let i=0;i<allUserBookings.length;i++){
+        if(allUserBookings[i] !== obj._id.toString()){
+          newBookings.push(allUserBookings[i]);
+        }
+      }
+      let updateUserData = await usersCollection.updateBookingArr(obj.userId.toString(), newBookings);
+      let deletedBooking = await removeBooking(obj._id.toString());
       //console.log(deletedBooking);
     }
     //console.log("Delete Loop End")
