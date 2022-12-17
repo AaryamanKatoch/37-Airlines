@@ -1,4 +1,5 @@
 const mongoCollections = require('../config/mongoCollections');
+const bookingData = require('./bookingCollection')
 
 const flights = mongoCollections.flights;
 const {ObjectId} = require('mongodb');
@@ -16,17 +17,29 @@ const createFlight = async (
   arrivalDate,
   arrivalTime,
   duration,
-  miles
+  miles,
+  // ft_seats,
+  // bs_seats,
+  // ec_seats,
+  // ft_food_options,
+  // bs_food_options,
+  // ec_food_options,
+  // ft_price,
+  // bs_price,
+  // ec_price
 ) => {
 
-  flightCode=await helper.checkifproperflightcode(flightCode)
-  departure=await helper.checkifproperdeparr(departure)
-  arrival=await helper.checkifproperdeparr(arrival)
-  departureDate=await helper.checkifproperDate(departureDate)
-  departureTime=await helper.checkifproperarrdepttime(departureTime)
-  arrivalDate=await helper.checkifproperDate(arrivalDate)
-  arrivalTime=await helper.checkifproperarrdepttime(arrivalTime)
-  duration=await helper.checkifproperduration(duration)
+  // console.log(flightCode, departure, arrival, departureDate, departureTime, arrivalDate, arrivalTime, duration, miles, ft_seats, bs_seats,
+  //   ec_seats, ft_food_options, bs_food_options, ec_food_options, ft_price, bs_price, ec_price);
+
+  flightCode = await helper.checkifproperflightcode(flightCode);
+  departure = await helper.checkifproperdeparr(departure);
+  arrival = await helper.checkifproperdeparr(arrival);
+  departureDate = await helper.checkifproperDate(departureDate);
+  departureTime = await helper.checkifproperarrdepttime(departureTime);
+  arrivalDate = await helper.checkifproperDate(arrivalDate);
+  arrivalTime = await helper.checkifproperarrdepttime(arrivalTime);
+  duration = await helper.checkifproperduration(duration);
   await helper.checkifpropermiles(miles)
   miles=miles.trim()
 
@@ -102,6 +115,20 @@ const removeFlight = async (flightId) => {
 
   const flightCollection = await flights();
   var deletename = await getFlightById(flightId);
+
+  if (!deletename || deletename === undefined) {
+    throw `Could not delete flight with id of ${flightId}`;
+  }
+
+  // let allBookings = await bookingData.getAllBookings();
+  // (await allBookings).forEach(function (obj){
+  //   console.log("Delete Loop Start")
+  //   if(obj.flightId === flightId){
+  //     console.log(obj.userId);
+  //     let deletedBooking = await bookingData.removeBooking({_id: obj._id});
+  //   }
+  //   console.log("Delete Loop End")
+  // });
   
   const deletedflight = await flightCollection.deleteOne({_id: ObjectId(flightId)});
 

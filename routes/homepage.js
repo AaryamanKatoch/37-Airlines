@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const xss = require('xss');
+const rewardsData = require('../data/rewards.js');
+
 router.route("/").get(async (req, res) => {
     try {
         let isLoggedIn;
         if(req.session.user) isLoggedIn = true;
         else isLoggedIn = false;
+        //await rewardsData.addRewards();
         res.render("homePage", {title:"Home Page",isLoggedIn: isLoggedIn });
     } catch (error) {
         res.status(500).send(error);

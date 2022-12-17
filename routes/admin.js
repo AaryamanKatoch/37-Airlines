@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const data = require('../data');
+const classes = require('../data/class');
 const adminData = data.adminfunctions;
 const path = require('path');
 const { flights } = require('../data');
@@ -47,11 +48,34 @@ router.route("/admin/addflight")
   .post(async (req, res) => {
     try {
       let newFlightData = req.body;
-     
+      //console.log(newFlightData);
 
       const addFlightRes = await flights.createFlight(xss(newFlightData.flight_code), xss(newFlightData.departure), xss(newFlightData.arrival),
         xss(newFlightData.dept_date), xss(newFlightData.dept_time), xss(newFlightData.arrival_date), xss(newFlightData.arrival_time),
         xss(newFlightData.flight_duration), xss(newFlightData.miles));
+
+        
+        // newFlightData.ft_seats, newFlightData.bs_seats, newFlightData.ec_seats,
+        // newFlightData.ft_food_options, newFlightData.bs_food_options, newFlightData.ec_food_options, newFlightData.ft_price,
+        // newFlightData.bs_price, newFlightData.ec_price
+
+      if(Number(newFlightData.ft_seats) > 0){
+        const myArray = newFlightData.ft_food_options.split(",");
+        const addClassRes = await classes.createClass(addFlightRes._id, "first", Number(newFlightData.ft_seats), 
+        Number(newFlightData.ft_price), myArray);
+      }
+
+      if(Number(newFlightData.bs_seats) > 0){
+        const myArray = newFlightData.bs_food_options.split(",");
+        const addClassRes = await classes.createClass(addFlightRes._id, "business", Number(newFlightData.bs_seats), 
+        Number(newFlightData.bs_price), myArray);
+      }
+
+      if(Number(newFlightData.ec_seats) > 0){
+        const myArray = newFlightData.ec_food_options.split(",");
+        const addClassRes = await classes.createClass(addFlightRes._id, "economy", Number(newFlightData.ec_seats), 
+        Number(newFlightData.ec_price), myArray);
+      }
 
       res.redirect("/admin");
     } catch (error) {

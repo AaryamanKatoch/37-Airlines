@@ -51,21 +51,29 @@
         <tr>
             <td><b>Flight Classes</b></td>
             <td><b>No of Seats</b></td>
+            <td><b>Food Options</b></td>
+            <td><b>Price</b></td>
         </tr>
 
         <tr>
             <td>First Class</td>
-            <td><input type="number" placeholder="No of Seats" id="ft_seats" name="ft_seats" value="0"></td>
+            <td><input type="number" placeholder="No of Seats" id="ft_seats" name="ft_seats" value="0" min="0">&nbsp;</td>
+            <td><input type="text" placeholder="Enter ',' seprated values" id="ft_food_options" name="ft_food_options">&nbsp;</td>
+            <td><input type="number" placeholder="Enter Amount" id="ft_price" name="ft_price"></td>
         </tr>
 
         <tr>
             <td>Business Class</td>
-            <td><input type="number" placeholder="No of Seats" id="bs_seats" name="bs_seats" value="0"></td>
+            <td><input type="number" placeholder="No of Seats" id="bs_seats" name="bs_seats" value="0" min="0"></td>
+            <td><input type="text" placeholder="Enter ',' seprated values" id="bs_food_options" name="bs_food_options"></td>
+            <td><input type="number" placeholder="Enter Amount" id="bs_price" name="bs_price"></td>
         </tr>
 
         <tr>
             <td>Economy Class</td>
-            <td><input type="number" placeholder="No of Seats" id="ec_seats" name="ec_seats" value="0"></td>
+            <td><input type="number" placeholder="No of Seats" id="ec_seats" name="ec_seats" value="0" min="0"></td>
+            <td><input type="text" placeholder="Enter ',' seprated values" id="ec_food_options" name="ec_food_options"></td>
+            <td><input type="number" placeholder="Enter Amount" id="ec_price" name="ec_price"></td>
         </tr>
 
         <tr><td>&nbsp;</td></tr>

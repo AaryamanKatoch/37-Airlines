@@ -31,6 +31,7 @@ eachbobj["FlightCode"]=eachbfdet.flightCode
 eachbobj["Departure"]=eachbfdet.departure
 eachbobj["Arrival"]=eachbfdet.arrival
 eachbobj["DepartureDate"]=eachbfdet.departureDate
+//eachbobj["ArrivalDate"] = eachbfdet.arrivalDate
 resobj["bookings"].push(eachbobj)
 }
 return resobj
