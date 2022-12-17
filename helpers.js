@@ -77,7 +77,7 @@ async function checkifproperdeparr(vari){
     throw "minimum length of arrival and departure cities  should be two"
 
     if(vari.length>30)
-    throw "maximum length of arrival and departure cities should be 6 "
+    throw "maximum length of arrival and departure cities should be 30"
 
     return vari
 }

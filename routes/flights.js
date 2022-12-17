@@ -39,6 +39,10 @@ router.route("/searchflights").post(async (req, res) => {
       f_class=await helper.checkifproperclasstype(f_class)
       if(isNaN(NoOfPass)) throw 'Number of passengers must be valid Number';
       NoOfPass=Number(NoOfPass);
+      if(NoOfPass<1 || NoOfPass>5) throw 'Number of passengers must be between 1 to 5';
+      var today = new Date();
+      var today_date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      if(date<today_date) throw 'you can not add date which is lower than today';
 
       let isLoggedIn;
       if(req.session.user) isLoggedIn = true;
