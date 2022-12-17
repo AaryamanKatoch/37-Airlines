@@ -12,7 +12,7 @@ const helper =require('../helpers');
 const { checkifemptystring, checkifinputexists, checkifstring, checkifproperstudio, checkifproperdirector, checkifpropertitle, checkispropergenre, checkifvalidrating, checkispropercastmemeber, checkisproperdate, checkisproperruntime} = require('../helpers');
 
 const flightData = require('../data/flights.js');
-
+const xss = require('xss');
 
 
 router.route("/admin").get(async (req, res) => {
@@ -47,11 +47,11 @@ router.route("/admin/addflight")
   .post(async (req, res) => {
     try {
       let newFlightData = req.body;
-      console.log(newFlightData);
+     
 
-      const addFlightRes = await flights.createFlight(newFlightData.flight_code, newFlightData.departure, newFlightData.arrival,
-        newFlightData.dept_date, newFlightData.dept_time, newFlightData.arrival_date, newFlightData.arrival_time,
-        newFlightData.flight_duration, newFlightData.miles);
+      const addFlightRes = await flights.createFlight(xss(newFlightData.flight_code), xss(newFlightData.departure), xss(newFlightData.arrival),
+        xss(newFlightData.dept_date), xss(newFlightData.dept_time), xss(newFlightData.arrival_date), xss(newFlightData.arrival_time),
+        xss(newFlightData.flight_duration), xss(newFlightData.miles));
 
       res.redirect("/admin");
     } catch (error) {
@@ -89,15 +89,15 @@ router.route("/admin/editflight/:id").get(async (req, res) => {
 
 
   router.route("/admin/editflight/:id").post(async (req, res) => {
-     const newflightcode = req.body.flightcodeInput
-     const newdeparture = req.body.departureInput
-     const newarrival= req.body.arrivalInput
-     const newdepartureDate=req.body.departureDateInput
-     const newdeparturetime =req.body.departimeInput
-     const newarrivalDate= req.body.arrivalDateInput
-     const newarrivaltime=req.body.arrTimeInput
-     const newduration=req.body.durationInput
-     const newmiles=req.body.milesInput
+     const newflightcode = xss(req.body.flightcodeInput)
+     const newdeparture = xss(req.body.departureInput)
+     const newarrival= xss(req.body.arrivalInput)
+     const newdepartureDate=xss(req.body.departureDateInput)
+     const newdeparturetime =xss(req.body.departimeInput)
+     const newarrivalDate= xss(req.body.arrivalDateInput)
+     const newarrivaltime=xss(req.body.arrTimeInput)
+     const newduration=xss(req.body.durationInput)
+     const newmiles=xss(req.body.milesInput)
      const fid=req.params.id
      
  
@@ -114,7 +114,7 @@ router.route("/admin/editflight/:id").get(async (req, res) => {
 router.route("/admin/deleteflight/:id").get(async (req, res) => {
   try {
     let fid = req.params.id;
-    console.log(fid);
+  
 
     let isLoggedIn;
     if(req.session.admin) isLoggedIn = true;

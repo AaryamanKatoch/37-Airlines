@@ -13,6 +13,7 @@ const { travelers } = require('../data');
 const helpers = require('../helpers');
 const {ObjectId} = require('mongodb');
 const helper =require('../helpers');
+const xss = require('xss');
 
 //route for getting flights from passed parameters from form on the home page
 
@@ -20,13 +21,13 @@ router.route("/searchflights").post(async (req, res) => {
     try{
 
       //error cheking
-
+     
       let flightInfo=req.body;
-      let departure=flightInfo.depart_airport;
-      let arrival=flightInfo.arrival_airport;
-      let date=flightInfo.date;
-      let NoOfPass=flightInfo.passengers;
-      let f_class=flightInfo.class;
+      let departure=xss(flightInfo.depart_airport);
+      let arrival=xss(flightInfo.arrival_airport);
+      let date=xss(flightInfo.date);
+      let NoOfPass=xss(flightInfo.passengers);
+      let f_class=xss(flightInfo.class);
       if(!departure) throw 'No departure passed!';
       if(!arrival) throw 'No arrival passed!';
       if(!date) throw 'No date passed';
@@ -39,12 +40,17 @@ router.route("/searchflights").post(async (req, res) => {
       if(isNaN(NoOfPass)) throw 'Number of passengers must be valid Number';
       NoOfPass=Number(NoOfPass);
 
+      let isLoggedIn;
+      if(req.session.user) isLoggedIn = true;
+      else isLoggedIn = false;
+
       //error handling done
       
       let result=await flightsData.searchFlightsResult(departure,arrival,date,NoOfPass,f_class);
       
       if(result.length==0){
-        res.status(400).render('error',{error:'No result found for this properties' ,title:'No result Found'}, );
+        //res.status(400).render('error',{error:'No result found for this properties' ,title:'No result Found'}, );
+        res.render('searchFlights',{flights : result,title:'searchFlights', isLoggedIn: isLoggedIn,noflights:true});
       }
       else{
         await result.forEach(element => {
@@ -57,10 +63,10 @@ router.route("/searchflights").post(async (req, res) => {
         if(req.session.user) isLoggedIn = true;
         else isLoggedIn = false;
         // req.session.previousURL = {previousURL:"/searchflights"};
-        res.render('searchFlights',{flights : result,title:'searchFlights','class':f_class,'NoOfPass':NoOfPass, isLoggedIn: isLoggedIn});
+        res.render('searchFlights',{flights : result,title:'searchFlights', isLoggedIn: isLoggedIn,noflights:false});
       } 
     }catch(e){
-      res.status(400).render('error',{error:e ,title:'ridham error'}, );
+      res.status(400).render('error',{error:e ,title:'error'}, );
     }
 });
 
@@ -221,7 +227,7 @@ router.route("/searchflights/flightdetails/:id/book/success").post(async(req,res
         mobile = await helpers.checkifproperphonenumber(mobile);
         foodchoices = await helpers.checkifproperchoiceoffood(foodchoices);
 
-        let updatedBooking = await travelerData.createTraveler(bookingData._id,firstname,lastname,passport,birthdate,gender,email,mobile,classType,foodchoices);
+        let updatedBooking = await travelerData.createTraveler(bookingData._id,firstname,lastname,passport,birthdate,gender,email,mobile,flightClass,foodchoices);
         // console.log(updatedBooking);
     }
     let isLoggedIn;
@@ -246,12 +252,13 @@ router.route("/searchflights/flightdetails/:id/book/success").post(async(req,res
 
 
 router.route("/searchflights/flightdetails/:id/book/success/emailconfirmation").get(async (req, res) => {
+  let eror;
 let bookid= req.session.bookingID.bookingID
 bookid=bookid.toString()
-console.log(bookid)
+
 try{
 await emaildata.myemail(bookid)
-}catch(e){console.log(e)}
+}catch(e){error=e}
 res.redirect('/')
 
 });
@@ -259,12 +266,12 @@ res.redirect('/')
 router.route("/searchflights/flightdetails/:id/book/success").get(async (req, res) => {
   
   try{
-    let bookingId = req.session.bookingID.bookingID;
+    let bookingId =req.session.bookingID.bookingID;
     bookingId = bookingId.toString();
     let getBooking = await bookingCollection.getBookingById(bookingId);
     let flightDetails = await flightsData.getFlightById(getBooking.flightId);
     let travelersDetails = getBooking.travelers;
-    let NoOfPass = req.session.info.noOfPass;
+    let NoOfPass =req.session.info.noOfPass;
     // let flightId = req.params.id;
     let flightClass = req.session.info.class;
     flightClass = await helpers.checkifproperclasstype(flightClass);
@@ -282,7 +289,7 @@ router.route("/searchflights/flightdetails/:id/book/success").get(async (req, re
     });
     await pdfCreate.createInvoice(flightDetails,travelersDetails,totalPrice,"ticket.pdf",(chunk)=> stream.write(chunk),()=>stream.end());
     // res.render('success',{isLoggedIn: isLoggedIn, travelers : getBooking.travelers, sr : getBooking.travelers.length, totalPrice : totalPrice, flightDetails : flightDetails});
-    res.redirect('/');
+    // res.redirect('/');
   
   }catch(e){
     res.status(400).render('error',{title : "Error",error : e});

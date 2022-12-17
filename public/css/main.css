@@ -1,50 +1,58 @@
 button {
-    background-color: #416594;
+    background-color: rgb(236, 206, 206);
     border: rgb(5, 1, 1);
-    color: rgb(8, 7, 7);
-    padding: 10px 20px;
+    color: black;
     text-align: center;
-    display: inline-block;
     font-size: 16px;
-    border-radius: 8px;
+    border: 2px solid black;
+   
+   
+    
+
 }
+
 
 main{
     background-color: darkgray;
     border: black;
     color:black;
     text-align: center;
-    display: inline-block;
     font-size: 16px;
     border-radius: 8px;
+  
 }
 
 body{
-    background-color: bisque;
+background-color: antiquewhite;
+    height:800px;
+    width: 100%;
     border:black;
     color:black;
     text-align: center;
-    display:inline-block;
-    margin: 10px;
-    padding: 10px;
-}
-
-#flightdetailstable{
-    background-attachment: fixed;
-    background-color:darkgray;
-    border: black;
-    text-align: center;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 8px;
-    border-left: 1px solid #000;
-    border-right: 1px solid #000;
+    max-width: 500px;
+    margin: auto;
     
+    position:relative;
+    top: 25%;
+    left: 35%;
+  
 }
 
-#flightdetailstable td{
+table{
 
-    border-radius: 8px;
-    border-left: 10px solid #000;
+    align-content: flex-end;
+}
+thead{
+    background-color: #7493bb;
+    color:black
+}
+
+nav{
+    background-color: #7493bb;
+
+}
+.text-goes-here{
+    color: darkred;
+
 }
 

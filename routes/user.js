@@ -11,6 +11,7 @@ const {ObjectId} = require('mongodb');
 const helper =require('../helpers');
 const flightData = require('../data/flights.js');
 const userd=require("../data/usersCollection")
+const xss = require('xss');
 
 router.route("/userProfile").get(async (req, res) => {
     // need to add session coonditions
@@ -63,8 +64,8 @@ router.route("/userProfile").get(async (req, res) => {
         let email1=req.session.user.email;
         var sol=await userd.getUserByEmail(email1)
         const id=sol._id
-        const newfirstname = req.body.firstnameInput
-        const newlastname = req.body.lastnameInput
+        const newfirstname = xss(req.body.firstnameInput)
+        const newlastname = xss(req.body.lastnameInput)
         const  email=sol.email
         const password=sol.password
 

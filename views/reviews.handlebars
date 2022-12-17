@@ -1,12 +1,28 @@
 <main>
 <section>
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid well" id="home" style="display:block; padding-top:10px;padding-bottom:10px">
+            
+        <ul class="navbar-nav">
     {{#if isLoggedIn}}
-    <div><a href="/userProfile">User Profile</a></div>
-    <div><a href="/logout">Logout</a></div>
-    <div><a href="/reviews/add">Add Review</a><div>
+     <li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
+        <a class="nav-link" href="/userProfile">User Profile</a></li>
+
+    <li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
+        <a class="nav-link" href="/logout">Logout</a></li>
+    <li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
+        <a class="nav-link" href="/reviews/add">Add Review</a></li>
+    <li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
+    <a  class="nav-link" href="/"> Homepage</a></li>
+    
     {{else}}
-    <a href="/login">Login</a>
+    <li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
+    <a class="nav-link" href="/login">Login</a></li>
+    <li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
+    <a  class="nav-link" href="/"> Homepage</a></li>
+        
     {{/if}}
+    </ul></div></nav>
     <h1>Reviews:-</h1><hr>
     {{#if error}}
     <h1>{{error}}</h1>
@@ -16,7 +32,6 @@
         <h2>{{review}}</h2>
         <h2>{{rating}}</h2>
         <h6>{{userName}}</h6>
-        {{!-- <a href="/searchflights/{{_id}}&{{class}}&{{NoOfPass}}">click here for more details</a> --}}
     {{/each}}
 </section>
 </main>

@@ -5,6 +5,7 @@ const userData = data.users;
 const adminData = require("../data/adminCollection");
 const helpers = require('../helpers');
 
+const xss = require('xss');
 router
   .route('/login')
   .get(async (req, res) => {
@@ -27,8 +28,10 @@ router
     //   let passwordInput = await helpers.isValidPassword(userPostData.passwordInput);
     //   usernameInput = usernameInput.trim().toLowerCase();
     //   passwordInput = passwordInput.trim();
-        let email = userPostData.email.trim();
-        let password = userPostData.password;
+        let email = xss(userPostData.email).trim();
+        let password = xss(userPostData.password);
+        email=await helpers.checkifproperemail(email);
+        password=await helpers.checkisproperpassword(password);
       const newUser = await userData.checkUser(email, password);
       if(newUser.authenticatedUser !== true) throw 'User cannot be authenticated.';
       req.session.user = {email : email};
@@ -60,12 +63,17 @@ router
     //   let passwordInput = await helpers.isValidPassword(userPostData.passwordInput);
     //   usernameInput = usernameInput.trim().toLowerCase();
     //   passwordInput = passwordInput.trim();
-        let firstName = userPostData.firstName.trim().toLowerCase();
-        let lastName = userPostData.lastName.trim();
-        let email = userPostData.email.trim();
-        let password = userPostData.password;
-        let confirmPassword = userPostData.confirmPassword;
-        email = await helpers.checkifproperemail(email);
+
+        let firstName = xss(userPostData.firstName).trim().toLowerCase();
+        let lastName = xss(userPostData.lastName).trim();
+        let email = xss(userPostData.email).trim();
+        let password = xss(userPostData.password);
+        let confirmPassword = xss(userPostData.confirmPassword);
+        firstName=await helpers.checkifproperfirstname(firstName);
+        lastName=await helpers.checkifproperlastname(lastName);
+        email=await helpers.checkifproperemail(email);
+        password=await helpers.checkisproperpassword(password);
+        confirmPassword=await helpers.checkisproperpassword(confirmPassword);
         if(password != confirmPassword) throw 'Password does not match.'; 
         const newUser = await userData.createUsers(firstName,lastName,email,password,confirmPassword);
         if(!newUser.insertedUser) throw 'User cannot be created.';
@@ -109,12 +117,11 @@ router.route('/adminlogin').get(async (req, res) => {
     //code here for POST
     const adminPostData = req.body;
     try {
-    //   let usernameInput = await helpers.isValidUsername(userPostData.usernameInput);
-    //   let passwordInput = await helpers.isValidPassword(userPostData.passwordInput);
-    //   usernameInput = usernameInput.trim().toLowerCase();
-    //   passwordInput = passwordInput.trim();
-        let email = adminPostData.email.trim();
-        let password = adminPostData.password;
+
+        let email = xss(adminPostData.email).trim();
+        let password = xss(adminPostData.password);
+        email=await helpers.checkifproperemail(email);
+        password=await helpers.checkisproperpassword(password);
       const newAdmin = await adminData.checkAdmin(email, password);
       if(newAdmin.authenticatedAdmin !== true) throw 'Admin cannot be authenticated.';
       req.session.admin = {email : email};

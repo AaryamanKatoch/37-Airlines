@@ -1,26 +1,41 @@
 
-{{#if isLoggedIn}}
-<div><a href="/userProfile">User Profile</a></div>
-<div><a href="/logout">Logout</a></div>
-{{else}}
-<a href="/login">Login</a>
-{{/if}}
+        <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid well" id="home" style="display:block; padding-top:10px;padding-bottom:10px">
+            
+        <ul class="navbar-nav">
+    {{#if isLoggedIn}}
+    <li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
+    <a class="nav-link" href="/userProfile">User Profile</a>
+    </li>
+    <li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
+    <a class="nav-link" href="/logout">Logout</a></li>
+    {{else}}
+    <li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
+    <a class="nav-link" href="/login">Login</a></li>
+    {{/if}}
+    </ul>
+        </div>
+        </nav>
 <p>Success</p>
-<dl>
 
-  <dt>Flight Code</dt>
-  <dd>{{{flightDetails.flightCode}}}</dd>
-  <dt>Departure City</dt>
-  <dd>{{flightDetails.departure}}</dd>
-  <dt>Arrival City</dt>
-  <dd>{{flightDetails.arrival}}</dd>
-  <dt>Departure Time</dt>
-  <dd>{{flightDetails.departureTime}}</dd>
-  <dt>Arrival Time</dt>
-  <dd>{{flightDetails.arrivalTime}}</dd>
-  <dt>Flight Duration</dt>
-  <dd>{{flightDetails.duration}}</dd>
-</dl>
+<table class="table table-striped">
+    <thead>
+        <td>Flight Code</td>
+        <td>Departure City</td>
+        <td>Arrival City</td>
+        <td>Departure Time</td>
+        <td>Arrival Time</td>
+        <td>Flight Duration</td>
+    </thead>
+    <tbody>
+  <td>{{{flightDetails.flightCode}}}</td>
+  <td>{{flightDetails.departure}}</td>
+  <td>{{flightDetails.arrival}}</td>
+  <td>{{flightDetails.departureTime}}</td>
+  <td>{{flightDetails.arrivalTime}}</td>
+  <td>{{flightDetails.duration}}</td>
+      </tbody>
+</table>
 <table class="table table-striped">
     <thead>
     <tr>
@@ -51,9 +66,14 @@
         <td>{{this.food}}</td>
     </tr>
     {{/each}}
+    </tbody>
+</table>
 
+<table class="table table-striped">
+    <tbody>
     <tr>
-        <td>Total Price : {{totalPrice}}</td>
+        <td>Total Price</td>
+        <td>{{totalPrice}}</td>
     </tr>
     </tbody>
 </table>

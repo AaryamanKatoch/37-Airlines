@@ -41,7 +41,8 @@
                 data:JSON.stringify({review:review,rating:rating}),
                 success: function(){
                     console.log("Connected");
-                    window.location.replace('/reviews');
+                    //window.location.replace('/reviews');
+                    window.location = '/reviews';
                 },
             });
 

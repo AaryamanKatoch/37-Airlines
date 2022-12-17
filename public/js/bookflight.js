@@ -246,10 +246,8 @@
             } catch (e) {
                 const message = typeof e === 'string' ? e : e.message;
                 errorTextElement.textContent = message;
-                // errorContainer.hidden=false;
+                //errorContainer.hidden=false;
                 errorContainer.classList.remove('hidden');
-                // errors.textContent = message;
-                // errors.hidden = false;
             }
             
         });

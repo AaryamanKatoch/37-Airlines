@@ -195,11 +195,11 @@ const searchFlightsResult = async (
   
   //error cheking 
 
-  // if(!departure) throw 'No departure passed!';
-  // if(!arrival) throw 'No arrival passed!';
-  // if(!date) throw 'No date passed';
+  if(!departure) throw 'No departure passed!';
+  if(!arrival) throw 'No arrival passed!';
+  if(!date) throw 'No date passed';
   if(!NoOfPass) throw 'No passengers passed!';
-  // if(!f_class) throw 'No flight class passed!';
+  if(!f_class) throw 'No flight class passed!';
 
   departure=await helper.checkifproperdeparr(departure)
   arrival=await helper.checkifproperdeparr(arrival)

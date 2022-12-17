@@ -56,7 +56,8 @@ const createUsers = async (
     if (!insertInfo.acknowledged || !insertInfo.insertedId)
       throw 'Could not add user data.';
   let userInsertedObj = {insertedUser: true};
-  return userInsertedObj;
+  let user = await getUserById(insertInfo.insertedId.toString());
+  return user;
 };
 
 const getAllUsers = async () => {    const userCollection = await users();
