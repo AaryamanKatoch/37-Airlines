@@ -22,6 +22,7 @@ router.route("/userProfile").get(async (req, res) => {
     let email= req.session.user.email
     try{
       var sol=await userData.getuserinfoforuserprofile(email)
+     
       return res.status(200).render('userprofile', { solution1: sol,title: "User Details",haserror:haserror,error:error });
     } catch(e){haserror=true;error=e;
       return res.status(400).render('userprofile', { solution1: sol,title: "User Details" ,haserror:haserror,error:error});}

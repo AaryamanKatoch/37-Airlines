@@ -34,6 +34,7 @@ eachbobj["DepartureDate"]=eachbfdet.departureDate
 //eachbobj["ArrivalDate"] = eachbfdet.arrivalDate
 resobj["bookings"].push(eachbobj)
 }
+
 return resobj
 }
 

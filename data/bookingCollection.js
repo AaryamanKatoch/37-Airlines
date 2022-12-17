@@ -180,7 +180,6 @@ const removeAllBookingHavingFid = async (flightId) => {
     }
     //console.log("Delete Loop End")
   });
-
   return (`successfully deleted all bookings with ${flightId}`);
 };
 

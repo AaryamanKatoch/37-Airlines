@@ -76,7 +76,7 @@ router
         confirmPassword=await helpers.checkisproperpassword(confirmPassword);
         if(password != confirmPassword) throw 'Password does not match.'; 
         const newUser = await userData.createUsers(firstName,lastName,email,password,confirmPassword);
-        if(!newUser.insertedUser) throw 'User cannot be created.';
+        if(!newUser) throw 'User cannot be created.';
         res.redirect('/login');
     }
     catch (e) {
