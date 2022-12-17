@@ -1,3 +1,5 @@
+// Homepage (General) when you hit http://localhost:3000/
+
 var dateToday = new Date();
 var day = dateToday.getDate();
 var month = dateToday.getMonth() + 1;

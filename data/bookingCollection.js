@@ -158,12 +158,37 @@ return await getBookingById(bookingId)
 
 };
 
+const removeAllBookingHavingFid = async (flightId) => {
+  if (!flightId)
+    throw `no id is given`;
+  if (typeof (flightId) !== "string")
+    throw `type of id is not a string`;
+  if (flightId.trim().length === 0)
+    throw 'id cannot be empty or all white spaces';
 
+  flightId = flightId.trim();
+  if (!ObjectId.isValid(flightId))
+    throw `id is not valid`;
+  
+  let allBookings = await getAllBookings();
+  (await allBookings).forEach(function (obj){
+    //console.log("Delete Loop Start")
+    if(obj.flightId === flightId){
+      //console.log(obj.userId);
+      let deletedBooking = removeBooking(obj._id.toString());
+      //console.log(deletedBooking);
+    }
+    //console.log("Delete Loop End")
+  });
+
+  return (`successfully deleted all bookings with ${flightId}`);
+};
 
 
 module.exports = {createBooking,
   getAllBookings,
   getBookingById,
   removeBooking,
-  updateBooking
+  updateBooking,
+  removeAllBookingHavingFid
 };

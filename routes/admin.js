@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const data = require('../data');
+const bookingsData = require('../data/bookingCollection');
 const classes = require('../data/class');
 const adminData = data.adminfunctions;
 const path = require('path');
@@ -146,6 +147,9 @@ router.route("/admin/deleteflight/:id").get(async (req, res) => {
 
     let flightDeleted = await flightData.removeFlight(fid);
     //console.log(flightDeleted);
+    let bookingsDeleted = await bookingsData.removeAllBookingHavingFid(fid);
+    //console.log(bookingsDeleted);
+    
     res.redirect('/admin');
   } catch (error) {
     console.log(error);

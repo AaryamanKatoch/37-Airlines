@@ -113,23 +113,13 @@ const removeFlight = async (flightId) => {
   flightId = flightId.trim();
   if(!ObjectId.isValid(flightId)) throw `id is not valid`;
 
-  const flightCollection = await flights();
   var deletename = await getFlightById(flightId);
 
   if (!deletename || deletename === undefined) {
     throw `Could not delete flight with id of ${flightId}`;
   }
-
-  // let allBookings = await bookingData.getAllBookings();
-  // (await allBookings).forEach(function (obj){
-  //   console.log("Delete Loop Start")
-  //   if(obj.flightId === flightId){
-  //     console.log(obj.userId);
-  //     let deletedBooking = await bookingData.removeBooking({_id: obj._id});
-  //   }
-  //   console.log("Delete Loop End")
-  // });
   
+  const flightCollection = await flights();
   const deletedflight = await flightCollection.deleteOne({_id: ObjectId(flightId)});
 
   if (deletedflight.deletedCount === 0) {
