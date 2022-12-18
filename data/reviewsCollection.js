@@ -126,54 +126,48 @@ const removeReview = async (reviewId) => {
   return (`has been successfully deleted! `);
 };
 
-// const updateReview = async (
-//   username,
-//   review,
-//   rating
-// ) => {
-
-
-
  // error handling not done for review and rating ------ @ridham 
-// const updateReview = async (
-//     reviewId,
-//     userId,
-//     flightId,
-//     review,
-//     rating
-// ) => {
+const updateReview = async (
+    reviewId,
+    username,
+    review,
+    rating
+) => {
+    //error checking
+    username=await helper.checkifproperemail(username)
+    review=await helper.checkifproperreview(review)
+    rating=await helper.checkifproperrating(rating)
+    if(!reviewId)
+    throw `no id is given`;
+    if(typeof(reviewId)!=="string")
+    throw `type of id is not a string`;
+    if(reviewId.trim().length===0)
+    throw 'id cannot be empty or all white spaces';
+    reviewId=reviewId.trim();
+    if(!ObjectId.isValid(reviewId))
+    throw `id is not valid`;
 
-//     //error checking
-//     username=await helper.checkifproperemail(username)
-//     review=await helper.checkifproperreview(review)
-//     rating=await helper.checkifproperrating(rating)
+    const reviewcollection = await reviews();
 
-
-//     const reviewcollection = await reviews();
-
-//     let userinfo=await userData.getUserByEmail(username);
+    let userinfo=await userData.getUserByEmail(username);
   
-//     if(!userinfo){
-//       throw 'can not find the user!!!!';
-//     }
+    if(!userinfo){
+      throw 'can not find the user!!!!';
+    }
 
 
-//   let updatedreview = {
-//     userId:userId,
-//     flightId:flightId,
-//     review:review,
-//     rating:rating
-//   }
-//   const updatedInfo = await reviewCollection.updateOne({_id: ObjectId(reviewId)},
-//   {$set: updatedreview}
-// );
-// if (updatedInfo.modifiedCount === 0) {
-//   throw 'could not update review successfully';
-  
-// }
-// return await getReviewById(reviewId)
-
-// };
+  let updatedreview = {
+    userId:userinfo._id.toString(),
+    userName:username,
+    review:review,
+    rating:rating
+  }
+  const updatedInfo = await reviewcollection.updateOne({_id: ObjectId(reviewId)},{$set: updatedreview});
+  if (updatedInfo.modifiedCount === 0) {
+    throw 'could not update review successfully';  
+  }
+return await getReviewById(reviewId);
+};
 
 async function check_if_user_can_add_review(bookings){
   var now = new Date();
@@ -218,11 +212,49 @@ async function check_if_user_can_add_review(bookings){
   }
 }
 
+async function getReviewByUsername(userName){
+  userName=await helper.checkifproperemail(userName);
+  //creating reviews collection object
+  const reviewcollection = await reviews();
+
+  //verifying user
+  let userinfo=await userData.getUserByEmail(userName);
+  
+  if(!userinfo){
+    throw 'can not find the user!!!!';
+  }
+
+  const reviewByUsername= await reviewcollection.findOne({userName:userName});
+  if(!reviewByUsername || reviewByUsername==null){
+    return null;
+  }else{
+    return reviewByUsername;
+  }
+}
+
+// async function main(){
+//   try{
+//     let val=await getReviewByUsername('test123@stevens.edu');
+//     console.log(val)
+//   }catch(e){
+//     console.log(e)
+//   }
+//   // try{
+//   //   let upval=await updateReview('639e6a71cc6c80ebe63e5f10','rpatel16@stevens.edu','updated',5)
+//   //   console.log(upval);
+//   // }catch(e){
+//   //  console.log(e) 
+//   // }
+// }
+
+// main();
+
 module.exports = {
   createReview,
   getAllReviews,
   getReviewById,
   removeReview,
-  //updateReview
+  getReviewByUsername,
+  updateReview,
   check_if_user_can_add_review
 };

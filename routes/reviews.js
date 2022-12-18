@@ -67,14 +67,17 @@ router.route('/reviews/add').get(async (req,res)=>{
         }
         let bul= await reviewsData.check_if_user_can_add_review(data.bookingHistory);
         if(bul==true){
-            res.render('addReview',{title:'Add Reviews','isLoggedIn':isLoggedIn});
+            let userHaveReview=await reviewsData.getReviewByUsername(username);
+            if(userHaveReview==null){
+                res.render('addReview',{title:'Add Reviews','isLoggedIn':isLoggedIn,alreadyHaveReview:false});
+            }else{
+                res.render('addReview',{title:'Add Reviews','isLoggedIn':isLoggedIn,alreadyHaveReview:true,review:userHaveReview.review,rating:userHaveReview.rating});
+            }
+            
         }else{
             req.session.canNotAddReview=true
             return res.redirect("/reviews");
-            //res.render('reviews',{review : reviews,title:'Reviews','isLoggedIn':isLoggedIn,noReviews:false,canNotAddReview:true});
-            //res.json({'error':'can add review now!'})
         }
-        //res.render('addReview',{title:'Reviews','isLoggedIn':isLoggedIn});
     }catch(e){
         res.status(400).render('error',{error:e ,title:'Error'});
     }
@@ -103,6 +106,49 @@ router.route('/reviews/add').get(async (req,res)=>{
     }
  })
 
+ router.route('/reviews/add/update').get(async (req,res)=>{
+    try{
+        let isLoggedIn;
+        if(req.session.user){
+            isLoggedIn = true;
+        }
+        else{
+            isLoggedIn = false
+        };
+        let username=req.session.user.email;
+        username=await helper.checkifproperemail(username);
+        let userinfo=await userData.getUserByEmail(username);
+        if(!userinfo){
+            throw 'can not find the user!!!!';
+        }
+        // let data=await userData.getUserByEmail(username);
+        res.status(200).render('updateReview',{title:'Add Reviews','isLoggedIn':isLoggedIn});
+    }catch(e){
+        res.status(400).render('error',{error:e ,title:'Error'});
+    }
+}).post(async function(req,res){
+    try{
+        const data=req.body;
+        let review=xss(data.review);
+        let rating=xss(data.rating);
+        let username=req.session.user.email;
+        //console.log('in the post of review')
 
+        rating=Number(rating);
+        rating=await helper.checkifproperrating(rating);
+        review=await helper.checkifproperreview(review);
+        username=await helper.checkifproperemail(username);
+
+        let reviewDetails=await reviewsData.getReviewByUsername(username);
+        const result=await reviewsData.updateReview(reviewDetails._id.toString(),username,review,rating);
+        //console.log('****',result,'******')
+        if(!result || result==null){
+            res.status(400).render('error',{error:'can not update review' ,title:'can not update review'}, );
+        }
+        res.redirect("/reviews");
+    }catch(e){
+        res.status(400).render('error',{error:e ,title:'Error'});
+    }
+ })
 
 module.exports = router;
