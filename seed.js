@@ -26,7 +26,6 @@ async function main() {
     let flight26 = undefined;
     let class1 = undefined;
     let class2 = undefined;
-    let class3 = undefined;
     let bookedseat1 = undefined;
     let user1 = undefined;
     let user2 = undefined;
@@ -38,41 +37,56 @@ async function main() {
    await db.dropDatabase();
 
 
-   //*************************************
 
    try {
 
-    flight26 = await flights.createFlight("SDF12", "New York", "Los Angeles", "2022-12-10", "10:00", "2022-12-11", "11:00",  "20");
+    flight26 = await flights.createFlight("SDF43", "New York", "California", "2022-12-10", "10:00", "2022-12-11", "11:00",  "20");
     //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
+} catch (e) {
+    console.log(e);
+}
 
     try {
 
-        class1 = await classes.createClass(flight26._id, "economy", 100, 1000, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e+"26");
-    }
-    try {
-    
-        class2 = await classes.createClass(flight26._id, "business", 50, 2000, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e+"26");
-    }
-
-       //*************************************
-
-
-    try {
-
-        flight1 = await flights.createFlight("MF012", "New York", "Los Angeles", "2022-12-21", "10:00", "2022-12-22", "11:00", "20");
+        flight1 = await flights.createFlight("MF090", "New York", "California", "2022-12-18", "10:00", "2022-12-19", "11:00", "20");
         //console.log(flight1)
     } catch (e) {
         console.log(e);
     }
+
+    try {
+
+        flight2 = await flights.createFlight("MF080", "New York", "California", "2022-12-18", "10:00", "2022-12-19", "11:00", "20");
+        //console.log(flight1)
+    } catch (e) {
+        console.log(e);
+    }
+
+    try {
+
+        flight3 = await flights.createFlight("MF070", "New York", "California", "2022-12-19", "12:00", "2022-12-20", "11:00", "20");
+        //console.log(flight1)
+    } catch (e) {
+        console.log(e);
+    }
+
+    try {
+
+        flight6 = await flights.createFlight("MF060", "New York", "California", "2022-12-22", "12:00", "2022-12-23", "11:00","20");
+        //console.log(flight1)
+    } catch (e) {
+        console.log(e);
+    }
+
+
+    try {
+
+        flight4 = await flights.createFlight("SA091", "New Jersey", "Los Angeles", "2022-12-19", "17:00", "2022-12-20", "18:00", "2001");
+        //console.log(flight2)
+    } catch (e) {
+        console.log(e);
+    }
+   
 
     try {
 
@@ -91,1145 +105,52 @@ async function main() {
 
     try {
 
-        class3 = await classes.createClass(flight1._id, "first", 5, 4000, ["veg", "nonveg","vegan","salad"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-
-       //*************************************
-
-    try {
-
-        flight2 = await flights.createFlight("NF013", "New York", "Los Angeles", "2022-12-21", "10:00", "2022-12-22", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try{
-        class1 = await classes.createClass(flight2._id,"economy",100,1000,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"2");
-    }
-    try{
-    
-        class2 = await classes.createClass(flight2._id,"business",50,2000,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"2");
-    }
-
-       //*************************************
-
-
-    try {
-        flight3 = await flights.createFlight("MF070", "New York", "Los Angeles", "2022-12-20", "12:00", "2022-12-21", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try{
-        class2 = await classes.createClass(flight3._id,"business",5,2000,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"3");
-    }
-
-    try{
-        class2 = await classes.createClass(flight3._id,"first",5,4000,["veg","nonveg","vegan","salad"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"3");
-    }
-
-
-       //*************************************
-
-
-    try {
-
-        flight6 = await flights.createFlight("MF060", "New York", "Los Angeles", "2022-12-22", "12:00", "2022-12-23", "11:00","20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
         class2 = await classes.createClass(flight6._id, "economy", 15, 2000, ["veg", "nonveg"])
         //console.log(flight3)
     } catch (e) {
         console.log(e +"6");
     }
 
-
-    //*************************************
-    //*************************************
-
-   try {
-
-    flight26 = await flights.createFlight("SAF41", "New jersey", "Los Angeles", "2022-12-22", "10:00", "2022-12-23", "11:00",  "20");
-    //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class1 = await classes.createClass(flight26._id, "economy", 100, 500, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e+"26");
-    }
-    try {
-    
-        class2 = await classes.createClass(flight26._id, "business", 50, 1000, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e+"26");
-    }
-
-       //*************************************
-
-
-    try {
-
-        flight1 = await flights.createFlight("MF094", "New jersey", "Los Angeles", "2022-12-21", "10:00", "2022-12-22", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class1 = await classes.createClass(flight1._id, "economy", 10, 500, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-    try {
-
-        class2 = await classes.createClass(flight1._id, "business", 5, 1000, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-
-    try {
-
-        class3 = await classes.createClass(flight1._id, "first", 5, 3000, ["veg", "nonveg","vegan","salad"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-
-       //*************************************
-
-    try {
-
-        flight2 = await flights.createFlight("MF084", "New jersey", "Los Angeles", "2022-12-21", "10:00", "2022-12-22", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try{
-        class1 = await classes.createClass(flight2._id,"economy",100,500,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"2");
-    }
-    try{
-    
-        class2 = await classes.createClass(flight2._id,"business",50,1000,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"2");
-    }
-
-       //*************************************
-
-
-    try {
-        flight3 = await flights.createFlight("MF074", "New jersey", "Los Angeles", "2022-12-20", "12:00", "2022-12-21", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try{
-        class2 = await classes.createClass(flight3._id,"business",5,1000,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"3");
-    }
-
-    try{
-        class2 = await classes.createClass(flight3._id,"first",5,3000,["veg","nonveg","vegan","salad"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"3");
-    }
-
-
-       //*************************************
-
-
-    try {
-
-        flight6 = await flights.createFlight("MF064", "New jersey", "Los Angeles", "2022-12-22", "12:00", "2022-12-23", "11:00","20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class2 = await classes.createClass(flight6._id, "economy", 150, 500, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"6");
-    }
-
-
-
-    //*************************************
-    //*************************************
-
-   try {
-
-    flight26 = await flights.createFlight("SXF435", "New jersey", "Chicago", "2022-12-22", "10:00", "2022-12-23", "11:00",  "20");
-    //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class1 = await classes.createClass(flight26._id, "economy", 100, 500, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e+"26");
-    }
-    try {
-    
-        class2 = await classes.createClass(flight26._id, "business", 50, 1000, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e+"26");
-    }
-
-       //*************************************
-
-
-    try {
-
-        flight1 = await flights.createFlight("MF095", "New jersey", "Chicago", "2022-12-21", "10:00", "2022-12-22", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class1 = await classes.createClass(flight1._id, "economy", 10, 500, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-    try {
-
-        class2 = await classes.createClass(flight1._id, "business", 5, 1000, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-
-    try {
-
-        class3 = await classes.createClass(flight1._id, "first", 5, 3000, ["veg", "nonveg","vegan","salad"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-
-       //*************************************
-
-    try {
-
-        flight2 = await flights.createFlight("MF085", "New jersey", "Chicago", "2022-12-21", "10:00", "2022-12-22", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try{
-        class1 = await classes.createClass(flight2._id,"economy",100,500,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"2");
-    }
-    try{
-    
-        class2 = await classes.createClass(flight2._id,"business",50,1000,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"2");
-    }
-
-       //*************************************
-
-
-    try {
-        flight3 = await flights.createFlight("MF075", "New jersey", "Chicago", "2022-12-20", "12:00", "2022-12-21", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try{
-        class2 = await classes.createClass(flight3._id,"business",5,1000,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"3");
-    }
-
-    try{
-        class2 = await classes.createClass(flight3._id,"first",5,3000,["veg","nonveg","vegan","salad"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"3");
-    }
-
-
-       //*************************************
-
-
-    try {
-
-        flight6 = await flights.createFlight("MF065", "New jersey", "Chicago", "2022-12-22", "12:00", "2022-12-23", "11:00","20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class2 = await classes.createClass(flight6._id, "economy", 150, 500, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"6");
-    }
-
-
-
-
-
-     //*************************************
-    //*************************************
-
-   try {
-
-    flight26 = await flights.createFlight("SYF45", "Phoenix", "Chicago", "2022-12-22", "10:00", "2022-12-23", "11:00",  "20");
-    //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class1 = await classes.createClass(flight26._id, "economy", 100, 200, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e+"26");
-    }
-    try {
-    
-        class2 = await classes.createClass(flight26._id, "business", 50, 800, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e+"26");
-    }
-
-       //*************************************
-
-
-    try {
-
-        flight1 = await flights.createFlight("MF096", "Phoenix", "Chicago", "2022-12-21", "10:00", "2022-12-22", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class1 = await classes.createClass(flight1._id, "economy", 10, 200, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-    try {
-
-        class2 = await classes.createClass(flight1._id, "business", 5, 800, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-
-    try {
-
-        class3 = await classes.createClass(flight1._id, "first", 5, 1000, ["veg", "nonveg","vegan","salad"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-
-       //*************************************
-
-    try {
-
-        flight2 = await flights.createFlight("MF086", "Phoenix", "Chicago", "2022-12-21", "10:00", "2022-12-22", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try{
-        class1 = await classes.createClass(flight2._id,"economy",100,200,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"2");
-    }
-    try{
-    
-        class2 = await classes.createClass(flight2._id,"business",50,800,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"2");
-    }
-
-       //*************************************
-
-
-    try {
-        flight3 = await flights.createFlight("MF076", "Phoenix", "Chicago", "2022-12-20", "12:00", "2022-12-21", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try{
-        class2 = await classes.createClass(flight3._id,"business",5,800,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"3");
-    }
-
-    try{
-        class2 = await classes.createClass(flight3._id,"first",5,1000,["veg","nonveg","vegan","salad"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"3");
-    }
-
-
-       //*************************************
-
-
-    try {
-
-        flight6 = await flights.createFlight("MF066", "Phoenix", "Chicago", "2022-12-22", "12:00", "2022-12-23", "11:00","20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class2 = await classes.createClass(flight6._id, "economy", 150, 200, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"6");
-    }
-
-
-
-
-
-
-    //*************************************
-    //*************************************
-
-   try {
-
-    flight26 = await flights.createFlight("SR437", "New jersey", "boston", "2022-12-22", "10:00", "2022-12-23", "11:00",  "20");
-    //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class1 = await classes.createClass(flight26._id, "economy", 100, 500, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e+"26");
-    }
-    try {
-    
-        class2 = await classes.createClass(flight26._id, "business", 50, 1000, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e+"26");
-    }
-
-       //*************************************
-
-
-    try {
-
-        flight1 = await flights.createFlight("MF097", "New jersey", "boston", "2022-12-21", "10:00", "2022-12-22", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class1 = await classes.createClass(flight1._id, "economy", 10, 500, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-    try {
-
-        class2 = await classes.createClass(flight1._id, "business", 5, 1000, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-
-    try {
-
-        class3 = await classes.createClass(flight1._id, "first", 5, 3000, ["veg", "nonveg","vegan","salad"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-
-       //*************************************
-
-    try {
-
-        flight2 = await flights.createFlight("MF087", "New jersey", "boston", "2022-12-21", "10:00", "2022-12-22", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try{
-        class1 = await classes.createClass(flight2._id,"economy",100,500,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"2");
-    }
-    try{
-    
-        class2 = await classes.createClass(flight2._id,"business",50,1000,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"2");
-    }
-
-       //*************************************
-
-
-    try {
-        flight3 = await flights.createFlight("MF077", "New jersey", "boston", "2022-12-20", "12:00", "2022-12-21", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try{
-        class2 = await classes.createClass(flight3._id,"business",5,1000,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"3");
-    }
-
-    try{
-        class2 = await classes.createClass(flight3._id,"first",5,3000,["veg","nonveg","vegan","salad"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"3");
-    }
-
-
-       //*************************************
-
-
-    try {
-
-        flight6 = await flights.createFlight("MF067", "New jersey", "boston", "2022-12-22", "12:00", "2022-12-23", "11:00","20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class2 = await classes.createClass(flight6._id, "economy", 150, 500, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"6");
-    }
-    
-
-
-
-
-    //******************************************* */
-    //******************************************* */
-
-     //*************************************
-    //*************************************
-
-   try {
-
-    flight26 = await flights.createFlight("SQ438", "New jersey", "Dallas", "2022-12-22", "10:00", "2022-12-23", "11:00",  "20");
-    //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class1 = await classes.createClass(flight26._id, "economy", 100, 500, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e+"26");
-    }
-    try {
-    
-        class2 = await classes.createClass(flight26._id, "business", 50, 1000, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e+"26");
-    }
-
-       //*************************************
-
-
-    try {
-
-        flight1 = await flights.createFlight("MF098", "New jersey", "Dallas", "2022-12-21", "10:00", "2022-12-22", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class1 = await classes.createClass(flight1._id, "economy", 10, 500, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-    try {
-
-        class2 = await classes.createClass(flight1._id, "business", 5, 1000, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-
-    try {
-
-        class3 = await classes.createClass(flight1._id, "first", 5, 3000, ["veg", "nonveg","vegan","salad"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-
-       //*************************************
-
-    try {
-
-        flight2 = await flights.createFlight("MF088", "New jersey", "Dallas", "2022-12-21", "10:00", "2022-12-22", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try{
-        class1 = await classes.createClass(flight2._id,"economy",100,500,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"2");
-    }
-    try{
-    
-        class2 = await classes.createClass(flight2._id,"business",50,1000,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"2");
-    }
-
-       //*************************************
-
-
-    try {
-        flight3 = await flights.createFlight("MF078", "New jersey", "Dallas", "2022-12-20", "12:00", "2022-12-21", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try{
-        class2 = await classes.createClass(flight3._id,"business",5,1000,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"3");
-    }
-
-    try{
-        class2 = await classes.createClass(flight3._id,"first",5,3000,["veg","nonveg","vegan","salad"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"3");
-    }
-
-
-       //*************************************
-
-
-    try {
-
-        flight6 = await flights.createFlight("MF068", "New jersey", "Dallas", "2022-12-22", "12:00", "2022-12-23", "11:00","20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class2 = await classes.createClass(flight6._id, "economy", 150, 500, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"6");
-    }
-
-
-
-    //*************************************
-    //*************************************
-
-   try {
-
-    flight26 = await flights.createFlight("SDU39", "New jersey", "Dallas", "2022-12-22", "10:00", "2022-12-23", "11:00",  "20");
-    //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class1 = await classes.createClass(flight26._id, "economy", 100, 500, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e+"26");
-    }
-    try {
-    
-        class2 = await classes.createClass(flight26._id, "business", 50, 1000, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e+"26");
-    }
-
-       //*************************************
-
-
-    try {
-
-        flight1 = await flights.createFlight("MF099", "New jersey", "Dallas", "2022-12-21", "10:00", "2022-12-22", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class1 = await classes.createClass(flight1._id, "economy", 10, 500, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-    try {
-
-        class2 = await classes.createClass(flight1._id, "business", 5, 1000, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-
-    try {
-
-        class3 = await classes.createClass(flight1._id, "first", 5, 3000, ["veg", "nonveg","vegan","salad"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-
-       //*************************************
-
-    try {
-
-        flight2 = await flights.createFlight("MF089", "New jersey", "Dallas", "2022-12-21", "10:00", "2022-12-22", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try{
-        class1 = await classes.createClass(flight2._id,"economy",100,500,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"2");
-    }
-    try{
-    
-        class2 = await classes.createClass(flight2._id,"business",50,1000,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"2");
-    }
-
-       //*************************************
-
-
-    try {
-        flight3 = await flights.createFlight("MF079", "New jersey", "Dallas", "2022-12-20", "12:00", "2022-12-21", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try{
-        class2 = await classes.createClass(flight3._id,"business",5,1000,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"3");
-    }
-
-    try{
-        class2 = await classes.createClass(flight3._id,"first",5,3000,["veg","nonveg","vegan","salad"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"3");
-    }
-
-
-       //*************************************
-
-
-    try {
-
-        flight6 = await flights.createFlight("MF069", "New jersey", "Dallas", "2022-12-22", "12:00", "2022-12-23", "11:00","20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class2 = await classes.createClass(flight6._id, "economy", 150, 500, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"6");
-    }
-
-
-
-
-
-     //*************************************
-    //*************************************
-
-   try {
-
-    flight26 = await flights.createFlight("SDW12", "florida", "Chicago", "2022-12-22", "10:00", "2022-12-23", "11:00",  "20");
-    //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class1 = await classes.createClass(flight26._id, "economy", 100, 200, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e+"26");
-    }
-    try {
-    
-        class2 = await classes.createClass(flight26._id, "business", 50, 800, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e+"26");
-    }
-
-       //*************************************
-
-
-    try {
-
-        flight1 = await flights.createFlight("MF912", "florida", "Chicago", "2022-12-21", "10:00", "2022-12-22", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class1 = await classes.createClass(flight1._id, "economy", 10, 200, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-    try {
-
-        class2 = await classes.createClass(flight1._id, "business", 5, 800, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-
-    try {
-
-        class3 = await classes.createClass(flight1._id, "first", 5, 1000, ["veg", "nonveg","vegan","salad"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-
-       //*************************************
-
-    try {
-
-        flight2 = await flights.createFlight("MF812", "florida", "Chicago", "2022-12-21", "10:00", "2022-12-22", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try{
-        class1 = await classes.createClass(flight2._id,"economy",100,200,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"2");
-    }
-    try{
-    
-        class2 = await classes.createClass(flight2._id,"business",50,800,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"2");
-    }
-
-       //*************************************
-
-
-    try {
-        flight3 = await flights.createFlight("MF712", "florida", "Chicago", "2022-12-20", "12:00", "2022-12-21", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try{
-        class2 = await classes.createClass(flight3._id,"business",5,800,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"3");
-    }
-
-    try{
-        class2 = await classes.createClass(flight3._id,"first",5,1000,["veg","nonveg","vegan","salad"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"3");
-    }
-
-
-       //*************************************
-
-
-    try {
-
-        flight6 = await flights.createFlight("MF612", "florida", "Chicago", "2022-12-22", "12:00", "2022-12-23", "11:00","20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class2 = await classes.createClass(flight6._id, "economy", 150, 200, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"6");
-    }
-
-
-
-
-
-
-    //*************************************
-    //*************************************
-
-   try {
-
-    flight26 = await flights.createFlight("SDV33", "New jersey", "florida", "2022-12-22", "10:00", "2022-12-23", "11:00",  "20");
-    //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class1 = await classes.createClass(flight26._id, "economy", 100, 500, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e+"26");
-    }
-    try {
-    
-        class2 = await classes.createClass(flight26._id, "business", 50, 1000, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e+"26");
-    }
-
-       //*************************************
-
-
-    try {
-
-        flight1 = await flights.createFlight("M913", "New jersey", "florida", "2022-12-21", "10:00", "2022-12-22", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class1 = await classes.createClass(flight1._id, "economy", 10, 500, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-    try {
-
-        class2 = await classes.createClass(flight1._id, "business", 5, 1000, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-
-    try {
-
-        class3 = await classes.createClass(flight1._id, "first", 5, 3000, ["veg", "nonveg","vegan","salad"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"1");
-    }
-
-       //*************************************
-
-    try {
-
-        flight2 = await flights.createFlight("M813", "New jersey", "florida", "2022-12-21", "10:00", "2022-12-22", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try{
-        class1 = await classes.createClass(flight2._id,"economy",100,500,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"2");
-    }
-    try{
-    
-        class2 = await classes.createClass(flight2._id,"business",50,1000,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"2");
-    }
-
-       //*************************************
-
-
-    try {
-        flight3 = await flights.createFlight("M713", "New jersey", "florida", "2022-12-20", "12:00", "2022-12-21", "11:00", "20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try{
-        class2 = await classes.createClass(flight3._id,"business",5,1000,["veg","nonveg"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"3");
-    }
-
-    try{
-        class2 = await classes.createClass(flight3._id,"first",5,3000,["veg","nonveg","vegan","salad"])
-        //console.log(flight3)
-    }catch(e){
-        console.log(e+"3");
-    }
-
-
-       //*************************************
-
-
-    try {
-
-        flight6 = await flights.createFlight("M613", "New jersey", "florida", "2022-12-22", "12:00", "2022-12-23", "11:00","20");
-        //console.log(flight1)
-    } catch (e) {
-        console.log(e);
-    }
-
-    try {
-
-        class2 = await classes.createClass(flight6._id, "economy", 150, 500, ["veg", "nonveg"])
-        //console.log(flight3)
-    } catch (e) {
-        console.log(e +"6");
-    }
-    
-
-
-
-
-
-
-
-
-
-
-
+try{
+    class1 = await classes.createClass(flight2._id,"economy",100,1000,["veg","nonveg"])
+    //console.log(flight3)
+}catch(e){
+    console.log(e+"2");
+}
+try{
+
+    class2 = await classes.createClass(flight2._id,"business",50,2000,["veg","nonveg"])
+    //console.log(flight3)
+}catch(e){
+    console.log(e+"2");
+}
+try{
+    class2 = await classes.createClass(flight3._id,"business",5,2000,["veg","nonveg"])
+    //console.log(flight3)
+}catch(e){
+    console.log(e+"3");
+}
+try {
+
+    class1 = await classes.createClass(flight26._id, "economy", 100, 1000, ["veg", "nonveg"])
+    //console.log(flight3)
+} catch (e) {
+    console.log(e+"26");
+}
+try {
+
+    class2 = await classes.createClass(flight26._id, "business", 50, 2000, ["veg", "nonveg"])
+    //console.log(flight3)
+} catch (e) {
+    console.log(e+"26");
+}
+
+
+    // try {
+    //     user1 = await users.createUsers('test1', 'test2', 'admin123@stevens.edu', 'Admin@123', 'Admin@123');
+    // } catch (e) {
+    //     console.log(e);
+    // }
 
     try {
         user1 = await users.createUsers('test', 'test', 'test123@stevens.edu', 'Test@123', 'Test@123');
@@ -1246,6 +167,18 @@ async function main() {
     } catch (e) {
         console.log(e);
     }
+
+    // try {
+    //     review1 = await review.createReview('admin123@stevens.edu', 'good one', 5)
+    // } catch (e) {
+    //     console.log(e);
+    // }
+
+    // try {
+    //     review2 = await review.createReview('admin123@stevens.edu', 'bad one', 1)
+    // } catch (e) {
+    //     console.log(e);
+    // }
 
     // try{
 
@@ -1284,17 +217,40 @@ async function main() {
     //     console.log(e);
     // }
 
+    // try{
 
-    try{
+//     review2 = await review.createReview(user1._id,flight1._id,"flight was awesome",4)
+//     //console.log(flight3)
+// }catch(e){
+//     console.log(e);
+// }
 
-        adminData = await adminCollection.createAdmin("abc@gmail.com","Qwerty123!");
-        //console.log(flight3)
-    }catch(e){
-        console.log(e);
-    }
+try{
 
-    await connection.closeConnection();
-    console.log('Done!');
+    adminData = await adminCollection.createAdmin("abc@gmail.com","Qwerty123!");
+    //console.log(flight3)
+}catch(e){
+    console.log(e);
+}
+
+//  try{
+
+// // try{
+
+// //     adminData = await flights.getallflightdetailsforflightdetailspage("639a00cae633c3e1f81b834b","economy");
+// //     console.log(adminData)
+// // }catch(e){
+// //     console.log(e);
+// // }
+
+//     adminData = await flights.getallflightdetailsforflightdetailspage("639a00cae633c3e1f81b834b","economy");
+//     console.log(adminData)
+// }catch(e){
+//     console.log(e);
+// }
+
+await connection.closeConnection();
+console.log('Done!');
 
 }
 
