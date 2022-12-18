@@ -57,7 +57,7 @@ async function main() {
     }
     try {
     
-        class2 = await classes.createClass(flight26._id, "business", 50, 2000, ["veg", "nonveg"])
+        class2 = await classes.createClass(flight26._id, "business", 50, 2000, ["veg", "nonveg","salad"])
         //console.log(flight3)
     } catch (e) {
         console.log(e+"26");
@@ -83,7 +83,7 @@ async function main() {
     }
     try {
 
-        class2 = await classes.createClass(flight1._id, "business", 5, 2000, ["veg", "nonveg"])
+        class2 = await classes.createClass(flight1._id, "business", 5, 2000, ["veg", "nonveg","salad"])
         //console.log(flight3)
     } catch (e) {
         console.log(e +"1");
@@ -115,7 +115,7 @@ async function main() {
     }
     try{
     
-        class2 = await classes.createClass(flight2._id,"business",50,2000,["veg","nonveg"])
+        class2 = await classes.createClass(flight2._id,"business",50,2000,["veg","nonveg","salad"])
         //console.log(flight3)
     }catch(e){
         console.log(e+"2");
@@ -132,7 +132,7 @@ async function main() {
     }
 
     try{
-        class2 = await classes.createClass(flight3._id,"business",5,2000,["veg","nonveg"])
+        class2 = await classes.createClass(flight3._id,"business",5,2000,["veg","nonveg","salad"])
         //console.log(flight3)
     }catch(e){
         console.log(e+"3");
@@ -186,7 +186,7 @@ async function main() {
     }
     try {
     
-        class2 = await classes.createClass(flight26._id, "business", 50, 1000, ["veg", "nonveg"])
+        class2 = await classes.createClass(flight26._id, "business", 50, 1000, ["veg", "nonveg","salad"])
         //console.log(flight3)
     } catch (e) {
         console.log(e+"26");
@@ -212,7 +212,7 @@ async function main() {
     }
     try {
 
-        class2 = await classes.createClass(flight1._id, "business", 5, 1000, ["veg", "nonveg"])
+        class2 = await classes.createClass(flight1._id, "business", 5, 1000, ["veg", "nonveg","salad"])
         //console.log(flight3)
     } catch (e) {
         console.log(e +"1");
@@ -244,7 +244,7 @@ async function main() {
     }
     try{
     
-        class2 = await classes.createClass(flight2._id,"business",50,1000,["veg","nonveg"])
+        class2 = await classes.createClass(flight2._id,"business",50,1000,["veg","nonveg","salad"])
         //console.log(flight3)
     }catch(e){
         console.log(e+"2");
@@ -261,7 +261,7 @@ async function main() {
     }
 
     try{
-        class2 = await classes.createClass(flight3._id,"business",5,1000,["veg","nonveg"])
+        class2 = await classes.createClass(flight3._id,"business",5,1000,["veg","nonveg","salad"])
         //console.log(flight3)
     }catch(e){
         console.log(e+"3");
@@ -316,7 +316,7 @@ async function main() {
     }
     try {
     
-        class2 = await classes.createClass(flight26._id, "business", 50, 1000, ["veg", "nonveg"])
+        class2 = await classes.createClass(flight26._id, "business", 50, 1000, ["veg", "nonveg","salad"])
         //console.log(flight3)
     } catch (e) {
         console.log(e+"26");
@@ -342,7 +342,7 @@ async function main() {
     }
     try {
 
-        class2 = await classes.createClass(flight1._id, "business", 5, 1000, ["veg", "nonveg"])
+        class2 = await classes.createClass(flight1._id, "business", 5, 1000, ["veg", "nonveg","salad"])
         //console.log(flight3)
     } catch (e) {
         console.log(e +"1");
@@ -374,7 +374,7 @@ async function main() {
     }
     try{
     
-        class2 = await classes.createClass(flight2._id,"business",50,1000,["veg","nonveg"])
+        class2 = await classes.createClass(flight2._id,"business",50,1000,["veg","nonveg","salad"])
         //console.log(flight3)
     }catch(e){
         console.log(e+"2");
@@ -391,7 +391,7 @@ async function main() {
     }
 
     try{
-        class2 = await classes.createClass(flight3._id,"business",5,1000,["veg","nonveg"])
+        class2 = await classes.createClass(flight3._id,"business",5,1000,["veg","nonveg","salad"])
         //console.log(flight3)
     }catch(e){
         console.log(e+"3");
@@ -448,7 +448,7 @@ async function main() {
     }
     try {
     
-        class2 = await classes.createClass(flight26._id, "business", 50, 800, ["veg", "nonveg"])
+        class2 = await classes.createClass(flight26._id, "business", 50, 800, ["veg", "nonveg","salad"])
         //console.log(flight3)
     } catch (e) {
         console.log(e+"26");
@@ -474,7 +474,7 @@ async function main() {
     }
     try {
 
-        class2 = await classes.createClass(flight1._id, "business", 5, 800, ["veg", "nonveg"])
+        class2 = await classes.createClass(flight1._id, "business", 5, 800, ["veg", "nonveg","salad"])
         //console.log(flight3)
     } catch (e) {
         console.log(e +"1");
@@ -506,7 +506,7 @@ async function main() {
     }
     try{
     
-        class2 = await classes.createClass(flight2._id,"business",50,800,["veg","nonveg"])
+        class2 = await classes.createClass(flight2._id,"business",50,800,["veg","nonveg","salad"])
         //console.log(flight3)
     }catch(e){
         console.log(e+"2");
@@ -523,7 +523,7 @@ async function main() {
     }
 
     try{
-        class2 = await classes.createClass(flight3._id,"business",5,800,["veg","nonveg"])
+        class2 = await classes.createClass(flight3._id,"business",5,800,["veg","nonveg","salad"])
         //console.log(flight3)
     }catch(e){
         console.log(e+"3");
@@ -581,7 +581,7 @@ async function main() {
     }
     try {
     
-        class2 = await classes.createClass(flight26._id, "business", 50, 1000, ["veg", "nonveg"])
+        class2 = await classes.createClass(flight26._id, "business", 50, 1000, ["veg", "nonveg","salad"])
         //console.log(flight3)
     } catch (e) {
         console.log(e+"26");
@@ -607,7 +607,7 @@ async function main() {
     }
     try {
 
-        class2 = await classes.createClass(flight1._id, "business", 5, 1000, ["veg", "nonveg"])
+        class2 = await classes.createClass(flight1._id, "business", 5, 1000, ["veg", "nonveg","salad"])
         //console.log(flight3)
     } catch (e) {
         console.log(e +"1");
@@ -639,7 +639,7 @@ async function main() {
     }
     try{
     
-        class2 = await classes.createClass(flight2._id,"business",50,1000,["veg","nonveg"])
+        class2 = await classes.createClass(flight2._id,"business",50,1000,["veg","nonveg","salad"])
         //console.log(flight3)
     }catch(e){
         console.log(e+"2");
@@ -656,7 +656,7 @@ async function main() {
     }
 
     try{
-        class2 = await classes.createClass(flight3._id,"business",5,1000,["veg","nonveg"])
+        class2 = await classes.createClass(flight3._id,"business",5,1000,["veg","nonveg","salad"])
         //console.log(flight3)
     }catch(e){
         console.log(e+"3");
@@ -716,7 +716,7 @@ async function main() {
     }
     try {
     
-        class2 = await classes.createClass(flight26._id, "business", 50, 1000, ["veg", "nonveg"])
+        class2 = await classes.createClass(flight26._id, "business", 50, 1000, ["veg", "nonveg","salad"])
         //console.log(flight3)
     } catch (e) {
         console.log(e+"26");
@@ -742,7 +742,7 @@ async function main() {
     }
     try {
 
-        class2 = await classes.createClass(flight1._id, "business", 5, 1000, ["veg", "nonveg"])
+        class2 = await classes.createClass(flight1._id, "business", 5, 1000, ["veg", "nonveg","salad"])
         //console.log(flight3)
     } catch (e) {
         console.log(e +"1");
@@ -774,7 +774,7 @@ async function main() {
     }
     try{
     
-        class2 = await classes.createClass(flight2._id,"business",50,1000,["veg","nonveg"])
+        class2 = await classes.createClass(flight2._id,"business",50,1000,["veg","nonveg","salad"])
         //console.log(flight3)
     }catch(e){
         console.log(e+"2");
@@ -791,7 +791,7 @@ async function main() {
     }
 
     try{
-        class2 = await classes.createClass(flight3._id,"business",5,1000,["veg","nonveg"])
+        class2 = await classes.createClass(flight3._id,"business",5,1000,["veg","nonveg","salad"])
         //console.log(flight3)
     }catch(e){
         console.log(e+"3");
@@ -846,7 +846,7 @@ async function main() {
     }
     try {
     
-        class2 = await classes.createClass(flight26._id, "business", 50, 1000, ["veg", "nonveg"])
+        class2 = await classes.createClass(flight26._id, "business", 50, 1000, ["veg", "nonveg","salad"])
         //console.log(flight3)
     } catch (e) {
         console.log(e+"26");
@@ -872,7 +872,7 @@ async function main() {
     }
     try {
 
-        class2 = await classes.createClass(flight1._id, "business", 5, 1000, ["veg", "nonveg"])
+        class2 = await classes.createClass(flight1._id, "business", 5, 1000, ["veg", "nonveg","salad"])
         //console.log(flight3)
     } catch (e) {
         console.log(e +"1");
@@ -904,7 +904,7 @@ async function main() {
     }
     try{
     
-        class2 = await classes.createClass(flight2._id,"business",50,1000,["veg","nonveg"])
+        class2 = await classes.createClass(flight2._id,"business",50,1000,["veg","nonveg","salad"])
         //console.log(flight3)
     }catch(e){
         console.log(e+"2");
@@ -921,7 +921,7 @@ async function main() {
     }
 
     try{
-        class2 = await classes.createClass(flight3._id,"business",5,1000,["veg","nonveg"])
+        class2 = await classes.createClass(flight3._id,"business",5,1000,["veg","nonveg","salad"])
         //console.log(flight3)
     }catch(e){
         console.log(e+"3");
@@ -978,7 +978,7 @@ async function main() {
     }
     try {
     
-        class2 = await classes.createClass(flight26._id, "business", 50, 800, ["veg", "nonveg"])
+        class2 = await classes.createClass(flight26._id, "business", 50, 800, ["veg", "nonveg","salad"])
         //console.log(flight3)
     } catch (e) {
         console.log(e+"26");
@@ -1004,7 +1004,7 @@ async function main() {
     }
     try {
 
-        class2 = await classes.createClass(flight1._id, "business", 5, 800, ["veg", "nonveg"])
+        class2 = await classes.createClass(flight1._id, "business", 5, 800, ["veg", "nonveg","salad"])
         //console.log(flight3)
     } catch (e) {
         console.log(e +"1");
@@ -1036,7 +1036,7 @@ async function main() {
     }
     try{
     
-        class2 = await classes.createClass(flight2._id,"business",50,800,["veg","nonveg"])
+        class2 = await classes.createClass(flight2._id,"business",50,800,["veg","nonveg","salad"])
         //console.log(flight3)
     }catch(e){
         console.log(e+"2");
@@ -1053,7 +1053,7 @@ async function main() {
     }
 
     try{
-        class2 = await classes.createClass(flight3._id,"business",5,800,["veg","nonveg"])
+        class2 = await classes.createClass(flight3._id,"business",5,800,["veg","nonveg","salad"])
         //console.log(flight3)
     }catch(e){
         console.log(e+"3");
@@ -1111,7 +1111,7 @@ async function main() {
     }
     try {
     
-        class2 = await classes.createClass(flight26._id, "business", 50, 1000, ["veg", "nonveg"])
+        class2 = await classes.createClass(flight26._id, "business", 50, 1000, ["veg", "nonveg","salad"])
         //console.log(flight3)
     } catch (e) {
         console.log(e+"26");
@@ -1137,7 +1137,7 @@ async function main() {
     }
     try {
 
-        class2 = await classes.createClass(flight1._id, "business", 5, 1000, ["veg", "nonveg"])
+        class2 = await classes.createClass(flight1._id, "business", 5, 1000, ["veg", "nonveg","salad"])
         //console.log(flight3)
     } catch (e) {
         console.log(e +"1");
@@ -1169,7 +1169,7 @@ async function main() {
     }
     try{
     
-        class2 = await classes.createClass(flight2._id,"business",50,1000,["veg","nonveg"])
+        class2 = await classes.createClass(flight2._id,"business",50,1000,["veg","nonveg","salad"])
         //console.log(flight3)
     }catch(e){
         console.log(e+"2");
@@ -1186,7 +1186,7 @@ async function main() {
     }
 
     try{
-        class2 = await classes.createClass(flight3._id,"business",5,1000,["veg","nonveg"])
+        class2 = await classes.createClass(flight3._id,"business",5,1000,["veg","nonveg","salad"])
         //console.log(flight3)
     }catch(e){
         console.log(e+"3");
