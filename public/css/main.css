@@ -5,6 +5,7 @@ button {
     text-align: center;
     font-size: 16px;
     border: 2px solid black;
+    border-radius: 4px;
 }
 
 
@@ -19,7 +20,7 @@ main{
 }
 
 body{
-background-color: rgb(252, 248, 244);
+    background-color: rgb(252, 248, 244);
     height:800px;
     width: 100%;
     border:black;
@@ -37,19 +38,24 @@ background-color: rgb(252, 248, 244);
 table{
 
     align-content: flex-end;
+    padding: 10px;
 }
+
 thead{
     background-color: #7493bb;
-    color:black
+    color:black;
+    padding: 10px;
 }
 
 nav{
     background-color:  #7493bb;
-
+    font-weight: bold;
 }
+
 .text-goes-here{
     color: #840000;
-
+    font-weight: bold;
+    font-style: italic;
 }
 
 .nav-link{
@@ -58,9 +64,29 @@ nav{
 
 a{
     color:blue;
+    font-size: medium;
 }
 
 .get-center{
     align-content: center;
     align-items: center;
+}
+
+h1 {
+    color: rgb(15, 15, 109);
+    text-decoration: underline;
+    font-family: fantasy;
+}
+
+h2 {
+    color: rgb(26, 104, 26);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h3 {
+    color: rgb(255, 0, 0);
+}
+
+tr, td {
+    padding: 5px;
 }

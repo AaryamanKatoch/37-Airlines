@@ -1,5 +1,10 @@
 <body>
+     {{#if haserror}}
+        <div>Error : {{error}}</div>
+        {{/if}}
     <form method="post" name="addFlightForm" id="addFlightForm" action="/admin/addflight" >
+     
+
     <table>
         <tr>
             <td><label for="flight_code">Flight Code</label></td>
@@ -76,7 +81,7 @@
         <tr><td>&nbsp;</td></tr>
 
         <tr>
-            <td><button type="submit" >Add Flight</button></td>
+            <td colspan="4"><button type="submit" >Add Flight</button></td>
         </tr>
         
     </table>
@@ -89,32 +94,3 @@
 
     <script src="/public/js/createflight.js"></script>
 </body>
-
-
-
-{{!-- <tr>
-    <td>Classes</td>
-    <td>
-        <input type="checkbox" id="ec" name="ec" value="economy" onclick="fnChecked()">
-        <label for="ec">Economy</label><br>
-    </td>
-    <td>
-        <input type="number" placeholder="No of Seats" id="ec_seats" style="display: none;" value="0">
-    </td>
-</tr>
-
-<tr>
-    <td>&nbsp;</td>
-    <td>
-        <input type="checkbox" id="bs" name="bs" value="business">
-        <label for="bs">Business</label><br>
-    </td>
-</tr>
-
-<tr>
-    <td>&nbsp;</td>
-    <td>
-        <input type="checkbox" id="ft" name="ft" value="first">
-        <label for="ft">First Class</label><br>
-    </td>
-</tr> --}}
