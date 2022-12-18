@@ -16,8 +16,7 @@ const createFlight = async (
   departureTime,
   arrivalDate,
   arrivalTime,
-  duration,
-  miles,
+  miles
   // ft_seats,
   // bs_seats,
   // ec_seats,
@@ -39,7 +38,7 @@ const createFlight = async (
   departureTime = await helper.checkifproperarrdepttime(departureTime);
   arrivalDate = await helper.checkifproperDate(arrivalDate);
   arrivalTime = await helper.checkifproperarrdepttime(arrivalTime);
-  duration = await helper.checkifproperduration(duration);
+  
   await helper.checkifpropermiles(miles)
   miles=miles.trim()
 
@@ -52,7 +51,7 @@ const createFlight = async (
     departureTime: departureTime,
     arrivalDate: arrivalDate,
     arrivalTime: arrivalTime,
-    duration: duration,
+   
     miles: miles,
     flightClass: [],
     bookedSeats: [],
@@ -149,7 +148,7 @@ const updateFlight = async (
   departureTime,
   arrivalDate,
   arrivalTime,
-  duration,
+  
   miles
   
 ) => {
@@ -171,7 +170,7 @@ const updateFlight = async (
   departureTime=await helper.checkifproperarrdepttime(departureTime)
   arrivalDate=await helper.checkifproperDate(arrivalDate)
   arrivalTime=await helper.checkifproperarrdepttime(arrivalTime)
-  duration=await helper.checkifproperduration(duration)
+ 
   await helper.checkifpropermiles(miles)
   miles=miles.trim()
   //flightCode=await helper.checkifproperflightcode(flightCode)
@@ -195,7 +194,7 @@ const updateFlight = async (
     departureTime:departureTime,
     arrivalDate:arrivalDate,
     arrivalTime:arrivalTime,
-    duration:duration,
+    
     miles:miles
   }
   const updatedInfo = await flightCollection.updateOne({_id: ObjectId(id)},
@@ -338,7 +337,7 @@ async function getallflightdetailsforflightdetailspage(id,fclass){
   arrival:flightdetails.arrival,
   departureTime:flightdetails.departureTime,
   arrivalTime:flightdetails.arrivalTime,
-  duration:flightdetails.duration,
+  
   miles:flightdetails.miles,
   flightClass:resclass
 }

@@ -53,7 +53,7 @@ router.route("/admin/addflight")
 
       const addFlightRes = await flights.createFlight(xss(newFlightData.flight_code), xss(newFlightData.departure), xss(newFlightData.arrival),
         xss(newFlightData.dept_date), xss(newFlightData.dept_time), xss(newFlightData.arrival_date), xss(newFlightData.arrival_time),
-        xss(newFlightData.flight_duration), xss(newFlightData.miles));
+       xss(newFlightData.miles));
 
         
         // newFlightData.ft_seats, newFlightData.bs_seats, newFlightData.ec_seats,
@@ -121,13 +121,13 @@ router.route("/admin/editflight/:id").get(async (req, res) => {
      const newdeparturetime =xss(req.body.departimeInput)
      const newarrivalDate= xss(req.body.arrivalDateInput)
      const newarrivaltime=xss(req.body.arrTimeInput)
-     const newduration=xss(req.body.durationInput)
+   
      const newmiles=xss(req.body.milesInput)
      const fid=req.params.id
      
  
    try{
-   const newflight = await flightData.updateFlight(fid,newflightcode,newdeparture,newarrival,newdepartureDate,newdeparturetime,newarrivalDate,newarrivaltime,newduration,newmiles)
+   const newflight = await flightData.updateFlight(fid,newflightcode,newdeparture,newarrival,newdepartureDate,newdeparturetime,newarrivalDate,newarrivaltime,newmiles)
    return res.redirect('/admin')
    
 }catch(e){ 
@@ -152,7 +152,7 @@ router.route("/admin/deleteflight/:id").get(async (req, res) => {
     
     res.redirect('/admin');
   } catch (error) {
-    console.log(error);
+    
     res.redirect('admin');
   }
   
