@@ -117,7 +117,7 @@ document.getElementById("arrival_date").setAttribute("min", dateToday);
       const depttime=document.getElementById('dept_time')
       const arrivaldate=document.getElementById('arrival_date')
       const arrivaltime=document.getElementById('arrival_time')
-      const duration=document.getElementById('flight_duration')
+     
       const miles=document.getElementById('miles')
       const firstnumber=document.getElementById('ft_seats')
       const firstfood=document.getElementById('ft_food_options')
@@ -528,8 +528,9 @@ document.getElementById("arrival_date").setAttribute("min", dateToday);
           if(aadate<dddate)
           throw 'arrival date cannot be before departure'
           
-          if(dddate===aadate){
-            if(vari11>vari22){
+          if(date==adate){
+            console.log("here")
+            if(vari11>vari21){
           throw "arrival time cannot be before departure"
             }
           }
@@ -540,7 +541,7 @@ document.getElementById("arrival_date").setAttribute("min", dateToday);
 
 
 
-              staticForm.submit()
+            staticForm.submit()
           } catch (e) {
           
             const message = typeof e === 'string' ? e : e.message;

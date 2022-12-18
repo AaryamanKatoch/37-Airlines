@@ -40,7 +40,7 @@ async function main() {
 
    try {
 
-    flight26 = await flights.createFlight("SDF43", "New York", "California", "2022-12-10", "10:00", "2022-12-11", "11:00", "88", "20");
+    flight26 = await flights.createFlight("SDF43", "New York", "California", "2022-12-10", "10:00", "2022-12-11", "11:00",  "20");
     //console.log(flight1)
 } catch (e) {
     console.log(e);
@@ -48,7 +48,7 @@ async function main() {
 
     try {
 
-        flight1 = await flights.createFlight("MF090", "New York", "California", "2022-12-18", "10:00", "2022-12-19", "11:00", "1", "20");
+        flight1 = await flights.createFlight("MF090", "New York", "California", "2022-12-18", "10:00", "2022-12-19", "11:00", "20");
         //console.log(flight1)
     } catch (e) {
         console.log(e);
@@ -56,7 +56,7 @@ async function main() {
 
     try {
 
-        flight2 = await flights.createFlight("MF080", "New York", "California", "2022-12-18", "10:00", "2022-12-19", "11:00", "1", "20");
+        flight2 = await flights.createFlight("MF080", "New York", "California", "2022-12-18", "10:00", "2022-12-19", "11:00", "20");
         //console.log(flight1)
     } catch (e) {
         console.log(e);
@@ -64,7 +64,7 @@ async function main() {
 
     try {
 
-        flight3 = await flights.createFlight("MF070", "New York", "California", "2022-12-19", "12:00", "2022-12-20", "11:00", "1", "20");
+        flight3 = await flights.createFlight("MF070", "New York", "California", "2022-12-19", "12:00", "2022-12-20", "11:00", "20");
         //console.log(flight1)
     } catch (e) {
         console.log(e);
@@ -72,7 +72,7 @@ async function main() {
 
     try {
 
-        flight6 = await flights.createFlight("MF060", "New York", "California", "2022-12-22", "12:00", "2022-12-23", "11:00", "1", "20");
+        flight6 = await flights.createFlight("MF060", "New York", "California", "2022-12-22", "12:00", "2022-12-23", "11:00","20");
         //console.log(flight1)
     } catch (e) {
         console.log(e);
@@ -81,7 +81,7 @@ async function main() {
 
     try {
 
-        flight4 = await flights.createFlight("SA091", "New Jersey", "Los Angeles", "2022-12-19", "17:00", "2022-12-20", "18:00", "1", "2001");
+        flight4 = await flights.createFlight("SA091", "New Jersey", "Los Angeles", "2022-12-19", "17:00", "2022-12-20", "18:00", "2001");
         //console.log(flight2)
     } catch (e) {
         console.log(e);
