@@ -69,9 +69,9 @@ router.route('/reviews/add').get(async (req,res)=>{
         if(bul==true){
             let userHaveReview=await reviewsData.getReviewByUsername(username);
             if(userHaveReview==null){
-                res.render('addReview',{title:'Add Reviews','isLoggedIn':isLoggedIn,alreadyHaveReview:false});
+                return res.render('addReview',{title:'Add Reviews','isLoggedIn':isLoggedIn,alreadyHaveReview:false});
             }else{
-                res.render('addReview',{title:'Add Reviews','isLoggedIn':isLoggedIn,alreadyHaveReview:true,review:userHaveReview.review,rating:userHaveReview.rating});
+                return res.render('addReview',{title:'Add Reviews','isLoggedIn':isLoggedIn,alreadyHaveReview:true,review:userHaveReview.review,rating:userHaveReview.rating});
             }
             
         }else{
