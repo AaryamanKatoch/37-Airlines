@@ -89,44 +89,50 @@ newFlightData.miles=newFlightData.miles.trim()
       throw "economy class seat capacity should be integer"
 
       newFlightData.ft_price=xss(newFlightData.ft_price)
-      if(!newFlightData.ft_price)
-      throw "first class price not provided";
-   
-      if(typeof(newFlightData.ft_price)!=="string")
-      throw 'first class price is not a string';
-      if(newFlightData.ft_price.trim().length===0)
-      throw "first class price cant be empty or all white spaces";
-   
-      newFlightData.ft_price=newFlightData.ft_price.trim() 
-      if(!(Number.isInteger(Number(newFlightData.ft_price)) && Number(newFlightData.ft_price) > 1 && Number(newFlightData.ft_price)<1000000))
-      throw "not proper first class price , should be an integer between 1 and 1000000 "
 
-      newFlightData.ec_price=xss(newFlightData.ec_price)
-      if(!newFlightData.ec_price)
-      throw "economy class price not provided";
-   
-      if(typeof(newFlightData.ec_price)!=="string")
-      throw 'economy class price is not a string';
-      if(newFlightData.ec_price.trim().length===0)
-      throw "economy class price cant be empty or all white spaces";
-   
-      newFlightData.ec_price=newFlightData.ec_price.trim() 
-      if(!(Number.isInteger(Number(newFlightData.ec_price)) && Number(newFlightData.ec_price) > 1 && Number(newFlightData.ec_price)<1000000))
-      throw "not proper economy class price , should be an integer between 1 and 1000000 "
+      if(Number(newFlightData.ft_seats) > 0){
+        if(!newFlightData.ft_price)
+        throw "first class price not provided";
+    
+        if(typeof(newFlightData.ft_price)!=="string")
+        throw 'first class price is not a string';
+        if(newFlightData.ft_price.trim().length===0)
+        throw "first class price cant be empty or all white spaces";
+    
+        newFlightData.ft_price=newFlightData.ft_price.trim() 
+        if(!(Number.isInteger(Number(newFlightData.ft_price)) && Number(newFlightData.ft_price) > 1 && Number(newFlightData.ft_price)<1000000))
+        throw "not proper first class price , should be an integer between 1 and 1000000 "
+      }
+      
+      if(Number(newFlightData.ec_seats) > 0){
+        newFlightData.ec_price=xss(newFlightData.ec_price)
+        if(!newFlightData.ec_price)
+        throw "economy class price not provided";
+    
+        if(typeof(newFlightData.ec_price)!=="string")
+        throw 'economy class price is not a string';
+        if(newFlightData.ec_price.trim().length===0)
+        throw "economy class price cant be empty or all white spaces";
+    
+        newFlightData.ec_price=newFlightData.ec_price.trim() 
+        if(!(Number.isInteger(Number(newFlightData.ec_price)) && Number(newFlightData.ec_price) > 1 && Number(newFlightData.ec_price)<1000000))
+        throw "not proper economy class price , should be an integer between 1 and 1000000 "
+      }
 
-
-      newFlightData.bs_price=xss(newFlightData.bs_price)
-      if(!newFlightData.bs_price)
-      throw "business class price not provided";
-   
-      if(typeof(newFlightData.bs_price)!=="string")
-      throw 'business class price is not a string';
-      if(newFlightData.bs_price.trim().length===0)
-      throw "business class price cant be empty or all white spaces";
-   
-      newFlightData.bs_price=newFlightData.bs_price.trim() 
-      if(!(Number.isInteger(Number(newFlightData.bs_price)) && Number(newFlightData.bs_price) > 1 && Number(newFlightData.bs_price)<1000000))
-      throw "not proper business class price , should be an integer between 1 and 1000000 "
+      if(Number(newFlightData.bs_seats) > 0){
+        newFlightData.bs_price=xss(newFlightData.bs_price)
+        if(!newFlightData.bs_price)
+        throw "business class price not provided";
+    
+        if(typeof(newFlightData.bs_price)!=="string")
+        throw 'business class price is not a string';
+        if(newFlightData.bs_price.trim().length===0)
+        throw "business class price cant be empty or all white spaces";
+    
+        newFlightData.bs_price=newFlightData.bs_price.trim() 
+        if(!(Number.isInteger(Number(newFlightData.bs_price)) && Number(newFlightData.bs_price) > 1 && Number(newFlightData.bs_price)<1000000))
+        throw "not proper business class price , should be an integer between 1 and 1000000 "
+      }
 
 
       if(Number(newFlightData.ft_seats) > 0){

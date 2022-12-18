@@ -3,7 +3,6 @@ var day = dateToday.getDate();
 var month = dateToday.getMonth() + 1;
 var year = dateToday.getFullYear();
 
-/*
 if (day < 10) {
     day = '0' + day;
 }
@@ -14,7 +13,6 @@ if (month < 10) {
 dateToday = year + '-' + month + '-' + day;
 document.getElementById("dept_date").setAttribute("min", dateToday);
 document.getElementById("arrival_date").setAttribute("min", dateToday);
-*/
 
 
 /*
@@ -329,6 +327,9 @@ document.getElementById("arrival_date").setAttribute("min", dateToday);
             vari31=vari31.trim() 
             if(!(Number.isInteger(Number(vari31)) && Number(vari31) > 1 && Number(vari31)<9538))
             throw "not proper miles , should be an integer between 1 and 9538"
+
+            if(new Date(arrivaldate.value) < new Date(deptdate.value)) 
+            throw "Arrival Date should be later than Departure Date";
             
 
             let fnum=firstnumber.value
@@ -370,83 +371,88 @@ document.getElementById("arrival_date").setAttribute("min", dateToday);
             if(!(Number.isInteger(Number(ecnum)) && Number(ecnum) >= 0 && Number(ecnum)<201))
             throw "economy class seat number should be an integer between 0 and 200"
 
+            if(firstnumber.value !== '0'){
+                let fprice = firstprice.value
+                if(!fprice)
+                throw "first class price not provided";
             
-
-            let fprice=firstprice.value
-            if(!fprice)
-            throw "first class price not provided";
-         
-            if(typeof(fprice)!=="string")
-            throw 'first class price is not a string';
-            if(fprice.trim().length===0)
-            throw "first class price cant be empty or all white spaces";
-         
-            fprice=fprice.trim() 
-            if(!(Number.isInteger(Number(fprice)) && Number(fprice) > 1 && Number(fprice)<1000000))
-            throw "not proper first class price , should be an integer between 1 and 1000000 "
-
-            let bprice=businessprice.value
-            if(!bprice)
-            throw "business class price not provided";
-         
-            if(typeof(bprice)!=="string")
-            throw 'business class price is not a string';
-            if(bprice.trim().length===0)
-            throw "business class price cant be empty or all white spaces";
-         
-            bprice=bprice.trim() 
-            if(!(Number.isInteger(Number(bprice)) && Number(bprice) > 1 && Number(bprice)<1000000))
-            throw "not proper business class price , should be an integer between 1 and 1000000 "
-
-
-            let eprice=economyprice.value
-            if(!eprice)
-            throw "economy class price not provided";
-         
-            if(typeof(eprice)!=="string")
-            throw 'economy class price is not a string';
-            if(eprice.trim().length===0)
-            throw "economy class price cant be empty or all white spaces";
-         
-            eprice=eprice.trim() 
-            if(!(Number.isInteger(Number(eprice)) && Number(eprice) > 1 && Number(eprice)<1000000))
-            throw "not proper economy class price , should be an integer between 1 and 1000000 "
-
+                if(typeof(fprice)!=="string")
+                throw 'first class price is not a string';
+                if(fprice.trim().length===0)
+                throw "first class price cant be empty or all white spaces";
             
-            let ffood=firstfood.value
-            if(!ffood)
-            throw 'no first class food option provided'
-            ffood=ffood.trim()
-            let vari12=ffood.split(",")
-            if(!vari12)
-            throw "first class food choices not provided";
-         
-            if(!Array.isArray(vari12))
-            throw 'first class food choices is not in proper format';
+                fprice=fprice.trim() 
+                if(!(Number.isInteger(Number(fprice)) && Number(fprice) > 1 && Number(fprice)<1000000))
+                throw "not proper first class price , should be an integer between 1 and 1000000 "
+            }
+
+            if(businessnumber.value !== '0'){
+                let bprice=businessprice.value
+                if(!bprice)
+                throw "business class price not provided";
             
-            if(!vari12.length>0)
-            throw 'first class food choicescant be empty'
-        
-            for(i=0;i<vari12.length;i++){
-                //console.log(vari[i])
-                if(typeof(vari12[i])!=="string")
-                throw 'first class choice should be a string'
-                //console.log(curfood)
-                vari12[i]=vari12[i].trim()
-                vari12[i]=vari12[i].toLowerCase()
-                //console.log(curfood)
-                if(vari12[i].length===0)
-                throw 'first class choice cant be empty or all white spaces'
-        
-                for(j=0;j<vari12[i].length;j++){
-                    if(!vari12[i][j].match(/^[A-Za-z\s]*$/))  
-                    throw 'first class choice should only be a string of alphabets'
+                if(typeof(bprice)!=="string")
+                throw 'business class price is not a string';
+                if(bprice.trim().length===0)
+                throw "business class price cant be empty or all white spaces";
+            
+                bprice=bprice.trim() 
+                if(!(Number.isInteger(Number(bprice)) && Number(bprice) > 1 && Number(bprice)<1000000))
+                throw "not proper business class price , should be an integer between 1 and 1000000 "
+            }
+
+            if(economynumber.value !== '0'){
+                let eprice=economyprice.value
+                if(!eprice)
+                throw "economy class price not provided";
+            
+                if(typeof(eprice)!=="string")
+                throw 'economy class price is not a string';
+                if(eprice.trim().length===0)
+                throw "economy class price cant be empty or all white spaces";
+            
+                eprice=eprice.trim() 
+                if(!(Number.isInteger(Number(eprice)) && Number(eprice) > 1 && Number(eprice)<1000000))
+                throw "not proper economy class price , should be an integer between 1 and 1000000 "
+            }
+
+            if(firstnumber.value !== '0'){
+                let ffood=firstfood.value
+                if(!ffood)
+                throw 'no first class food option provided'
+                ffood=ffood.trim()
+                let vari12=ffood.split(",")
+                if(!vari12)
+                throw "first class food choices not provided";
+            
+                if(!Array.isArray(vari12))
+                throw 'first class food choices is not in proper format';
+                
+                if(!vari12.length>0)
+                throw 'first class food choicescant be empty'
+            
+                for(i=0;i<vari12.length;i++){
+                    //console.log(vari[i])
+                    if(typeof(vari12[i])!=="string")
+                    throw 'first class choice should be a string'
+                    //console.log(curfood)
+                    vari12[i]=vari12[i].trim()
+                    vari12[i]=vari12[i].toLowerCase()
+                    //console.log(curfood)
+                    if(vari12[i].length===0)
+                    throw 'first class choice cant be empty or all white spaces'
+            
+                    for(j=0;j<vari12[i].length;j++){
+                        if(!vari12[i][j].match(/^[A-Za-z\s]*$/))  
+                        throw 'first class choice should only be a string of alphabets'
+                    }
+            
+                    if(vari12[i].length>30)
+                    throw "first class food choice name is too long, ask the chef to change name"
                 }
-        
-                if(vari12[i].length>30)
-                throw "first class food choice name is too long, ask the chef to change name"
-                }
+            }
 
+            if(businessnumber.value !== '0'){
                 let bfood=businessfood.value
                 if(!bfood)
                 throw "no business class food choice provided"
@@ -480,42 +486,65 @@ document.getElementById("arrival_date").setAttribute("min", dateToday);
             
                     if(vari22[i].length>30)
                     throw "business class food choice name is too long, ask the chef to change name"
-                    }
+                }
+            }
 
-                    let efood=economyfood.value
-                    if(!efood)
-                    throw "no economy class food choice provided"
-                    efood=efood.trim()
-                    let vari32=efood.split(",")
+            if(economynumber.value !== '0'){
+                let efood=economyfood.value
+                if(!efood)
+                throw "no economy class food choice provided"
+                efood=efood.trim()
+                let vari32=efood.split(",")
             
-                    if(!vari32)
-                    throw "economy class food choices not provided";
+                if(!vari32)
+                throw "economy class food choices not provided";
                  
-                    if(!Array.isArray(vari32))
-                    throw 'economy class food choices is not in proper format';
+                if(!Array.isArray(vari32))
+                throw 'economy class food choices is not in proper format';
                     
-                    if(!vari32.length>0)
-                    throw 'economy class food choicescant be empty'
+                if(!vari32.length>0)
+                throw 'economy class food choicescant be empty'
                 
-                    for(i=0;i<vari32.length;i++){
-                        //console.log(vari[i])
-                        if(typeof(vari32[i])!=="string")
-                        throw 'economy class choice should be a string'
-                        //console.log(curfood)
-                        vari32[i]=vari32[i].trim()
-                        vari32[i]=vari32[i].toLowerCase()
-                        //console.log(curfood)
-                        if(vari32[i].length===0)
-                        throw 'economy class choice cant be empty or all white spaces'
-                
-                        for(j=0;j<vari32[i].length;j++){
-                            if(!vari32[i][j].match(/^[A-Za-z\s]*$/))  
+                for(i=0;i<vari32.length;i++){
+                    //console.log(vari[i])
+                    if(typeof(vari32[i])!=="string")
+                    throw 'economy class choice should be a string'
+                    //console.log(curfood)
+                    vari32[i]=vari32[i].trim()
+                    vari32[i]=vari32[i].toLowerCase()
+                    //console.log(curfood)
+                    if(vari32[i].length===0)
+                    throw 'economy class choice cant be empty or all white spaces'
+            
+                    for(j=0;j<vari32[i].length;j++){
+                        if(!vari32[i][j].match(/^[A-Za-z\s]*$/))  
                             throw 'economy class choice should only be a string of alphabets'
-                        }
+                    }
                 
-                        if(vari32[i].length>30)
+                    if(vari32[i].length>30)
                         throw "economy class food choice name is too long, ask the chef to change name"
-                        }
+                }
+            }
+
+            let ec_seats = economynumber.value;
+            let bs_seats = businessnumber.value;
+            let ft_seats = firstnumber.value;
+
+            let ec_price = economyprice.value;
+            let bs_price = businessprice.value;
+            let ft_price = firstprice.value;
+
+            let ec_food_options = economyfood.value;
+            let bs_food_options = businessfood.value;
+            let ft_food_options = firstfood.value;
+
+            if(ec_seats === '0' && (ec_food_options.length > 0 || ec_price)) 
+                throw "Cannot provide food options/price for flight classes having 0 seats";
+            if(bs_seats === '0' && (bs_food_options.length > 0 || bs_price)) 
+                throw "Cannot provide food options/price for flight classes having 0 seats";
+            if(ft_seats === '0' && (ft_food_options.length > 0 || ft_price)) 
+                throw "Cannot provide food options/price for flight classes having 0 seats";
+
           const dddate=new Date(date)
           const aadate=new Date(adate)
 
