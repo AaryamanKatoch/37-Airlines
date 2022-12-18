@@ -54,7 +54,7 @@ router.route("/searchflights").post(async (req, res) => {
       
       if(result.length==0){
         //res.status(400).render('error',{error:'No result found for this properties' ,title:'No result Found'}, );
-        res.render('searchFlights',{flights : result,title:'searchFlights', isLoggedIn: isLoggedIn,noflights:true});
+        return res.render('searchFlights',{flights : result,title:'searchFlights', isLoggedIn: isLoggedIn,noflights:true});
       }
       else{
         await result.forEach(element => {
@@ -67,7 +67,7 @@ router.route("/searchflights").post(async (req, res) => {
         if(req.session.user) isLoggedIn = true;
         else isLoggedIn = false;
         // req.session.previousURL = {previousURL:"/searchflights"};
-        res.render('searchFlights',{flights : result,title:'searchFlights', isLoggedIn: isLoggedIn,noflights:false});
+        return res.render('searchFlights',{flights : result,title:'searchFlights', isLoggedIn: isLoggedIn,noflights:false});
       } 
     }catch(e){
       res.status(400).render('error',{error:e ,title:'error'}, );
