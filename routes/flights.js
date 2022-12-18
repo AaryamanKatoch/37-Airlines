@@ -151,7 +151,7 @@ router.route("/searchflights/flightdetails/:id/book").get(async(req,res)=>{
     
     // console.log(food);
     // req.session.previousURL = {previousURL:`/searchflights/flightdetails/${flightId}/book`};
-    res.render('bookflight', {title : "Book Flight", noOfPass : NoOfPass, choice : food, flightId : flightId, flightClass : flightClass, isLoggedIn : isLoggedIn, hasError : false});
+    res.render('bookflight', {title : "Book Flight",noOfPass : NoOfPass, choice : food, flightId : flightId, flightClass : flightClass, isLoggedIn : isLoggedIn, hasError : false});
   } catch (e) {
     
     res.status(400).render('error',{title : "Error",error : e});
