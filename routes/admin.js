@@ -43,10 +43,13 @@ router.route("/admin/addflight")
   .get(async (req, res) => {
     let haserror=false;
     let error;
+    let isLoggedIn;
     try {
-      return res.status(200).render("newFlight", { title: "Add Flight",haserror:haserror,error:error});
+      if(req.session.admin) isLoggedIn = true;
+    else isLoggedIn = false;
+      return res.status(200).render("newFlight", { title: "Add Flight",haserror:haserror,error:error,isLoggedIn : isLoggedIn});
     } catch (error) {haserror=true;error=e;
-      return res.status(400).render("newFlight", { title: "Add Flight",haserror:haserror,error:error});
+      return res.status(400).render("newFlight", { title: "Add Flight",haserror:haserror,error:error,isLoggedIn : isLoggedIn});
     }
     res.status(500).render("newFlight", { title: "Add Flight",haserror:haserror,error:error});
   })
@@ -169,7 +172,7 @@ router.route("/admin/addflight")
 
       return res.redirect("/admin");
     } catch (e) {haserror=true;error=e;
-      res.status(400).render("newFlight", { title: "Add Flight",haserror:haserror,error:error});
+      return res.status(400).render("newFlight", { title: "Add Flight",haserror:haserror,error:error});
     }
   });
   
