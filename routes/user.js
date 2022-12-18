@@ -59,6 +59,7 @@ router.route("/userProfile").get(async (req, res) => {
 
 
       router.route("/userProfile/editdetails").post(async (req, res) => {
+        let error;
         if(!req.session.user)
         return res.redirect("/login")
         
@@ -78,7 +79,8 @@ router.route("/userProfile").get(async (req, res) => {
      
       res.redirect("/userprofile")
    }catch(e){//console.log(e)
-    res.redirect("/userprofile")
+    error=e;
+    res.status(400).render("error",{error:error})
    }
        });
 

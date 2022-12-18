@@ -64,8 +64,8 @@ router.route("/admin/addflight")
      newFlightData.dept_time=await helper.checkifproperarrdepttime(xss(newFlightData.dept_time))
      newFlightData.arrival_date=await helper.checkifproperDate(xss(newFlightData.arrival_date))
      newFlightData.arrival_time=await helper.checkifproperarrdepttime(xss(newFlightData.arrival_time))
-await helper.checkifpropermiles(xss(newFlightData.miles))
-newFlightData.miles=newFlightData.miles.trim()
+     await helper.checkifpropermiles(xss(newFlightData.miles))
+     newFlightData.miles=xss(newFlightData.miles).trim()
 
 
 
@@ -89,6 +89,8 @@ newFlightData.miles=newFlightData.miles.trim()
       throw "economy class seat capacity should be integer"
 
       newFlightData.ft_price=xss(newFlightData.ft_price)
+      newFlightData.ft_seats=xss(newFlightData.ft_seats)
+
 
       if(Number(newFlightData.ft_seats) > 0){
         if(!newFlightData.ft_price)
@@ -104,6 +106,9 @@ newFlightData.miles=newFlightData.miles.trim()
         throw "not proper first class price , should be an integer between 1 and 1000000 "
       }
       
+      newFlightData.ec_price=xss(newFlightData.ec_price)
+      newFlightData.ec_seats=xss(newFlightData.ec_seats)
+
       if(Number(newFlightData.ec_seats) > 0){
         newFlightData.ec_price=xss(newFlightData.ec_price)
         if(!newFlightData.ec_price)
@@ -118,6 +123,9 @@ newFlightData.miles=newFlightData.miles.trim()
         if(!(Number.isInteger(Number(newFlightData.ec_price)) && Number(newFlightData.ec_price) > 1 && Number(newFlightData.ec_price)<1000000))
         throw "not proper economy class price , should be an integer between 1 and 1000000 "
       }
+
+      newFlightData.bs_price=xss(newFlightData.bs_price)
+      newFlightData.bs_seats=xss(newFlightData.bs_seats)
 
       if(Number(newFlightData.bs_seats) > 0){
         newFlightData.bs_price=xss(newFlightData.bs_price)
@@ -195,6 +203,8 @@ router.route("/admin/editflight/:id").get(async (req, res) => {
 
 
   router.route("/admin/editflight/:id").post(async (req, res) => {
+    let haserror=false;
+    let error;
      const newflightcode = xss(req.body.flightcodeInput)
      const newdeparture = xss(req.body.departureInput)
      const newarrival= xss(req.body.arrivalInput)
@@ -208,16 +218,18 @@ router.route("/admin/editflight/:id").get(async (req, res) => {
      
  
    try{
-   const newflight = await flightData.updateFlight(fid,newflightcode,newdeparture,newarrival,newdepartureDate,newdeparturetime,newarrivalDate,newarrivaltime,newmiles)
+   var newflight = await flightData.updateFlight(fid,newflightcode,newdeparture,newarrival,newdepartureDate,newdeparturetime,newarrivalDate,newarrivaltime,newmiles)
    return res.redirect('/admin')
    
-}catch(e){ 
-  return res.redirect('/admin')
+}catch(e){ error=e; haserror=true;
+  return res.status(400).render('editadmin', { solution1: newflight ,title: "Edit Flight" ,haserror:haserror,error:error});
 }
 });
 
 
 router.route("/admin/deleteflight/:id").get(async (req, res) => {
+  let haserror=false;
+  let error;
   try {
     let fid = xss(req.params.id);
   
@@ -232,9 +244,9 @@ router.route("/admin/deleteflight/:id").get(async (req, res) => {
     //console.log(bookingsDeleted);
     
     res.redirect('/admin');
-  } catch (error) {
-    
-    res.redirect('admin');
+  } catch (e) {
+    error=e; haserror=true;
+    return res.status(400).render('error', {error:error});
   }
   
 });

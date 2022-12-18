@@ -41,8 +41,16 @@ const createFlight = async (
   
   await helper.checkifpropermiles(miles)
   miles=miles.trim()
-
   const flightcollection = await flights();
+  const flightList = await flightcollection.find({}).toArray();
+  for(k=0;k<flightList.length;k++){
+    if(flightCode==flightList[k].flightCode)
+    throw "Cannot create a flight with a pre-existing flight code"
+  }
+
+
+
+
   let flight1 = {
     flightCode: flightCode,
     departure: departure,
@@ -186,6 +194,17 @@ const updateFlight = async (
 
   ///
   const flightCollection = await flights();
+  let fff=await getFlightById(id)
+
+  
+  const flightList = await flightCollection.find({}).toArray();
+  for(k=0;k<flightList.length;k++){
+    if(fff._id!=flightList[k]._id && flightCode==flightList[k].flightCode)
+    throw "Cannot create a flight with a pre-existing flight code"
+  }
+
+
+
   let updatedflight = {
     flightCode:flightCode,
     departure:departure,

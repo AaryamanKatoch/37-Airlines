@@ -7,7 +7,7 @@ const bookingCollection = require('../data/bookingCollection');
 const travelerData = require('../data/travelers');
 const userCollection = require('../data/usersCollection');
 const path = require('path');
-
+require('dotenv').config()
 
 async function getmaildata(bookingid){
 
@@ -68,7 +68,7 @@ let transporter = nodemailer.createTransport({
     requireTLS:true,
     auth:{
         user:'aaryamantpkatoch@gmail.com',
-        pass:'qjrnkfbwokfxwdle'
+        pass:"qjrnkfbwokfxwdle"
     }
 });
 

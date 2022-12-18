@@ -34,6 +34,7 @@ async function main() {
     let review1 = undefined;
     let review2 = undefined;
 
+    /*
    await db.dropDatabase();
 
 
@@ -247,7 +248,15 @@ try{
 //     console.log(adminData)
 // }catch(e){
 //     console.log(e);
-// }
+// }*/
+
+try{
+
+    const ff = await flights.createFlight("MF88", "New York", "California", "2022-12-10", "10:00", "2022-12-11", "11:00",  "20");
+    //console.log(flight3)
+}catch(e){
+    console.log(e);
+}
 
 await connection.closeConnection();
 console.log('Done!');

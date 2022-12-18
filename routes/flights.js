@@ -85,6 +85,8 @@ router.route("/searchflights/flightdetails/:id").get(async (req, res) => {
   let f_class=req.session.info.class;
   let NoOfPass=req.session.info.noOfPass;
   let isLoggedIn;
+
+
   try{
   if(!fid) {
     throw "no flight id is given"
@@ -97,6 +99,11 @@ router.route("/searchflights/flightdetails/:id").get(async (req, res) => {
 
   fid=fid.trim()
 
+  
+  
+
+
+
   var sol=await flightsData.getallflightdetailsforflightdetailspage(fid,f_class)
   
   sol["id1"]=fid
@@ -104,6 +111,7 @@ router.route("/searchflights/flightdetails/:id").get(async (req, res) => {
   sol["NoOfPass"]=NoOfPass
 
   
+
   req.session.previousURL = {previousURL:`/searchflights/flightdetails/${fid}/book`};
   if(req.session.user) isLoggedIn = true;
   else isLoggedIn = false;
@@ -191,7 +199,7 @@ router.route("/searchflights/flightdetails/:id/book/success").post(async(req,res
     let arrayObj = [];
     for(let i = 0; i < keys.length; i++)
     {
-        let value = data[keys[i]];
+        let value = xss(data[keys[i]]);
         let key = keys[i].substring(0, keys[i].length - 1);
         let index = parseInt(keys[i][keys[i].length - 1]) - 1;
         arrayObj[index] = arrayObj[index] || {};
