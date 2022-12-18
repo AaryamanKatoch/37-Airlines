@@ -558,7 +558,7 @@ document.getElementById("arrival_date").setAttribute("min", dateToday);
           throw 'arrival date cannot be before departure'
           
           if(date==adate){
-            console.log("here")
+            
             if(vari11>vari21){
           throw "arrival time cannot be before departure"
             }

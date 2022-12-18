@@ -10,7 +10,7 @@ button {
 
 
 main{
-    background-color: darkgray;
+    background-color: rgba(248, 243, 243, 0.907);
     border: black;
     color:black;
     text-align: center;
@@ -79,7 +79,7 @@ h1 {
 }
 
 h2 {
-    color: rgb(26, 104, 26);
+    color: #ab006d;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
