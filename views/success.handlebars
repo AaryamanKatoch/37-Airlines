@@ -1,4 +1,4 @@
-
+<section>
         <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid well" id="home" style="display:block; padding-top:10px;padding-bottom:10px">
             
@@ -20,20 +20,22 @@
 
 <table class="table table-striped">
     <thead>
-        <td>Flight Code</td>
-        <td>Departure City</td>
-        <td>Arrival City</td>
-        <td>Departure Time</td>
-        <td>Arrival Time</td>
-       
+        <tr>
+            <td>Flight Code</td>
+            <td>Departure City</td>
+            <td>Arrival City</td>
+            <td>Departure Time</td>
+            <td>Arrival Time</td>
+        </tr>
     </thead>
     <tbody>
-  <td>{{{flightDetails.flightCode}}}</td>
-  <td>{{flightDetails.departure}}</td>
-  <td>{{flightDetails.arrival}}</td>
-  <td>{{flightDetails.departureTime}}</td>
-  <td>{{flightDetails.arrivalTime}}</td>
- 
+        <tr>
+            <td>{{{flightDetails.flightCode}}}</td>
+            <td>{{flightDetails.departure}}</td>
+            <td>{{flightDetails.arrival}}</td>
+            <td>{{flightDetails.departureTime}}</td>
+            <td>{{flightDetails.arrivalTime}}</td>
+        </tr>
       </tbody>
 </table>
 <table class="table table-striped">
@@ -81,3 +83,4 @@
 <div><a href="/searchflights/flightdetails/:id/book/success">Download ticket</a></div>
 
 <div><a href="/searchflights/flightdetails/:id/book/success/emailconfirmation">Click here to get email confirmation via mail and be redirected to Homepage</a></div>
+</section>

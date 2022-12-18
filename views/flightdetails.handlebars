@@ -6,11 +6,15 @@
         <ul class="navbar-nav">
     {{#if isLoggedIn}}
     <li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
+    <a  class="nav-link" href="/"> Homepage</a></li>
+    <li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
     <a class="nav-link" href="/userProfile">User Profile</a>
     </li>
     <li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
     <a class="nav-link" href="/logout">Logout</a></li>
     {{else}}
+    <li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
+    <a  class="nav-link" href="/"> Homepage</a></li>
     <li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
     <a class="nav-link" href="/login">Login</a></li>
     {{/if}}
@@ -73,5 +77,5 @@
 </table>
 <br>
 <br>
-   <a href="/searchflights/flightdetails/{{solution1.id1}}/book">click kere to book flight</a>
+   <a href="/searchflights/flightdetails/{{solution1.id1}}/book">Book Flight</a>
 </section>
