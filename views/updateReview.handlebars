@@ -30,21 +30,11 @@
     <h1>{{error}}</h1>
     {{/if}}
 
-
-    {{#if alreadyHaveReview}}
-        <h3>You already gave review</h3>
-        <h3>If you want to change it please go on update review</h3>
-        <hr>
-        <h4>Review:- {{review}}</h4>
-        <h4>Rating :- {{rating}}</h4>
-        <hr>
-        <a href="/reviews/add/update">Update Review</a> 
-    {{else}}
-        <form method="post" id="addreviewform">
+        <form method="post" id="updatereviewform" action="/reviews/add/update" name="updatereviewform">
                 <table>
                     <tr>
                         <td><label for="review">Review</label></td>
-                        <td><input type="text" name="review" id="review" placeholder="Add Review Here"></td>
+                        <td><input type="text" name="review" id="review" placeholder="Update Review Here"></td>
                     </tr>
                     <tr>
                         <td><label for="rating">Rating</label></td>
@@ -59,12 +49,12 @@
                         </td>
                     </tr>
                 </table>
-                <button id="submit-button" type="submit" name="submit" value="submit">Add</button>
-            </form>
-    {{/if}}
+                <button id="submit-button" type="submit">Update</button>
+        </form>
+
     <div class="hidden" id="error-container">
         <div class="text-goes-here">
         </div>
     </div>
-    <script src="/public/js/reviews.js"></script>
+    <script src="/public/js/updateReview.js"></script>
 </main>

@@ -1,5 +1,10 @@
 <body>
+     {{#if haserror}}
+        <div>Error : {{error}}</div>
+        {{/if}}
     <form method="post" name="addFlightForm" id="addFlightForm" action="/admin/addflight" >
+     
+
     <table>
         <tr>
             <td><label for="flight_code">Flight Code</label></td>
@@ -47,36 +52,48 @@
 
         <tr>
             <td><b>Flight Classes</b></td>
+            <td></td>
             <td><b>No of Seats</b></td>
+            <td></td>
             <td><b>Food Options</b></td>
+            <td></td>
             <td><b>Price</b></td>
         </tr>
 
         <tr>
             <td>First Class</td>
+            <td><label for="ft_seats" >First class number of seats</label></td>
             <td><input type="number" placeholder="No of Seats" id="ft_seats" name="ft_seats" value="0" min="0">&nbsp;</td>
+            <td><label for="ft_food_options" >First class food options</label></td>
             <td><input type="text" placeholder="Enter ',' seprated values" id="ft_food_options" name="ft_food_options">&nbsp;</td>
+            <td><label for="ft_price" >First class Price</label></td>
             <td><input type="number" placeholder="Enter Amount" id="ft_price" name="ft_price"></td>
         </tr>
 
         <tr>
             <td>Business Class</td>
+            <td><label for="bs_seats" >Business class number of seats</label></td>
             <td><input type="number" placeholder="No of Seats" id="bs_seats" name="bs_seats" value="0" min="0"></td>
+            <td><label for="bs_food_options" >Business class food options</label></td>
             <td><input type="text" placeholder="Enter ',' seprated values" id="bs_food_options" name="bs_food_options"></td>
+            <td><label for="bs_price" >Business class Price</label></td>
             <td><input type="number" placeholder="Enter Amount" id="bs_price" name="bs_price"></td>
         </tr>
 
         <tr>
             <td>Economy Class</td>
+            <td><label for="ec_seats" >Economy class number of seats</label></td>
             <td><input type="number" placeholder="No of Seats" id="ec_seats" name="ec_seats" value="0" min="0"></td>
+            <td><label for="ec_food_options" >Economy class food options</label></td>
             <td><input type="text" placeholder="Enter ',' seprated values" id="ec_food_options" name="ec_food_options"></td>
+             <td><label for="ec_price" >Economy class price</label></td>
             <td><input type="number" placeholder="Enter Amount" id="ec_price" name="ec_price"></td>
         </tr>
 
         <tr><td>&nbsp;</td></tr>
 
         <tr>
-            <td><button type="submit" >Add Flight</button></td>
+            <td colspan="4"><button type="submit" >Add Flight</button></td>
         </tr>
         
     </table>
@@ -89,32 +106,3 @@
 
     <script src="/public/js/createflight.js"></script>
 </body>
-
-
-
-{{!-- <tr>
-    <td>Classes</td>
-    <td>
-        <input type="checkbox" id="ec" name="ec" value="economy" onclick="fnChecked()">
-        <label for="ec">Economy</label><br>
-    </td>
-    <td>
-        <input type="number" placeholder="No of Seats" id="ec_seats" style="display: none;" value="0">
-    </td>
-</tr>
-
-<tr>
-    <td>&nbsp;</td>
-    <td>
-        <input type="checkbox" id="bs" name="bs" value="business">
-        <label for="bs">Business</label><br>
-    </td>
-</tr>
-
-<tr>
-    <td>&nbsp;</td>
-    <td>
-        <input type="checkbox" id="ft" name="ft" value="first">
-        <label for="ft">First Class</label><br>
-    </td>
-</tr> --}}
