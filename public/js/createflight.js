@@ -536,7 +536,7 @@ document.getElementById("arrival_date").setAttribute("min", dateToday);
           }
         
          
-
+  
 
 
 
