@@ -12,7 +12,7 @@ const userhome = require("./data/userfunctions")
 const adminCollection = require("./data/adminCollection");
 const emaildata=require("./data/email")
 
-
+///for test commit////
 async function main() {
     const db = await connection.dbConnection();
    
