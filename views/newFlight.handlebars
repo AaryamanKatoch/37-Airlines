@@ -1,5 +1,10 @@
 <body>
+     {{#if haserror}}
+        <div>Error : {{error}}</div>
+        {{/if}}
     <form method="post" name="addFlightForm" id="addFlightForm" action="/admin/addflight" >
+     
+
     <table>
         <tr>
             <td><label for="flight_code">Flight Code</label></td>

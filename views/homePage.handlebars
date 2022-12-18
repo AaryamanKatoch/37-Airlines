@@ -1,4 +1,5 @@
 <main>
+
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid well" id="home" style="display:block; padding-top:10px;padding-bottom:10px">
             
@@ -24,6 +25,9 @@
     </div>
     </nav>
 
+ {{#if haserror}}
+        <div>Error : {{error}}</div>
+        {{/if}}
     <form method="post" name="searchFlightsForm" action="/searchflights" id="searchFlightsForm">
     <table>
         <tbody>

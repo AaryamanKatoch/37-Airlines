@@ -4,15 +4,18 @@ const xss = require('xss');
 const rewardsData = require('../data/rewards.js');
 
 router.route("/").get(async (req, res) => {
+    let haserror=false;
+    let error;
     try {
         let isLoggedIn;
         if(req.session.user) isLoggedIn = true;
         else isLoggedIn = false;
         //await rewardsData.addRewards();
-        res.render("homePage", {title:"Home Page",isLoggedIn: isLoggedIn });
-    } catch (error) {
-        res.status(500).send(error);
+        return res.status(200).render("homePage", {title:"Home Page",isLoggedIn: isLoggedIn,haserror:haserror,error:error });
+    } catch (e) {haserror=true;error=e
+        return res.status(200).render("homePage", {title:"Home Page",isLoggedIn: isLoggedIn,haserror:haserror,error:error });
     }
+    res.status(500).render("homePage", {title:"Home Page",isLoggedIn: isLoggedIn,haserror:haserror,error:error });
 });
 
 // router.route("/flights").post(async (req, res) => {
