@@ -22,6 +22,7 @@
 
 <form action="/searchflights/flightdetails/{{flightId}}/book/success" method="POST" name = "formName" id="formName">
 {{#for noOfPass choice}}
+    <h2>Fill Details For Person {{this.noOfForms}}</h2>
     <div>
         <label for="firstname{{this.noOfForms}}" class="form-label">Firstname</label>
         <input type="text" class="form-control" name="firstname{{this.noOfForms}}" placeholder="Enter Firstname" id = "firstname{{this.noOfForms}}">
