@@ -25,9 +25,9 @@ router.route("/reviews").get(async (req,res)=>{
         };
         let reviews=await reviewsData.getAllReviews();
         if(reviews.length==0){
-            res.render('reviews',{review : reviews,title:'Reviews','isLoggedIn':isLoggedIn,noReviews:true});
+            return res.render('reviews',{review : reviews,title:'Reviews','isLoggedIn':isLoggedIn,noReviews:true});
         }else{
-            res.render('reviews',{review : reviews,title:'Reviews','isLoggedIn':isLoggedIn,noReviews:false});
+            return res.render('reviews',{review : reviews,title:'Reviews','isLoggedIn':isLoggedIn,noReviews:false});
         }
     }catch(e){
         res.status(400).render('error',{error:e ,title:'ridham error'});
@@ -97,9 +97,9 @@ router.route('/reviews/add').get(async (req,res)=>{
         const result=await reviewsData.createReview(username,review,rating);
         //console.log('****',result,'******')
         if(!result || result==null){
-            res.status(400).render('error',{error:'can not add review' ,title:'can not add review'}, );
+            return res.status(400).render('error',{error:'can not add review' ,title:'can not add review'}, );
         }
-        res.redirect("/reviews");
+        return res.redirect("/reviews");
         //res.status(400).render('error',{error:'render from post review add' ,title:'ridham error'});
     }catch(e){
         res.status(400).render('error',{error:e ,title:'Error'});
@@ -143,9 +143,9 @@ router.route('/reviews/add').get(async (req,res)=>{
         const result=await reviewsData.updateReview(reviewDetails._id.toString(),username,review,rating);
         //console.log('****',result,'******')
         if(!result || result==null){
-            res.status(400).render('error',{error:'can not update review' ,title:'can not update review'}, );
+            return res.status(400).render('error',{error:'can not update review' ,title:'can not update review'}, );
         }
-        res.redirect("/reviews");
+        return res.redirect("/reviews");
     }catch(e){
         res.status(400).render('error',{error:e ,title:'Error'});
     }

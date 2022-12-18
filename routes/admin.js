@@ -161,7 +161,7 @@ newFlightData.miles=newFlightData.miles.trim()
 
       return res.redirect("/admin");
     } catch (e) {haserror=true;error=e;
-      res.status(400).render("newFlight", { title: "Add Flight",haserror:haserror,error:error});
+      return res.status(400).render("newFlight", { title: "Add Flight",haserror:haserror,error:error});
     }
   });
   
