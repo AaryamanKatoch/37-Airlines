@@ -118,10 +118,6 @@ async function checkifproperDate(date){
         throw 'invalid Date';
     }
 
-
-    // if(year<1900 || year> (c_year+2) ){
-    //     throw 'invalid Date';
-    // }
     if(month<0 || month>12){
         throw 'invalid Date';
     }

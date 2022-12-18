@@ -190,6 +190,34 @@ async function updateBookingHistory(userId,bookingId){
 }
 
 
+async function updateBookingArr(userId,bookingArr){
+  if(!userId)
+  throw `no id is given`;
+  if(typeof(userId)!=="string")
+  throw `type of id is not a string`;
+  if(userId.trim().length===0)
+  throw 'id cannot be empty or all white spaces';
+  userId=userId.trim();
+  if(!ObjectId.isValid(userId))
+  throw `id is not valid`;
+
+  if(!bookingArr)
+  throw `no booking array is given`;
+  if (!(Array.isArray(bookingArr))) throw (`Error: Booking History Array input \"${bookingArr}\" is not an Array`);
+  for(let i=0; i<bookingArr.length; i++){
+    bookingId = bookingArr[i].trim();
+    if (!ObjectId.isValid(bookingId)) throw (`Error: Booking ID not valid`);
+}
+
+  const userCollection = await users();
+  // const getUserDetails = await userCollection.getUserById(userId);
+  let updateHistory = await userCollection.updateOne({_id : ObjectId(userId)},{$set : {bookingHistory : bookingArr}});
+  if (updateHistory.modifiedCount === 0) {
+    throw 'could not update user booking history successfully';
+  } 
+  return updateHistory;
+}
+
 
 module.exports = {createUsers,
   getAllUsers,
@@ -198,5 +226,6 @@ module.exports = {createUsers,
   updateUser,
   checkUser,
   getUserByEmail,
-  updateBookingHistory
+  updateBookingHistory,
+  updateBookingArr
 };

@@ -5,10 +5,6 @@ button {
     text-align: center;
     font-size: 16px;
     border: 2px solid black;
-   
-   
-    
-
 }
 
 
@@ -23,7 +19,7 @@ main{
 }
 
 body{
-background-color: antiquewhite;
+background-color: rgb(252, 248, 244);
     height:800px;
     width: 100%;
     border:black;
@@ -48,11 +44,23 @@ thead{
 }
 
 nav{
-    background-color: #7493bb;
+    background-color:  #7493bb;
 
 }
 .text-goes-here{
-    color: darkred;
+    color: #840000;
 
 }
 
+.nav-link{
+    color: blue;
+}
+
+a{
+    color:blue;
+}
+
+.get-center{
+    align-content: center;
+    align-items: center;
+}

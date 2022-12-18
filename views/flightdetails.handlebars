@@ -6,11 +6,15 @@
         <ul class="navbar-nav">
     {{#if isLoggedIn}}
     <li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
+    <a  class="nav-link" href="/"> Homepage</a></li>
+    <li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
     <a class="nav-link" href="/userProfile">User Profile</a>
     </li>
     <li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
     <a class="nav-link" href="/logout">Logout</a></li>
     {{else}}
+    <li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
+    <a  class="nav-link" href="/"> Homepage</a></li>
     <li class="nav-item" style="float:right;display:block;padding-left:10px;padding-right:10px;">
     <a class="nav-link" href="/login">Login</a></li>
     {{/if}}
@@ -53,10 +57,6 @@
     <td>{{solution1.arrivalTime}}</td>
   </tr>
 
-  <tr>
-    <td>Flight Duration</td>
-    <td>{{solution1.duration}}</td>
-  </tr>
 
   <tr>
     <td>Flight Miles</td>

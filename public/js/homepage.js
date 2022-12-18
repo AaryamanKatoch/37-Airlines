@@ -13,7 +13,7 @@ if(staticForm){
     const departim=document.getElementById('departimeInput');
    const arrivaldate=document.getElementById('arrivalDateInput')
     const arritim=document.getElementById('arrTimeInput');
-    const dura=document.getElementById('durationInput');
+    
     const mil=document.getElementById('milesInput');
    
 
@@ -166,12 +166,12 @@ if(staticForm){
 
 
 //arrival date
-date=arrivaldate.value;
-if(!date) throw 'No date passed';
+let date1=arrivaldate.value;
+if(!date1) throw 'No date passed';
 
-if(typeof date!=='string') throw 'date must be valid string';
-if(date.trim().length==0) throw 'date can not be empty string';
-date=date.trim();
+if(typeof date1!=='string') throw 'date must be valid string';
+if(date1.trim().length==0) throw 'date can not be empty string';
+date1=date1.trim();
 c_year = new Date().getFullYear();  
 
  arr=date.split('-');
@@ -225,7 +225,7 @@ if(day>ListofDays[month-1]){
             if (!regex.test(arritimval))
             throw 'not proper arrival/departure time format'
 
-            let duraval=dura.value;
+          
           //duration function is left
 
             let milval=mil.value;
@@ -242,7 +242,28 @@ if(day>ListofDays[month-1]){
             if(!(Number.isInteger(Number(milval)) && Number(milval) > 1 && Number(milval)<9538))
             throw "not proper miles , should be an integer between 1 and 9538"
             
-            staticForm.submit()
+
+            
+            let ddate=new Date(date)
+            var today=new Date()
+            var today_date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            if(ddate<today)
+            throw "cannot add flights in the past or for the same day"
+  
+  
+            if(date1<date)
+            throw 'arrival date cannot be before departure'
+          
+            if(date==date1){
+           
+              if(departimval>arritimval){
+               
+            throw "arrival time cannot be before departure"
+              }
+            }
+
+        
+           staticForm.submit()
         } catch (e) {
             errorContainer.classList.remove('hidden');
           const message = typeof e === 'string' ? e : e.message;

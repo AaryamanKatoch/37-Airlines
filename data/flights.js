@@ -16,8 +16,7 @@ const createFlight = async (
   departureTime,
   arrivalDate,
   arrivalTime,
-  duration,
-  miles,
+  miles
   // ft_seats,
   // bs_seats,
   // ec_seats,
@@ -39,7 +38,7 @@ const createFlight = async (
   departureTime = await helper.checkifproperarrdepttime(departureTime);
   arrivalDate = await helper.checkifproperDate(arrivalDate);
   arrivalTime = await helper.checkifproperarrdepttime(arrivalTime);
-  duration = await helper.checkifproperduration(duration);
+  
   await helper.checkifpropermiles(miles)
   miles=miles.trim()
 
@@ -52,7 +51,7 @@ const createFlight = async (
     departureTime: departureTime,
     arrivalDate: arrivalDate,
     arrivalTime: arrivalTime,
-    duration: duration,
+   
     miles: miles,
     flightClass: [],
     bookedSeats: [],
@@ -113,13 +112,23 @@ const removeFlight = async (flightId) => {
   flightId = flightId.trim();
   if(!ObjectId.isValid(flightId)) throw `id is not valid`;
 
+  const flightCollection = await flights();
   var deletename = await getFlightById(flightId);
 
   if (!deletename || deletename === undefined) {
     throw `Could not delete flight with id of ${flightId}`;
   }
+
+  // let allBookings = await bookingData.getAllBookings();
+  // (await allBookings).forEach(function (obj){
+  //   console.log("Delete Loop Start")
+  //   if(obj.flightId === flightId){
+  //     console.log(obj.userId);
+  //     let deletedBooking = await bookingData.removeBooking({_id: obj._id});
+  //   }
+  //   console.log("Delete Loop End")
+  // });
   
-  const flightCollection = await flights();
   const deletedflight = await flightCollection.deleteOne({_id: ObjectId(flightId)});
 
   if (deletedflight.deletedCount === 0) {
@@ -139,7 +148,7 @@ const updateFlight = async (
   departureTime,
   arrivalDate,
   arrivalTime,
-  duration,
+  
   miles
   
 ) => {
@@ -161,7 +170,7 @@ const updateFlight = async (
   departureTime=await helper.checkifproperarrdepttime(departureTime)
   arrivalDate=await helper.checkifproperDate(arrivalDate)
   arrivalTime=await helper.checkifproperarrdepttime(arrivalTime)
-  duration=await helper.checkifproperduration(duration)
+ 
   await helper.checkifpropermiles(miles)
   miles=miles.trim()
   //flightCode=await helper.checkifproperflightcode(flightCode)
@@ -185,7 +194,7 @@ const updateFlight = async (
     departureTime:departureTime,
     arrivalDate:arrivalDate,
     arrivalTime:arrivalTime,
-    duration:duration,
+    
     miles:miles
   }
   const updatedInfo = await flightCollection.updateOne({_id: ObjectId(id)},
@@ -222,7 +231,12 @@ const searchFlightsResult = async (
   arrival=await helper.checkifproperdeparr(arrival)
   date=await helper.checkifproperDate(date)
   f_class=await helper.checkifproperclasstype(f_class)
-  
+  if(isNaN(NoOfPass)) throw 'Number of passengers must be valid Number';
+  NoOfPass=Number(NoOfPass);
+  if(NoOfPass<1 || NoOfPass>5) throw 'Number of passengers must be between 1 to 5';
+  var today = new Date();
+  var today_date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  if(date<today_date) throw 'you can not add date which is lower than today';
 
   // if(departure.trim().length==0) throw 'departure can not be empty string';
   // if(arrival.trim().length==0) throw 'arrival can not be empty string';
@@ -323,7 +337,7 @@ async function getallflightdetailsforflightdetailspage(id,fclass){
   arrival:flightdetails.arrival,
   departureTime:flightdetails.departureTime,
   arrivalTime:flightdetails.arrivalTime,
-  duration:flightdetails.duration,
+  
   miles:flightdetails.miles,
   flightClass:resclass
 }

@@ -25,11 +25,11 @@
             throw 'rating is not a number';
             
             if(!Number.isInteger(Number(rating)))
-            throw "rating should be an integer"
+            throw "rating should be an integer Number"
 
             rating=Number(rating)
 
-            if(rating>5 || rating<0)
+            if(rating>5 || rating<=0)
             throw 'rating should be between 0 and 5'
 
             errorContainer.hide();
