@@ -81,8 +81,7 @@ router.route("/searchflights/flightdetails/:id").get(async (req, res) => {
   // let NoOfPass=req.params.NoOfPass;
   let err;
   let haserror=false;
-  let fid=req.params.id;
-  
+  let fid=xss(req.params.id);
   let f_class=req.session.info.class;
   let NoOfPass=req.session.info.noOfPass;
   let isLoggedIn;
@@ -118,7 +117,7 @@ router.route("/searchflights/flightdetails/:id").get(async (req, res) => {
 });
 
 router.route("/searchflights/flightdetails/:id/book").get(async(req,res)=>{
-  let flightId = req.params.id;
+  let flightId = xss(req.params.id);
     
   let flightClass = req.session.info.class;
   
@@ -165,7 +164,7 @@ router.route("/searchflights/flightdetails/:id/book").get(async(req,res)=>{
 
 router.route("/searchflights/flightdetails/:id/book/success").post(async(req,res) => {
   let data = req.body;
-  let flightId = req.params.id;
+  let flightId = xss(req.params.id);
   let flightClass = req.session.info.class;
   let NoOfPass = req.session.info.noOfPass;
 

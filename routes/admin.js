@@ -162,7 +162,7 @@ newFlightData.miles=newFlightData.miles.trim()
   
 router.route("/admin/editflight/:id").get(async (req, res) => {
     //code here for GET
-    let fid=req.params.id;
+    let fid=xss(req.params.id);
     let isLoggedIn;
     let error;
     let haserror=false;
@@ -175,7 +175,7 @@ router.route("/admin/editflight/:id").get(async (req, res) => {
     fid=fid.trim()
     if(fid.length===0)
     {throw "No Flight Id is given or is all white spaces" }
-  req.params.id=req.params.id.trim()
+  req.params.id=xss(req.params.id).trim()
     var sol=await flights.getFlightById(fid)
     if(req.session.admin) isLoggedIn = true;
     else isLoggedIn = false;
@@ -198,7 +198,7 @@ router.route("/admin/editflight/:id").get(async (req, res) => {
      const newarrivaltime=xss(req.body.arrTimeInput)
    
      const newmiles=xss(req.body.milesInput)
-     const fid=req.params.id
+     const fid=xss(req.params.id)
      
  
    try{
@@ -213,7 +213,7 @@ router.route("/admin/editflight/:id").get(async (req, res) => {
 
 router.route("/admin/deleteflight/:id").get(async (req, res) => {
   try {
-    let fid = req.params.id;
+    let fid = xss(req.params.id);
   
 
     let isLoggedIn;
