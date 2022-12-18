@@ -219,8 +219,10 @@ noOfPass = await helper.checkifproperNoOfPass(noOfPass);
 
   const flightCollection = await flights();
   let getFlightClass = await flightCollection.findOne({_id : ObjectId(flightId)},{projection:{_id: 0, flightClass : {$elemMatch: {classType : classType}}}});
-  if(getFlightClass == null || getFlightClass.length == 0 || JSON.stringify(getFlightClass) === "{}") throw 'Cannot find the flight with that id and the given class type.';
+  if(getFlightClass == null || getFlightClass.length == 0) throw 'Cannot find the flight with the given id.';
+  if(JSON.stringify(getFlightClass) === "{}") throw 'Selected Flight class is not present for the given flight id.';
   let updateFlightClassCapacity = parseInt(getFlightClass.flightClass[0].classCapacity) - parseInt(noOfPass);
+  if(updateFlightClassCapacity < 0) throw 'Enough seats are not available for this flight class and flight id';
   let updateFlightClass = await flightCollection.updateOne({_id : ObjectId(flightId), "flightClass.classType" : classType},{$set : {"flightClass.$.classCapacity" : updateFlightClassCapacity}});
  // console.log(updateFlightClass);
  if(updateFlightClass.modifiedCount === 0) throw 'Cannot update the Class Capacity';
@@ -252,8 +254,30 @@ classType=await helper.checkifproperclasstype(classType)
   let flightClassPrice = parseInt(getFlightClass.flightClass[0].price);
   return flightClassPrice;  
 }
+async function checkIfClassTypeAndSeatsAvailable(flightId, classType,noOfPass){
+  if(!flightId)
+  throw `no id is given`;
+  if(typeof(flightId)!=="string")
+  throw `type of id is not a string`;
+  if(flightId.trim().length===0)
+  throw 'id cannot be empty or all white spaces';
+  flightId=flightId.trim();
+  if(!ObjectId.isValid(flightId))
+  throw `id is not valid`;
+  flightId=flightId.trim()
+
+
+  classType=await helper.checkifproperclasstype(classType);
+  noOfPass = await helper.checkifproperNoOfPass(noOfPass);
+  const flightCollection = await flights();
+  let getFlightClass = await flightCollection.findOne({_id : ObjectId(flightId)},{projection:{_id: 0, flightClass : {$elemMatch: {classType : classType}}}});
+  if(getFlightClass == null || getFlightClass.length == 0) throw 'Cannot find the flight with the given id.';
+  if(JSON.stringify(getFlightClass) === "{}") throw 'Selected Flight class is not present for the given flight id.';
+  let updateFlightClassCapacity = parseInt(getFlightClass.flightClass[0].classCapacity) - parseInt(noOfPass);
+  if(updateFlightClassCapacity < 0) throw 'Enough seats are not available for this flight class and flight id';
+}
 
   
 
 
-module.exports = {createClass,getAllClasses,getClass,removeClass,getFoodChoiceFromClass,updateClassCapacity,getFlightClassPrice};
+module.exports = {createClass,getAllClasses,getClass,removeClass,getFoodChoiceFromClass,updateClassCapacity,getFlightClassPrice,checkIfClassTypeAndSeatsAvailable};

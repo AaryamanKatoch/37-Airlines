@@ -96,7 +96,7 @@ router.route("/searchflights/flightdetails/:id").get(async (req, res) => {
   {throw "No Flight Id is given or is all white spaces"}
 
   fid=fid.trim()
-
+  await classes.checkIfClassTypeAndSeatsAvailable(fid,f_class,NoOfPass);
   var sol=await flightsData.getallflightdetailsforflightdetailspage(fid,f_class)
   
   sol["id1"]=fid
@@ -110,7 +110,7 @@ router.route("/searchflights/flightdetails/:id").get(async (req, res) => {
   return res.status(200).render('flightdetails', { solution1: sol,title: "Flight Found" ,isLoggedIn : isLoggedIn, haserror:haserror, error:err});
 
 } catch(e){err=e;haserror=true;
-  return res.status(400).render('flightdetails', { solution1: sol,title: "Flight Found" ,isLoggedIn : isLoggedIn, haserror:haserror, error:err});
+  return res.status(400).render('error',{title : "Error",error : e});
 }
   
     
@@ -149,6 +149,8 @@ router.route("/searchflights/flightdetails/:id/book").get(async(req,res)=>{
     
     if(req.session.user) isLoggedIn = true;
     else isLoggedIn = false;
+
+    await classes.checkIfClassTypeAndSeatsAvailable(flightId,flightClass,NoOfPass);
     
     food = await classes.getFoodChoiceFromClass(flightId,flightClass);
     
@@ -187,6 +189,7 @@ router.route("/searchflights/flightdetails/:id/book/success").post(async(req,res
     throw 'Number of Passengers cannot be empty or all white spaces';
     flightClass = await helpers.checkifproperclasstype(flightClass);
     NoOfPass = await helpers.checkifproperNoOfPass(NoOfPass);
+    await classes.checkIfClassTypeAndSeatsAvailable(flightId,flightClass,NoOfPass);
     let keys = Object.keys(data);
     let arrayObj = [];
     for(let i = 0; i < keys.length; i++)
@@ -245,7 +248,7 @@ router.route("/searchflights/flightdetails/:id/book/success").post(async(req,res
     // console.log(getBookings.travelers);
     // req.session.previousURL = {previousURL:`/searchflights/flightdetails/${flightId}/book/success`};
     req.session.bookingID = {bookingID : bookingData._id};
-    res.render('success',{title:"Success",isLoggedIn: isLoggedIn, travelers : getBookings.travelers, sr : getBookings.travelers.length, totalPrice : totalPrice, flightDetails : flightDetails});
+    res.render('success',{title:"Success",isLoggedIn: isLoggedIn, travelers : getBookings.travelers, sr : getBookings.travelers.length, totalPrice : totalPrice, flightDetails : flightDetails, flightId : flightId});
     
   } catch (e) {
     res.status(400).render('error',{title : "Error",error : e});
@@ -271,6 +274,7 @@ router.route("/searchflights/flightdetails/:id/book/success").get(async (req, re
   try{
     let bookingId =req.session.bookingID.bookingID;
     bookingId = bookingId.toString();
+    let flightId = xss(req.params.id);
     let getBooking = await bookingCollection.getBookingById(bookingId);
     let flightDetails = await flightsData.getFlightById(getBooking.flightId);
     let travelersDetails = getBooking.travelers;
@@ -279,6 +283,7 @@ router.route("/searchflights/flightdetails/:id/book/success").get(async (req, re
     let flightClass = req.session.info.class;
     flightClass = await helpers.checkifproperclasstype(flightClass);
     NoOfPass = await helpers.checkifproperNoOfPass(NoOfPass);
+    await classes.checkIfClassTypeAndSeatsAvailable(flightId,flightClass,NoOfPass);
     let flightClassPrice = await classes.getFlightClassPrice(getBooking.flightId,flightClass);
     let totalPrice = NoOfPass*flightClassPrice;
     let isLoggedIn;
