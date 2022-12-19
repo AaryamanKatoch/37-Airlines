@@ -42,7 +42,7 @@ async function main() {
 
    try {
 
-    flight26 = await flights.createFlight("SDF12", "New York", "Los Angeles", "2022-12-10", "10:00", "2022-12-11", "11:00",  "20");
+    flight26 = await flights.createFlight("SDF12", "New York", "Los Angeles", "2022-12-25", "10:00", "2022-12-26", "11:00",  "20");
     //console.log(flight1)
     } catch (e) {
         console.log(e);
@@ -68,7 +68,7 @@ async function main() {
 
     try {
 
-        flight1 = await flights.createFlight("MF012", "New York", "Los Angeles", "2022-12-21", "10:00", "2022-12-22", "11:00", "20");
+        flight1 = await flights.createFlight("MF012", "New York", "Los Angeles", "2022-12-24", "10:00", "2022-12-25", "11:00", "20");
         //console.log(flight1)
     } catch (e) {
         console.log(e);
@@ -125,7 +125,7 @@ async function main() {
 
 
     try {
-        flight3 = await flights.createFlight("MF070", "New York", "Los Angeles", "2022-12-20", "12:00", "2022-12-21", "11:00", "20");
+        flight3 = await flights.createFlight("MF070", "New York", "Los Angeles", "2022-12-21", "12:00", "2022-12-22", "11:00", "20");
         //console.log(flight1)
     } catch (e) {
         console.log(e);
@@ -1096,7 +1096,7 @@ async function main() {
 
    try {
 
-    flight26 = await flights.createFlight("SDV33", "New jersey", "florida", "2022-12-22", "10:00", "2022-12-23", "11:00",  "20");
+    flight26 = await flights.createFlight("SDV33", "New jersey", "florida", "2022-12-08", "10:00", "2022-12-09", "11:00",  "20");
     //console.log(flight1)
     } catch (e) {
         console.log(e);
