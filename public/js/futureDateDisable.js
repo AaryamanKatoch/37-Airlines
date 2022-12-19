@@ -1,7 +1,7 @@
 let today = new Date();
 let month = today.getMonth()+1; 
 let year = today.getFullYear();
-let day = today.getDate();
+let day = today.getDate()-1;
 month = (month<10)?("0"+month) : month;
 day = (day<10)?("0"+day) : day;
 

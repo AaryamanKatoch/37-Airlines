@@ -51,6 +51,7 @@ router.route('/reviews/add').get(async (req,res)=>{
             throw 'can not find the user!!!!';
         }
         let data=await userData.getUserByEmail(username);
+        // console.log(data.bookingHistory);
         if(!data.bookingHistory){
             req.session.canNotAddReview=true
             return res.redirect("/reviews");
