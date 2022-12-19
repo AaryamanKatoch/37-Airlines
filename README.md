@@ -10,6 +10,13 @@ Ridham Patel - 20010932<br>
 Aaryaman Katoch - 20011367<br>
 Hem Urmeshkumar Patel - 20011907
 
+<b>Project Overview</b><br>
+37 Airlines - A Flight Booking System<br>
+One can search flights based on departure, arrival and date. One can look for every information about flight and book the tickets after logging in to the system.<br>
+On the other hand, admin can perform CRUD operations on the flights.<br>
+User can add reviews once they complete a flight.
+
+<b>What you need to do to run this project..</b><br>
 First seed data to database using following steps :<br>
 ● npm install<br>
 ● npm run seed<br>
